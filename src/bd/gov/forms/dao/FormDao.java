@@ -26,51 +26,55 @@ import java.util.List;
  */
 public interface FormDao {
 
-    public void saveForm(final Form frm);
+	public void saveForm(final Form frm);
 
-    public Form getForm(String formId);
+	public Form getForm(String formId);
 
-    public void updateForm(final Form frm);
+	public void updateForm(final Form frm);
 
-    public void deleteForm(String formId);
+	public void deleteForm(String formId);
 
-    public byte[] getTemplateContent(String formId);
+	public byte[] getTemplateContent(String formId);
 
-    public Form getFormWithFields(String formId);
+	public byte[] getLogoContent(String formId);
 
-    public Field getField(String fieldId);
+	public Form getFormWithFields(String formId);
 
-    public void saveField(final Field fld);
+	public Field getField(String fieldId);
 
-    public void updateField(final Field fld);
+	public void saveField(final Field fld);
 
-    public void deleteField(String fieldId, int formId);
+	public void updateField(final Field fld);
 
-    public void updateOrder(int formId, int fieldOrder, String operator);
+	public void deleteField(String fieldId, int formId);
 
-    public void moveField(int formId, String fieldId, int fieldOrder, int order);
+	public void updateOrder(int formId, int fieldOrder, String operator);
 
-    public List getFormList(int page);
+	public void moveField(int formId, String fieldId, int fieldOrder, int order);
 
-    public void updateStatus(String formId, int i);
+	public List getFormList(int page);
 
-    public void createTable(Form frm);
+	public void updateStatus(String formId, int i);
 
-    public void saveEntry(final Form frm2);
+	public void createTable(Form frm);
 
-    public void initDbIdentifiers(int id);
+	public void saveEntry(final Form frm2);
 
-    public List getEntryList(final Form frm, Integer page, String colName, String colVal, String sortCol,
-                             String sortDir, boolean limit);
+	public void initDbIdentifiers(int id);
 
-    public Form getEntry(final Form frm);
+	public List getEntryList(final Form frm, Integer page, String colName,
+			String colVal, String sortCol, String sortDir, boolean limit);
 
-    public void updateEntryStatus(Form frm, String entryId, String string);
+	public Form getEntry(final Form frm);
 
-    public void removeTemplate(String formId);
+	public void updateEntryStatus(Form frm, String entryId, String string);
 
-    public List getPublicForms();
+	public void removeTemplate(String formId);
+	
+	public void removeLogo(String formId);
 
-    public int getFormEntryCount(Form frm, String status);
+	public List getPublicForms();
+
+	public int getFormEntryCount(Form frm, String status);
 
 }

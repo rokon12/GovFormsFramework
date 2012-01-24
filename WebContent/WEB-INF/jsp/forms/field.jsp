@@ -98,7 +98,18 @@
         <div class="clear"></div>
     </c:if>
 
-    <c:if test="${fieldCmd.type == 'select' || fieldCmd.type == 'radio'}">
+    <c:if test="${fieldCmd.type == 'select' || fieldCmd.type == 'radio' }">
+        <div class="label">
+            <form:label path="listDataId"><fmt:message key="new.field.list.source"/></form:label>
+        </div>
+        <div class="field">
+            <form:select path="listDataId" items="${listSrc}" cssClass=""/>
+            <form:errors path="listDataId" cssClass="error"/>
+        </div>
+        <div class="clear"></div>
+    </c:if>
+
+    <c:if test="${fieldCmd.type=='checkbox' }">
         <div class="label">
             <form:label path="listDataId"><fmt:message key="new.field.list.source"/></form:label>
         </div>

@@ -88,6 +88,7 @@
                 <select name="newFieldType0">
                     <option value="text">Text</option>
                     <option value="select">Select</option>
+                    <option value="checkbox">Checkbox</option>
                     <option value="radio">Radio</option>
                     <option value="textarea">Text Area</option>
                     <option value="section">Section</option>
@@ -133,6 +134,7 @@
                     <select name="newFieldType${indx+1}">
                        <option value="text">Text</option>
                        <option value="select">Select</option>
+                       <option value="checkbox">Checkbox</option>
                        <option value="radio">Radio</option>
                        <option value="textarea">Text Area</option>
                        <option value="section">Section</option>
@@ -187,6 +189,21 @@
             </div>
             <div class="field">
                 <form:select path="fields[${indx}].strVal" items="${f.list}" cssClass="${f.cssClass}"/>
+                <form:errors path="fields[${indx}].strVal" cssClass="error"/>
+            </div>
+            <div class="clear"></div>
+        </c:if>
+        
+       <c:if test="${f.type == 'checkbox'}">
+            <div class="label">
+                <form:label path="fields[${indx}].strVal">${f.label}</form:label>
+                <c:if test="${f.required ==1}">
+                    <span class="required">*</span>
+                </c:if>
+                <span class="help">${f.helpText}</span>
+            </div>
+            <div class="field">
+                <form:checkboxes path="fields[${indx}].strVal" items="${f.list}" cssClass="${f.cssClass}" />
                 <form:errors path="fields[${indx}].strVal" cssClass="error"/>
             </div>
             <div class="clear"></div>

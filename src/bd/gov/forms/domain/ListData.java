@@ -33,7 +33,7 @@ public class ListData {
     private String detail;
     private String values;
 
-    public List getList(String type) throws Exception {
+	public List getList(String type) throws Exception {
         List<String> list = new ArrayList<String>();
 
         if ("select".equals(type)) {

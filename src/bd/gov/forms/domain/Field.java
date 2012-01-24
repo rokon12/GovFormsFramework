@@ -30,6 +30,7 @@ public class Field implements Serializable {
     private String type;
     private String label;
     private int required;
+    private boolean multiCheckEnable; 	// for multiple/single check box
     private String helpText;
     private String options;     //not used
     private int listDataId;
@@ -44,7 +45,17 @@ public class Field implements Serializable {
     private int formId;
     private String formIdStr;
 
-    public byte[] getByteVal() {
+    
+    
+    public boolean isMultiCheckEnable() {
+		return multiCheckEnable;
+	}
+
+	public void setMultiCheckEnable(boolean multiCheckEnable) {
+		this.multiCheckEnable = multiCheckEnable;
+	}
+
+	public byte[] getByteVal() {
         return byteVal;
     }
 

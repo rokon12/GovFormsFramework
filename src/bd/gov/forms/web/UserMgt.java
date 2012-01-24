@@ -46,260 +46,262 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/userMgt")
 @SuppressWarnings("unchecked")
 public class UserMgt {
-    
-    private static final Logger log = LoggerFactory.getLogger(UserMgt.class);
 
-    @Autowired
-    private UserDao userDao;
-    @Autowired
-    MessageSource messageSource;
+	private static final Logger log = LoggerFactory.getLogger(UserMgt.class);
 
-    @RequestMapping(value = "/newUser", method = RequestMethod.GET)
-    public String newUser(ModelMap model, HttpServletRequest request) {
-        String access = UserAccessChecker.check(request);
-        if (access != null) {
-            return access;
-        }
+	@Autowired
+	private UserDao userDao;
+	@Autowired
+	MessageSource messageSource;
 
-        User user = new User();
+	@RequestMapping(value = "/newUser", method = RequestMethod.GET)
+	public String newUser(ModelMap model, HttpServletRequest request) {
+		String access = UserAccessChecker.check(request);
+		if (access != null) {
+			return access;
+		}
 
-        model.put("userCmd", user);
-        model.put("formAction", "saveUser");
+		User user = new User();
 
-        return "user";
-    }
+		model.put("userCmd", user);
+		model.put("formAction", "saveUser");
 
-    @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
-    public String saveUser(@ModelAttribute("userCmd") User user,
-                           BindingResult result, HttpServletRequest request, ModelMap model) {
+		return "user/user";
+	}
 
-        String access = UserAccessChecker.check(request);
-        if (access != null) {
-            return access;
-        }
+	@RequestMapping(value = "/saveUser", method = RequestMethod.POST)
+	public String saveUser(@ModelAttribute("userCmd") User user,
+			BindingResult result, HttpServletRequest request, ModelMap model) {
 
-        if (FormUtil.isEmpty(user.getUserName()) || FormUtil.isEmpty(user.getPassword())) {
-            throw new RuntimeException("Required value not found.");
-        }
-        if (userDao.getCountWithUserName(user.getUserName()) > 0) {
-            throw new RuntimeException("User Name must be unique");
-        }
+		String access = UserAccessChecker.check(request);
+		if (access != null) {
+			return access;
+		}
 
-        model.put("userCmd", user);
-        model.put("formAction", "saveUser");
+		if (FormUtil.isEmpty(user.getUserName())
+				|| FormUtil.isEmpty(user.getPassword())) {
+			throw new RuntimeException("Required value not found.");
+		}
+		if (userDao.getCountWithUserName(user.getUserName()) > 0) {
+			throw new RuntimeException("User Name must be unique");
+		}
 
-        log.debug("user->save");
+		model.put("userCmd", user);
+		model.put("formAction", "saveUser");
 
-        user.setSysId(Long.toString(System.nanoTime()) + new Long(new Random().nextLong()));
-        userDao.saveUser(user);
+		log.debug("user->save");
 
-        model.put("message", "msg.form.submitted");
-        model.put("msgType", "success");
+		user.setSysId(Long.toString(System.nanoTime())
+				+ new Long(new Random().nextLong()));
+		userDao.saveUser(user);
 
-        return "redirect:userList.htm";
-    }
+		model.put("message", "msg.form.submitted");
+		model.put("msgType", "success");
 
-    @RequestMapping(value = "/editUser", method = RequestMethod.GET)
-    public String editUser(@RequestParam(value = "sysId", required = true) String sysId,
-                           ModelMap model, HttpServletRequest request) {
+		return "redirect:userList.htm";
+	}
 
-        String access = UserAccessChecker.check(request);
-        if (access != null) {
-            return access;
-        }
+	@RequestMapping(value = "/editUser", method = RequestMethod.GET)
+	public String editUser(
+			@RequestParam(value = "sysId", required = true) String sysId,
+			ModelMap model, HttpServletRequest request) {
 
-        User user = sysId != null ? userDao.getUser(sysId) : null;
+		String access = UserAccessChecker.check(request);
+		if (access != null) {
+			return access;
+		}
 
-        model.put("userCmd", user);
-        model.put("formAction", "updateUser");
+		User user = sysId != null ? userDao.getUser(sysId) : null;
 
-        return "user";
-    }
+		model.put("userCmd", user);
+		model.put("formAction", "updateUser");
 
-    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
-    public String updateUser(@ModelAttribute("userCmd") User cmd,
-                             BindingResult result, HttpServletRequest request, ModelMap model) {
+		return "user/user";
+	}
 
-        String access = UserAccessChecker.check(request);
-        if (access != null) {
-            return access;
-        }
+	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+	public String updateUser(@ModelAttribute("userCmd") User cmd,
+			BindingResult result, HttpServletRequest request, ModelMap model) {
 
-        if (FormUtil.isEmpty(cmd.getUserName())) {
-            throw new RuntimeException("Required value not found.");
-        }
+		String access = UserAccessChecker.check(request);
+		if (access != null) {
+			return access;
+		}
 
-        model.put("userCmd", cmd);
-        model.put("formAction", "updateUser");
+		if (FormUtil.isEmpty(cmd.getUserName())) {
+			throw new RuntimeException("Required value not found.");
+		}
 
-        log.debug("user->update");
+		model.put("userCmd", cmd);
+		model.put("formAction", "updateUser");
 
-        userDao.updateUser(cmd);
+		log.debug("user->update");
 
-        model.put("message", "msg.form.updated");
-        model.put("msgType", "success");
+		userDao.updateUser(cmd);
 
-        return "redirect:userList.htm";
-    }
+		model.put("message", "msg.form.updated");
+		model.put("msgType", "success");
 
-    @RequestMapping(value = "/userList", method = RequestMethod.GET)
-    public String userList(ModelMap model, HttpServletRequest request) throws IOException {
+		return "redirect:userList.htm";
+	}
 
-        String access = UserAccessChecker.check(request);
-        if (access != null) {
-            return access;
-        }
+	@RequestMapping(value = "/userList", method = RequestMethod.GET)
+	public String userList(ModelMap model, HttpServletRequest request)
+			throws IOException {
 
-        List list = userDao.getUserList();
-        model.put("list", list);
+		String access = UserAccessChecker.check(request);
+		if (access != null) {
+			return access;
+		}
 
-        return "userList";
-    }
+		List list = userDao.getUserList();
+		model.put("list", list);
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginForm(ModelMap model) {
-        User user = new User();
+		return "user/userList";
+	}
 
-        model.put("userCmd", user);
-        model.put("formAction", "loginAction");
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String loginForm(ModelMap model) {
+		User user = new User();
 
-        return "login";
-    }
+		model.put("userCmd", user);
+		model.put("formAction", "loginAction");
 
-    @RequestMapping(value = "/loginAction", method = RequestMethod.POST)
-    public String loginAction(@ModelAttribute("userCmd") User user,
-                              BindingResult result,
-                              HttpServletRequest request,
-                              HttpServletResponse response,
-                              ModelMap model) {
-
-        request.getSession().setAttribute("user", null);
+		return "login/login";
+	}
 
-        user = userDao.getUser(user.getUserName(), user.getPassword());
+	@RequestMapping(value = "/loginAction", method = RequestMethod.POST)
+	public String loginAction(@ModelAttribute("userCmd") User user,
+			BindingResult result, HttpServletRequest request,
+			HttpServletResponse response, ModelMap model) {
 
-        if (user != null) {
-            request.getSession().setAttribute("user", user);
-        } else {
-            model.put("message", "login.failed");
-            model.put("msgType", "failed");
-            return "redirect:login.htm";
-        }
+		request.getSession().setAttribute("user", null);
 
-        return "redirect:/formBuilder/index.htm";
-    }
+		user = userDao.getUser(user.getUserName(), user.getPassword());
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(ModelMap model, HttpServletRequest request) {
-        request.getSession().setAttribute("user", null);
+		if (user != null) {
+			request.getSession().setAttribute("user", user);
+		} else {
+			model.put("message", "login.failed");
+			model.put("msgType", "failed");
+			return "redirect:login.htm";
+		}
 
-        return "redirect:login.htm";
-    }
+		return "redirect:/formBuilder/index.htm";
+	}
 
-    @RequestMapping(value = "/forgotPassword", method = RequestMethod.GET)
-    public String forgotPasswordForm(ModelMap model) {
-        User user = new User();
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(ModelMap model, HttpServletRequest request) {
+		request.getSession().setAttribute("user", null);
 
-        model.put("userCmd", user);
-        model.put("formAction", "forgotPasswordAction");
+		return "redirect:login.htm";
+	}
 
-        return "forgotPassword";
-    }
+	@RequestMapping(value = "/forgotPassword", method = RequestMethod.GET)
+	public String forgotPasswordForm(ModelMap model) {
+		User user = new User();
 
-    @RequestMapping(value = "/forgotPasswordAction", method = RequestMethod.POST)
-    public String forgotPasswordAction(@ModelAttribute("userCmd") User user,
-                                       BindingResult result,
-                                       HttpServletRequest request,
-                                       HttpServletResponse response,
-                                       ModelMap model) {
+		model.put("userCmd", user);
+		model.put("formAction", "forgotPasswordAction");
 
-        User currUser = userDao.getUserWithEmail(user.getUserName(), user.getEmail());
+		return "login/forgotPassword";
+	}
 
-        if (currUser != null) {
-            //TODO: send email
-            model.put("doneMessage", "pass.sent.success");
-            model.put("doneMsgType", "success");
-            return "redirect:/formBuilder/done.htm";
+	@RequestMapping(value = "/forgotPasswordAction", method = RequestMethod.POST)
+	public String forgotPasswordAction(@ModelAttribute("userCmd") User user,
+			BindingResult result, HttpServletRequest request,
+			HttpServletResponse response, ModelMap model) {
 
-        }
+		User currUser = userDao.getUserWithEmail(user.getUserName(),
+				user.getEmail());
 
-        model.put("message", "pass.sent.failed");
-        model.put("msgType", "failed");
+		if (currUser != null) {
+			// TODO: send email
+			model.put("doneMessage", "pass.sent.success");
+			model.put("doneMsgType", "success");
+			return "redirect:/formBuilder/done.htm";
 
-        return "redirect:forgotPassword.htm";
-    }
+		}
 
-    @RequestMapping(value = "/changePassword", method = RequestMethod.GET)
-    public String changePasswordForm(ModelMap model, HttpServletRequest request) {
-        String access = Role.checkRole(Role.ROLE_USER, (User) request.getSession().getAttribute("user"));
-        if (access != null) {
-            return access;
-        }
+		model.put("message", "pass.sent.failed");
+		model.put("msgType", "failed");
 
-        User user = new User();
+		return "redirect:forgotPassword.htm";
+	}
 
-        model.put("userCmd", user);
-        model.put("formAction", "changePasswordAction");
+	@RequestMapping(value = "/changePassword", method = RequestMethod.GET)
+	public String changePasswordForm(ModelMap model, HttpServletRequest request) {
+		String access = Role.checkRole(Role.ROLE_USER, (User) request
+				.getSession().getAttribute("user"));
+		if (access != null) {
+			return access;
+		}
 
-        return "changePassword";
-    }
+		User user = new User();
 
-    @RequestMapping(value = "/changePasswordAction", method = RequestMethod.POST)
-    public String changePasswordAction(@ModelAttribute("userCmd") User user,
-                                       BindingResult result,
-                                       HttpServletRequest request,
-                                       HttpServletResponse response,
-                                       ModelMap model) {
+		model.put("userCmd", user);
+		model.put("formAction", "changePasswordAction");
 
-        String access = Role.checkRole(Role.ROLE_USER, (User) request.getSession().getAttribute("user"));
-        if (access != null) {
-            return access;
-        }
+		return "login/changePassword";
+	}
 
-        User sessionUser = (User) request.getSession().getAttribute("user");
+	@RequestMapping(value = "/changePasswordAction", method = RequestMethod.POST)
+	public String changePasswordAction(@ModelAttribute("userCmd") User user,
+			BindingResult result, HttpServletRequest request,
+			HttpServletResponse response, ModelMap model) {
 
-        if (sessionUser != null) {
-            User currUser = userDao.getUser(sessionUser.getSysId());
+		String access = Role.checkRole(Role.ROLE_USER, (User) request
+				.getSession().getAttribute("user"));
+		if (access != null) {
+			return access;
+		}
 
-            if (currUser.getPassword().equals(user.getOldPassword())) {
-                if (user.getPassword().equals(user.getConfirmPassword())) {
-                    userDao.changePassword(sessionUser.getUserName(), user.getPassword());
-                    model.put("doneMessage", "pass.change.success");
-                    model.put("doneMsgType", "success");
-                    return "redirect:/formBuilder/done.htm";
-                }
-            }
-        }
+		User sessionUser = (User) request.getSession().getAttribute("user");
 
-        model.put("message", "pass.change.failed");
-        model.put("msgType", "failed");
+		if (sessionUser != null) {
+			User currUser = userDao.getUser(sessionUser.getSysId());
 
-        return "redirect:changePassword.htm";
-    }
+			if (currUser.getPassword().equals(user.getOldPassword())) {
+				if (user.getPassword().equals(user.getConfirmPassword())) {
+					userDao.changePassword(sessionUser.getUserName(),
+							user.getPassword());
+					model.put("doneMessage", "pass.change.success");
+					model.put("doneMsgType", "success");
+					return "redirect:/formBuilder/done.htm";
+				}
+			}
+		}
 
-    @ModelAttribute("yesNoOption")
-    public Map getYesNoOption(Locale locale) {
-        Map m = new HashMap();
+		model.put("message", "pass.change.failed");
+		model.put("msgType", "failed");
 
-        m.put("1", messageSource.getMessage("yes", null, locale));
-        m.put("0", messageSource.getMessage("no", null, locale));
+		return "redirect:changePassword.htm";
+	}
 
-        return m;
-    }
+	@ModelAttribute("yesNoOption")
+	public Map getYesNoOption(Locale locale) {
+		Map m = new HashMap();
 
-    @RequestMapping(value = "/uniqueUserName", method = RequestMethod.GET)
-    public void uniqueUserName(@RequestParam(value = "userName", required = true) String userName,
-                               ModelMap model, HttpServletResponse response) throws Exception {
+		m.put("1", messageSource.getMessage("yes", null, locale));
+		m.put("0", messageSource.getMessage("no", null, locale));
 
-        log.debug("Found username: {}", userName);
-        String responseString = "false";
+		return m;
+	}
 
-        int count = userDao.getCountWithUserName(userName);
-        log.debug("userName: {}, count: {}", userName, count);
-        if (count == 0) {
-            responseString = "true";
-        }
+	@RequestMapping(value = "/uniqueUserName", method = RequestMethod.GET)
+	public void uniqueUserName(
+			@RequestParam(value = "userName", required = true) String userName,
+			ModelMap model, HttpServletResponse response) throws Exception {
 
-        response.getWriter().print(responseString);
-    }
+		log.debug("Found username: {}", userName);
+		String responseString = "false";
 
+		int count = userDao.getCountWithUserName(userName);
+		log.debug("userName: {}, count: {}", userName, count);
+		if (count == 0) {
+			responseString = "true";
+		}
+
+		response.getWriter().print(responseString);
+	}
 }

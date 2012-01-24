@@ -18,141 +18,186 @@ package bd.gov.forms.domain;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * @author asif
+ * 
  */
+@XmlRootElement(name = "form")
 public class Form {
 
-    private int id;
-    private String formId;
-    private String title;
-    private String subTitle;
-    private String detail;
-    private String tableName;
-    private int status;
-    private byte[] pdfTemplate;
-    private String templateFileName;
-    private List<Field> fields;
+	private int id;
+	private String formId;
+	private String title;
+	private String subTitle;
+	private String detail;
+	private String tableName;
+	private int status;
+	private byte[] pdfTemplate;
+	private String templateFileName;
+	private List<Field> fields;
 
-    private String entryId;
-    private String entryStatus;
-    private int totalPages;
+	private String logoName; // added for logo
+	private byte[] logo;
 
-    public String getDetail() {
-        return detail;
-    }
+	private String entryId;
+	private String entryStatus;
+	private int totalPages;
 
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
+	public Form() {
+	}
 
-    public List<Field> getFields() {
-        return fields;
-    }
+	public Form(int id, String formId, String title, String subTitle,
+			String detail, String tableName, int status, byte[] pdfTemplate,
+			String templateFileName, List<Field> fields, String entryId,
+			String entryStatus, int totalPages) {
+		super();
+		this.id = id;
+		this.formId = formId;
+		this.title = title;
+		this.subTitle = subTitle;
+		this.detail = detail;
+		this.tableName = tableName;
+		this.status = status;
+		this.pdfTemplate = pdfTemplate;
+		this.templateFileName = templateFileName;
+		this.fields = fields;
+		this.entryId = entryId;
+		this.entryStatus = entryStatus;
+		this.totalPages = totalPages;
+	}
 
-    public void setFields(List<Field> fields) {
-        this.fields = fields;
-    }
+	public String getDetail() {
+		return detail;
+	}
 
-    public String getFormId() {
-        return formId;
-    }
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
 
-    public void setFormId(String formId) {
-        this.formId = formId;
-    }
+	public List<Field> getFields() {
+		return fields;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public void setFields(List<Field> fields) {
+		this.fields = fields;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public String getFormId() {
+		return formId;
+	}
 
-    public byte[] getPdfTemplate() {
-        return pdfTemplate;
-    }
+	public void setFormId(String formId) {
+		this.formId = formId;
+	}
 
-    public void setPdfTemplate(byte[] pdfTemplate) {
-        this.pdfTemplate = pdfTemplate;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public String getTemplateFileName() {
-        return templateFileName;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setTemplateFileName(String templateFileName) {
-        this.templateFileName = templateFileName;
-    }
+	public byte[] getPdfTemplate() {
+		return pdfTemplate;
+	}
 
-    public int getStatus() {
-        return status;
-    }
+	public void setPdfTemplate(byte[] pdfTemplate) {
+		this.pdfTemplate = pdfTemplate;
+	}
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
+	public String getTemplateFileName() {
+		return templateFileName;
+	}
 
-    public String getSubTitle() {
-        return subTitle;
-    }
+	public void setTemplateFileName(String templateFileName) {
+		this.templateFileName = templateFileName;
+	}
 
-    public void setSubTitle(String subTitle) {
-        this.subTitle = subTitle;
-    }
+	public int getStatus() {
+		return status;
+	}
 
-    public String getTableName() {
-        return tableName;
-    }
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
-    }
+	public String getSubTitle() {
+		return subTitle;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public void setSubTitle(String subTitle) {
+		this.subTitle = subTitle;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public String getTableName() {
+		return tableName;
+	}
 
-    public String getEntryId() {
-        return entryId;
-    }
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
+	}
 
-    public void setEntryId(String entryId) {
-        this.entryId = entryId;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public String getEntryStatus() {
-        return entryStatus;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public void setEntryStatus(String entryStatus) {
-        this.entryStatus = entryStatus;
-    }
+	public String getEntryId() {
+		return entryId;
+	}
 
-    public int getTotalPages() {
-        return totalPages;
-    }
+	public void setEntryId(String entryId) {
+		this.entryId = entryId;
+	}
 
-    public void setTotalPages(int totalPages) {
-        this.totalPages = totalPages;
-    }
+	public String getEntryStatus() {
+		return entryStatus;
+	}
 
-    public String getStatusStr() {
-        switch (getStatus()) {
-            case 1:
-                return "Draft";
-            case 2:
-                return "Activated";
-            case 3:
-                return "Deactivated";
-            default:
-                return "";
-        }
-    }
+	public void setEntryStatus(String entryStatus) {
+		this.entryStatus = entryStatus;
+	}
 
+	public int getTotalPages() {
+		return totalPages;
+	}
+
+	public void setTotalPages(int totalPages) {
+		this.totalPages = totalPages;
+	}
+
+	public String getStatusStr() {
+		switch (getStatus()) {
+		case 1:
+			return "Draft";
+		case 2:
+			return "Activated";
+		case 3:
+			return "Deactivated";
+		default:
+			return "";
+		}
+	}
+
+	public String getLogoName() {
+		return logoName;
+	}
+
+	public void setLogoName(String logoName) {
+		this.logoName = logoName;
+	}
+
+	public byte[] getLogo() {
+		return logo;
+	}
+
+	public void setLogo(byte[] logo) {
+		this.logo = logo;
+	}
 }

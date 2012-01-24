@@ -61,7 +61,7 @@ public class ListBuilder {
         model.put("listDataCmd", listData);
         model.put("formAction", "saveList");
 
-        return "listData";
+        return "list/listData";
     }
 
     @RequestMapping(value = "/saveList", method = RequestMethod.POST)
@@ -109,7 +109,7 @@ public class ListBuilder {
         model.put("listDataCmd", listData);
         model.put("formAction", "updateList");
 
-        return "listData";
+        return "list/listData";
     }
 
     @RequestMapping(value = "/updateList", method = RequestMethod.POST)
@@ -149,7 +149,6 @@ public class ListBuilder {
 
         model.put("list", list);
 
-        return "listDataList";
+        return "list/listDataList";
     }
-
 }
