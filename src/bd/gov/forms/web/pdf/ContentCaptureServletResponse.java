@@ -8,24 +8,25 @@ import java.io.PrintWriter;
 
 public class ContentCaptureServletResponse extends HttpServletResponseWrapper {
 
-	private ByteArrayOutputStream contentBuffer;
-	private PrintWriter writer;
+    private ByteArrayOutputStream contentBuffer;
+    private PrintWriter writer;
 
-	public ContentCaptureServletResponse(HttpServletResponse originalResponse) {
-		super(originalResponse);
-	}
+    public ContentCaptureServletResponse(HttpServletResponse originalResponse) {
+        super(originalResponse);
+    }
 
-	@Override
-	public PrintWriter getWriter() throws IOException {
-		if (writer == null) {
-			contentBuffer = new ByteArrayOutputStream();
-			writer = new PrintWriter(contentBuffer);
-		}
-		return writer;
-	}
+    @Override
+    public PrintWriter getWriter() throws IOException {
+        if (writer == null) {
+            contentBuffer = new ByteArrayOutputStream();
+            writer = new PrintWriter(contentBuffer);
+        }
+        return writer;
+    }
 
-	public String getHtlmContent() throws IOException {
-		getWriter().flush();
-		return new String(contentBuffer.toByteArray());
-	}
+
+    public String getHtlmContent() throws IOException {
+        getWriter().flush();
+        return new String(contentBuffer.toByteArray());
+    }
 }

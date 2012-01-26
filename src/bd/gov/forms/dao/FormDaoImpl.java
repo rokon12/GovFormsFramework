@@ -157,7 +157,7 @@ public class FormDaoImpl implements FormDao {
 			sql += ", template_file = ?, template_file_name = ?";
 		}
 
-		if (formHasTemplate(form)) {
+		if (formHasLogo(form)) {
 			sql += ", logo = ?, logo_name = ?";
 		}
 

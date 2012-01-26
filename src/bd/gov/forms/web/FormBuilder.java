@@ -147,6 +147,11 @@ public class FormBuilder {
 					&& "".equals(form.getTemplateFileName().trim())) {
 				form.setTemplateFileName(null);
 			}
+
+			if (form.getLogoName() != null
+					&& "".equals(form.getLogoName().trim())) {
+				form.setLogoName(null);
+			}
 		}
 
 		model.put("formDetailsCmd", form);
@@ -885,6 +890,21 @@ public class FormBuilder {
 		return map;
 	}
 
+	@RequestMapping(value = "/downloadForm", method = RequestMethod.GET)
+	public void downloadForm(
+			@RequestParam(value = "formId", required = true) String formId) {
+
+		Form form = formDao.getForm(formId);
+		List<Field> fields = form.getFields();
+		Field field = new Field();
+		
+	}
+
+	
+	
+	
+	
+	
 	/**
 	 * @author Rokonoid added for testing purpose
 	 * **/
@@ -971,7 +991,6 @@ public class FormBuilder {
 
 	@RequestMapping(value = "/remove/{documentId}")
 	public String remove(@PathVariable("documentId") Integer documentId) {
-
 		documentDao.delete(documentId);
 		return "redirect:/list.htm";
 	}

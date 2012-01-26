@@ -3,9 +3,11 @@ package bd.gov.forms.web.pdf;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
+import java.io.StringBufferInputStream;
 import java.io.StringReader;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -24,8 +26,8 @@ public class PdfGenerator {
 		this.outputStream = os;
 	}
 
-	public void renderPdf(String htmlContent, HttpServletRequest request)
-			throws Exception {
+	public void renderPdf(String htmlContent, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		log.debug("renderPdf");
 
 		htmlContent = cleanUpHtml(htmlContent);
@@ -54,14 +56,15 @@ public class PdfGenerator {
 		documentBuilder.setEntityResolver(new NoOpEntityResolver());
 
 		Document xhtmlContent = documentBuilder.parse(source);
+
 		ITextRenderer renderer = new ITextRenderer();
 		renderer.setDocument(xhtmlContent, null);
 		renderer.layout();
 
-		// renderer.createPDF(outputStream);
-
-		renderer.createPDF(outputStream);
+		//renderer.createPDF(outputStream);
+		//renderer.createPDF(outputStream);
 		outputStream.close();
+
 	}
 
 	private String cleanUpHtml(String data) {
@@ -108,7 +111,7 @@ public class PdfGenerator {
 	private String addFooter(String data) {
 		log.debug("addFooter-e:");
 
-		String footer = "iTax";
+		String footer = "iit lone gunmen 2.0";
 
 		data = HtmlUtils.replaceAll(data, "(<body.*?>)", "$1" + footer);
 		return data;

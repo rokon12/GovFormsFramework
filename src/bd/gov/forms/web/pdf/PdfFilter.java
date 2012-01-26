@@ -1,8 +1,6 @@
 package bd.gov.forms.web.pdf;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
@@ -12,23 +10,22 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class PdfFilter implements Filter, ApplicationContextAware {
-	private static final Logger log = LoggerFactory.getLogger(PdfFilter.class);
+
+	@SuppressWarnings({ "UnusedDeclaration" })
+	private static final Logger log = Logger.getLogger(PdfFilter.class);
 	protected ApplicationContext applicationContext;
 
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext)
-			throws BeansException {
-		this.applicationContext = applicationContext;
+	public void init(FilterConfig config) {
+		/* do nothing */
 	}
 
-	@Override
 	public void destroy() {
-
+		/* do nothing */
 	}
 
-	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp,
 			FilterChain filterChain) throws IOException, ServletException {
+
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
 
@@ -54,15 +51,15 @@ public class PdfFilter implements Filter, ApplicationContextAware {
 
 			PdfGenerator pdfGenerator = new PdfGenerator(
 					response.getOutputStream());
-			pdfGenerator.renderPdf(htmlContent, request);
+			
+			pdfGenerator.renderPdf(htmlContent, request, response);
 
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
 	}
 
-	@Override
-	public void init(FilterConfig config) throws ServletException {
-
+	public void setApplicationContext(ApplicationContext applicationContext) {
+		this.applicationContext = applicationContext;
 	}
 }
