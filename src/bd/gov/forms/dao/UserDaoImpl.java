@@ -48,56 +48,83 @@ public class UserDaoImpl implements UserDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	private RowMapper getUserRowMapper() {
+		return new RowMapper<Object>() {
+
+			@Override
+			public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+				User user = new User();
+
+				user.setId(rs.getInt("id"));
+				user.setSysId(rs.getString("sys_id"));
+				user.setName(rs.getString("name"));
+				user.setTitle(rs.getString("title"));
+				user.setUserName(rs.getString("user"));
+
+				user.setMobile(rs.getString("mobile"));
+				user.setEmail(rs.getString("email"));
+				user.setAdmin(rs.getInt("admin"));
+				user.setActive(rs.getInt("active"));
+				user.setMinistry(rs.getInt("ministry"));
+
+				return user;
+			}
+		};
+	}
+
 	public User getUser(String sysId) {
 		return (User) jdbcTemplate.queryForObject(
 				"SELECT * FROM user WHERE sys_id = ?", new Object[] { sysId },
-				new RowMapper() {
-
-					public Object mapRow(ResultSet rs, int rowNum)
-							throws SQLException {
-						User user = new User();
-
-						user.setId(rs.getInt("id"));
-						user.setSysId(rs.getString("sys_id"));
-						user.setName(rs.getString("name"));
-						user.setTitle(rs.getString("title"));
-						user.setUserName(rs.getString("user"));
-						user.setPassword(rs.getString("password"));
-
-						user.setMobile(rs.getString("mobile"));
-						user.setEmail(rs.getString("email"));
-						user.setAdmin(rs.getInt("admin"));
-						user.setActive(rs.getInt("active"));
-
-						return user;
-					}
-				});
+				getUserRowMapper());
+		// new RowMapper() {
+		//
+		// public Object mapRow(ResultSet rs, int rowNum)
+		// throws SQLException {
+		// User user = new User();
+		//
+		// user.setId(rs.getInt("id"));
+		// user.setSysId(rs.getString("sys_id"));
+		// user.setName(rs.getString("name"));
+		// user.setTitle(rs.getString("title"));
+		// user.setUserName(rs.getString("user"));
+		// user.setPassword(rs.getString("password"));
+		//
+		// user.setMobile(rs.getString("mobile"));
+		// user.setEmail(rs.getString("email"));
+		// user.setAdmin(rs.getInt("admin"));
+		// user.setActive(rs.getInt("active"));
+		//
+		// return user;
+		// }
+		// });
 	}
 
 	public User getUser(String userName, String password) {
 		try {
 			return (User) jdbcTemplate.queryForObject(
 					"SELECT * FROM user WHERE user = ? and password=?",
-					new Object[] { userName, password }, new RowMapper() {
-
-						public Object mapRow(ResultSet rs, int rowNum)
-								throws SQLException {
-							User user = new User();
-
-							user.setId(rs.getInt("id"));
-							user.setSysId(rs.getString("sys_id"));
-							user.setName(rs.getString("name"));
-							user.setTitle(rs.getString("title"));
-							user.setUserName(rs.getString("user"));
-
-							user.setMobile(rs.getString("mobile"));
-							user.setEmail(rs.getString("email"));
-							user.setAdmin(rs.getInt("admin"));
-							user.setActive(rs.getInt("active"));
-
-							return user;
-						}
-					});
+					new Object[] { userName, password }, getUserRowMapper());
+			// new RowMapper() {
+			//
+			// public Object mapRow(ResultSet rs, int rowNum)
+			// throws SQLException {
+			// User user = new User();
+			//
+			// user.setId(rs.getInt("id"));
+			// user.setSysId(rs.getString("sys_id"));
+			// user.setName(rs.getString("name"));
+			// user.setTitle(rs.getString("title"));
+			// user.setUserName(rs.getString("user"));
+			//
+			// user.setMobile(rs.getString("mobile"));
+			// user.setEmail(rs.getString("email"));
+			// user.setAdmin(rs.getInt("admin"));
+			// user.setActive(rs.getInt("active"));
+			// user.setMinistry(rs.getInt("ministry"));
+			//
+			// return user;
+			// }
+			// });
 		} catch (Exception ex) {
 			log.debug("Exception in getUser().", ex);
 			return null;
@@ -108,26 +135,27 @@ public class UserDaoImpl implements UserDao {
 		try {
 			return (User) jdbcTemplate.queryForObject(
 					"SELECT * FROM user WHERE user = ? and email=?",
-					new Object[] { userName, email }, new RowMapper() {
-
-						public Object mapRow(ResultSet rs, int rowNum)
-								throws SQLException {
-							User user = new User();
-
-							user.setId(rs.getInt("id"));
-							user.setSysId(rs.getString("sys_id"));
-							user.setName(rs.getString("name"));
-							user.setTitle(rs.getString("title"));
-							user.setUserName(rs.getString("user"));
-
-							user.setMobile(rs.getString("mobile"));
-							user.setEmail(rs.getString("email"));
-							user.setAdmin(rs.getInt("admin"));
-							user.setActive(rs.getInt("active"));
-
-							return user;
-						}
-					});
+					new Object[] { userName, email }, getUserRowMapper());
+			// new RowMapper() {
+			//
+			// public Object mapRow(ResultSet rs, int rowNum)
+			// throws SQLException {
+			// User user = new User();
+			//
+			// user.setId(rs.getInt("id"));
+			// user.setSysId(rs.getString("sys_id"));
+			// user.setName(rs.getString("name"));
+			// user.setTitle(rs.getString("title"));
+			// user.setUserName(rs.getString("user"));
+			//
+			// user.setMobile(rs.getString("mobile"));
+			// user.setEmail(rs.getString("email"));
+			// user.setAdmin(rs.getInt("admin"));
+			// user.setActive(rs.getInt("active"));
+			//
+			// return user;
+			// }
+			// });
 		} catch (Exception ex) {
 			log.debug("Exception in getUserWIthEmail().", ex);
 			return null;
@@ -136,22 +164,23 @@ public class UserDaoImpl implements UserDao {
 
 	public List getUserList() {
 		return jdbcTemplate.query("SELECT * FROM user ", new Object[] {},
-				new RowMapper() {
-
-					public Object mapRow(ResultSet rs, int rowNum)
-							throws SQLException {
-						User user = new User();
-
-						user.setSysId(rs.getString("sys_id"));
-						user.setName(rs.getString("name"));
-						user.setTitle(rs.getString("title"));
-						user.setUserName(rs.getString("user"));
-						user.setAdmin(rs.getInt("admin"));
-						user.setActive(rs.getInt("active"));
-
-						return user;
-					}
-				});
+				getUserRowMapper());
+		// new RowMapper() {
+		//
+		// public Object mapRow(ResultSet rs, int rowNum)
+		// throws SQLException {
+		// User user = new User();
+		//
+		// user.setSysId(rs.getString("sys_id"));
+		// user.setName(rs.getString("name"));
+		// user.setTitle(rs.getString("title"));
+		// user.setUserName(rs.getString("user"));
+		// user.setAdmin(rs.getInt("admin"));
+		// user.setActive(rs.getInt("active"));
+		//
+		// return user;
+		// }
+		// });
 	}
 
 	public void saveUser(final User user) {
@@ -220,5 +249,37 @@ public class UserDaoImpl implements UserDao {
 	public int getCountWithUserName(String userName) {
 		return jdbcTemplate.queryForInt(
 				"select count(*) from user where user = ?", userName);
+	}
+
+	@Override
+	public User getUser(String userName, String password, int ministryId) {
+
+		return (User) jdbcTemplate
+				.queryForObject(
+						"SELECT * FROM user WHERE user = ? and password=? and 	ministry=?",
+						new Object[] { userName, password, ministryId },
+						getUserRowMapper());
+		// new RowMapper() {
+		//
+		// public Object mapRow(ResultSet rs, int rowNum)
+		// throws SQLException {
+		// User user = new User();
+		//
+		// user.setId(rs.getInt("id"));
+		// user.setSysId(rs.getString("sys_id"));
+		// user.setName(rs.getString("name"));
+		// user.setTitle(rs.getString("title"));
+		// user.setUserName(rs.getString("user"));
+		//
+		// user.setMobile(rs.getString("mobile"));
+		// user.setEmail(rs.getString("email"));
+		// user.setAdmin(rs.getInt("admin"));
+		// user.setActive(rs.getInt("active"));
+		// user.setActive(rs.getInt("ministryId"));
+		//
+		// return user;
+		// }
+		// });
+
 	}
 }

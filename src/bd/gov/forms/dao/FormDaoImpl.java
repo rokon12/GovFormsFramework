@@ -57,7 +57,7 @@ public class FormDaoImpl implements FormDao {
 
 	public void saveForm(final Form form) {
 		String sql = "INSERT INTO form";
-		sql += " (form_id, title, subtitle, detail, status";
+		sql += " (form_id, title, subtitle, detail, status, ministry";
 
 		if (formHasTemplate(form)) {
 			sql += ", template_file, template_file_name";
@@ -68,7 +68,7 @@ public class FormDaoImpl implements FormDao {
 		}
 
 		sql += ")";
-		sql += " VALUES (?, ?, ?, ?, ?";
+		sql += " VALUES (?, ?, ?, ?, ?, ?";
 
 		if (formHasTemplate(form)) {
 			sql += " , ?, ?";
@@ -95,7 +95,8 @@ public class FormDaoImpl implements FormDao {
 						ps.setString(i++, form.getSubTitle());
 						ps.setString(i++, form.getDetail());
 						ps.setInt(i++, form.getStatus());
-
+						ps.setInt(i++, form.getMinistry());
+						
 						if (formHasTemplate(form)) {
 							lobCreator.setBlobAsBinaryStream(
 									ps,

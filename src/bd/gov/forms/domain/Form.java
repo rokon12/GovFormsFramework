@@ -44,6 +44,7 @@ public class Form {
 	private String entryId;
 	private String entryStatus;
 	private int totalPages;
+	private int ministry;
 
 	public Form() {
 	}
@@ -199,5 +200,13 @@ public class Form {
 
 	public void setLogo(byte[] logo) {
 		this.logo = logo;
+	}
+
+	public int getMinistry() {
+		return ministry;
+	}
+
+	public void setMinistry(int ministry) {
+		this.ministry = ministry;
 	}
 }

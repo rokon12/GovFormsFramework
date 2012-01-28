@@ -23,6 +23,7 @@ import bd.gov.forms.domain.Document;
 import bd.gov.forms.domain.Field;
 import bd.gov.forms.domain.Form;
 import bd.gov.forms.domain.ListData;
+import bd.gov.forms.domain.User;
 import bd.gov.forms.utils.ContentType;
 import bd.gov.forms.utils.FormUtil;
 
@@ -33,11 +34,13 @@ import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.channels.SeekableByteChannel;
 import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bd.gov.forms.utils.UserAccessChecker;
 import bd.gov.forms.web.pdf.ContentCaptureServletResponse;
@@ -98,9 +101,7 @@ public class FormBuilder {
 		if (access != null) {
 			return access;
 		}
-
 		Form form = new Form();
-
 		model.put("formDetailsCmd", form);
 		model.put("formAction", "saveForm");
 
@@ -123,6 +124,10 @@ public class FormBuilder {
 		form.setFormId(Long.toString(System.nanoTime())
 				+ new Long(new Random().nextLong()));
 		form.setStatus(1);
+
+		User user = (User) request.getSession().getAttribute("user");
+
+		form.setMinistry(user.getMinistry());
 
 		formDao.saveForm(form);
 

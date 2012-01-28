@@ -187,18 +187,37 @@ public class UserMgt {
 			HttpServletResponse response, ModelMap model) {
 
 		request.getSession().setAttribute("user", null);
+		request.getSession().setAttribute("ministry", null);
 
 		user = userDao.getUser(user.getUserName(), user.getPassword());
 
 		if (user != null) {
 			request.getSession().setAttribute("user", user);
+			if (user.getAdmin() == 1) {
+				return "redirect:/formBuilder/index.htm";
+			} else {
+				request.setAttribute("ministry", user.getMinistry());
+				return "redirect:/ministry/dashboard.htm?ministry="
+						+ user.getMinistry();
+			}
 		} else {
 			model.put("message", "login.failed");
 			model.put("msgType", "failed");
 			return "redirect:login.htm";
 		}
 
-		return "redirect:/formBuilder/index.htm";
+		// } else {
+		// if (user != null) {
+		// request.getSession().setAttribute("user", user);
+		// request.setAttribute("ministry", user.getMinistry());
+		// } else {
+		// model.put("message", "login.failed");
+		// model.put("msgType", "failed");
+		// return "redirect:login.htm";
+		// }
+
+		// }
+
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+
 public class FormDaoTest {
 
 	@Before
@@ -13,7 +14,7 @@ public class FormDaoTest {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+
 	}
 
 }

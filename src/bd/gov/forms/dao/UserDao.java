@@ -25,20 +25,22 @@ import java.util.List;
  */
 public interface UserDao {
 
-    public void saveUser(final User user);
+	public void saveUser(final User user);
 
-    public User getUser(String sysId);
+	public User getUser(String sysId);
 
-    public void updateUser(final User user);
+	public void updateUser(final User user);
 
-    public List getUserList();
+	public List getUserList();
 
-    public User getUser(String userName, String password);
+	public User getUser(String userName, String password);
 
-    public User getUserWithEmail(String userName, String email);
+	public User getUser(String userName, String password, int ministryId);
 
-    public int changePassword(String userName, String password);
+	public User getUserWithEmail(String userName, String email);
 
-    public int getCountWithUserName(String userName);
+	public int changePassword(String userName, String password);
+
+	public int getCountWithUserName(String userName);
 
 }
