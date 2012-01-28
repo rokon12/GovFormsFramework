@@ -20,6 +20,7 @@ import bd.gov.forms.domain.Field;
 import bd.gov.forms.domain.Form;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -599,6 +600,8 @@ public class FormDaoImpl implements FormDao {
 		String sql = "SELECT * FROM " + form.getTableName() + where + order
 				+ " LIMIT ?, ?";
 		log.debug("getEntryList SQL query: {}", sql);
+		final String columName = colName;
+		// final String columVal = colVal;
 
 		return this.jdbcTemplate.query(sql, new Object[] { colVal, start,
 				resultsPerPage }, new RowMapper() {
@@ -611,6 +614,9 @@ public class FormDaoImpl implements FormDao {
 					map.put("entry_date", rs.getString("entry_date"));
 					map.put("entry_time", rs.getString("entry_time"));
 					map.put("entry_status", rs.getString("entry_status"));
+					map.put("entry_id", rs.getString("entry_id"));
+					map.put("table_name", form.getTableName());
+					map.put("colum_name", field.getColName());
 
 					if (fieldTypeIsNotFileOrNoteOrSection(field.getType())) {
 						map.put(field.getColName(),
@@ -672,5 +678,26 @@ public class FormDaoImpl implements FormDao {
 		}
 
 		return jdbcTemplate.queryForInt(sql);
+	}
+
+	@Override
+	public List getAttachment(String entryId, String columName, String tableName) {
+
+		String query = "SELECT * From " + tableName + " WHERE entry_id=?";
+
+		final String colName = columName;
+
+		return this.jdbcTemplate.query(query, new Object[] { entryId },
+				new RowMapper() {
+
+					public Object mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						Map map = new HashMap();
+
+						map.put("file", rs.getBytes(colName));
+						map.put("name", rs.getString(colName + "_fname"));
+						return map;
+					}
+				});
 	}
 }

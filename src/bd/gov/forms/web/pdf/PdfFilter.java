@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class PdfFilter implements Filter, ApplicationContextAware {
-
 	@SuppressWarnings({ "UnusedDeclaration" })
 	private static final Logger log = Logger.getLogger(PdfFilter.class);
 	protected ApplicationContext applicationContext;
@@ -51,8 +50,7 @@ public class PdfFilter implements Filter, ApplicationContextAware {
 
 			PdfGenerator pdfGenerator = new PdfGenerator(
 					response.getOutputStream());
-			
-			pdfGenerator.renderPdf(htmlContent, request, response);
+			pdfGenerator.renderPdf(htmlContent, request);
 
 		} catch (Exception e) {
 			throw new ServletException(e);

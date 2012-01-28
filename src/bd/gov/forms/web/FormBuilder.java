@@ -23,13 +23,16 @@ import bd.gov.forms.domain.Document;
 import bd.gov.forms.domain.Field;
 import bd.gov.forms.domain.Form;
 import bd.gov.forms.domain.ListData;
+import bd.gov.forms.utils.ContentType;
 import bd.gov.forms.utils.FormUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -37,6 +40,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bd.gov.forms.utils.UserAccessChecker;
+import bd.gov.forms.web.pdf.ContentCaptureServletResponse;
+import bd.gov.forms.web.pdf.PdfGenerator;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -897,14 +902,9 @@ public class FormBuilder {
 		Form form = formDao.getForm(formId);
 		List<Field> fields = form.getFields();
 		Field field = new Field();
-		
+
 	}
 
-	
-	
-	
-	
-	
 	/**
 	 * @author Rokonoid added for testing purpose
 	 * **/
@@ -974,6 +974,7 @@ public class FormBuilder {
 		try {
 			response.setHeader("Content-Disposition", "inline;filename=\""
 					+ doc.getFilename() + "\"");
+
 			OutputStream out = response.getOutputStream();
 			response.setContentType(doc.getContentType());
 
@@ -1010,5 +1011,120 @@ public class FormBuilder {
 
 		Form form = formDao.getForm(id);
 		return form;
+	}
+
+	@RequestMapping(value = "printPdf", method = RequestMethod.GET)
+	public void printPdf(
+			@RequestParam(value = "formId", required = true) String formId,
+			@RequestParam(value = "entryId", required = true) String entryId,
+			HttpServletRequest request, HttpServletResponse response) {
+
+		byte[] fileContent = formDao.getTemplateContent(formId);
+		Form form = formDao.getFormWithFields(formId);
+		form.setEntryId(entryId);
+
+		response.setContentType("application/pdf; charset=UTF-8");
+		response.setHeader("Content-disposition", "attachment; filename=\""
+				+ formId + ".pdf\"");
+		response.addHeader("Cache-Control", "-1");
+
+		form = formDao.getEntry(form);
+		String report = "";
+
+		if (fileContent != null) {
+			try {
+				report = new String(fileContent, "UTF8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+
+			for (Field field : form.getFields()) {
+				if (fieldTypeIsNotOfFileOrNoteOrSection(field)) {
+					report = report.replaceAll("#" + field.getColName()
+							+ ":label#", field.getLabel());
+					report = report.replaceAll("#" + field.getColName()
+							+ ":value#", field.getStrVal());
+				}
+			}
+		} else {
+			report += "<table cellspacing='0' cellpadding='0' style='border:1px solid #aaa;width:98%;'>";
+
+			for (Field field : form.getFields()) {
+				if (fieldTypeIsNotOfFileOrNoteOrSection(field)) {
+					report += "<tr>";
+					report += "<td>";
+					report += field.getLabel();
+					report += "</td>";
+					report += "<td>";
+					report += field.getStrVal();
+					report += "</td>";
+
+					report += "</tr>";
+
+				}
+			}
+
+			report += "</table>";
+		}
+
+		try {
+			PdfGenerator pdfGenerator = new PdfGenerator(
+					response.getOutputStream());
+			pdfGenerator.renderPdf(report, request);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping(value = "downloadAttachment", method = RequestMethod.GET)
+	public String downloadAttachemnt(
+			@RequestParam(value = "entryId", required = true) String entryId,
+			@RequestParam(value = "columName", required = true) String columName,
+			@RequestParam(value = "tableName", required = true) String tableName,
+			HttpServletResponse response, HttpServletRequest request) {
+		String access = UserAccessChecker.check(request);
+
+		if (access != null) {
+			return access;
+		}
+
+		List<HashMap> list = formDao.getAttachment(entryId, columName,
+				tableName);
+		if (list != null && list.size() > 0) {
+
+			Map map = list.get(0);
+
+			try {
+				String fileName = (String) map.get("name");
+				String nameOnly = (String) fileName.subSequence(0,
+						fileName.indexOf('.'));
+				response.setHeader("Content-Disposition", "inline;filename=\""
+						+ nameOnly + "\"");
+
+				OutputStream out = response.getOutputStream();
+
+				String contentType = (String) fileName.subSequence(
+						fileName.indexOf('.'), fileName.length());
+				System.out.println("ContentType: " + contentType);
+				System.out
+						.println("return Type:"
+								+ ContentType.getInstance().getContentType(
+										contentType));
+
+				response.setContentType(ContentType.getInstance()
+						.getContentType(contentType));
+
+				InputStream stream = new ByteArrayInputStream(
+						(byte[]) map.get("file"));
+				IOUtils.copy(stream, out);
+				out.flush();
+				out.close();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
 	}
 }

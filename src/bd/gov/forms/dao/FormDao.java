@@ -70,11 +70,13 @@ public interface FormDao {
 	public void updateEntryStatus(Form frm, String entryId, String string);
 
 	public void removeTemplate(String formId);
-	
+
 	public void removeLogo(String formId);
 
 	public List getPublicForms();
 
 	public int getFormEntryCount(Form frm, String status);
+
+	public List getAttachment(String entryId, String columName, String tableName);
 
 }
