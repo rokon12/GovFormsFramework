@@ -16,7 +16,9 @@
  */
 package bd.gov.forms.web;
 
+import bd.gov.forms.dao.MinistryDao;
 import bd.gov.forms.dao.UserDao;
+import bd.gov.forms.domain.Ministry;
 import bd.gov.forms.domain.Role;
 import bd.gov.forms.domain.User;
 import bd.gov.forms.utils.FormUtil;
@@ -51,6 +53,10 @@ public class UserMgt {
 
 	@Autowired
 	private UserDao userDao;
+
+	@Autowired
+	private MinistryDao ministryDao;
+
 	@Autowired
 	MessageSource messageSource;
 
@@ -62,9 +68,11 @@ public class UserMgt {
 		}
 
 		User user = new User();
+		List<Ministry> ministries = ministryDao.getAll();
 
 		model.put("userCmd", user);
 		model.put("formAction", "saveUser");
+		model.put("ministryList", ministries);
 
 		return "user/user";
 	}
@@ -112,6 +120,9 @@ public class UserMgt {
 		}
 
 		User user = sysId != null ? userDao.getUser(sysId) : null;
+
+		List<Ministry> ministries = ministryDao.getAll();
+		model.put("ministryList", ministries);
 
 		model.put("userCmd", user);
 		model.put("formAction", "updateUser");

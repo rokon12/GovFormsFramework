@@ -33,188 +33,192 @@ import org.springframework.jdbc.support.lob.LobCreator;
 import org.springframework.stereotype.Repository;
 
 /**
- *
+ * 
  * @author asif
  */
 @Repository("userDao")
 @SuppressWarnings("unchecked")
 public class UserDaoImpl implements UserDao {
 
-    private static final Logger log = LoggerFactory.getLogger(UserDaoImpl.class);
-    
-    @Autowired
-    DefaultLobHandler lobHandler;
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+	private static final Logger log = LoggerFactory
+			.getLogger(UserDaoImpl.class);
 
-    public User getUser(String sysId) {
-        return (User) jdbcTemplate.queryForObject(
-                "SELECT * FROM user WHERE sys_id = ?",
-                new Object[]{sysId},
-                new RowMapper() {
+	@Autowired
+	DefaultLobHandler lobHandler;
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 
-                    public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        User user = new User();
+	public User getUser(String sysId) {
+		return (User) jdbcTemplate.queryForObject(
+				"SELECT * FROM user WHERE sys_id = ?", new Object[] { sysId },
+				new RowMapper() {
 
-                        user.setId(rs.getInt("id"));
-                        user.setSysId(rs.getString("sys_id"));
-                        user.setName(rs.getString("name"));
-                        user.setTitle(rs.getString("title"));
-                        user.setUserName(rs.getString("user"));
-                        user.setPassword(rs.getString("password"));
+					public Object mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						User user = new User();
 
-                        user.setMobile(rs.getString("mobile"));
-                        user.setEmail(rs.getString("email"));
-                        user.setAdmin(rs.getInt("admin"));
-                        user.setActive(rs.getInt("active"));
+						user.setId(rs.getInt("id"));
+						user.setSysId(rs.getString("sys_id"));
+						user.setName(rs.getString("name"));
+						user.setTitle(rs.getString("title"));
+						user.setUserName(rs.getString("user"));
+						user.setPassword(rs.getString("password"));
 
-                        return user;
-                    }
-                });
-    }
+						user.setMobile(rs.getString("mobile"));
+						user.setEmail(rs.getString("email"));
+						user.setAdmin(rs.getInt("admin"));
+						user.setActive(rs.getInt("active"));
 
-    public User getUser(String userName, String password) {
-        try {
-            return (User) jdbcTemplate.queryForObject(
-                    "SELECT * FROM user WHERE user = ? and password=?",
-                    new Object[]{userName, password},
-                    new RowMapper() {
+						return user;
+					}
+				});
+	}
 
-                        public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-                            User user = new User();
+	public User getUser(String userName, String password) {
+		try {
+			return (User) jdbcTemplate.queryForObject(
+					"SELECT * FROM user WHERE user = ? and password=?",
+					new Object[] { userName, password }, new RowMapper() {
 
-                            user.setId(rs.getInt("id"));
-                            user.setSysId(rs.getString("sys_id"));
-                            user.setName(rs.getString("name"));
-                            user.setTitle(rs.getString("title"));
-                            user.setUserName(rs.getString("user"));
+						public Object mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							User user = new User();
 
-                            user.setMobile(rs.getString("mobile"));
-                            user.setEmail(rs.getString("email"));
-                            user.setAdmin(rs.getInt("admin"));
-                            user.setActive(rs.getInt("active"));
+							user.setId(rs.getInt("id"));
+							user.setSysId(rs.getString("sys_id"));
+							user.setName(rs.getString("name"));
+							user.setTitle(rs.getString("title"));
+							user.setUserName(rs.getString("user"));
 
-                            return user;
-                        }
-                    });
-        } catch (Exception ex) {
-            log.debug("Exception in getUser().", ex);
-            return null;
-        }
-    }
+							user.setMobile(rs.getString("mobile"));
+							user.setEmail(rs.getString("email"));
+							user.setAdmin(rs.getInt("admin"));
+							user.setActive(rs.getInt("active"));
 
-    public User getUserWithEmail(String userName, String email) {
-        try {
-            return (User) jdbcTemplate.queryForObject(
-                    "SELECT * FROM user WHERE user = ? and email=?",
-                    new Object[]{userName, email},
-                    new RowMapper() {
+							return user;
+						}
+					});
+		} catch (Exception ex) {
+			log.debug("Exception in getUser().", ex);
+			return null;
+		}
+	}
 
-                        public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-                            User user = new User();
+	public User getUserWithEmail(String userName, String email) {
+		try {
+			return (User) jdbcTemplate.queryForObject(
+					"SELECT * FROM user WHERE user = ? and email=?",
+					new Object[] { userName, email }, new RowMapper() {
 
-                            user.setId(rs.getInt("id"));
-                            user.setSysId(rs.getString("sys_id"));
-                            user.setName(rs.getString("name"));
-                            user.setTitle(rs.getString("title"));
-                            user.setUserName(rs.getString("user"));
+						public Object mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							User user = new User();
 
-                            user.setMobile(rs.getString("mobile"));
-                            user.setEmail(rs.getString("email"));
-                            user.setAdmin(rs.getInt("admin"));
-                            user.setActive(rs.getInt("active"));
+							user.setId(rs.getInt("id"));
+							user.setSysId(rs.getString("sys_id"));
+							user.setName(rs.getString("name"));
+							user.setTitle(rs.getString("title"));
+							user.setUserName(rs.getString("user"));
 
-                            return user;
-                        }
-                    });
-        } catch (Exception ex) {
-            log.debug("Exception in getUserWIthEmail().", ex);
-            return null;
-        }
-    }
+							user.setMobile(rs.getString("mobile"));
+							user.setEmail(rs.getString("email"));
+							user.setAdmin(rs.getInt("admin"));
+							user.setActive(rs.getInt("active"));
 
-    public List getUserList() {
-        return jdbcTemplate.query(
-                "SELECT * FROM user ",
-                new Object[]{},
-                new RowMapper() {
+							return user;
+						}
+					});
+		} catch (Exception ex) {
+			log.debug("Exception in getUserWIthEmail().", ex);
+			return null;
+		}
+	}
 
-                    public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        User user = new User();
+	public List getUserList() {
+		return jdbcTemplate.query("SELECT * FROM user ", new Object[] {},
+				new RowMapper() {
 
-                        user.setSysId(rs.getString("sys_id"));
-                        user.setName(rs.getString("name"));
-                        user.setTitle(rs.getString("title"));
-                        user.setUserName(rs.getString("user"));
-                        user.setAdmin(rs.getInt("admin"));
-                        user.setActive(rs.getInt("active"));
+					public Object mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						User user = new User();
 
-                        return user;
-                    }
-                });
-    }
+						user.setSysId(rs.getString("sys_id"));
+						user.setName(rs.getString("name"));
+						user.setTitle(rs.getString("title"));
+						user.setUserName(rs.getString("user"));
+						user.setAdmin(rs.getInt("admin"));
+						user.setActive(rs.getInt("active"));
 
-    public void saveUser(final User user) {
-        String sql = "INSERT INTO user";
-        sql += " (sys_id, name, title, user, password, mobile, email, admin, active";
-        sql += ")";
-        sql += " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?";
-        sql += ")";
+						return user;
+					}
+				});
+	}
 
-        log.debug("SQL INSERT query: {}", sql);
+	public void saveUser(final User user) {
+		String sql = "INSERT INTO user";
+		sql += " (sys_id, name, title, user, password, mobile, email, admin, active, ministry";
+		sql += ")";
+		sql += " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?";
+		sql += ")";
 
-        jdbcTemplate.execute(sql,
-                new AbstractLobCreatingPreparedStatementCallback(lobHandler) {
+		log.debug("SQL INSERT query: {}", sql);
 
-                    @Override
-                    protected void setValues(PreparedStatement ps, LobCreator lobCreator) throws SQLException {
-                        int i = 1;
+		jdbcTemplate.execute(sql,
+				new AbstractLobCreatingPreparedStatementCallback(lobHandler) {
 
-                        ps.setString(i++, user.getSysId());
-                        ps.setString(i++, user.getName());
-                        ps.setString(i++, user.getTitle());
-                        ps.setString(i++, user.getUserName());
-                        ps.setString(i++, user.getPassword());
-                        ps.setString(i++, user.getMobile());
-                        ps.setString(i++, user.getEmail());
-                        ps.setInt(i++, user.getAdmin());
-                        ps.setInt(i, user.getActive());
-                    }
-                }
-        );
-    }
+					@Override
+					protected void setValues(PreparedStatement ps,
+							LobCreator lobCreator) throws SQLException {
+						int i = 1;
 
-    public void updateUser(final User user) {
-        String sql = "UPDATE user";
-        sql += " set name = ?, title = ?, mobile = ?, email = ?, admin = ?, active = ?";
-        sql += " WHERE sys_id = ?";
+						ps.setString(i++, user.getSysId());
+						ps.setString(i++, user.getName());
+						ps.setString(i++, user.getTitle());
+						ps.setString(i++, user.getUserName());
+						ps.setString(i++, user.getPassword());
+						ps.setString(i++, user.getMobile());
+						ps.setString(i++, user.getEmail());
+						ps.setInt(i++, user.getAdmin());
+						ps.setInt(i++, user.getActive());
+						ps.setInt(i, user.getMinistry());
+					}
+				});
+	}
 
-        log.debug("SQL UPDATE query: {}", sql);
+	public void updateUser(final User user) {
+		String sql = "UPDATE user";
+		sql += " set name = ?, title = ?, mobile = ?, email = ?, admin = ?, active = ?";
+		sql += " WHERE sys_id = ?";
 
-        jdbcTemplate.execute(sql,
-                new AbstractLobCreatingPreparedStatementCallback(lobHandler) {
+		log.debug("SQL UPDATE query: {}", sql);
 
-                    @Override
-                    protected void setValues(PreparedStatement ps, LobCreator lobCreator) throws SQLException {
-                        int i = 1;
+		jdbcTemplate.execute(sql,
+				new AbstractLobCreatingPreparedStatementCallback(lobHandler) {
 
-                        ps.setString(i++, user.getName());
-                        ps.setString(i++, user.getTitle());                   
-                        ps.setString(i++, user.getMobile());
-                        ps.setString(i++, user.getEmail());
-                        ps.setInt(i++, user.getAdmin());
-                        ps.setInt(i++, user.getActive());
-                        ps.setString(i, user.getSysId());
-                    }
-                }
-        );
-    }
+					@Override
+					protected void setValues(PreparedStatement ps,
+							LobCreator lobCreator) throws SQLException {
+						int i = 1;
 
-    public int changePassword(String userName, String password) {
-        return jdbcTemplate.update("UPDATE user SET password = ? WHERE user = ?", password, userName);
-    }
+						ps.setString(i++, user.getName());
+						ps.setString(i++, user.getTitle());
+						ps.setString(i++, user.getMobile());
+						ps.setString(i++, user.getEmail());
+						ps.setInt(i++, user.getAdmin());
+						ps.setInt(i++, user.getActive());
+						ps.setString(i, user.getSysId());
+					}
+				});
+	}
 
-    public int getCountWithUserName(String userName) {
-        return jdbcTemplate.queryForInt("select count(*) from user where user = ?" , userName);
-    }
+	public int changePassword(String userName, String password) {
+		return jdbcTemplate.update(
+				"UPDATE user SET password = ? WHERE user = ?", password,
+				userName);
+	}
+
+	public int getCountWithUserName(String userName) {
+		return jdbcTemplate.queryForInt(
+				"select count(*) from user where user = ?", userName);
+	}
 }

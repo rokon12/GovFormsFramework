@@ -28,6 +28,7 @@ public class Role {
 
     public static final int ROLE_USER = 0;
     public static final int ROLE_ADMIN = 1;
+    
 
     public static String checkRole(int role, User user) {
         if (user == null) {

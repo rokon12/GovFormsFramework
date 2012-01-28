@@ -21,115 +21,126 @@ package bd.gov.forms.domain;
  */
 public class User {
 
-    private int id;
-    private String sysId;
-    private String userName;
-    private String password;
+	private int id;
+	private String sysId;
+	private String userName;
+	private String password;
 
-    private String name;
-    private String email;
-    private int admin;
-    private String mobile;
-    private int active;
-    private String title;
+	private String name;
+	private String email;
+	private int admin;
+	private String mobile;
+	private int active;
+	private String title;
 
-    private String confirmPassword;
-    private String oldPassword;
+	// for different minstry of bangladesh
+	private int ministry;
 
-    public int getActive() {
-        return active;
-    }
+	private String confirmPassword;
+	private String oldPassword;
 
-    public void setActive(int active) {
-        this.active = active;
-    }
+	public int getActive() {
+		return active;
+	}
 
-    public int getAdmin() {
-        return admin;
-    }
+	public void setActive(int active) {
+		this.active = active;
+	}
 
-    public void setAdmin(int admin) {
-        this.admin = admin;
-    }
+	public int getAdmin() {
+		return admin;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setAdmin(int admin) {
+		this.admin = admin;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public String getMobile() {
-        return mobile;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
+	public String getMobile() {
+		return mobile;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public String getSysId() {
-        return sysId;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setSysId(String sysId) {
-        this.sysId = sysId;
-    }
+	public String getSysId() {
+		return sysId;
+	}
 
-    public String getUserName() {
-        return userName;
-    }
+	public void setSysId(String sysId) {
+		this.sysId = sysId;
+	}
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+	public String getUserName() {
+		return userName;
+	}
 
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
 
-    public String getOldPassword() {
-        return oldPassword;
-    }
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
 
-    public void setOldPassword(String oldPassword) {
-        this.oldPassword = oldPassword;
-    }
+	public String getOldPassword() {
+		return oldPassword;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public int getMinistry() {
+		return ministry;
+	}
+
+	public void setMinistry(int ministry) {
+		this.ministry = ministry;
+	}
 
 }
