@@ -74,7 +74,7 @@ public class UserDaoImpl implements UserDao {
 				user.setSysId(rs.getString("sys_id"));
 				user.setName(rs.getString("name"));
 				user.setTitle(rs.getString("title"));
-				user.setUserName(rs.getString("user"));
+				user.setUserName(rs.getString("user_name"));
 
 				user.setMobile(rs.getString("mobile"));
 				user.setEmail(rs.getString("email"));
@@ -147,7 +147,7 @@ public class UserDaoImpl implements UserDao {
 	public User getUser(String userName, String password) {
 		try {
 			return (User) jdbcTemplate.queryForObject(
-					"SELECT * FROM user WHERE user = ? and password=?",
+					"SELECT * FROM user WHERE user_name = ? and password=?",
 					new Object[] { userName, password }, new RowMapper() {
 
 						public Object mapRow(ResultSet rs, int rowNum)
@@ -158,7 +158,7 @@ public class UserDaoImpl implements UserDao {
 							user.setSysId(rs.getString("sys_id"));
 							user.setName(rs.getString("name"));
 							user.setTitle(rs.getString("title"));
-							user.setUserName(rs.getString("user"));
+							user.setUserName(rs.getString("user_name"));
 
 							user.setMobile(rs.getString("mobile"));
 							user.setEmail(rs.getString("email"));
