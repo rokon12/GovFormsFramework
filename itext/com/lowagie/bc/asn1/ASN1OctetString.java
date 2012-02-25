@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Vector;
 
+/**
+ */
 public abstract class ASN1OctetString
     extends DERObject
 {
@@ -16,9 +18,10 @@ public abstract class ASN1OctetString
      * @param obj the tagged object holding the object we want.
      * @param explicit true if the object is meant to be explicitly
      *              tagged false otherwise.
+    
+     * @return ASN1OctetString
      * @exception IllegalArgumentException if the tagged object cannot
-     *              be converted.
-     */
+     *              be converted. */
     public static ASN1OctetString getInstance(
         ASN1TaggedObject    obj,
         boolean             explicit)
@@ -30,8 +33,9 @@ public abstract class ASN1OctetString
      * return an Octet String from the given object.
      *
      * @param obj the object we want converted.
-     * @exception IllegalArgumentException if the object cannot be converted.
-     */
+    
+     * @return ASN1OctetString
+     * @exception IllegalArgumentException if the object cannot be converted. */
     public static ASN1OctetString getInstance(
         Object  obj)
     {
@@ -70,6 +74,10 @@ public abstract class ASN1OctetString
         this.string = string;
     }
 
+    /**
+     * Constructor for ASN1OctetString.
+     * @param obj DEREncodable
+     */
     public ASN1OctetString(
         DEREncodable obj)
     {
@@ -89,11 +97,19 @@ public abstract class ASN1OctetString
         }
     }
 
+    /**
+     * Method getOctets.
+     * @return byte[]
+     */
     public byte[] getOctets()
     {
         return string;
     }
 
+    /**
+     * Method hashCode.
+     * @return int
+     */
     public int hashCode()
     {
         byte[]  b = this.getOctets();
@@ -107,6 +123,11 @@ public abstract class ASN1OctetString
         return value;
     }
 
+    /**
+     * Method equals.
+     * @param o Object
+     * @return boolean
+     */
     public boolean equals(
         Object  o)
     {
@@ -136,6 +157,11 @@ public abstract class ASN1OctetString
         return true;
     }
 
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
+     */
     abstract void encode(DEROutputStream out)
         throws IOException;
 }

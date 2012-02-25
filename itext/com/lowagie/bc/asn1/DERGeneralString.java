@@ -2,11 +2,18 @@ package com.lowagie.bc.asn1;
 
 import java.io.IOException;
 
+/**
+ */
 public class DERGeneralString 
 	extends DERObject implements DERString
 {
 	private String string;
 
+	/**
+	 * Method getInstance.
+	 * @param obj Object
+	 * @return DERGeneralString
+	 */
 	public static DERGeneralString getInstance(
 		Object obj) 
 	{
@@ -26,6 +33,12 @@ public class DERGeneralString
 				+ obj.getClass().getName());
 	}
 
+	/**
+	 * Method getInstance.
+	 * @param obj ASN1TaggedObject
+	 * @param explicit boolean
+	 * @return DERGeneralString
+	 */
 	public static DERGeneralString getInstance(
 		ASN1TaggedObject obj, 
 		boolean explicit) 
@@ -33,6 +46,10 @@ public class DERGeneralString
 		return getInstance(obj.getObject());
 	}
 
+	/**
+	 * Constructor for DERGeneralString.
+	 * @param string byte[]
+	 */
 	public DERGeneralString(byte[] string) 
 	{
 		char[] cs = new char[string.length];
@@ -42,16 +59,29 @@ public class DERGeneralString
 		this.string = new String(cs);
 	}
 
+	/**
+	 * Constructor for DERGeneralString.
+	 * @param string String
+	 */
 	public DERGeneralString(String string) 
 	{
 		this.string = string;
 	}
 	
+	/**
+	 * Method getString.
+	 * @return String
+	 * @see com.lowagie.bc.asn1.DERString#getString()
+	 */
 	public String getString() 
 	{
 		return string;
 	}
 	
+	/**
+	 * Method getOctets.
+	 * @return byte[]
+	 */
 	public byte[] getOctets() 
 	{
 		char[] cs = string.toCharArray();
@@ -63,17 +93,31 @@ public class DERGeneralString
 		return bs;
 	}
 	
+	/**
+	 * Method encode.
+	 * @param out DEROutputStream
+	 * @throws IOException
+	 */
 	void encode(DEROutputStream out) 
 		throws IOException 
 	{
 		out.writeEncoded(GENERAL_STRING, this.getOctets());
 	}
 	
+	/**
+	 * Method hashCode.
+	 * @return int
+	 */
 	public int hashCode() 
 	{
 		return this.getString().hashCode();
 	}
 	
+	/**
+	 * Method equals.
+	 * @param o Object
+	 * @return boolean
+	 */
 	public boolean equals(Object o) 
 	{
 		if (!(o instanceof DERGeneralString)) 

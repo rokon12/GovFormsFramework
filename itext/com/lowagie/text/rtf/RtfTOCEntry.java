@@ -132,6 +132,11 @@ public class RtfTOCEntry extends Chunk implements RtfField {
     }
 
     
+    /**
+     * Method writeField.
+     * @param out OutputStream
+     * @throws IOException
+     */
     private void writeField( OutputStream out ) throws IOException {
         
         // always hide the toc entry

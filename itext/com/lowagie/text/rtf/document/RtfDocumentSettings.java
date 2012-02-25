@@ -82,8 +82,8 @@ public class RtfDocumentSettings {
     /**
      * Gets whether to output the line breaks for increased rtf document readability.
      * 
-     * @return Whether to output line breaks.
-     */
+    
+     * @return Whether to output line breaks. */
     public boolean isOutputDebugLineBreaks() {
         return outputDebugLineBreaks;
     }
@@ -101,8 +101,8 @@ public class RtfDocumentSettings {
     /**
      * Gets whether the table row definition should also be written after the cell content.
      * 
-     * @return Returns the outputTableRowDefinitionAfter.
-     */
+    
+     * @return Returns the outputTableRowDefinitionAfter. */
     public boolean isOutputTableRowDefinitionAfter() {
         return outputTableRowDefinitionAfter;
     }
@@ -122,8 +122,8 @@ public class RtfDocumentSettings {
     /**
      * Gets whether all linebreaks inside Chunks are generated as soft linebreaks.
      * 
-     * @return <code>True</code> if soft linebreaks are generated, <code>false</code> for hard linebreaks.
-     */
+    
+     * @return <code>True</code> if soft linebreaks are generated, <code>false</code> for hard linebreaks. */
     public boolean isAlwaysGenerateSoftLinebreaks() {
         return this.alwaysGenerateSoftLinebreaks;
     }
@@ -140,8 +140,8 @@ public class RtfDocumentSettings {
     /**
      * Gets whether all characters bigger than 'z' are represented as unicode.
      * 
-     * @return <code>True</code> if unicode representation is used, <code>false</code> otherwise.
-     */
+    
+     * @return <code>True</code> if unicode representation is used, <code>false</code> otherwise. */
     public boolean isAlwaysUseUnicode() {
         return this.alwaysUseUnicode;
     }

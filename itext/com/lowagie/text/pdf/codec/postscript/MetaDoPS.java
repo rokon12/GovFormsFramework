@@ -55,6 +55,8 @@ import java.awt.*;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.*;
 
+/**
+ */
 public class MetaDoPS {
 
   public PdfContentByte cb;
@@ -65,11 +67,21 @@ public class MetaDoPS {
   int bottom;
   int inch;
 
+  /**
+   * Constructor for MetaDoPS.
+   * @param in InputStream
+   * @param cb PdfContentByte
+   */
   public MetaDoPS(InputStream in, PdfContentByte cb) {
     this.cb = cb;
     this.in = in;
   }
 
+  /**
+   * Method readAll.
+   * @throws IOException
+   * @throws DocumentException
+   */
   public void readAll() throws IOException, DocumentException {
 
     cb.saveState();

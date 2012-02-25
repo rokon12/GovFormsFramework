@@ -54,6 +54,7 @@ import java.io.*;
 /**
  *
  * @author  Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PRTokeniser {
     
@@ -107,46 +108,97 @@ public class PRTokeniser {
     
     private static final int LINE_SEGMENT_SIZE = 256;
     
+    /**
+     * Constructor for PRTokeniser.
+     * @param filename String
+     * @throws IOException
+     */
     public PRTokeniser(String filename) throws IOException {
         file = new RandomAccessFileOrArray(filename);
     }
 
+    /**
+     * Constructor for PRTokeniser.
+     * @param pdfIn byte[]
+     */
     public PRTokeniser(byte pdfIn[]) {
         file = new RandomAccessFileOrArray(pdfIn);
     }
     
+    /**
+     * Constructor for PRTokeniser.
+     * @param file RandomAccessFileOrArray
+     */
     public PRTokeniser(RandomAccessFileOrArray file) {
         this.file = file;
     }
     
+    /**
+     * Method seek.
+     * @param pos int
+     * @throws IOException
+     */
     public void seek(int pos) throws IOException {
         file.seek(pos);
     }
     
+    /**
+     * Method getFilePointer.
+     * @return int
+     * @throws IOException
+     */
     public int getFilePointer() throws IOException {
         return file.getFilePointer();
     }
 
+    /**
+     * Method close.
+     * @throws IOException
+     */
     public void close() throws IOException {
         file.close();
     }
     
+    /**
+     * Method length.
+     * @return int
+     * @throws IOException
+     */
     public int length() throws IOException {
         return file.length();
     }
 
+    /**
+     * Method read.
+     * @return int
+     * @throws IOException
+     */
     public int read() throws IOException {
         return file.read();
     }
     
+    /**
+     * Method getSafeFile.
+     * @return RandomAccessFileOrArray
+     */
     public RandomAccessFileOrArray getSafeFile() {
         return new RandomAccessFileOrArray(file);
     }
     
+    /**
+     * Method getFile.
+     * @return RandomAccessFileOrArray
+     */
     public RandomAccessFileOrArray getFile() {
         return file;
     }
     
+    /**
+     * Method readString.
+     * @param size int
+     * @return String
+     * @throws IOException
+     */
     public String readString(int size) throws IOException {
         StringBuffer buf = new StringBuffer();
         int ch;
@@ -159,43 +211,89 @@ public class PRTokeniser {
         return buf.toString();
     }
 
+    /**
+     * Method isWhitespace.
+     * @param ch int
+     * @return boolean
+     */
     public static final boolean isWhitespace(int ch) {
         return (ch == 0 || ch == 9 || ch == 10 || ch == 12 || ch == 13 || ch == 32);
     }
     
+    /**
+     * Method isDelimiter.
+     * @param ch int
+     * @return boolean
+     */
     public static final boolean isDelimiter(int ch) {
         return (ch == '(' || ch == ')' || ch == '<' || ch == '>' || ch == '[' || ch == ']' || ch == '/' || ch == '%');
     }
 
+    /**
+     * Method isDelimiterWhitespace.
+     * @param ch int
+     * @return boolean
+     */
     public static final boolean isDelimiterWhitespace(int ch) {
         return delims[ch + 1];
     }
 
+    /**
+     * Method getTokenType.
+     * @return int
+     */
     public int getTokenType() {
         return type;
     }
     
+    /**
+     * Method getStringValue.
+     * @return String
+     */
     public String getStringValue() {
         return stringValue;
     }
     
+    /**
+     * Method getReference.
+     * @return int
+     */
     public int getReference() {
         return reference;
     }
     
+    /**
+     * Method getGeneration.
+     * @return int
+     */
     public int getGeneration() {
         return generation;
     }
     
+    /**
+     * Method backOnePosition.
+     * @param ch int
+     * @throws IOException
+     */
     public void backOnePosition(int ch) throws IOException {
         if (ch != -1)
             file.pushBack((byte)ch);
     }
     
+    /**
+     * Method throwError.
+     * @param error String
+     * @throws IOException
+     */
     public void throwError(String error) throws IOException {
         throw new IOException(error + " at file pointer " + file.getFilePointer());
     }
     
+    /**
+     * Method checkPdfHeader.
+     * @return char
+     * @throws IOException
+     */
     public char checkPdfHeader() throws IOException {
         file.setStartOffset(0);
         String str = readString(1024);
@@ -206,6 +304,10 @@ public class PRTokeniser {
         return str.charAt(idx + 7);
     }
     
+    /**
+     * Method checkFdfHeader.
+     * @throws IOException
+     */
     public void checkFdfHeader() throws IOException {
         file.setStartOffset(0);
         String str = readString(1024);
@@ -215,6 +317,11 @@ public class PRTokeniser {
         file.setStartOffset(idx);
     }
 
+    /**
+     * Method getStartxref.
+     * @return int
+     * @throws IOException
+     */
     public int getStartxref() throws IOException {
         int size = Math.min(1024, file.length());
         int pos = file.length() - size;
@@ -226,6 +333,11 @@ public class PRTokeniser {
         return pos + idx;
     }
 
+    /**
+     * Method getHex.
+     * @param v int
+     * @return int
+     */
     public static int getHex(int v) {
         if (v >= '0' && v <= '9')
             return v - '0';
@@ -236,6 +348,10 @@ public class PRTokeniser {
         return -1;
     }
     
+    /**
+     * Method nextValidToken.
+     * @throws IOException
+     */
     public void nextValidToken() throws IOException {
         int level = 0;
         String n1 = null;
@@ -284,6 +400,11 @@ public class PRTokeniser {
         throwError("Unexpected end of file");
     }
     
+    /**
+     * Method nextToken.
+     * @return boolean
+     * @throws IOException
+     */
     public boolean nextToken() throws IOException {
         StringBuffer outBuf = null;
         stringValue = EMPTY;
@@ -486,10 +607,20 @@ public class PRTokeniser {
         return true;
     }
     
+    /**
+     * Method intValue.
+     * @return int
+     */
     public int intValue() {
         return Integer.valueOf(stringValue).intValue();
     }
     
+    /**
+     * Method readLineSegment.
+     * @param input byte[]
+     * @return boolean
+     * @throws IOException
+     */
     public boolean readLineSegment(byte input[]) throws IOException {
         int c = -1;
         boolean eol = false;
@@ -556,6 +687,11 @@ public class PRTokeniser {
         return true;
     }
     
+    /**
+     * Method checkObjectStart.
+     * @param line byte[]
+     * @return int[]
+     */
     public static int[] checkObjectStart(byte line[]) {
         try {
             PRTokeniser tk = new PRTokeniser(line);
@@ -579,6 +715,10 @@ public class PRTokeniser {
         return null;
     }
     
+    /**
+     * Method isHexString.
+     * @return boolean
+     */
     public boolean isHexString() {
         return this.hexString;
     }

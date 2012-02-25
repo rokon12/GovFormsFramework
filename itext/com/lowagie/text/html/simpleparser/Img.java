@@ -54,7 +54,16 @@ import java.util.HashMap;
 /**
  *
  * @author  psoares
+ * @version $Revision: 1.0 $
  */
 public interface Img {
+    /**
+     * Method process.
+     * @param img Image
+     * @param h HashMap
+     * @param cprops ChainedProperties
+     * @param doc DocListener
+     * @return boolean
+     */
     boolean process(Image img, HashMap h, ChainedProperties cprops, DocListener doc);
 }

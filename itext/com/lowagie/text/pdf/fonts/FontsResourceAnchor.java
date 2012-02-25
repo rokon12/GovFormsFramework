@@ -50,6 +50,7 @@ package com.lowagie.text.pdf.fonts;
  * A class to facilitate the loading of resources
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class FontsResourceAnchor {
     

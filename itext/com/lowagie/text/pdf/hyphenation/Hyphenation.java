@@ -20,6 +20,7 @@ package com.lowagie.text.pdf.hyphenation;
  * This class represents a hyphenated word.
  *
  * @author Carlos Villegas <cav@uniscope.co.jp>
+ * @version $Revision: 1.0 $
  */
 public class Hyphenation {
     
@@ -34,6 +35,8 @@ public class Hyphenation {
     /**
      * rawWord as made of alternating strings and {@link Hyphen Hyphen}
      * instances
+     * @param word String
+     * @param points int[]
      */
     Hyphenation(String word, int[] points) {
         this.word = word;
@@ -42,33 +45,39 @@ public class Hyphenation {
     }
 
     /**
-     * @return the number of hyphenation points in the word
-     */
+    
+     * @return the number of hyphenation points in the word */
     public int length() {
         return len;
     }
 
     /**
-     * @return the pre-break text, not including the hyphen character
-     */
+    
+     * @param index int
+     * @return the pre-break text, not including the hyphen character */
     public String getPreHyphenText(int index) {
         return word.substring(0, hyphenPoints[index]);
     }
 
     /**
-     * @return the post-break text
-     */
+    
+     * @param index int
+     * @return the post-break text */
     public String getPostHyphenText(int index) {
         return word.substring(hyphenPoints[index]);
     }
 
     /**
-     * @return the hyphenation points
-     */
+    
+     * @return the hyphenation points */
     public int[] getHyphenationPoints() {
         return hyphenPoints;
     }
 
+    /**
+     * Method toString.
+     * @return String
+     */
     public String toString() {
         StringBuffer str = new StringBuffer();
         int start = 0;

@@ -57,6 +57,7 @@ import com.lowagie.text.ExceptionConverter;
  *
  * @author  Paulo Soares (psoares@consiste.pt)
  * @author Kazuya Ujihara
+ * @version $Revision: 1.0 $
  */
 public class PdfEncryption {
     
@@ -98,6 +99,10 @@ public class PdfEncryption {
         }
     }
 
+    /**
+     * Constructor for PdfEncryption.
+     * @param enc PdfEncryption
+     */
     public PdfEncryption(PdfEncryption enc) {
         this();
         mkey = (byte[])enc.mkey.clone();
@@ -109,6 +114,8 @@ public class PdfEncryption {
     }
     
     /**
+     * @param userPassword byte[]
+     * @return byte[]
      */
     private byte[] padPassword(byte userPassword[]) {
         byte userPad[] = new byte[32];
@@ -125,6 +132,10 @@ public class PdfEncryption {
     }
 
     /**
+     * @param userPad byte[]
+     * @param ownerPad byte[]
+     * @param strength128Bits boolean
+     * @return byte[]
      */
     private byte[] computeOwnerKey(byte userPad[], byte ownerPad[], boolean strength128Bits) {
         byte ownerKey[] = new byte[32];
@@ -153,6 +164,11 @@ public class PdfEncryption {
     /**
      *
      * ownerKey, documentID must be setuped
+     * @param documentID byte[]
+     * @param userPad byte[]
+     * @param ownerKey byte[]
+     * @param permissions int
+     * @param strength128Bits boolean
      */
     private void setupGlobalEncryptionKey(byte[] documentID, byte userPad[], byte ownerKey[], int permissions, boolean strength128Bits) {
         this.documentID = documentID;
@@ -207,6 +223,13 @@ public class PdfEncryption {
         }
     }
 
+    /**
+     * Method setupAllKeys.
+     * @param userPassword byte[]
+     * @param ownerPassword byte[]
+     * @param permissions int
+     * @param strength128Bits boolean
+     */
     public void setupAllKeys(byte userPassword[], byte ownerPassword[], int permissions, boolean strength128Bits) {
         if (ownerPassword == null || ownerPassword.length == 0)
             ownerPassword = md5.digest(createDocumentId());
@@ -222,6 +245,10 @@ public class PdfEncryption {
         setupByUserPad(this.documentID, userPad, this.ownerKey, permissions, strength128Bits);
     }
 
+    /**
+     * Method createDocumentId.
+     * @return byte[]
+     */
     public static byte[] createDocumentId() {
         MessageDigest md5;
         try {
@@ -237,12 +264,22 @@ public class PdfEncryption {
     }
 
     /**
+     * @param documentID byte[]
+     * @param userPassword byte[]
+     * @param ownerKey byte[]
+     * @param permissions int
+     * @param strength128Bits boolean
      */
     public void setupByUserPassword(byte[] documentID, byte userPassword[], byte ownerKey[], int permissions, boolean strength128Bits) {
         setupByUserPad(documentID, padPassword(userPassword), ownerKey, permissions, strength128Bits);
     }
 
     /**
+     * @param documentID byte[]
+     * @param userPad byte[]
+     * @param ownerKey byte[]
+     * @param permissions int
+     * @param strength128Bits boolean
      */
     private void setupByUserPad(byte[] documentID, byte userPad[], byte ownerKey[], int permissions, boolean strength128Bits) {
         setupGlobalEncryptionKey(documentID, userPad, ownerKey, permissions, strength128Bits);
@@ -250,11 +287,26 @@ public class PdfEncryption {
     }
 
     /**
+     * @param documentID byte[]
+     * @param ownerPassword byte[]
+     * @param userKey byte[]
+     * @param ownerKey byte[]
+     * @param permissions int
+     * @param strength128Bits boolean
      */
     public void setupByOwnerPassword(byte[] documentID, byte ownerPassword[], byte userKey[], byte ownerKey[], int permissions, boolean strength128Bits) {
         setupByOwnerPad(documentID, padPassword(ownerPassword), userKey, ownerKey, permissions, strength128Bits);
     }
 
+    /**
+     * Method setupByOwnerPad.
+     * @param documentID byte[]
+     * @param ownerPad byte[]
+     * @param userKey byte[]
+     * @param ownerKey byte[]
+     * @param permissions int
+     * @param strength128Bits boolean
+     */
     private void setupByOwnerPad(byte[] documentID, byte ownerPad[], byte userKey[], byte ownerKey[], int permissions, boolean strength128Bits) {
         byte userPad[] = computeOwnerKey(ownerKey, ownerPad, strength128Bits);	//userPad will be set in this.ownerKey
         setupGlobalEncryptionKey(documentID, userPad, ownerKey, permissions, strength128Bits); //step 3
@@ -265,6 +317,11 @@ public class PdfEncryption {
         prepareRC4Key(key, 0, keySize);
     }
 
+    /**
+     * Method setHashKey.
+     * @param number int
+     * @param generation int
+     */
     public void setHashKey(int number, int generation) {
         md5.reset();	//added by ujihara
         extra[0] = (byte)number;
@@ -279,6 +336,11 @@ public class PdfEncryption {
             keySize = 16;
     }
 
+    /**
+     * Method createInfoId.
+     * @param id byte[]
+     * @return PdfObject
+     */
     public static PdfObject createInfoId(byte id[]) {
         ByteBuffer buf = new ByteBuffer(90);
         buf.append('[').append('<');
@@ -292,6 +354,10 @@ public class PdfEncryption {
         return new PdfLiteral(buf.toByteArray());
     }
 
+    /**
+     * Method getEncryptionDictionary.
+     * @return PdfDictionary
+     */
     public PdfDictionary getEncryptionDictionary() {
         PdfDictionary dic = new PdfDictionary();
         dic.put(PdfName.FILTER, PdfName.STANDARD);
@@ -310,10 +376,20 @@ public class PdfEncryption {
         return dic;
     }
 
+    /**
+     * Method prepareRC4Key.
+     * @param key byte[]
+     */
     public void prepareRC4Key(byte key[]) {
         prepareRC4Key(key, 0, key.length);
     }
 
+    /**
+     * Method prepareRC4Key.
+     * @param key byte[]
+     * @param off int
+     * @param len int
+     */
     public void prepareRC4Key(byte key[], int off, int len) {
         int index1 = 0;
         int index2 = 0;
@@ -331,6 +407,13 @@ public class PdfEncryption {
         }
     }
 
+    /**
+     * Method encryptRC4.
+     * @param dataIn byte[]
+     * @param off int
+     * @param len int
+     * @param dataOut byte[]
+     */
     public void encryptRC4(byte dataIn[], int off, int len, byte dataOut[]) {
         int length = len + off;
         byte tmp;
@@ -344,18 +427,37 @@ public class PdfEncryption {
         }
     }
 
+    /**
+     * Method encryptRC4.
+     * @param data byte[]
+     * @param off int
+     * @param len int
+     */
     public void encryptRC4(byte data[], int off, int len) {
         encryptRC4(data, off, len, data);
     }
 
+    /**
+     * Method encryptRC4.
+     * @param dataIn byte[]
+     * @param dataOut byte[]
+     */
     public void encryptRC4(byte dataIn[], byte dataOut[]) {
         encryptRC4(dataIn, 0, dataIn.length, dataOut);
     }
 
+    /**
+     * Method encryptRC4.
+     * @param data byte[]
+     */
     public void encryptRC4(byte data[]) {
         encryptRC4(data, 0, data.length, data);
     }
     
+    /**
+     * Method getFileID.
+     * @return PdfObject
+     */
     public PdfObject getFileID() {
         return createInfoId(documentID);
     }

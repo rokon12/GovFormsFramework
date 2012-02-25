@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Vector;
 
+/**
+ */
 public class BERInputStream
     extends DERInputStream
 {
@@ -18,6 +20,10 @@ public class BERInputStream
 										}
 
 									};
+    /**
+     * Constructor for BERInputStream.
+     * @param is InputStream
+     */
     public BERInputStream(
         InputStream is)
     {
@@ -26,6 +32,8 @@ public class BERInputStream
 
     /**
      * read a string of bytes representing an indefinite length object.
+     * @return byte[]
+     * @throws IOException
      */
     private byte[] readIndefiniteLengthFully()
         throws IOException
@@ -49,6 +57,11 @@ public class BERInputStream
         return bOut.toByteArray();
     }
 
+	/**
+	 * Method buildConstructedOctetString.
+	 * @return BERConstructedOctetString
+	 * @throws IOException
+	 */
 	private BERConstructedOctetString buildConstructedOctetString()
 		throws IOException
 	{
@@ -69,6 +82,11 @@ public class BERInputStream
 		return new BERConstructedOctetString(octs);
 	}
 
+    /**
+     * Method readObject.
+     * @return DERObject
+     * @throws IOException
+     */
     public DERObject readObject()
         throws IOException
     {

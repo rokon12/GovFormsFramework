@@ -70,6 +70,8 @@ import java.io.IOException;
  * @see		PdfDictionary
  * @see		PdfStream
  * @see		PdfIndirectReference
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public abstract class PdfObject {
@@ -169,8 +171,8 @@ public abstract class PdfObject {
  * Writes the PDF representation of this <CODE>PdfObject</CODE> as an array of <CODE>byte</CODE>s to the writer.
  * @param writer for backwards compatibility
  * @param os the outputstream to write the bytes to.
- * @throws IOException
- */
+
+ * @throws IOException */
     
     public void toPdf(PdfWriter writer, OutputStream os) throws IOException {
         if (bytes != null)
@@ -179,16 +181,16 @@ public abstract class PdfObject {
     
     /**
      * Gets the presentation of this object in a byte array
-     * @return a byte array
-     */
+    
+     * @return a byte array */
     public byte[] getBytes() {
         return bytes;
     }
 
     /**
      * Can this object be in an object stream?
-     * @return true if this object can be in an object stream.
-     */
+    
+     * @return true if this object can be in an object stream. */
     public boolean canBeInObjStm() {
         return (type >= 1 && type <= 6) || type == 8;
     }
@@ -203,8 +205,8 @@ public abstract class PdfObject {
  * Remark: the actual content of an object is in most cases identical to its representation.
  * The following statement is always true: length() &gt;= pdfLength().</P>
  *
- * @return		a length
- */
+
+ * @return		a length */
     
 //    public int pdfLength() {
 //        return toPdf(null).length;
@@ -234,8 +236,8 @@ public abstract class PdfObject {
  * Remark: the actual content of an object is in some cases identical to its representation.
  * The following statement is always true: length() &gt;= pdfLength().</P>
  *
- * @return		a length
- */
+
+ * @return		a length */
     
     public int length() {
         return toString().length();
@@ -256,8 +258,8 @@ public abstract class PdfObject {
 /**
  * Returns the type of this <CODE>PdfObject</CODE>.
  *
- * @return		a type
- */
+
+ * @return		a type */
     
     public int type() {
         return type;
@@ -266,8 +268,8 @@ public abstract class PdfObject {
 /**
  * Checks if this <CODE>PdfObject</CODE> is of the type <CODE>PdfNull</CODE>.
  *
- * @return		<CODE>true</CODE> or <CODE>false</CODE>
- */
+
+ * @return		<CODE>true</CODE> or <CODE>false</CODE> */
     
     public boolean isNull() {
         return (this.type == NULL);
@@ -276,8 +278,8 @@ public abstract class PdfObject {
 /**
  * Checks if this <CODE>PdfObject</CODE> is of the type <CODE>PdfBoolean</CODE>.
  *
- * @return		<CODE>true</CODE> or <CODE>false</CODE>
- */
+
+ * @return		<CODE>true</CODE> or <CODE>false</CODE> */
     
     public boolean isBoolean() {
         return (this.type == BOOLEAN);
@@ -286,8 +288,8 @@ public abstract class PdfObject {
 /**
  * Checks if this <CODE>PdfObject</CODE> is of the type <CODE>PdfNumber</CODE>.
  *
- * @return		<CODE>true</CODE> or <CODE>false</CODE>
- */
+
+ * @return		<CODE>true</CODE> or <CODE>false</CODE> */
     
     public boolean isNumber() {
         return (this.type == NUMBER);
@@ -296,8 +298,8 @@ public abstract class PdfObject {
 /**
  * Checks if this <CODE>PdfObject</CODE> is of the type <CODE>PdfString</CODE>.
  *
- * @return		<CODE>true</CODE> or <CODE>false</CODE>
- */
+
+ * @return		<CODE>true</CODE> or <CODE>false</CODE> */
     
     public boolean isString() {
         return (this.type == STRING);
@@ -306,8 +308,8 @@ public abstract class PdfObject {
 /**
  * Checks if this <CODE>PdfObject</CODE> is of the type <CODE>PdfName</CODE>.
  *
- * @return		<CODE>true</CODE> or <CODE>false</CODE>
- */
+
+ * @return		<CODE>true</CODE> or <CODE>false</CODE> */
     
     public boolean isName() {
         return (this.type == NAME);
@@ -316,8 +318,8 @@ public abstract class PdfObject {
 /**
  * Checks if this <CODE>PdfObject</CODE> is of the type <CODE>PdfArray</CODE>.
  *
- * @return		<CODE>true</CODE> or <CODE>false</CODE>
- */
+
+ * @return		<CODE>true</CODE> or <CODE>false</CODE> */
     
     public boolean isArray() {
         return (this.type == ARRAY);
@@ -326,8 +328,8 @@ public abstract class PdfObject {
 /**
  * Checks if this <CODE>PdfObject</CODE> is of the type <CODE>PdfDictionary</CODE>.
  *
- * @return		<CODE>true</CODE> or <CODE>false</CODE>
- */
+
+ * @return		<CODE>true</CODE> or <CODE>false</CODE> */
     
     public boolean isDictionary() {
         return (this.type == DICTIONARY);
@@ -336,8 +338,8 @@ public abstract class PdfObject {
 /**
  * Checks if this <CODE>PdfObject</CODE> is of the type <CODE>PdfStream</CODE>.
  *
- * @return		<CODE>true</CODE> or <CODE>false</CODE>
- */
+
+ * @return		<CODE>true</CODE> or <CODE>false</CODE> */
     
     public boolean isStream() {
         return (this.type == STREAM);
@@ -345,16 +347,16 @@ public abstract class PdfObject {
 
     /**
      * Checks if this is an indirect object.
-     * @return true if this is an indirect object
-     */
+    
+     * @return true if this is an indirect object */
     public boolean isIndirect() {
         return (this.type == INDIRECT);
     }
     
     /**
      * Getter for property indRef.
-     * @return Value of property indRef.
-     */
+    
+     * @return Value of property indRef. */
     public PRIndirectReference getIndRef() {
         return this.indRef;
     }

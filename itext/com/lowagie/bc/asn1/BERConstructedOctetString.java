@@ -5,11 +5,15 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Vector;
 
+/**
+ */
 public class BERConstructedOctetString
     extends DEROctetString
 {
     /**
      * convert a vector of octet strings into a single byte string
+     * @param octs Vector
+     * @return byte[]
      */
     static private byte[] toBytes(
         Vector  octs)
@@ -44,6 +48,10 @@ public class BERConstructedOctetString
 		super(string);
     }
 
+    /**
+     * Constructor for BERConstructedOctetString.
+     * @param octs Vector
+     */
     public BERConstructedOctetString(
         Vector  octs)
     {
@@ -52,18 +60,30 @@ public class BERConstructedOctetString
         this.octs = octs;
     }
 
+    /**
+     * Constructor for BERConstructedOctetString.
+     * @param obj DERObject
+     */
     public BERConstructedOctetString(
         DERObject  obj)
     {
 		super(obj);
     }
 
+    /**
+     * Constructor for BERConstructedOctetString.
+     * @param obj DEREncodable
+     */
     public BERConstructedOctetString(
         DEREncodable  obj)
     {
         super(obj.getDERObject());
     }
 
+    /**
+     * Method getOctets.
+     * @return byte[]
+     */
     public byte[] getOctets()
     {
         return string;
@@ -71,6 +91,7 @@ public class BERConstructedOctetString
 
     /**
      * return the DER octets that make up this string.
+     * @return Enumeration
      */
     public Enumeration getObjects()
     {
@@ -82,6 +103,10 @@ public class BERConstructedOctetString
         return octs.elements();
     }
 
+    /**
+     * Method generateOcts.
+     * @return Vector
+     */
     private Vector generateOcts()
     {
         int     start = 0;
@@ -111,6 +136,11 @@ public class BERConstructedOctetString
         return vec;
     }
 
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
+     */
     public void encode(
         DEROutputStream out)
         throws IOException

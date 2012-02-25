@@ -62,6 +62,7 @@ package com.lowagie.text;
  *
  * @author  Bruno Lowagie
  * @author  Evelyne De Cordier
+ * @version $Revision: 1.0 $
  */
 
 public class SpecialSymbol {
@@ -70,8 +71,8 @@ public class SpecialSymbol {
  * Returns the first occurrence of a special symbol in a <CODE>String</CODE>.
  *
  * @param	string		a <CODE>String</CODE>
- * @return	an index of -1 if no special symbol was found
- */
+
+ * @return	an index of -1 if no special symbol was found */
     
     public static int index(String string) {
         int length = string.length();
@@ -87,8 +88,8 @@ public class SpecialSymbol {
  * Gets a chunk with a symbol character.
  * @param c a character that has to be changed into a symbol
  * @param font Font if there is no SYMBOL character corresponding with c
- * @return a SYMBOL version of a character
- */
+
+ * @return a SYMBOL version of a character */
     
     public static Chunk get(char c, Font font) {
         char greek = SpecialSymbol.getCorrespondingSymbol(c);
@@ -104,8 +105,8 @@ public class SpecialSymbol {
  * Looks for the corresponding symbol in the font Symbol.
  *
  * @param	c	the original ASCII-char
- * @return	the corresponding symbol in font Symbol
- */
+
+ * @return	the corresponding symbol in font Symbol */
     
     public static char getCorrespondingSymbol(char c) {
         switch(c) {

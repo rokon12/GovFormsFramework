@@ -54,6 +54,7 @@ import java.util.ArrayList;
  * This is a node in a document logical structure. It may contain a mark point or it may contain
  * other nodes.
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PdfStructureElement extends PdfDictionary {
     
@@ -91,6 +92,11 @@ public class PdfStructureElement extends PdfDictionary {
         put(PdfName.P, parent.getReference());
     }
     
+    /**
+     * Method init.
+     * @param parent PdfDictionary
+     * @param structureType PdfName
+     */
     private void init(PdfDictionary parent, PdfName structureType) {
         PdfObject kido = parent.get(PdfName.K);
         PdfArray kids = null;
@@ -109,12 +115,17 @@ public class PdfStructureElement extends PdfDictionary {
     
     /**
      * Gets the parent of this node.
-     * @return the parent of this node
-     */    
+    
+     * @return the parent of this node */    
     public PdfDictionary getParent() {
         return parent;
     }
     
+    /**
+     * Method setPageMark.
+     * @param page int
+     * @param mark int
+     */
     void setPageMark(int page, int mark) {
         if (mark >= 0)
             put(PdfName.K, new PdfNumber(mark));
@@ -123,8 +134,8 @@ public class PdfStructureElement extends PdfDictionary {
     
     /**
      * Gets the reference this object will be written to.
-     * @return the reference this object will be written to
-     */    
+    
+     * @return the reference this object will be written to */    
     public PdfIndirectReference getReference() {
         return this.reference;
     }

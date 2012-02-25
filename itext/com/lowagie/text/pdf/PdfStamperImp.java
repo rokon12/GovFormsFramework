@@ -59,6 +59,8 @@ import com.lowagie.text.Rectangle;
 import com.lowagie.text.Image;
 import com.lowagie.text.ExceptionConverter;
 
+/**
+ */
 class PdfStamperImp extends PdfWriter {
     HashMap readers2intrefs = new HashMap();
     HashMap readers2file = new HashMap();
@@ -93,9 +95,9 @@ class PdfStamperImp extends PdfWriter {
      * @param pdfVersion the new pdf version or '\0' to keep the same version as the original
      * document
      * @param append
-     * @throws DocumentException on error
-     * @throws IOException
-     */
+    
+    
+     * @throws DocumentException on error * @throws IOException */
     PdfStamperImp(PdfReader reader, OutputStream os, char pdfVersion, boolean append) throws DocumentException, IOException {
         super(new PdfDocument(), os);
         if (reader.isTampered())
@@ -138,6 +140,12 @@ class PdfStamperImp extends PdfWriter {
         initialXrefSize = reader.getXrefSize();
     }
     
+    /**
+     * Method close.
+     * @param moreInfo HashMap
+     * @throws DocumentException
+     * @throws IOException
+     */
     void close(HashMap moreInfo) throws DocumentException, IOException {
         if (closed)
             return;
@@ -284,6 +292,11 @@ class PdfStamperImp extends PdfWriter {
         reader.close();
     }
     
+    /**
+     * Method applyRotation.
+     * @param pageN PdfDictionary
+     * @param out ByteBuffer
+     */
     void applyRotation(PdfDictionary pageN, ByteBuffer out) {
         if (!rotateContents)
             return;
@@ -311,6 +324,10 @@ class PdfStamperImp extends PdfWriter {
         }
     }
     
+    /**
+     * Method alterContents.
+     * @throws IOException
+     */
     void alterContents() throws IOException {
         for (Iterator i = pagesToContent.values().iterator(); i.hasNext();) {
             PageStamp ps = (PageStamp)i.next();
@@ -363,10 +380,21 @@ class PdfStamperImp extends PdfWriter {
         }
     }
 
+    /**
+     * Method alterResources.
+     * @param ps PageStamp
+     */
     void alterResources(PageStamp ps) {
         ps.pageN.put(PdfName.RESOURCES, ps.pageResources.getResources());
     }
     
+    /**
+     * Method getNewObjectNumber.
+     * @param reader PdfReader
+     * @param number int
+     * @param generation int
+     * @return int
+     */
     protected int getNewObjectNumber(PdfReader reader, int number, int generation) {
         IntHashtable ref = (IntHashtable)readers2intrefs.get(reader);
         if (ref != null) {
@@ -391,6 +419,11 @@ class PdfStamperImp extends PdfWriter {
             return currentPdfReaderInstance.getNewObjectNumber(number, generation);
     }
     
+    /**
+     * Method getReaderFile.
+     * @param reader PdfReader
+     * @return RandomAccessFileOrArray
+     */
     RandomAccessFileOrArray getReaderFile(PdfReader reader) {
         if (readers2intrefs.containsKey(reader)) {
             RandomAccessFileOrArray raf = (RandomAccessFileOrArray)readers2file.get(reader);
@@ -407,8 +440,8 @@ class PdfStamperImp extends PdfWriter {
     /**
      * @param reader
      * @param openFile
-     * @throws IOException
-     */
+    
+     * @throws IOException */
     public void registerReader(PdfReader reader, boolean openFile) throws IOException {
         if (readers2intrefs.containsKey(reader))
             return;
@@ -434,6 +467,12 @@ class PdfStamperImp extends PdfWriter {
         try{raf.close();}catch(Exception e){}
     }
 
+    /**
+     * Method findAllObjects.
+     * @param reader PdfReader
+     * @param obj PdfObject
+     * @param hits IntHashtable
+     */
     static void findAllObjects(PdfReader reader, PdfObject obj, IntHashtable hits) {
         if (obj == null)
             return;
@@ -466,8 +505,8 @@ class PdfStamperImp extends PdfWriter {
     
     /**
      * @param fdf
-     * @throws IOException
-     */
+    
+     * @throws IOException */
     public void addComments(FdfReader fdf) throws IOException{
         if (readers2intrefs.containsKey(fdf))
             return;
@@ -531,6 +570,11 @@ class PdfStamperImp extends PdfWriter {
         }
     }
     
+    /**
+     * Method getPageStamp.
+     * @param pageNum int
+     * @return PageStamp
+     */
     PageStamp getPageStamp(int pageNum) {
         PdfDictionary pageN = reader.getPageN(pageNum);
         PageStamp ps = (PageStamp)pagesToContent.get(pageN);
@@ -541,6 +585,11 @@ class PdfStamperImp extends PdfWriter {
         return ps;
     }
     
+    /**
+     * Method getUnderContent.
+     * @param pageNum int
+     * @return PdfContentByte
+     */
     PdfContentByte getUnderContent(int pageNum) {
         if (pageNum < 1 || pageNum > reader.getNumberOfPages())
             return null;
@@ -550,6 +599,11 @@ class PdfStamperImp extends PdfWriter {
         return ps.under;
     }
     
+    /**
+     * Method getOverContent.
+     * @param pageNum int
+     * @return PdfContentByte
+     */
     PdfContentByte getOverContent(int pageNum) {
         if (pageNum < 1 || pageNum > reader.getNumberOfPages())
             return null;
@@ -559,6 +613,10 @@ class PdfStamperImp extends PdfWriter {
         return ps.over;
     }
     
+    /**
+     * Method correctAcroFieldPages.
+     * @param page int
+     */
     void correctAcroFieldPages(int page) {
         if (acroFields == null)
             return;
@@ -576,6 +634,11 @@ class PdfStamperImp extends PdfWriter {
         }
     }
     
+    /**
+     * Method insertPage.
+     * @param pageNumber int
+     * @param mediabox Rectangle
+     */
     void insertPage(int pageNumber, Rectangle mediabox) {
         Rectangle media = new Rectangle(mediabox);
         int rotation = media.getRotation() % 360;
@@ -640,9 +703,9 @@ class PdfStamperImp extends PdfWriter {
     }
     
     /** Getter for property rotateContents.
-     * @return Value of property rotateContents.
+    
      *
-     */
+     * @return Value of property rotateContents. */
     boolean isRotateContents() {
         return this.rotateContents;
     }
@@ -655,10 +718,18 @@ class PdfStamperImp extends PdfWriter {
         this.rotateContents = rotateContents;
     }
     
+    /**
+     * Method isContentWritten.
+     * @return boolean
+     */
     boolean isContentWritten() {
         return body.size() > 1;
     }
     
+    /**
+     * Method getAcroFields.
+     * @return AcroFields
+     */
     AcroFields getAcroFields() {
         if (acroFields == null) {
             acroFields = new AcroFields(reader, this);
@@ -666,14 +737,27 @@ class PdfStamperImp extends PdfWriter {
         return acroFields;
     }
 
+    /**
+     * Method setFormFlattening.
+     * @param flat boolean
+     */
     void setFormFlattening(boolean flat) {
         this.flat = flat;
     }
     
+	/**
+	 * Method setFreeTextFlattening.
+	 * @param flat boolean
+	 */
 	void setFreeTextFlattening(boolean flat) {
 		this.flatFreeText = flat;
     }
     
+    /**
+     * Method partialFormFlattening.
+     * @param name String
+     * @return boolean
+     */
     boolean partialFormFlattening(String name) {
         getAcroFields();
         if (!acroFields.getFields().containsKey(name))
@@ -841,6 +925,10 @@ class PdfStamperImp extends PdfWriter {
 //        reader.getCatalog().remove(PdfName.ACROFORM);
     }
     
+    /**
+     * Method sweepKids.
+     * @param obj PdfObject
+     */
     void sweepKids(PdfObject obj) {
         PdfObject oo = PdfReader.killIndirect(obj);
         if (oo == null || !oo.isDictionary())
@@ -967,6 +1055,10 @@ class PdfStamperImp extends PdfWriter {
         throw new RuntimeException("Unsupported in this context. Use PdfStamper.addAnnotation()");
     }
     
+    /**
+     * Method addDocumentField.
+     * @param ref PdfIndirectReference
+     */
     void addDocumentField(PdfIndirectReference ref) {
         PdfDictionary catalog = reader.getCatalog();
         PdfDictionary acroForm = (PdfDictionary)PdfReader.getPdfObject(catalog.get(PdfName.ACROFORM), catalog);
@@ -1013,6 +1105,11 @@ class PdfStamperImp extends PdfWriter {
         }
     }
     
+    /**
+     * Method expandFields.
+     * @param field PdfFormField
+     * @param allAnnots ArrayList
+     */
     void expandFields(PdfFormField field, ArrayList allAnnots) {
         allAnnots.add(field);
         ArrayList kids = field.getKids();
@@ -1022,6 +1119,11 @@ class PdfStamperImp extends PdfWriter {
         }
     }
 
+    /**
+     * Method addAnnotation.
+     * @param annot PdfAnnotation
+     * @param pageN PdfDictionary
+     */
     void addAnnotation(PdfAnnotation annot, PdfDictionary pageN) {
         try {
             ArrayList allAnnots = new ArrayList();
@@ -1100,10 +1202,19 @@ class PdfStamperImp extends PdfWriter {
         }
     }
     
+    /**
+     * Method addAnnotation.
+     * @param annot PdfAnnotation
+     * @param page int
+     */
     void addAnnotation(PdfAnnotation annot, int page) {
         addAnnotation(annot, reader.getPageN(page));
     }
 
+    /**
+     * Method outlineTravel.
+     * @param outline PRIndirectReference
+     */
     private void outlineTravel(PRIndirectReference outline) {
         while (outline != null) {
             PdfDictionary outlineR = (PdfDictionary)PdfReader.getPdfObjectRelease(outline);
@@ -1129,6 +1240,10 @@ class PdfStamperImp extends PdfWriter {
         markUsed(catalog);
     }
     
+    /**
+     * Method setJavaScript.
+     * @throws IOException
+     */
     void setJavaScript() throws IOException {
         ArrayList djs = pdf.getDocumentJavaScript();
         if (djs.size() == 0)
@@ -1154,6 +1269,10 @@ class PdfStamperImp extends PdfWriter {
         names.put(PdfName.JAVASCRIPT, addToBody(tree).getIndirectReference());
     }
         
+    /**
+     * Method setOutlines.
+     * @throws IOException
+     */
     void setOutlines() throws IOException {
         if (newBookmarks == null)
             return;
@@ -1172,6 +1291,10 @@ class PdfStamperImp extends PdfWriter {
         markUsed(reader.getCatalog());
     }
     
+    /**
+     * Method setOutlines.
+     * @param outlines List
+     */
     void setOutlines(List outlines) {
         newBookmarks = outlines;
     }
@@ -1179,8 +1302,8 @@ class PdfStamperImp extends PdfWriter {
     /**
      * Sets the viewer preferences.
      * @param preferences the viewer preferences
-     * @see PdfWriter#setViewerPreferences(int)
-     */
+    
+     * @see PdfWriter#setViewerPreferences(int) */
     public void setViewerPreferences(int preferences) {
         useVp = true;
         vp |= preferences;
@@ -1197,9 +1320,9 @@ class PdfStamperImp extends PdfWriter {
     /** Always throws an <code>UnsupportedOperationException</code>.
      * @param actionType ignore
      * @param action ignore
-     * @throws PdfException ignore
-     * @see PdfStamper#setPageAction(PdfName, PdfAction, int)
-     */    
+    
+    
+     * @throws PdfException ignore * @see PdfStamper#setPageAction(PdfName, PdfAction, int) */    
     public void setPageAction(PdfName actionType, PdfAction action) throws PdfException {
         throw new UnsupportedOperationException("Use setPageAction(PdfName actionType, PdfAction action, int page)");
     }
@@ -1210,8 +1333,8 @@ class PdfStamperImp extends PdfWriter {
      * or <CODE>PdfWriter.PAGE_CLOSE</CODE>
      * @param action the action to perform
      * @param page the page where the action will be applied. The first page is 1
-     * @throws PdfException if the action type is invalid
-     */    
+    
+     * @throws PdfException if the action type is invalid */    
     void setPageAction(PdfName actionType, PdfAction action, int page) throws PdfException {
         if (!actionType.equals(PAGE_OPEN) && !actionType.equals(PAGE_CLOSE))
             throw new PdfException("Invalid page additional action type: " + actionType.toString());
@@ -1270,6 +1393,10 @@ class PdfStamperImp extends PdfWriter {
         markUsed(pg);
     }
 
+    /**
+     * Method markUsed.
+     * @param obj PdfObject
+     */
     protected void markUsed(PdfObject obj) {
         if (append && obj != null) {
             PRIndirectReference ref = null;
@@ -1282,6 +1409,10 @@ class PdfStamperImp extends PdfWriter {
         }
     }
     
+    /**
+     * Method markUsed.
+     * @param num int
+     */
     protected void markUsed(int num) {
         if (append)
             marked.put(num, 1);
@@ -1289,8 +1420,8 @@ class PdfStamperImp extends PdfWriter {
     
     /**
      * Getter for property append.
-     * @return Value of property append.
-     */
+    
+     * @return Value of property append. */
     boolean isAppend() {
         return append;
     }
@@ -1303,8 +1434,8 @@ class PdfStamperImp extends PdfWriter {
      *
      * @param actionType the action type
      * @param action the action to execute in response to the trigger
-     * @throws PdfException on invalid action type
-     */
+    
+     * @throws PdfException on invalid action type */
     public void setAdditionalAction(PdfName actionType, PdfAction action) throws PdfException {
         if (!(actionType.equals(DOCUMENT_CLOSE) ||
         actionType.equals(WILL_SAVE) ||
@@ -1348,6 +1479,13 @@ class PdfStamperImp extends PdfWriter {
         throw new UnsupportedOperationException("Use PdfStamper.setThumbnail().");
     }
     
+    /**
+     * Method setThumbnail.
+     * @param image Image
+     * @param page int
+     * @throws PdfException
+     * @throws DocumentException
+     */
     void setThumbnail(Image image, int page) throws PdfException, DocumentException {
         PdfIndirectReference thumb = getImageReference(addDirectImageSimple(image));
         reader.resetReleasePage();
@@ -1356,6 +1494,8 @@ class PdfStamperImp extends PdfWriter {
         reader.resetReleasePage();
     }
     
+    /**
+     */
     static class PageStamp {
         
         PdfDictionary pageN;
@@ -1363,6 +1503,12 @@ class PdfStamperImp extends PdfWriter {
         StampContent over;
         PageResources pageResources;
         
+        /**
+         * Constructor for PageStamp.
+         * @param stamper PdfStamperImp
+         * @param reader PdfReader
+         * @param pageN PdfDictionary
+         */
         PageStamp(PdfStamperImp stamper, PdfReader reader, PdfDictionary pageN) {
             this.pageN = pageN;
             pageResources = new PageResources();

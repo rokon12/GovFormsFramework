@@ -64,6 +64,7 @@ import java.io.IOException;
  *
  * Version: $Id: RtfFontList.java,v 1.4 2004/11/06 16:52:48 blowagie Exp $
  * @author Mark Hall (mhall@edu.uni-klu.ac.at)
+ * @version $Revision: 1.0 $
  */
 public class RtfFontList extends RtfElement implements RtfExtendedElement {
     
@@ -100,8 +101,8 @@ public class RtfFontList extends RtfElement implements RtfExtendedElement {
      * exist in the list, it is added.
      *
      * @param font The font to get the id for
-     * @return The index of the font
-     */
+    
+     * @return The index of the font */
     public int getFontNumber(RtfFont font) {
         int fontIndex = -1;
         for(int i = 0; i < fontList.size(); i++) {
@@ -119,7 +120,8 @@ public class RtfFontList extends RtfElement implements RtfExtendedElement {
     /**
      * Writes the definition of the font list
      *
-     * @return A byte array with the definition of the font list
+    
+     * @return A byte array with the definition of the font list * @see com.lowagie.text.rtf.RtfExtendedElement#writeDefinition()
      */
     public byte[] writeDefinition() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();

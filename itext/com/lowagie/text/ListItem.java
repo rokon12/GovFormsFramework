@@ -100,6 +100,8 @@ import com.lowagie.text.markup.MarkupParser;
  * @see	Element
  * @see List
  * @see	Paragraph
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class ListItem extends Paragraph implements TextElementArray, MarkupAttributes {
@@ -244,7 +246,8 @@ public class ListItem extends Paragraph implements TextElementArray, MarkupAttri
 /**
  * Gets the type of the text element.
  *
- * @return	a type
+
+ * @return	a type * @see com.lowagie.text.Element#type()
  */
     
     public int type() {
@@ -271,8 +274,8 @@ public class ListItem extends Paragraph implements TextElementArray, MarkupAttri
 /**
  * Returns the listsymbol.
  *
- * @return	a <CODE>Chunk</CODE>
- */
+
+ * @return	a <CODE>Chunk</CODE> */
     
     public Chunk listSymbol() {
         return symbol;
@@ -282,8 +285,8 @@ public class ListItem extends Paragraph implements TextElementArray, MarkupAttri
  * Checks if a given tag corresponds with this object.
  *
  * @param   tag     the given tag
- * @return  true if the tag corresponds
- */
+
+ * @return  true if the tag corresponds */
     
     public static boolean isTag(String tag) {
         return ElementTags.LISTITEM.equals(tag);

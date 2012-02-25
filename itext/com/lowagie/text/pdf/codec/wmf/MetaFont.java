@@ -54,6 +54,8 @@ import java.io.UnsupportedEncodingException;
 import com.lowagie.text.pdf.*;
 import com.lowagie.text.ExceptionConverter;
 
+/**
+ */
 public class MetaFont extends MetaObject {
     static final String fontNames[] = {
         "Courier", "Courier-Bold", "Courier-Oblique", "Courier-BoldOblique",
@@ -97,6 +99,11 @@ public class MetaFont extends MetaObject {
         type = META_FONT;
     }
 
+    /**
+     * Method init.
+     * @param in InputMeta
+     * @throws IOException
+     */
     public void init(InputMeta in) throws IOException {
         height = Math.abs(in.readShort());
         in.skip(2);
@@ -127,6 +134,10 @@ public class MetaFont extends MetaObject {
         faceName = faceName.toLowerCase();
     }
     
+    /**
+     * Method getFont.
+     * @return BaseFont
+     */
     public BaseFont getFont() {
         if (font != null)
             return font;
@@ -187,18 +198,35 @@ public class MetaFont extends MetaObject {
         return font;
     }
     
+    /**
+     * Method getAngle.
+     * @return float
+     */
     public float getAngle() {
         return angle;
     }
     
+    /**
+     * Method isUnderline.
+     * @return boolean
+     */
     public boolean isUnderline() {
         return underline;
     }
     
+    /**
+     * Method isStrikeout.
+     * @return boolean
+     */
     public boolean isStrikeout() {
         return strikeout;
     }
     
+    /**
+     * Method getFontSize.
+     * @param state MetaState
+     * @return float
+     */
     public float getFontSize(MetaState state) {
         return Math.abs(state.transformY(height) - state.transformY(0)) * 0.86f;
     }

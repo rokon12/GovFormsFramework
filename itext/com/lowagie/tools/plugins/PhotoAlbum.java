@@ -70,6 +70,8 @@ import com.lowagie.tools.arguments.ToolArgument;
  * Converts a Tiff file to a PDF file.
  * Inspired by a comp.text.pdf question by Sebastian Schubert
  * and an answer by Hans-Werner Hilse.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class PhotoAlbum extends AbstractTool {
 	

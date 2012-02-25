@@ -267,6 +267,10 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
         fontBullet = new RtfFont(document, new Font(Font.SYMBOL, 10, Font.NORMAL, new Color(0, 0, 0)));
     }
     
+    /**
+     * Method writeIndentations.
+     * @return byte[]
+     */
     private byte[] writeIndentations() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
         try {
@@ -285,7 +289,8 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
     /**
      * Writes the definition part of this list level
      * 
-     * @return A byte array containing the definition of this list level
+    
+     * @return A byte array containing the definition of this list level * @see com.lowagie.text.rtf.RtfExtendedElement#writeDefinition()
      */
     public byte[] writeDefinition() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -357,8 +362,8 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
     /**
      * Writes the initialisation part of the RtfList
      * 
-     * @return A byte array containing the initialisation part
-     */
+    
+     * @return A byte array containing the initialisation part */
     private byte[] writeListBeginning() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
         try {
@@ -400,7 +405,8 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
     /**
      * Writes the content of the RtfList
      * 
-     * @return A byte array containing the actual content of the RtfList
+    
+     * @return A byte array containing the actual content of the RtfList * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write()  {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -452,8 +458,8 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
     /**
      * Gets the list level of this RtfList
      * 
-     * @return Returns the list level.
-     */
+    
+     * @return Returns the list level. */
     public int getListLevel() {
         return listLevel;
     }
@@ -491,8 +497,8 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
     /**
      * Gets the id of this list
      * 
-     * @return Returns the list number.
-     */
+    
+     * @return Returns the list number. */
     public int getListNumber() {
         return listNumber;
     }
@@ -511,6 +517,7 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
      * child elements.
      * 
      * @param inTable <code>True</code> if this RtfList is in a table, <code>false</code> otherwise
+     * @see com.lowagie.text.rtf.RtfBasicElement#setInTable(boolean)
      */
     public void setInTable(boolean inTable) {
         super.setInTable(inTable);
@@ -524,6 +531,7 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
      * child elements.
      * 
      * @param inHeader <code>True</code> if this RtfList is in a header, <code>false</code> otherwise
+     * @see com.lowagie.text.rtf.RtfBasicElement#setInHeader(boolean)
      */
     public void setInHeader(boolean inHeader) {
         super.setInHeader(inHeader);
@@ -550,8 +558,8 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
     /**
      * Get the left indentation of this RtfList.
      * 
-     * @return The left indentation.
-     */
+    
+     * @return The left indentation. */
     private int getLeftIndent() {
         return this.leftIndent;
     }
@@ -559,8 +567,8 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
     /**
      * Get the first line indentation of this RtfList.
      * 
-     * @return The first line indentation.
-     */
+    
+     * @return The first line indentation. */
     private int getFirstIndent() {
         return this.firstIndent;
     }

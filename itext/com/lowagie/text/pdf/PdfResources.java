@@ -63,6 +63,8 @@ package com.lowagie.text.pdf;
  * section 7.5 (page 195-197).
  *
  * @see		PdfPage
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 class PdfResources extends PdfDictionary {
@@ -79,6 +81,11 @@ class PdfResources extends PdfDictionary {
     
     // methods
     
+    /**
+     * Method add.
+     * @param key PdfName
+     * @param resource PdfDictionary
+     */
     void add(PdfName key, PdfDictionary resource) {
         if (resource.size() == 0)
             return;

@@ -57,6 +57,8 @@ import com.lowagie.text.Image;
 import com.lowagie.text.Chunk;
 
 /** A cell in a PdfPTable.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfPCell extends Rectangle{
@@ -222,8 +224,8 @@ public class PdfPCell extends Rectangle{
     }
     
     /** Gets the <CODE>Phrase</CODE> from this cell.
-     * @return the <CODE>Phrase</CODE>
-     */
+    
+     * @return the <CODE>Phrase</CODE> */
     public Phrase getPhrase() {
         return phrase;
     }
@@ -238,8 +240,8 @@ public class PdfPCell extends Rectangle{
     }
     
     /** Gets the horizontal alignment for the cell.
-     * @return the horizontal alignment for the cell
-     */
+    
+     * @return the horizontal alignment for the cell */
     public int getHorizontalAlignment() {
         return column.getAlignment();
     }
@@ -253,8 +255,8 @@ public class PdfPCell extends Rectangle{
     }
     
     /** Gets the vertical alignment for the cell.
-     * @return the vertical alignment for the cell
-     */
+    
+     * @return the vertical alignment for the cell */
     public int getVerticalAlignment() {
         return verticalAlignment;
     }
@@ -271,15 +273,15 @@ public class PdfPCell extends Rectangle{
     
     /** Gets the effective left padding.  This will include
      *  the left border width if {@link #isUseBorderPadding()} is true.
-     * @return effective value of property paddingLeft.
-     */
+    
+     * @return effective value of property paddingLeft. */
     public float getEffectivePaddingLeft() {
         return paddingLeft + (isUseBorderPadding() ? (getBorderWidthLeft()/(isUseVariableBorders()?1f:2f)) : 0);
     }
     
     /**
-     * @return Value of property paddingLeft.
-     */
+    
+     * @return Value of property paddingLeft. */
     public float getPaddingLeft() {
         return paddingLeft;
     }
@@ -294,16 +296,16 @@ public class PdfPCell extends Rectangle{
     
     /** Gets the effective right padding.  This will include
      *  the right border width if {@link #isUseBorderPadding()} is true.
-     * @return effective value of property paddingRight.
-     */
+    
+     * @return effective value of property paddingRight. */
     public float getEffectivePaddingRight() {
         return paddingRight + (isUseBorderPadding() ? (getBorderWidthRight()/(isUseVariableBorders()?1f:2f)) : 0);
     }
     
     /**
      * Getter for property paddingRight.
-     * @return Value of property paddingRight.
-     */
+    
+     * @return Value of property paddingRight. */
     public float getPaddingRight() {
         return paddingRight;
     }
@@ -318,16 +320,16 @@ public class PdfPCell extends Rectangle{
     
     /** Gets the effective top padding.  This will include
      *  the top border width if {@link #isUseBorderPadding()} is true.
-     * @return effective value of property paddingTop.
-     */
+    
+     * @return effective value of property paddingTop. */
     public float getEffectivePaddingTop() {
         return paddingTop + (isUseBorderPadding() ? (getBorderWidthTop()/(isUseVariableBorders()?1f:2f)) : 0);
     }
     
     /**
      * Getter for property paddingTop.
-     * @return Value of property paddingTop.
-     */
+    
+     * @return Value of property paddingTop. */
     public float getPaddingTop() {
         return paddingTop;
     }
@@ -342,16 +344,16 @@ public class PdfPCell extends Rectangle{
     
     /** Gets the effective bottom padding.  This will include
      *  the bottom border width if {@link #isUseBorderPadding()} is true.
-     * @return effective value of property paddingBottom.
-     */
+    
+     * @return effective value of property paddingBottom. */
     public float getEffectivePaddingBottom() {
         return paddingBottom + (isUseBorderPadding() ? (getBorderWidthBottom()/(isUseVariableBorders()?1f:2f)) : 0);
     }
     
     /**
      * Getter for property paddingBottom.
-     * @return Value of property paddingBottom.
-     */
+    
+     * @return Value of property paddingBottom. */
     public float getPaddingBottom() {
         return paddingBottom;
     }
@@ -377,8 +379,8 @@ public class PdfPCell extends Rectangle{
 
     /**
      * If true, then effective padding will include border widths
-     * @return true if effective padding includes border widths
-     */
+    
+     * @return true if effective padding includes border widths */
     public boolean isUseBorderPadding() {
         return useBorderPadding;
     }
@@ -404,16 +406,16 @@ public class PdfPCell extends Rectangle{
     
     /**
      * Gets the fixed leading
-     * @return the leading
-     */
+    
+     * @return the leading */
     public float getLeading() {
         return column.getLeading();
     }
     
     /**
      * Gets the variable leading
-     * @return the leading
-     */
+    
+     * @return the leading */
     public float getMultipliedLeading() {
         return column.getMultipliedLeading();
     }
@@ -428,16 +430,16 @@ public class PdfPCell extends Rectangle{
     
     /**
      * Gets the first paragraph line indent.
-     * @return the indent
-     */
+    
+     * @return the indent */
     public float getIndent() {
         return column.getIndent();
     }
     
     /**
      * Gets the extra space between paragraphs.
-     * @return the extra space between paragraphs
-     */
+    
+     * @return the extra space between paragraphs */
     public float getExtraParagraphSpace() {
         return column.getExtraParagraphSpace();
     }
@@ -452,8 +454,8 @@ public class PdfPCell extends Rectangle{
     
     /**
      * Getter for property fixedHeight.
-     * @return Value of property fixedHeight.
-     */
+    
+     * @return Value of property fixedHeight. */
     public float getFixedHeight() {
         return fixedHeight;
     }
@@ -469,8 +471,8 @@ public class PdfPCell extends Rectangle{
     
     /**
      * Getter for property noWrap.
-     * @return Value of property noWrap.
-     */
+    
+     * @return Value of property noWrap. */
     public boolean isNoWrap() {
         return noWrap;
     }
@@ -485,12 +487,16 @@ public class PdfPCell extends Rectangle{
     
     /**
      * Getter for property table.
-     * @return Value of property table.
-     */
+    
+     * @return Value of property table. */
     PdfPTable getTable() {
         return table;
     }
     
+    /**
+     * Method setTable.
+     * @param table PdfPTable
+     */
     void setTable(PdfPTable table) {
         this.table = table;
         column.setText(null);
@@ -503,8 +509,8 @@ public class PdfPCell extends Rectangle{
     }
     
     /** Getter for property minimumHeight.
-     * @return Value of property minimumHeight.
-     */
+    
+     * @return Value of property minimumHeight. */
     public float getMinimumHeight() {
         return minimumHeight;
     }
@@ -518,8 +524,8 @@ public class PdfPCell extends Rectangle{
     }
     
     /** Getter for property colspan.
-     * @return Value of property colspan.
-     */
+    
+     * @return Value of property colspan. */
     public int getColspan() {
         return colspan;
     }
@@ -541,8 +547,8 @@ public class PdfPCell extends Rectangle{
     
     /**
      * Gets the following paragraph lines indent.
-     * @return the indent
-     */
+    
+     * @return the indent */
     public float getFollowingIndent() {
         return column.getFollowingIndent();
     }
@@ -557,16 +563,16 @@ public class PdfPCell extends Rectangle{
     
     /**
      * Gets the right paragraph lines indent.
-     * @return the indent
-     */
+    
+     * @return the indent */
     public float getRightIndent() {
         return column.getRightIndent();
     }
     
     /** Gets the space/character extra spacing ratio for
      * fully justified text.
-     * @return the space/character extra spacing ratio
-     */
+    
+     * @return the space/character extra spacing ratio */
     public float getSpaceCharRatio() {
         return column.getSpaceCharRatio();
     }
@@ -592,16 +598,16 @@ public class PdfPCell extends Rectangle{
     
     /**
      * Gets the run direction of the text content in the cell
-     * @return One of the following values: PdfWriter.RUN_DIRECTION_DEFAULT, PdfWriter.RUN_DIRECTION_NO_BIDI, PdfWriter.RUN_DIRECTION_LTR or PdfWriter.RUN_DIRECTION_RTL.
-     */
+    
+     * @return One of the following values: PdfWriter.RUN_DIRECTION_DEFAULT, PdfWriter.RUN_DIRECTION_NO_BIDI, PdfWriter.RUN_DIRECTION_LTR or PdfWriter.RUN_DIRECTION_RTL. */
     public int getRunDirection() {
         return column.getRunDirection();
     }
     
     /** Getter for property image.
-     * @return Value of property image.
+    
      *
-     */
+     * @return Value of property image. */
     public Image getImage() {
         return this.image;
     }
@@ -617,9 +623,9 @@ public class PdfPCell extends Rectangle{
     }
     
     /** Gets the cell event for this cell.
-     * @return the cell event
+    
      *
-     */
+     * @return the cell event */
     public PdfPCellEvent getCellEvent() {
         return this.cellEvent;
     }
@@ -633,8 +639,8 @@ public class PdfPCell extends Rectangle{
     }
     
     /** Gets the arabic shaping options.
-     * @return the arabic shaping options
-     */
+    
+     * @return the arabic shaping options */
     public int getArabicOptions() {
         return column.getArabicOptions();
     }
@@ -648,8 +654,8 @@ public class PdfPCell extends Rectangle{
     }
 
     /** Gets state of first line height based on max ascender
-     * @return true if an ascender is to be used.
-     */
+    
+     * @return true if an ascender is to be used. */
     public boolean isUseAscender() {
         return column.isUseAscender();
     }
@@ -664,9 +670,9 @@ public class PdfPCell extends Rectangle{
 
 
     /** Getter for property useDescender.
-     * @return Value of property useDescender.
+    
      *
-     */
+     * @return Value of property useDescender. */
     public boolean isUseDescender() {
         return this.useDescender;
     }
@@ -681,8 +687,8 @@ public class PdfPCell extends Rectangle{
 
     /**
      * Gets the ColumnText with the content of the cell.
-     * @return a columntext object
-     */
+    
+     * @return a columntext object */
     public ColumnText getColumn() {
         return column;
     }

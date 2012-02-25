@@ -117,8 +117,8 @@ public class GenericRtfField extends AbstractRtfField implements RtfField {
      * method for writing custom stuff to the Field Initialization
      * Stuff part of an RtfField.
      * @param out
-     * @throws IOException
-     */
+    
+     * @throws IOException */
     public void writeRtfFieldInitializationStuff(OutputStream out) throws IOException {
         out.write(fieldInst.trim().getBytes());
         out.write(RtfWriter.delimiter);
@@ -128,8 +128,8 @@ public class GenericRtfField extends AbstractRtfField implements RtfField {
      * method for writing custom stuff to the Field Result part of an
      * RtfField.
      * @param out
-     * @throws IOException
-     */
+    
+     * @throws IOException */
     public void writeRtfFieldResultStuff(OutputStream out) throws IOException {
         if (null != fieldResult) {
             out.write(fieldResult.trim().getBytes());

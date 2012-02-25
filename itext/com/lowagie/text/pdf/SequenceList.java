@@ -60,6 +60,8 @@ import java.util.ListIterator;
  * You can have multiple ranges separated by commas ','. The '!' modifier removes the
  * range from what is already selected. The range changes are incremental, that is,
  * numbers are added or deleted as the range appears. The start or the end, but not both, can be ommited.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class SequenceList {
     protected static final int COMMA = 1;
@@ -87,11 +89,19 @@ public class SequenceList {
     protected boolean even;
     protected boolean inverse;
 
+    /**
+     * Constructor for SequenceList.
+     * @param range String
+     */
     protected SequenceList(String range) {
         ptr = 0;
         text = range.toCharArray();
     }
     
+    /**
+     * Method nextChar.
+     * @return char
+     */
     protected char nextChar() {
         while (true) {
             if (ptr >= text.length)
@@ -108,6 +118,10 @@ public class SequenceList {
             ptr = 0;
     }
     
+    /**
+     * Method getType.
+     * @return int
+     */
     protected int getType() {
         StringBuffer buf = new StringBuffer();
         int state = FIRST;
@@ -173,6 +187,10 @@ public class SequenceList {
         }
     }
     
+    /**
+     * Method getAttributes.
+     * @return boolean
+     */
     protected boolean getAttributes() {
         low = -1;
         high = -1;
@@ -247,8 +265,8 @@ public class SequenceList {
      * Generates a list of numbers from a string.
      * @param ranges the comma separated ranges
      * @param maxNumber the maximum number in the range
-     * @return a list with the numbers as <CODE>Integer</CODE>
-     */    
+    
+     * @return a list with the numbers as <CODE>Integer</CODE> */    
     public static List expand(String ranges, int maxNumber) {
         SequenceList parse = new SequenceList(ranges);
         LinkedList list = new LinkedList();

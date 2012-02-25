@@ -62,6 +62,8 @@ import java.util.StringTokenizer;
  *
  * @see		Element
  * @see		Image
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class ImgPostscript
@@ -70,6 +72,10 @@ implements Element {
     
     // Constructors
     
+    /**
+     * Constructor for ImgPostscript.
+     * @param image Image
+     */
     ImgPostscript(Image image) {
         super(image);
     }
@@ -78,9 +84,9 @@ implements Element {
      * Constructs an <CODE>ImgPostscript</CODE>-object, using an <VAR>url</VAR>.
      *
      * @param url the <CODE>URL</CODE> where the image can be found
-     * @throws BadElementException on error
-     * @throws IOException on error
-     */
+    
+    
+     * @throws BadElementException on error * @throws IOException on error */
     
     public ImgPostscript(URL url) throws BadElementException, IOException {
         super(url);
@@ -91,10 +97,10 @@ implements Element {
      * Constructs an <CODE>ImgPostscript</CODE>-object, using a <VAR>filename</VAR>.
      *
      * @param filename a <CODE>String</CODE>-representation of the file that contains the image.
-     * @throws BadElementException on error
-     * @throws MalformedURLException on error
-     * @throws IOException on error
-     */
+    
+    
+    
+     * @throws BadElementException on error * @throws MalformedURLException on error * @throws IOException on error */
     
     public ImgPostscript(String filename) throws BadElementException,
     MalformedURLException, IOException {
@@ -105,9 +111,9 @@ implements Element {
      * Constructs an <CODE>ImgPostscript</CODE>-object from memory.
      *
      * @param img the memory image
-     * @throws BadElementException on error
-     * @throws IOException on error
-     */
+    
+    
+     * @throws BadElementException on error * @throws IOException on error */
     
     public ImgPostscript(byte[] img) throws BadElementException, IOException {
         super( (URL)null);
@@ -118,9 +124,9 @@ implements Element {
     
     /**
      * This method checks if the image is a valid Postscript and processes some parameters.
-     * @throws BadElementException
-     * @throws IOException
-     */
+    
+    
+     * @throws BadElementException * @throws IOException */
     
     private void processParameters() throws BadElementException, IOException {
         type = IMGTEMPLATE;
@@ -191,9 +197,9 @@ implements Element {
     
     /** Reads the Postscript into a template.
      * @param template the template to read to
-     * @throws IOException on error
-     * @throws DocumentException on error
-     */
+    
+    
+     * @throws IOException on error * @throws DocumentException on error */
     public void readPostscript(PdfTemplate template) throws IOException,
     DocumentException {
         setTemplateData(template);

@@ -2,6 +2,8 @@ package com.lowagie.bc.asn1;
 
 import java.io.IOException;
 
+/**
+ */
 public class DEROctetString
     extends ASN1OctetString
 {
@@ -14,12 +16,21 @@ public class DEROctetString
         super(string);
     }
 
+    /**
+     * Constructor for DEROctetString.
+     * @param obj DEREncodable
+     */
     public DEROctetString(
         DEREncodable  obj)
     {
         super(obj);
     }
 
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
+     */
     void encode(
         DEROutputStream out)
         throws IOException

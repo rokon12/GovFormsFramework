@@ -12,8 +12,14 @@
 
 package com.lowagie.text.pdf.codec.postscript;
 
+/**
+ */
 public class PainterException extends Exception {
 
+    /**
+     * Constructor for PainterException.
+     * @param msg String
+     */
     public PainterException(String msg){
         super(msg);
     }

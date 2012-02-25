@@ -86,7 +86,8 @@ public class RtfPageNumber extends GenericRtfField implements RtfField {
      * first argument.
      * @param writer the RtfWriter to use to write this RtfField
      * @param out the Stream to write this RtfField into.
-     * @throws IOException
+    
+     * @throws IOException * @see com.lowagie.text.rtf.RtfField#write(RtfWriter, OutputStream)
      */
     public void write( RtfWriter writer, OutputStream out ) throws IOException {
         writer.writeInitialFontSignature( out, this );

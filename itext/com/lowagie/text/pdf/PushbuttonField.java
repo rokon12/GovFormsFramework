@@ -78,6 +78,7 @@ import java.io.IOException;
  * document.close();
  * </PRE>
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PushbuttonField extends BaseField {
    
@@ -159,8 +160,8 @@ public class PushbuttonField extends BaseField {
     
     /**
      * Getter for property layout.
-     * @return Value of property layout.
-     */
+    
+     * @return Value of property layout. */
     public int getLayout() {
         return this.layout;
     }
@@ -181,8 +182,8 @@ public class PushbuttonField extends BaseField {
     
     /**
      * Getter for property image.
-     * @return Value of property image.
-     */
+    
+     * @return Value of property image. */
     public Image getImage() {
         return this.image;
     }
@@ -198,8 +199,8 @@ public class PushbuttonField extends BaseField {
     
     /**
      * Getter for property template.
-     * @return Value of property template.
-     */
+    
+     * @return Value of property template. */
     public PdfTemplate getTemplate() {
         return this.template;
     }
@@ -215,8 +216,8 @@ public class PushbuttonField extends BaseField {
     
     /**
      * Getter for property scaleIcon.
-     * @return Value of property scaleIcon.
-     */
+    
+     * @return Value of property scaleIcon. */
     public int getScaleIcon() {
         return this.scaleIcon;
     }
@@ -236,8 +237,8 @@ public class PushbuttonField extends BaseField {
     
     /**
      * Getter for property proportionalIcon.
-     * @return Value of property proportionalIcon.
-     */
+    
+     * @return Value of property proportionalIcon. */
     public boolean isProportionalIcon() {
         return this.proportionalIcon;
     }
@@ -253,8 +254,8 @@ public class PushbuttonField extends BaseField {
     
     /**
      * Getter for property iconVerticalAdjustment.
-     * @return Value of property iconVerticalAdjustment.
-     */
+    
+     * @return Value of property iconVerticalAdjustment. */
     public float getIconVerticalAdjustment() {
         return this.iconVerticalAdjustment;
     }
@@ -275,8 +276,8 @@ public class PushbuttonField extends BaseField {
     
     /**
      * Getter for property iconHorizontalAdjustment.
-     * @return Value of property iconHorizontalAdjustment.
-     */
+    
+     * @return Value of property iconHorizontalAdjustment. */
     public float getIconHorizontalAdjustment() {
         return this.iconHorizontalAdjustment;
     }
@@ -295,6 +296,14 @@ public class PushbuttonField extends BaseField {
         this.iconHorizontalAdjustment = iconHorizontalAdjustment;
     }
     
+    /**
+     * Method calculateFontSize.
+     * @param w float
+     * @param h float
+     * @return float
+     * @throws IOException
+     * @throws DocumentException
+     */
     private float calculateFontSize(float w, float h) throws IOException, DocumentException {
         BaseFont ufont = getRealFont();
         float fsize = fontSize;
@@ -314,10 +323,10 @@ public class PushbuttonField extends BaseField {
     
     /**
      * Gets the button appearance.
-     * @throws IOException on error
-     * @throws DocumentException on error
-     * @return the button appearance
-     */    
+    
+    
+    
+     * @return the button appearance * @throws IOException on error * @throws DocumentException on error */    
     protected PdfAppearance getAppearance() throws IOException, DocumentException {
         PdfAppearance app = getBorderAppearance();
         Rectangle box = new Rectangle(app.getBoundingBox());
@@ -520,10 +529,10 @@ public class PushbuttonField extends BaseField {
 
     /**
      * Gets the pushbutton field.
-     * @throws IOException on error
-     * @throws DocumentException on error
-     * @return the pushbutton field
-     */    
+    
+    
+    
+     * @return the pushbutton field * @throws IOException on error * @throws DocumentException on error */    
     public PdfFormField getField() throws IOException, DocumentException {
         PdfFormField field = PdfFormField.createPushButton(writer);
         field.setWidget(box, PdfAnnotation.HIGHLIGHT_INVERT);
@@ -582,8 +591,8 @@ public class PushbuttonField extends BaseField {
     
     /**
      * Getter for property iconFitToBounds.
-     * @return Value of property iconFitToBounds.
-     */
+    
+     * @return Value of property iconFitToBounds. */
     public boolean isIconFitToBounds() {
         return this.iconFitToBounds;
     }

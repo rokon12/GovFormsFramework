@@ -57,6 +57,7 @@ import java.util.List;
  * concatenation are the same as in Acrobat. All the documents are kept in memory unlike
  * PdfCopy.
  * @author  Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PdfCopyFields {
     
@@ -65,9 +66,9 @@ public class PdfCopyFields {
     /**
      * Creates a new instance.
      * @param os the output stream
-     * @throws DocumentException on error
-     * @throws IOException on error
-     */    
+    
+    
+     * @throws DocumentException on error * @throws IOException on error */    
     public PdfCopyFields(OutputStream os) throws DocumentException, IOException {
         fc = new PdfCopyFieldsImp(os);
     }
@@ -76,9 +77,9 @@ public class PdfCopyFields {
      * Creates a new instance.
      * @param os the output stream
      * @param pdfVersion the pdf version the output will have
-     * @throws DocumentException on error
-     * @throws IOException on error
-     */    
+    
+    
+     * @throws DocumentException on error * @throws IOException on error */    
     public PdfCopyFields(OutputStream os, char pdfVersion) throws DocumentException, IOException {
         fc = new PdfCopyFieldsImp(os, pdfVersion);
     }
@@ -86,8 +87,8 @@ public class PdfCopyFields {
     /**
      * Concatenates a PDF document.
      * @param reader the PDF document
-     * @throws DocumentException on error
-     */    
+    
+     * @throws DocumentException on error */    
     public void addDocument(PdfReader reader) throws DocumentException {
         fc.addDocument(reader);
     }
@@ -98,8 +99,8 @@ public class PdfCopyFields {
      * no page repetitions are allowed.
      * @param reader the PDF document
      * @param pagesToKeep the pages to keep
-     * @throws DocumentException on error
-     */    
+    
+     * @throws DocumentException on error */    
     public void addDocument(PdfReader reader, List pagesToKeep) throws DocumentException {
         fc.addDocument(reader, pagesToKeep);
     }
@@ -110,8 +111,8 @@ public class PdfCopyFields {
      * no page repetitions are allowed.
      * @param reader the PDF document
      * @param ranges the comma separated ranges as described in {@link SequenceList}
-     * @throws DocumentException on error
-     */    
+    
+     * @throws DocumentException on error */    
     public void addDocument(PdfReader reader, String ranges) throws DocumentException {
         fc.addDocument(reader, SequenceList.expand(ranges, reader.getNumberOfPages()));
     }
@@ -126,8 +127,8 @@ public class PdfCopyFields {
      * @param ownerPassword the owner password. Can be null or empty
      * @param permissions the user permissions
      * @param strength128Bits <code>true</code> for 128 bit key length, <code>false</code> for 40 bit key length
-     * @throws DocumentException if the document is already open
-     */
+    
+     * @throws DocumentException if the document is already open */
     public void setEncryption(byte userPassword[], byte ownerPassword[], int permissions, boolean strength128Bits) throws DocumentException {
         fc.setEncryption(userPassword, ownerPassword, permissions, strength128Bits);
     }
@@ -143,8 +144,8 @@ public class PdfCopyFields {
      * @param userPassword the user password. Can be null or empty
      * @param ownerPassword the owner password. Can be null or empty
      * @param permissions the user permissions
-     * @throws DocumentException if the document is already open
-     */
+    
+     * @throws DocumentException if the document is already open */
     public void setEncryption(boolean strength, String userPassword, String ownerPassword, int permissions) throws DocumentException {
         setEncryption(DocWriter.getISOBytes(userPassword), DocWriter.getISOBytes(ownerPassword), permissions, strength);
     }
@@ -182,16 +183,16 @@ public class PdfCopyFields {
     }
     
     /** Gets the underlying PdfWriter.
-     * @return the underlying PdfWriter
-     */    
+    
+     * @return the underlying PdfWriter */    
     public PdfWriter getWriter() {
         return fc;
     }
 
     /**
      * Gets the 1.5 compression status.
-     * @return <code>true</code> if the 1.5 compression is on
-     */
+    
+     * @return <code>true</code> if the 1.5 compression is on */
     public boolean isFullCompression() {
         return fc.isFullCompression();
     }

@@ -105,8 +105,8 @@ public class RtfHeaderFooter extends HeaderFooter {
 
 
     /**
-     * @return the element specified in the ctor or null;
-     */
+    
+     * @return the element specified in the ctor or null; */
     public Element content() {
         return content;
     }

@@ -12,6 +12,8 @@ import java.util.Vector;
  * others in that it returns null after it has read the last object in
  * the stream. If an ASN.1 NULL is encountered a DER/BER Null object is
  * returned.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class ASN1InputStream
     extends DERInputStream
@@ -27,12 +29,21 @@ public class ASN1InputStream
 									};
     boolean eofFound = false;
 
+    /**
+     * Constructor for ASN1InputStream.
+     * @param is InputStream
+     */
     public ASN1InputStream(
         InputStream is)
     {
         super(is);
     }
 
+    /**
+     * Method readLength.
+     * @return int
+     * @throws IOException
+     */
     protected int readLength()
         throws IOException
     {
@@ -68,6 +79,11 @@ public class ASN1InputStream
         return length;
     }
 
+    /**
+     * Method readFully.
+     * @param bytes byte[]
+     * @throws IOException
+     */
     protected void readFully(
         byte[]  bytes)
         throws IOException
@@ -97,6 +113,10 @@ public class ASN1InputStream
 	/**
 	 * build an object given its tag and a byte stream to construct it
 	 * from.
+	 * @param tag int
+	 * @param bytes byte[]
+	 * @return DERObject
+	 * @throws IOException
 	 */
     protected DERObject buildObject(
 		int	    tag,
@@ -259,6 +279,8 @@ public class ASN1InputStream
 
     /**
      * read a string of bytes representing an indefinite length object.
+     * @return byte[]
+     * @throws IOException
      */
     private byte[] readIndefiniteLengthFully()
         throws IOException
@@ -282,6 +304,11 @@ public class ASN1InputStream
         return bOut.toByteArray();
     }
 
+	/**
+	 * Method buildConstructedOctetString.
+	 * @return BERConstructedOctetString
+	 * @throws IOException
+	 */
 	private BERConstructedOctetString buildConstructedOctetString()
 		throws IOException
 	{
@@ -302,6 +329,11 @@ public class ASN1InputStream
 		return new BERConstructedOctetString(octs);
 	}
 
+    /**
+     * Method readObject.
+     * @return DERObject
+     * @throws IOException
+     */
     public DERObject readObject()
         throws IOException
     {

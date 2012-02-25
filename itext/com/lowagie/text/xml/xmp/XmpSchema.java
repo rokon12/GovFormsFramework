@@ -55,6 +55,8 @@ import java.util.Properties;
 
 /**
  * Abstract superclass of the XmpSchemas supported by iText.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public abstract class XmpSchema extends Properties {
 	
@@ -70,8 +72,8 @@ public abstract class XmpSchema extends Properties {
 	}
 	/**
 	 * The String representation of the contents.
-	 * @return a String representation.
-	 */
+	
+	 * @return a String representation. */
 	public String toString() {
 		StringBuffer buf = new StringBuffer();
 		for (Enumeration e = this.propertyNames(); e.hasMoreElements(); ) {
@@ -94,8 +96,8 @@ public abstract class XmpSchema extends Properties {
 		buf.append(">");
 	}
 	/**
-	 * @return Returns the xmlns.
-	 */
+	
+	 * @return Returns the xmlns. */
 	public String getXmlns() {
 		return xmlns;
 	}	
@@ -103,8 +105,8 @@ public abstract class XmpSchema extends Properties {
 	/**
 	 * @param key
 	 * @param value
-	 * @return the previous property (null if there wasn't one)
-	 */
+	
+	 * @return the previous property (null if there wasn't one) */
 	public synchronized Object addProperty(String key, String value) {
 		return this.setProperty(key, value);
 	}
@@ -117,19 +119,19 @@ public abstract class XmpSchema extends Properties {
 	}
 	
 	/**
-	 * @see java.util.Properties#setProperty(java.lang.String, java.lang.String)
+	
 	 * 
 	 * @param key
 	 * @param value
-	 * @return the previous property (null if there wasn't one)
-	 */
+	
+	 * @return the previous property (null if there wasn't one) * @see java.util.Properties#setProperty(java.lang.String, java.lang.String) */
 	public synchronized Object setProperty(String key, XmpArray value) {
 		return super.setProperty(key, value.toString());
 	}
 	/**
 	 * @param content
-	 * @return an escaped string
-	 */
+	
+	 * @return an escaped string */
 	public static String escape(String content) {
 		StringBuffer buf = new StringBuffer();
 		for (int i = 0; i < content.length(); i++) {

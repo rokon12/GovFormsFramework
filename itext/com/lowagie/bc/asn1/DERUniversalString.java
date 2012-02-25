@@ -5,6 +5,8 @@ import java.io.IOException;
 
 /**
  * DER UniversalString object.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class DERUniversalString
     extends DERObject
@@ -16,8 +18,10 @@ public class DERUniversalString
     /**
      * return a Universal String from the passed in object.
      *
-     * @exception IllegalArgumentException if the object cannot be converted.
-     */
+    
+     * @param obj Object
+     * @return DERUniversalString
+     * @exception IllegalArgumentException if the object cannot be converted. */
     public static DERUniversalString getInstance(
         Object  obj)
     {
@@ -40,9 +44,10 @@ public class DERUniversalString
      * @param obj the tagged object holding the object we want
      * @param explicit true if the object is meant to be explicitly
      *              tagged false otherwise.
+    
+     * @return DERUniversalString
      * @exception IllegalArgumentException if the tagged object cannot
-     *               be converted.
-     */
+     *               be converted. */
     public static DERUniversalString getInstance(
         ASN1TaggedObject obj,
         boolean          explicit)
@@ -52,6 +57,7 @@ public class DERUniversalString
 
     /**
      * basic constructor - byte encoded string.
+     * @param string byte[]
      */
     public DERUniversalString(
         byte[]   string)
@@ -59,6 +65,11 @@ public class DERUniversalString
         this.string = string;
     }
 
+	/**
+	 * Method getString.
+	 * @return String
+	 * @see com.lowagie.bc.asn1.DERString#getString()
+	 */
 	public String getString()
 	{
 		StringBuffer    buf = new StringBuffer("#");
@@ -85,11 +96,20 @@ public class DERUniversalString
 		return buf.toString();
 	}
 
+    /**
+     * Method getOctets.
+     * @return byte[]
+     */
     public byte[] getOctets()
     {
         return string;
     }
 
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
+     */
     void encode(
         DEROutputStream  out)
         throws IOException
@@ -97,6 +117,11 @@ public class DERUniversalString
         out.writeEncoded(UNIVERSAL_STRING, this.getOctets());
     }
     
+    /**
+     * Method equals.
+     * @param o Object
+     * @return boolean
+     */
     public boolean equals(
         Object  o)
     {

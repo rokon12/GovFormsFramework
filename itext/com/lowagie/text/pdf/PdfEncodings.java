@@ -59,6 +59,7 @@ import java.util.StringTokenizer;
  * Supports conversions from CJK encodings to CID.
  * Supports custom encodings.
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PdfEncodings {
     protected static final int CIDNONE = 0;
@@ -129,10 +130,10 @@ public class PdfEncodings {
 
     /** Converts a <CODE>String</CODE> to a </CODE>byte</CODE> array according
      * to the font's encoding.
-     * @return an array of <CODE>byte</CODE> representing the conversion according to the font's encoding
+    
      * @param encoding the encoding
      * @param text the <CODE>String</CODE> to be converted
-     */
+     * @return an array of <CODE>byte</CODE> representing the conversion according to the font's encoding */
     public static final byte[] convertToBytes(String text, String encoding) {
         if (text == null)
             return new byte[0];
@@ -205,8 +206,8 @@ public class PdfEncodings {
      * to the some encoding.
      * @param bytes the bytes to convert
      * @param encoding the encoding
-     * @return the converted <CODE>String</CODE>
-     */    
+    
+     * @return the converted <CODE>String</CODE> */    
     public static final String convertToString(byte bytes[], String encoding) {
         if (bytes == null)
             return PdfObject.NOTHING;
@@ -248,8 +249,8 @@ public class PdfEncodings {
     
     /** Checks is <CODE>text</CODE> only has PdfDocEncoding characters.
      * @param text the <CODE>String</CODE> to test
-     * @return <CODE>true</CODE> if only PdfDocEncoding characters are present
-     */    
+    
+     * @return <CODE>true</CODE> if only PdfDocEncoding characters are present */    
     public static boolean isPdfDocEncoding(String text) {
         if (text == null)
             return true;
@@ -316,8 +317,8 @@ public class PdfEncodings {
      * See ftp://ftp.oreilly.com/pub/examples/nutshell/cjkv/adobe/.
      * @param name the CJK encoding name
      * @param seq the <CODE>byte</CODE> array to be decoded
-     * @return the CID string
-     */    
+    
+     * @return the CID string */    
     public static String convertCmap(String name, byte seq[]) {
         return convertCmap(name, seq, 0, seq.length);
     }
@@ -332,8 +333,8 @@ public class PdfEncodings {
      * @param start the start offset in the data
      * @param length the number of bytes to convert
      * @param seq the <CODE>byte</CODE> array to be decoded
-     * @return the CID string
-     */    
+    
+     * @return the CID string */    
     public static String convertCmap(String name, byte seq[], int start, int length) {
         try {
             char planes[][] = null;
@@ -353,6 +354,14 @@ public class PdfEncodings {
         }        
     }
     
+    /**
+     * Method decodeSequence.
+     * @param seq byte[]
+     * @param start int
+     * @param length int
+     * @param planes char[][]
+     * @return String
+     */
     static String decodeSequence(byte seq[], int start, int length, char planes[][]) {
         StringBuffer buf = new StringBuffer();
         int end = start + length;
@@ -371,6 +380,13 @@ public class PdfEncodings {
         return buf.toString();
     }
 
+    /**
+     * Method readCmap.
+     * @param name String
+     * @param newline byte[][]
+     * @return char[][]
+     * @throws IOException
+     */
     static char[][] readCmap(String name, byte newline[][]) throws IOException {
         ArrayList planes = new ArrayList();
         planes.add(new char[256]);
@@ -383,6 +399,12 @@ public class PdfEncodings {
         return (char[][])planes.toArray(ret);
     }
     
+    /**
+     * Method readCmap.
+     * @param name String
+     * @param planes ArrayList
+     * @throws IOException
+     */
     static void readCmap(String name, ArrayList planes) throws IOException {
         String fullName = BaseFont.RESOURCE_PATH + "cmaps/" + name;
         InputStream in = BaseFont.getResourceStream(fullName);
@@ -392,6 +414,12 @@ public class PdfEncodings {
         in.close();
     }
     
+    /**
+     * Method encodeStream.
+     * @param in InputStream
+     * @param planes ArrayList
+     * @throws IOException
+     */
     static void encodeStream(InputStream in, ArrayList planes) throws IOException {
         BufferedReader rd = new BufferedReader(new InputStreamReader(in, "iso-8859-1"));
         String line = null;
@@ -452,12 +480,25 @@ public class PdfEncodings {
         }
     }
     
+    /**
+     * Method breakLong.
+     * @param n long
+     * @param size int
+     * @param seqs byte[]
+     */
     static void breakLong(long n, int size, byte seqs[]) {
         for (int k = 0; k < size; ++k) {
             seqs[k] = (byte)(n >> ((size - 1 - k) * 8));
         }
     }
 
+    /**
+     * Method encodeSequence.
+     * @param size int
+     * @param seqs byte[]
+     * @param cid char
+     * @param planes ArrayList
+     */
     static void encodeSequence(int size, byte seqs[], char cid, ArrayList planes) {
         --size;
         int nextPlane = 0;
@@ -492,8 +533,17 @@ public class PdfEncodings {
         }
     }
 
+    /**
+     */
     private static class WingdingsConversion implements ExtraEncoding {
         
+        /**
+         * Method charToByte.
+         * @param text String
+         * @param encoding String
+         * @return byte[]
+         * @see com.lowagie.text.pdf.ExtraEncoding#charToByte(String, String)
+         */
         public byte[] charToByte(String text, String encoding) {
             char cc[] = text.toCharArray();
             byte b[] = new byte[cc.length];
@@ -516,6 +566,13 @@ public class PdfEncodings {
             return b2;
         }
         
+        /**
+         * Method byteToChar.
+         * @param b byte[]
+         * @param encoding String
+         * @return String
+         * @see com.lowagie.text.pdf.ExtraEncoding#byteToChar(byte[], String)
+         */
         public String byteToChar(byte[] b, String encoding) {
             return null;
         }
@@ -544,9 +601,18 @@ public class PdfEncodings {
         };
     }
 
+    /**
+     */
     private static class Cp437Conversion implements ExtraEncoding {
         private static IntHashtable c2b = new IntHashtable();
         
+        /**
+         * Method charToByte.
+         * @param text String
+         * @param encoding String
+         * @return byte[]
+         * @see com.lowagie.text.pdf.ExtraEncoding#charToByte(String, String)
+         */
         public byte[] charToByte(String text, String encoding) {
             char cc[] = text.toCharArray();
             byte b[] = new byte[cc.length];
@@ -571,6 +637,13 @@ public class PdfEncodings {
             return b2;
         }
         
+        /**
+         * Method byteToChar.
+         * @param b byte[]
+         * @param encoding String
+         * @return String
+         * @see com.lowagie.text.pdf.ExtraEncoding#byteToChar(byte[], String)
+         */
         public String byteToChar(byte[] b, String encoding) {
             int len = b.length;
             char cc[] = new char[len];
@@ -606,12 +679,18 @@ public class PdfEncodings {
         }
     }
     
+    /**
+     */
     private static class SymbolConversion implements ExtraEncoding {
         
         private static final IntHashtable t1 = new IntHashtable();
         private static final IntHashtable t2 = new IntHashtable();
         private IntHashtable translation;
         
+        /**
+         * Constructor for SymbolConversion.
+         * @param symbol boolean
+         */
         SymbolConversion(boolean symbol) {
             if (symbol)
                 translation = t1;
@@ -619,6 +698,13 @@ public class PdfEncodings {
                 translation = t2;
         }
         
+        /**
+         * Method charToByte.
+         * @param text String
+         * @param encoding String
+         * @return byte[]
+         * @see com.lowagie.text.pdf.ExtraEncoding#charToByte(String, String)
+         */
         public byte[] charToByte(String text, String encoding) {
             char cc[] = text.toCharArray();
             byte b[] = new byte[cc.length];
@@ -637,6 +723,13 @@ public class PdfEncodings {
             return b2;
         }
         
+        /**
+         * Method byteToChar.
+         * @param b byte[]
+         * @param encoding String
+         * @return String
+         * @see com.lowagie.text.pdf.ExtraEncoding#byteToChar(byte[], String)
+         */
         public String byteToChar(byte[] b, String encoding) {
             return null;
         }
@@ -689,8 +782,17 @@ public class PdfEncodings {
         }
     }
     
+    /**
+     */
     private static class SymbolTTConversion implements ExtraEncoding {
         
+        /**
+         * Method charToByte.
+         * @param text String
+         * @param encoding String
+         * @return byte[]
+         * @see com.lowagie.text.pdf.ExtraEncoding#charToByte(String, String)
+         */
         public byte[] charToByte(String text, String encoding) {
             char ch[] = text.toCharArray();
             byte b[] = new byte[ch.length];
@@ -708,6 +810,13 @@ public class PdfEncodings {
             return b2;
         }
         
+        /**
+         * Method byteToChar.
+         * @param b byte[]
+         * @param encoding String
+         * @return String
+         * @see com.lowagie.text.pdf.ExtraEncoding#byteToChar(byte[], String)
+         */
         public String byteToChar(byte[] b, String encoding) {
             return null;
         }

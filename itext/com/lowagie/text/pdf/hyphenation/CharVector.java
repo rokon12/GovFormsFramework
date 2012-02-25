@@ -23,6 +23,7 @@ import java.io.Serializable;
  * underlying array.
  *
  * @author Carlos Villegas <cav@uniscope.co.jp>
+ * @version $Revision: 1.0 $
  */
 public class CharVector implements Cloneable, Serializable {
 
@@ -46,6 +47,10 @@ public class CharVector implements Cloneable, Serializable {
         this(DEFAULT_BLOCK_SIZE);
     }
 
+    /**
+     * Constructor for CharVector.
+     * @param capacity int
+     */
     public CharVector(int capacity) {
         if (capacity > 0) {
             blockSize = capacity;
@@ -56,12 +61,21 @@ public class CharVector implements Cloneable, Serializable {
         n = 0;
     }
 
+    /**
+     * Constructor for CharVector.
+     * @param a char[]
+     */
     public CharVector(char[] a) {
         blockSize = DEFAULT_BLOCK_SIZE;
         array = a;
         n = a.length;
     }
 
+    /**
+     * Constructor for CharVector.
+     * @param a char[]
+     * @param capacity int
+     */
     public CharVector(char[] a, int capacity) {
         if (capacity > 0) {
             blockSize = capacity;
@@ -79,18 +93,27 @@ public class CharVector implements Cloneable, Serializable {
         n = 0;
     }
 
+    /**
+     * Method clone.
+     * @return Object
+     */
     public Object clone() {
         CharVector cv = new CharVector((char[])array.clone(), blockSize);
         cv.n = this.n;
         return cv;
     }
 
+    /**
+     * Method getArray.
+     * @return char[]
+     */
     public char[] getArray() {
         return array;
     }
 
     /**
      * return number of items in array
+     * @return int
      */
     public int length() {
         return n;
@@ -98,19 +121,35 @@ public class CharVector implements Cloneable, Serializable {
 
     /**
      * returns current capacity of array
+     * @return int
      */
     public int capacity() {
         return array.length;
     }
 
+    /**
+     * Method put.
+     * @param index int
+     * @param val char
+     */
     public void put(int index, char val) {
         array[index] = val;
     }
 
+    /**
+     * Method get.
+     * @param index int
+     * @return char
+     */
     public char get(int index) {
         return array[index];
     }
 
+    /**
+     * Method alloc.
+     * @param size int
+     * @return int
+     */
     public int alloc(int size) {
         int index = n;
         int len = array.length;

@@ -53,12 +53,18 @@ package com.lowagie.text.pdf;
 /**
  *
  * @author  psoares
+ * @version $Revision: 1.0 $
  */
 public class SpotColor extends ExtendedColor {
 
     PdfSpotColor spot;
     float tint;
 
+    /**
+     * Constructor for SpotColor.
+     * @param spot PdfSpotColor
+     * @param tint float
+     */
     public SpotColor(PdfSpotColor spot, float tint) {
         super(TYPE_SEPARATION,
             ((float)spot.getAlternativeCS().getRed() / 255f - 1f) * tint + 1,
@@ -68,14 +74,26 @@ public class SpotColor extends ExtendedColor {
         this.tint = tint;
     }
     
+    /**
+     * Constructor for SpotColor.
+     * @param spot PdfSpotColor
+     */
     public SpotColor(PdfSpotColor spot) {
         this(spot, spot.getTint());
     }
     
+    /**
+     * Method getPdfSpotColor.
+     * @return PdfSpotColor
+     */
     public PdfSpotColor getPdfSpotColor() {
         return spot;
     }
     
+    /**
+     * Method getTint.
+     * @return float
+     */
     public float getTint() {
         return tint;
     }

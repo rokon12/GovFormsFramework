@@ -3,15 +3,26 @@ package com.lowagie.bc.asn1;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ */
 public class ASN1OutputStream
     extends DEROutputStream
 {
+    /**
+     * Constructor for ASN1OutputStream.
+     * @param os OutputStream
+     */
     public ASN1OutputStream(
         OutputStream    os)
     {
         super(os);
     }
 
+    /**
+     * Method writeObject.
+     * @param obj Object
+     * @throws IOException
+     */
     public void writeObject(
         Object    obj)
         throws IOException

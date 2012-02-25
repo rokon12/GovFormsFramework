@@ -3,10 +3,17 @@ package com.lowagie.bc.asn1;
 import java.io.IOException;
 import java.util.Enumeration;
 
+/**
+ */
 public class BERConstructedSequence
     extends DERConstructedSequence
 {
     /*
+     */
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
      */
     void encode(
         DEROutputStream out)

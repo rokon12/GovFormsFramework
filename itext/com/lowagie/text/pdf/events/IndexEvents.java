@@ -65,6 +65,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * Class for an index.
  * 
  * @author Michael Niedermair
+ * @version $Revision: 1.0 $
  */
 public class IndexEvents extends PdfPageEventHelper {
 
@@ -103,8 +104,8 @@ public class IndexEvents extends PdfPageEventHelper {
      * @param in1   The first level.
      * @param in2   The second level.
      * @param in3   The third level.
-     * @return Returns the Chunk.
-     */
+    
+     * @return Returns the Chunk. */
     public Chunk create(final String text, final String in1, final String in2,
             final String in3) {
 
@@ -122,8 +123,8 @@ public class IndexEvents extends PdfPageEventHelper {
      *
      * @param text  The text for the Chunk.
      * @param in1   The first level.
-     * @return Returns the Chunk.
-     */
+    
+     * @return Returns the Chunk. */
     public Chunk create(final String text, final String in1) {
         return create(text, in1, "", "");
     }
@@ -134,8 +135,8 @@ public class IndexEvents extends PdfPageEventHelper {
      * @param text  The text for the Chunk.
      * @param in1   The first level.
      * @param in2   The second level.
-     * @return Returns the Chunk.
-     */
+    
+     * @return Returns the Chunk. */
     public Chunk create(final String text, final String in1, final String in2) {
         return create(text, in1, in2, "");
     }
@@ -218,8 +219,8 @@ public class IndexEvents extends PdfPageEventHelper {
 
     /**
      * Returns the sorted list with the entries and the collected page numbers.
-     * @return Returns the sorted list with the entries and teh collected page numbers.
-     */
+    
+     * @return Returns the sorted list with the entries and teh collected page numbers. */
     public List getSortedEntries() {
 
         Map grouped = new HashMap();
@@ -256,6 +257,8 @@ public class IndexEvents extends PdfPageEventHelper {
      * In the first step, only in1, in2,in3 and tag are used.
      * After the collections of the index entries, pagenumbers are used.
      * </p>
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     public class Entry {
 
@@ -306,40 +309,40 @@ public class IndexEvents extends PdfPageEventHelper {
 
         /**
          * Returns the in1.
-         * @return Returns the in1.
-         */
+        
+         * @return Returns the in1. */
         public String getIn1() {
             return in1;
         }
 
         /**
          * Returns the in2.
-         * @return Returns the in2.
-         */
+        
+         * @return Returns the in2. */
         public String getIn2() {
             return in2;
         }
 
         /**
          * Returns the in3.
-         * @return Returns the in3.
-         */
+        
+         * @return Returns the in3. */
         public String getIn3() {
             return in3;
         }
 
         /**
          * Returns the tag.
-         * @return Returns the tag.
-         */
+        
+         * @return Returns the tag. */
         public String getTag() {
             return tag;
         }
 
         /**
          * Returns the pagenumer for this entry.
-         * @return Returns the pagenumer for this entry.
-         */
+        
+         * @return Returns the pagenumer for this entry. */
         public int getPageNumber() {
             int rt = -1;
             Integer i = (Integer) indextag.get(tag);
@@ -361,32 +364,32 @@ public class IndexEvents extends PdfPageEventHelper {
 
         /**
          * Returns the key for the map-entry.
-         * @return Returns the key for the map-entry.
-         */
+        
+         * @return Returns the key for the map-entry. */
         public String getKey() {
             return in1 + "!" + in2 + "!" + in3;
         }
 
         /**
          * Returns the pagenumbers.
-         * @return Returns the pagenumbers.
-         */
+        
+         * @return Returns the pagenumbers. */
         public List getPagenumbers() {
             return pagenumbers;
         }
 
         /**
          * Returns the tags.
-         * @return Returns the tags.
-         */
+        
+         * @return Returns the tags. */
         public List getTags() {
             return tags;
         }
 
         /**
          * print the entry (only for test)
-         * @return the toString implementation of the entry
-         */
+        
+         * @return the toString implementation of the entry */
         public String toString() {
             StringBuffer buf = new StringBuffer();
             buf.append(in1).append(" ");

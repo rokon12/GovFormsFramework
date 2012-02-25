@@ -55,6 +55,8 @@ import java.util.Properties;
  * A <code>Cell</code> with extended style attributes
  * 
  * ONLY FOR USE WITH THE RtfWriter NOT with the RtfWriter2.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class RtfTableCell extends Cell
 {
@@ -162,8 +164,8 @@ public class RtfTableCell extends Cell
  * <CODE>Cell</CODE>, an exception will be thrown.
  *
  * @param	element		the element
- * @throws	BadElementException when the creator was called with a <CODE>ListItem</CODE>, <CODE>Row</CODE> or <CODE>Cell</CODE>
- */
+
+ * @throws	BadElementException when the creator was called with a <CODE>ListItem</CODE>, <CODE>Row</CODE> or <CODE>Cell</CODE> */
     public RtfTableCell(Element element) throws BadElementException {
         super(element);
     }
@@ -214,8 +216,8 @@ public class RtfTableCell extends Cell
     
     /**
      * Get the top border width
-     * @return a width
-     */
+    
+     * @return a width */
     public float topBorderWidth() {
         return topBorderWidth;
     }
@@ -231,8 +233,8 @@ public class RtfTableCell extends Cell
     
     /**
      * Get the left border width
-     * @return a width
-     */
+    
+     * @return a width */
     public float leftBorderWidth() {
         return leftBorderWidth;
     }
@@ -248,8 +250,8 @@ public class RtfTableCell extends Cell
     
     /**
      * Get the right border width
-     * @return a width
-     */
+    
+     * @return a width */
     public float rightBorderWidth() {
         return rightBorderWidth;
     }
@@ -265,8 +267,8 @@ public class RtfTableCell extends Cell
     
     /**
      * Get the bottom border width
-     * @return a width
-     */
+    
+     * @return a width */
     public float bottomBorderWidth() {
         return bottomBorderWidth;
     }
@@ -294,8 +296,8 @@ public class RtfTableCell extends Cell
     
     /**
      * Get the top border style
-     * @return a style value
-     */
+    
+     * @return a style value */
     public int topBorderStyle() {
         return topBorderStyle;
     }
@@ -311,8 +313,8 @@ public class RtfTableCell extends Cell
     
     /**
      * Get the left border style
-     * @return a style value
-     */
+    
+     * @return a style value */
     public int leftBorderStyle() {
         return leftBorderStyle;
     }
@@ -328,8 +330,8 @@ public class RtfTableCell extends Cell
     
     /**
      * Get the right border style
-     * @return a style value
-     */
+    
+     * @return a style value */
     public int rightBorderStyle() {
         return rightBorderStyle;
     }
@@ -345,8 +347,8 @@ public class RtfTableCell extends Cell
     
     /**
      * Get the bottom border style
-     * @return a style value
-     */
+    
+     * @return a style value */
     public int bottomBorderStyle() {
         return bottomBorderStyle;
     }
@@ -354,8 +356,8 @@ public class RtfTableCell extends Cell
     /**
      * Get the RTF control word for <code>style</code>
      * @param style a style value
-     * @return a byte array corresponding with a style control word
-     */
+    
+     * @return a byte array corresponding with a style control word */
     protected static byte[] getStyleControlWord(int style) {
         switch(style)
         {

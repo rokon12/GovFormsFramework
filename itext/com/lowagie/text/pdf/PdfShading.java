@@ -51,6 +51,7 @@ import java.io.IOException;
 /** Implements the shading dictionary (or stream).
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PdfShading {
 
@@ -74,11 +75,16 @@ public class PdfShading {
     /** Holds value of property antiAlias. */
     protected boolean antiAlias = false;
     
-    /** Creates new PdfShading */
+    /** Creates new PdfShading * @param writer PdfWriter
+     */
     protected PdfShading(PdfWriter writer) {
         this.writer = writer;
     }
     
+    /**
+     * Method setColorSpace.
+     * @param color Color
+     */
     protected void setColorSpace(Color color) {
         cspace = color;
         int type = ExtendedColor.getType(color);
@@ -109,6 +115,10 @@ public class PdfShading {
         shading.put(PdfName.COLORSPACE, colorSpace);
     }
     
+    /**
+     * Method getColorSpace.
+     * @return Color
+     */
     Color getColorSpace() {
         return cspace;
     }
@@ -117,6 +127,11 @@ public class PdfShading {
         throw new IllegalArgumentException("A tiling or shading pattern cannot be used as a color space in a shading pattern");
     }
     
+    /**
+     * Method checkCompatibleColors.
+     * @param c1 Color
+     * @param c2 Color
+     */
     public static void checkCompatibleColors(Color c1, Color c2) {
         int type1 = ExtendedColor.getType(c1);
         int type2 = ExtendedColor.getType(c2);
@@ -128,6 +143,11 @@ public class PdfShading {
             throwColorSpaceError();
     }
     
+    /**
+     * Method getColorArray.
+     * @param color Color
+     * @return float[]
+     */
     public static float[] getColorArray(Color color) {
         int type = ExtendedColor.getType(color);
         switch (type) {
@@ -149,6 +169,15 @@ public class PdfShading {
         return null;
     }
 
+    /**
+     * Method type1.
+     * @param writer PdfWriter
+     * @param colorSpace Color
+     * @param domain float[]
+     * @param tMatrix float[]
+     * @param function PdfFunction
+     * @return PdfShading
+     */
     public static PdfShading type1(PdfWriter writer, Color colorSpace, float domain[], float tMatrix[], PdfFunction function) {
         PdfShading sp = new PdfShading(writer);
         sp.shading = new PdfDictionary();
@@ -163,6 +192,16 @@ public class PdfShading {
         return sp;
     }
     
+    /**
+     * Method type2.
+     * @param writer PdfWriter
+     * @param colorSpace Color
+     * @param coords float[]
+     * @param domain float[]
+     * @param function PdfFunction
+     * @param extend boolean[]
+     * @return PdfShading
+     */
     public static PdfShading type2(PdfWriter writer, Color colorSpace, float coords[], float domain[], PdfFunction function, boolean extend[]) {
         PdfShading sp = new PdfShading(writer);
         sp.shading = new PdfDictionary();
@@ -181,6 +220,16 @@ public class PdfShading {
         return sp;
     }
 
+    /**
+     * Method type3.
+     * @param writer PdfWriter
+     * @param colorSpace Color
+     * @param coords float[]
+     * @param domain float[]
+     * @param function PdfFunction
+     * @param extend boolean[]
+     * @return PdfShading
+     */
     public static PdfShading type3(PdfWriter writer, Color colorSpace, float coords[], float domain[], PdfFunction function, boolean extend[]) {
         PdfShading sp = type2(writer, colorSpace, coords, domain, function, extend);
         sp.shadingType = 3;
@@ -188,6 +237,19 @@ public class PdfShading {
         return sp;
     }
     
+    /**
+     * Method simpleAxial.
+     * @param writer PdfWriter
+     * @param x0 float
+     * @param y0 float
+     * @param x1 float
+     * @param y1 float
+     * @param startColor Color
+     * @param endColor Color
+     * @param extendStart boolean
+     * @param extendEnd boolean
+     * @return PdfShading
+     */
     public static PdfShading simpleAxial(PdfWriter writer, float x0, float y0, float x1, float y1, Color startColor, Color endColor, boolean extendStart, boolean extendEnd) {
         checkCompatibleColors(startColor, endColor);
         PdfFunction function = PdfFunction.type2(writer, new float[]{0, 1}, null, getColorArray(startColor),
@@ -195,10 +257,36 @@ public class PdfShading {
         return type2(writer, startColor, new float[]{x0, y0, x1, y1}, null, function, new boolean[]{extendStart, extendEnd});
     }
     
+    /**
+     * Method simpleAxial.
+     * @param writer PdfWriter
+     * @param x0 float
+     * @param y0 float
+     * @param x1 float
+     * @param y1 float
+     * @param startColor Color
+     * @param endColor Color
+     * @return PdfShading
+     */
     public static PdfShading simpleAxial(PdfWriter writer, float x0, float y0, float x1, float y1, Color startColor, Color endColor) {
         return simpleAxial(writer, x0, y0, x1, y1, startColor, endColor, true, true);
     }
     
+    /**
+     * Method simpleRadial.
+     * @param writer PdfWriter
+     * @param x0 float
+     * @param y0 float
+     * @param r0 float
+     * @param x1 float
+     * @param y1 float
+     * @param r1 float
+     * @param startColor Color
+     * @param endColor Color
+     * @param extendStart boolean
+     * @param extendEnd boolean
+     * @return PdfShading
+     */
     public static PdfShading simpleRadial(PdfWriter writer, float x0, float y0, float r0, float x1, float y1, float r1, Color startColor, Color endColor, boolean extendStart, boolean extendEnd) {
         checkCompatibleColors(startColor, endColor);
         PdfFunction function = PdfFunction.type2(writer, new float[]{0, 1}, null, getColorArray(startColor),
@@ -206,24 +294,53 @@ public class PdfShading {
         return type3(writer, startColor, new float[]{x0, y0, r0, x1, y1, r1}, null, function, new boolean[]{extendStart, extendEnd});
     }
 
+    /**
+     * Method simpleRadial.
+     * @param writer PdfWriter
+     * @param x0 float
+     * @param y0 float
+     * @param r0 float
+     * @param x1 float
+     * @param y1 float
+     * @param r1 float
+     * @param startColor Color
+     * @param endColor Color
+     * @return PdfShading
+     */
     public static PdfShading simpleRadial(PdfWriter writer, float x0, float y0, float r0, float x1, float y1, float r1, Color startColor, Color endColor) {
         return simpleRadial(writer, x0, y0, r0, x1, y1, r1, startColor, endColor, true, true);
     }
 
+    /**
+     * Method getShadingName.
+     * @return PdfName
+     */
     PdfName getShadingName() {
         return shadingName;
     }
     
+    /**
+     * Method getShadingReference.
+     * @return PdfIndirectReference
+     */
     PdfIndirectReference getShadingReference() {
         if (shadingReference == null)
             shadingReference = writer.getPdfIndirectReference();
         return shadingReference;
     }
     
+    /**
+     * Method setName.
+     * @param number int
+     */
     void setName(int number) {
         shadingName = new PdfName("Sh" + number);
     }
     
+    /**
+     * Method addToBody.
+     * @throws IOException
+     */
     void addToBody() throws IOException {
         if (bBox != null)
             shading.put(PdfName.BBOX, new PdfArray(bBox));
@@ -232,28 +349,52 @@ public class PdfShading {
         writer.addToBody(shading, getShadingReference());
     }
     
+    /**
+     * Method getWriter.
+     * @return PdfWriter
+     */
     PdfWriter getWriter() {
         return writer;
     }
     
+    /**
+     * Method getColorDetails.
+     * @return ColorDetails
+     */
     ColorDetails getColorDetails() {
         return colorDetails;
     }
     
+    /**
+     * Method getBBox.
+     * @return float[]
+     */
     public float[] getBBox() {
         return bBox;
     }
     
+    /**
+     * Method setBBox.
+     * @param bBox float[]
+     */
     public void setBBox(float[] bBox) {
         if (bBox.length != 4)
             throw new IllegalArgumentException("BBox must be a 4 element array.");
         this.bBox = bBox;
     }
     
+    /**
+     * Method isAntiAlias.
+     * @return boolean
+     */
     public boolean isAntiAlias() {
         return antiAlias;
     }
     
+    /**
+     * Method setAntiAlias.
+     * @param antiAlias boolean
+     */
     public void setAntiAlias(boolean antiAlias) {
         this.antiAlias = antiAlias;
     }

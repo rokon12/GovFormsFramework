@@ -49,6 +49,7 @@ package com.lowagie.text.pdf;
 /** The transparency group dictionary.
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PdfTransparencyGroup extends PdfDictionary {
     

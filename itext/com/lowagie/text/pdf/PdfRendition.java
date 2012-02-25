@@ -50,8 +50,17 @@ import java.io.IOException;
 
 /**
  * A Rendition dictionary (pdf spec 1.5)
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class PdfRendition extends PdfDictionary {
+     /**
+      * Constructor for PdfRendition.
+      * @param file String
+      * @param fs PdfFileSpecification
+      * @param mimeType String
+      * @throws IOException
+      */
      PdfRendition(String file, PdfFileSpecification fs, String mimeType) throws IOException{
          put(PdfName.S, new PdfName("MR"));
          put(PdfName.N, new PdfString("Rendition for "+file));

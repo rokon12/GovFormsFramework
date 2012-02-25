@@ -81,8 +81,8 @@ public class RtfDiskCache implements RtfDataCache {
     /**
      * Constructs a RtfFileCache. Creates the temp file.
      * 
-     * @throws IOException If the temporary file could not be created.
-     */
+    
+     * @throws IOException If the temporary file could not be created. */
     public RtfDiskCache() throws IOException {
         this.tempFile = File.createTempFile("iText", null);
         this.data = new BufferedOutputStream(new FileOutputStream(tempFile));
@@ -90,6 +90,8 @@ public class RtfDiskCache implements RtfDataCache {
 
     /**
      * Gets the BufferedOutputStream to write to.
+     * @return OutputStream
+     * @see com.lowagie.text.rtf.document.output.RtfDataCache#getOutputStream()
      */
     public OutputStream getOutputStream() {
         return this.data;
@@ -97,6 +99,9 @@ public class RtfDiskCache implements RtfDataCache {
 
     /**
      * Writes the content of the temporary file into the OutputStream.
+     * @param target OutputStream
+     * @throws IOException
+     * @see com.lowagie.text.rtf.document.output.RtfDataCache#writeTo(OutputStream)
      */
     public void writeTo(OutputStream target) throws IOException {
         this.data.close();

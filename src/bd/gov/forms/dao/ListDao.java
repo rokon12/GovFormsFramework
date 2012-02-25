@@ -20,19 +20,45 @@ import bd.gov.forms.domain.ListData;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @author asif
+ * @version $Revision: 1.0 $
  */
+@Component
 public interface ListDao {
 
+    /**
+     * Method getListDataSysId.
+     * @param id int
+     * @return String
+     */
     public String getListDataSysId(int id);
 
+    /**
+     * Method saveListData.
+     * @param lst ListData
+     */
     public void saveListData(final ListData lst);
 
+    /**
+     * Method getListData.
+     * @param sysId String
+     * @return ListData
+     */
     public ListData getListData(String sysId);
 
+    /**
+     * Method updateListData.
+     * @param lst ListData
+     */
     public void updateListData(final ListData lst);
 
+    /**
+     * Method getListDataList.
+     * @return List
+     */
     public List getListDataList();
 
 }

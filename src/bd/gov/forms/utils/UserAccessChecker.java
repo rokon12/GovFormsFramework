@@ -21,8 +21,15 @@ import bd.gov.forms.domain.User;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ */
 public class UserAccessChecker {
 
+    /**
+     * Method check.
+     * @param request HttpServletRequest
+     * @return String
+     */
     public static String check(HttpServletRequest request) {
         return Role.checkRole(Role.ROLE_USER, (User) request.getSession().getAttribute("user"));
     }

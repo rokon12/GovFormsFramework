@@ -3,15 +3,26 @@ package com.lowagie.bc.asn1;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ */
 public class BEROutputStream
     extends DEROutputStream
 {
+    /**
+     * Constructor for BEROutputStream.
+     * @param os OutputStream
+     */
     public BEROutputStream(
         OutputStream    os)
     {
         super(os);
     }
 
+    /**
+     * Method writeObject.
+     * @param obj Object
+     * @throws IOException
+     */
     public void writeObject(
         Object    obj)
         throws IOException

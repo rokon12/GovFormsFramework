@@ -56,6 +56,8 @@ import java.util.HashMap;
 /** This class takes any PDF and returns exactly the same but
  * encrypted. All the content, links, outlines, etc, are kept.
  * It is also possible to change the info dictionary.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class PdfEncryptor {
     
@@ -75,8 +77,8 @@ public class PdfEncryptor {
      * @param ownerPassword the owner password. Can be null or empty
      * @param permissions the user permissions
      * @param strength128Bits <code>true</code> for 128 bit key length, <code>false</code> for 40 bit key length
-     * @throws DocumentException on error
-     * @throws IOException on error */
+    
+     * @throws DocumentException on error * @throws IOException on error */
     public static void encrypt(PdfReader reader, OutputStream os, byte userPassword[], byte ownerPassword[], int permissions, boolean strength128Bits) throws DocumentException, IOException {
         PdfStamper stamper = new PdfStamper(reader, os);
         stamper.setEncryption(userPassword, ownerPassword, permissions, strength128Bits);
@@ -99,9 +101,9 @@ public class PdfEncryptor {
      * @param newInfo an optional <CODE>String</CODE> map to add or change
      * the info dictionary. Entries with <CODE>null</CODE>
      * values delete the key in the original info dictionary
-     * @throws DocumentException on error
-     * @throws IOException on error
-     */
+    
+    
+     * @throws DocumentException on error * @throws IOException on error */
     public static void encrypt(PdfReader reader, OutputStream os, byte userPassword[], byte ownerPassword[], int permissions, boolean strength128Bits, HashMap newInfo) throws DocumentException, IOException {
         PdfStamper stamper = new PdfStamper(reader, os);
         stamper.setEncryption(userPassword, ownerPassword, permissions, strength128Bits);
@@ -122,8 +124,8 @@ public class PdfEncryptor {
      * @param userPassword the user password. Can be null or empty
      * @param ownerPassword the owner password. Can be null or empty
      * @param permissions the user permissions
-     * @throws DocumentException on error
-     * @throws IOException on error */
+    
+     * @throws DocumentException on error * @throws IOException on error */
     public static void encrypt(PdfReader reader, OutputStream os, boolean strength, String userPassword, String ownerPassword, int permissions) throws DocumentException, IOException {
         PdfStamper stamper = new PdfStamper(reader, os);
         stamper.setEncryption(strength, userPassword, ownerPassword, permissions);
@@ -146,9 +148,9 @@ public class PdfEncryptor {
      * @param newInfo an optional <CODE>String</CODE> map to add or change
      * the info dictionary. Entries with <CODE>null</CODE>
      * values delete the key in the original info dictionary
-     * @throws DocumentException on error
-     * @throws IOException on error
-     */
+    
+    
+     * @throws DocumentException on error * @throws IOException on error */
     public static void encrypt(PdfReader reader, OutputStream os, boolean strength, String userPassword, String ownerPassword, int permissions, HashMap newInfo) throws DocumentException, IOException {
         PdfStamper stamper = new PdfStamper(reader, os);
         stamper.setEncryption(strength, userPassword, ownerPassword, permissions);
@@ -159,8 +161,8 @@ public class PdfEncryptor {
     /**
      * Give you a verbose analysis of the permissions.
      * @param permissions the permissions value of a PDF file
-     * @return a String that explains the meaning of the permissions value
-     */
+    
+     * @return a String that explains the meaning of the permissions value */
     public static String getPermissionsVerbose(int permissions) {
     	StringBuffer buf = new StringBuffer("Allowed:");
     	if ((PdfWriter.AllowPrinting & permissions) == PdfWriter.AllowPrinting) buf.append(" Printing");

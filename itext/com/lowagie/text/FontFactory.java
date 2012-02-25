@@ -69,6 +69,7 @@ import com.lowagie.text.markup.MarkupParser;
  * without having to enter a path as parameter.
  *
  * @author  Bruno Lowagie
+ * @version $Revision: 1.0 $
  */
 
 public class FontFactory extends java.lang.Object {
@@ -197,8 +198,8 @@ public class FontFactory extends java.lang.Object {
  * @param	size	    the size of this font
  * @param	style	    the style of this font
  * @param	color	    the <CODE>Color</CODE> of this font.
- * @return the Font constructed based on the parameters
- */
+
+ * @return the Font constructed based on the parameters */
     
     public static Font getFont(String fontname, String encoding, boolean embedded, float size, int style, Color color) {
         if (fontname == null) return new Font(Font.UNDEFINED, size, style, color);
@@ -259,8 +260,8 @@ public class FontFactory extends java.lang.Object {
  * Constructs a <CODE>Font</CODE>-object.
  *
  * @param   attributes  the attributes of a <CODE>Font</CODE> object.
- * @return the Font constructed based on the attributes
- */
+
+ * @return the Font constructed based on the attributes */
     
     public static Font getFont(Properties attributes) {
         String fontname = null;
@@ -355,8 +356,8 @@ public class FontFactory extends java.lang.Object {
  * @param       embedded    true if the font is to be embedded in the PDF
  * @param	size	    the size of this font
  * @param	style	    the style of this font
- * @return the Font constructed based on the parameters
- */
+
+ * @return the Font constructed based on the parameters */
     
     public static Font getFont(String fontname, String encoding, boolean embedded, float size, int style) {
         return getFont(fontname, encoding, embedded, size, style, null);
@@ -369,8 +370,8 @@ public class FontFactory extends java.lang.Object {
  * @param	encoding    the encoding of the font
  * @param       embedded    true if the font is to be embedded in the PDF
  * @param	size	    the size of this font
- * @return the Font constructed based on the parameters
- */
+
+ * @return the Font constructed based on the parameters */
     
     public static Font getFont(String fontname, String encoding, boolean embedded, float size) {
         return getFont(fontname, encoding, embedded, size, Font.UNDEFINED, null);
@@ -382,8 +383,8 @@ public class FontFactory extends java.lang.Object {
  * @param	fontname    the name of the font
  * @param	encoding    the encoding of the font
  * @param       embedded    true if the font is to be embedded in the PDF
- * @return the Font constructed based on the parameters
- */
+
+ * @return the Font constructed based on the parameters */
     
     public static Font getFont(String fontname, String encoding, boolean embedded) {
         return getFont(fontname, encoding, embedded, Font.UNDEFINED, Font.UNDEFINED, null);
@@ -397,8 +398,8 @@ public class FontFactory extends java.lang.Object {
  * @param	size	    the size of this font
  * @param	style	    the style of this font
  * @param	color	    the <CODE>Color</CODE> of this font.
- * @return the Font constructed based on the parameters
- */
+
+ * @return the Font constructed based on the parameters */
     
     public static Font getFont(String fontname, String encoding, float size, int style, Color color) {
         return getFont(fontname, encoding, defaultEmbedding, size, style, color);
@@ -411,8 +412,8 @@ public class FontFactory extends java.lang.Object {
  * @param	encoding    the encoding of the font
  * @param	size	    the size of this font
  * @param	style	    the style of this font
- * @return the Font constructed based on the parameters
- */
+
+ * @return the Font constructed based on the parameters */
     
     public static Font getFont(String fontname, String encoding, float size, int style) {
         return getFont(fontname, encoding, defaultEmbedding, size, style, null);
@@ -424,8 +425,8 @@ public class FontFactory extends java.lang.Object {
  * @param	fontname    the name of the font
  * @param	encoding    the encoding of the font
  * @param	size	    the size of this font
- * @return the Font constructed based on the parameters
- */
+
+ * @return the Font constructed based on the parameters */
     
     public static Font getFont(String fontname, String encoding, float size) {
         return getFont(fontname, encoding, defaultEmbedding, size, Font.UNDEFINED, null);
@@ -436,8 +437,8 @@ public class FontFactory extends java.lang.Object {
  *
  * @param	fontname    the name of the font
  * @param	encoding    the encoding of the font
- * @return the Font constructed based on the parameters
- */
+
+ * @return the Font constructed based on the parameters */
     
     public static Font getFont(String fontname, String encoding) {
         return getFont(fontname, encoding, defaultEmbedding, Font.UNDEFINED, Font.UNDEFINED, null);
@@ -450,8 +451,8 @@ public class FontFactory extends java.lang.Object {
  * @param	size	    the size of this font
  * @param	style	    the style of this font
  * @param	color	    the <CODE>Color</CODE> of this font.
- * @return the Font constructed based on the parameters
- */
+
+ * @return the Font constructed based on the parameters */
     
     public static Font getFont(String fontname, float size, int style, Color color) {
         return getFont(fontname, defaultEncoding, defaultEmbedding, size, style, color);
@@ -463,8 +464,8 @@ public class FontFactory extends java.lang.Object {
  * @param	fontname    the name of the font
  * @param	size	    the size of this font
  * @param	style	    the style of this font
- * @return the Font constructed based on the parameters
- */
+
+ * @return the Font constructed based on the parameters */
     
     public static Font getFont(String fontname, float size, int style) {
         return getFont(fontname, defaultEncoding, defaultEmbedding, size, style, null);
@@ -475,8 +476,8 @@ public class FontFactory extends java.lang.Object {
  *
  * @param	fontname    the name of the font
  * @param	size	    the size of this font
- * @return the Font constructed based on the parameters
- */
+
+ * @return the Font constructed based on the parameters */
     
     public static Font getFont(String fontname, float size) {
         return getFont(fontname, defaultEncoding, defaultEmbedding, size, Font.UNDEFINED, null);
@@ -486,8 +487,8 @@ public class FontFactory extends java.lang.Object {
  * Constructs a <CODE>Font</CODE>-object.
  *
  * @param	fontname    the name of the font
- * @return the Font constructed based on the parameters
- */
+
+ * @return the Font constructed based on the parameters */
     
     public static Font getFont(String fontname) {
         return getFont(fontname, defaultEncoding, defaultEmbedding, Font.UNDEFINED, Font.UNDEFINED, null);
@@ -595,8 +596,8 @@ public class FontFactory extends java.lang.Object {
 
     /** Register all the fonts in a directory.
      * @param dir the directory
-     * @return the number of fonts registered
-     */    
+    
+     * @return the number of fonts registered */    
     public static int registerDirectory(String dir) {
         int count = 0;
         try {
@@ -628,8 +629,8 @@ public class FontFactory extends java.lang.Object {
 
     /** Register fonts in some probable directories. It usually works in Windows,
      * Linux and Solaris.
-     * @return the number of fonts registered
-     */    
+    
+     * @return the number of fonts registered */    
     public static int registerDirectories() {
         int count = 0;
         count += registerDirectory("c:/windows/fonts");
@@ -645,8 +646,8 @@ public class FontFactory extends java.lang.Object {
 
 /**
  * Gets a set of registered fontnames.
- * @return a set of registered fonts
- */
+
+ * @return a set of registered fonts */
     
     public static Set getRegisteredFonts() {
         return Chunk.getKeySet(trueTypeFonts);
@@ -654,8 +655,8 @@ public class FontFactory extends java.lang.Object {
     
 /**
  * Gets a set of registered fontnames.
- * @return a set of registered font families
- */
+
+ * @return a set of registered font families */
     
     public static Set getRegisteredFamilies() {
         return Chunk.getKeySet(fontFamilies);
@@ -664,8 +665,8 @@ public class FontFactory extends java.lang.Object {
 /**
  * Gets a set of registered fontnames.
  * @param fontname of a font that may or may not be registered
- * @return true if a given font is registered
- */
+
+ * @return true if a given font is registered */
     
     public static boolean contains(String fontname) {
         return trueTypeFonts.containsKey(fontname.toLowerCase());
@@ -675,8 +676,8 @@ public class FontFactory extends java.lang.Object {
  * Checks if a certain font is registered.
  *
  * @param   fontname    the name of the font that has to be checked.
- * @return  true if the font is found
- */
+
+ * @return  true if the font is found */
     
     public static boolean isRegistered(String fontname) {
         return trueTypeFonts.containsKey(fontname.toLowerCase());

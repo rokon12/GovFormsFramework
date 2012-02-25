@@ -56,6 +56,7 @@ import com.lowagie.text.*;
  * The built in fonts "Symbol" and "ZapfDingbats", if used, have a special encoding
  * to allow the characters to be referred by Unicode.
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class FontSelector {
     
@@ -79,8 +80,8 @@ public class FontSelector {
      * Process the text so that it will render with a combination of fonts
      * if needed.
      * @param text the text
-     * @return a <CODE>Phrase</CODE> with one or more chunks
-     */    
+    
+     * @return a <CODE>Phrase</CODE> with one or more chunks */    
     public Phrase process(String text) {
         int fsize = fonts.size();
         if (fsize == 0)

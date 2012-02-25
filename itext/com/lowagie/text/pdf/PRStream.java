@@ -57,6 +57,8 @@ import com.lowagie.text.Document;
 import java.io.OutputStream;
 import java.io.IOException;
 
+/**
+ */
 public class PRStream extends PdfStream {
     
     protected PdfReader reader;
@@ -67,6 +69,11 @@ public class PRStream extends PdfStream {
     protected int objNum = 0;
     protected int objGen = 0;
     
+    /**
+     * Constructor for PRStream.
+     * @param stream PRStream
+     * @param newDic PdfDictionary
+     */
     public PRStream(PRStream stream, PdfDictionary newDic) {
         reader = stream.reader;
         offset = stream.offset;
@@ -82,16 +89,32 @@ public class PRStream extends PdfStream {
             hashMap.putAll(stream.hashMap);
     }
 
+    /**
+     * Constructor for PRStream.
+     * @param stream PRStream
+     * @param newDic PdfDictionary
+     * @param reader PdfReader
+     */
     public PRStream(PRStream stream, PdfDictionary newDic, PdfReader reader) {
         this(stream, newDic);
         this.reader = reader;
     }
 
+    /**
+     * Constructor for PRStream.
+     * @param reader PdfReader
+     * @param offset int
+     */
     public PRStream(PdfReader reader, int offset) {
         this.reader = reader;
         this.offset = offset;
     }
     
+    /**
+     * Constructor for PRStream.
+     * @param reader PdfReader
+     * @param conts byte[]
+     */
     public PRStream(PdfReader reader, byte conts[]) {
         this.reader = reader;
         this.offset = -1;
@@ -137,40 +160,79 @@ public class PRStream extends PdfStream {
         setLength(bytes.length);
     }
 
+    /**
+     * Method setLength.
+     * @param length int
+     */
     public void setLength(int length) {
         this.length = length;
         put(PdfName.LENGTH, new PdfNumber(length));
     }
     
+    /**
+     * Method getOffset.
+     * @return int
+     */
     public int getOffset() {
         return offset;
     }
     
+    /**
+     * Method getLength.
+     * @return int
+     */
     public int getLength() {
         return length;
     }
     
+    /**
+     * Method getReader.
+     * @return PdfReader
+     */
     public PdfReader getReader() {
         return reader;
     }
     
+    /**
+     * Method getBytes.
+     * @return byte[]
+     */
     public byte[] getBytes() {
         return bytes;
     }
     
+    /**
+     * Method setObjNum.
+     * @param objNum int
+     * @param objGen int
+     */
     public void setObjNum(int objNum, int objGen) {
         this.objNum = objNum;
         this.objGen = objGen;
     }
     
+    /**
+     * Method getObjNum.
+     * @return int
+     */
     int getObjNum() {
         return objNum;
     }
     
+    /**
+     * Method getObjGen.
+     * @return int
+     */
     int getObjGen() {
         return objGen;
     }
     
+    /**
+     * Method toPdf.
+     * @param writer PdfWriter
+     * @param os OutputStream
+     * @throws IOException
+     */
     public void toPdf(PdfWriter writer, OutputStream os) throws IOException {
         superToPdf(writer, os);
         os.write(STARTSTREAM);

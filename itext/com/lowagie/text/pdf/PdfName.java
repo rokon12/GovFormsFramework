@@ -65,6 +65,8 @@ package com.lowagie.text.pdf;
  * @see		PdfObject
  * @see		PdfDictionary
  * @see		BadPdfFormatException
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfName extends PdfObject implements Comparable{
@@ -1036,12 +1038,12 @@ public class PdfName extends PdfObject implements Comparable{
      *
      *
      * @param   object the Object to be compared.
-     * @return  a negative integer, zero, or a positive integer as this object
-     *		is less than, equal to, or greater than the specified object.
+    
      *
-     * @throws ClassCastException if the specified object's type prevents it
-     *         from being compared to this Object.
-     */
+    
+     * @return  a negative integer, zero, or a positive integer as this object
+     *		is less than, equal to, or greater than the specified object. * @throws ClassCastException if the specified object's type prevents it
+     *         from being compared to this Object. */
     public int compareTo(Object object) {
         PdfName name = (PdfName) object;
         
@@ -1066,9 +1068,9 @@ public class PdfName extends PdfObject implements Comparable{
      * Indicates whether some other object is "equal to" this one.
      *
      * @param   obj   the reference object with which to compare.
+    
      * @return  <code>true</code> if this object is the same as the obj
-     *          argument; <code>false</code> otherwise.
-     */
+     *          argument; <code>false</code> otherwise. */
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
@@ -1082,8 +1084,8 @@ public class PdfName extends PdfObject implements Comparable{
      * supported for the benefit of hashtables such as those provided by
      * <code>java.util.Hashtable</code>.
      *
-     * @return  a hash code value for this object.
-     */
+    
+     * @return  a hash code value for this object. */
     public int hashCode() {
         int h = hash;
         if (h == 0) {
@@ -1099,8 +1101,8 @@ public class PdfName extends PdfObject implements Comparable{
     
     /** Decodes an escaped name in the form "/AB#20CD" into "AB CD".
      * @param name the name to decode
-     * @return the decoded name
-     */
+    
+     * @return the decoded name */
     public static String decodeName(String name) {
         StringBuffer buf = new StringBuffer();
         try {

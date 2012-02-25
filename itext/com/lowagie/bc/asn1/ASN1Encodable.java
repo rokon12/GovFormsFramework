@@ -5,15 +5,17 @@ import java.io.IOException;
 
 /**
  * Abstract Syntax Notation One (ASN.1) is a formal language for abstractly describing messages to be exchanged between distributed computer systems.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public abstract class ASN1Encodable
     implements DEREncodable
 {
 	/**
 	 * Encodes the ASN1Encodable object.
-	 * @return an encoded bytearray
-	 * @throws IOException
-	 */
+	
+	
+	 * @return an encoded bytearray * @throws IOException */
 	public byte[] getEncoded() 
 		throws IOException
 	{
@@ -59,7 +61,7 @@ public abstract class ASN1Encodable
 
     /**
      * Abstract method that returns the object as an ASN1 object.
-     * @return an encodable object
-     */
+    
+     * @return an encodable object */
     public abstract DERObject toASN1Object();
 }

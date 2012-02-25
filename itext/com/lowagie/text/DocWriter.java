@@ -70,6 +70,8 @@ import com.lowagie.text.pdf.OutputStreamCounter;
  *
  * @see   Document
  * @see   DocListener
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public abstract class DocWriter implements DocListener {
@@ -144,8 +146,9 @@ public abstract class DocWriter implements DocListener {
  * derived from this abstract class.
  * 
  * @param element A high level object to add
- * @return  <CODE>false</CODE>
- * @throws  DocumentException when a document isn't open yet, or has been closed
+
+
+ * @return  <CODE>false</CODE> * @throws  DocumentException when a document isn't open yet, or has been closed * @see com.lowagie.text.ElementListener#add(Element)
  */
 
     public boolean add(Element element) throws DocumentException {
@@ -154,6 +157,7 @@ public abstract class DocWriter implements DocListener {
 
 /**
  * Signals that the <CODE>Document</CODE> was opened.
+ * @see com.lowagie.text.DocListener#open()
  */
 
     public void open() {
@@ -164,7 +168,8 @@ public abstract class DocWriter implements DocListener {
  * Sets the pagesize.
  *
  * @param pageSize  the new pagesize
- * @return  a <CODE>boolean</CODE>
+
+ * @return  a <CODE>boolean</CODE> * @see com.lowagie.text.DocListener#setPageSize(Rectangle)
  */
 
     public boolean setPageSize(Rectangle pageSize) {
@@ -180,7 +185,8 @@ public abstract class DocWriter implements DocListener {
  * a <CODE>Watermark</CODE>.
  * 
  * @param watermark A watermark object
- * @return  <CODE>false</CODE> (because watermarks aren't supported by default).
+
+ * @return  <CODE>false</CODE> (because watermarks aren't supported by default). * @see com.lowagie.text.DocListener#add(Watermark)
  */
 
     public boolean add(Watermark watermark) {
@@ -189,6 +195,7 @@ public abstract class DocWriter implements DocListener {
 
 /**
  * Removes the <CODE>Watermark</CODE> (if there is one).
+ * @see com.lowagie.text.DocListener#removeWatermark()
  */
 
     public void removeWatermark() {
@@ -203,7 +210,8 @@ public abstract class DocWriter implements DocListener {
  * @param marginRight   the margin on the right
  * @param marginTop   the margin on the top
  * @param marginBottom  the margin on the bottom
- * @return  <CODE>false</CODE>
+
+ * @return  <CODE>false</CODE> * @see com.lowagie.text.DocListener#setMargins(float, float, float, float)
  */
 
     public boolean setMargins(float marginLeft, float marginRight, float marginTop, float marginBottom) {
@@ -215,8 +223,9 @@ public abstract class DocWriter implements DocListener {
  * <P>
  * This does nothing. Has to be overridden if needed.
  *
- * @return  <CODE>true</CODE> if the page was added, <CODE>false</CODE> if not.
- * @throws  DocumentException when a document isn't open yet, or has been closed
+
+
+ * @return  <CODE>true</CODE> if the page was added, <CODE>false</CODE> if not. * @throws  DocumentException when a document isn't open yet, or has been closed * @see com.lowagie.text.DocListener#newPage()
  */
 
     public boolean newPage() throws DocumentException {
@@ -234,6 +243,7 @@ public abstract class DocWriter implements DocListener {
  * headers.
  *
  * @param header    the new header
+ * @see com.lowagie.text.DocListener#setHeader(HeaderFooter)
  */
 
     public void setHeader(HeaderFooter header) {
@@ -245,6 +255,7 @@ public abstract class DocWriter implements DocListener {
  * This method should be overriden in the specific <CODE>DocWriter<CODE> classes
  * derived from this abstract class if they actually support the use of
  * headers.
+ * @see com.lowagie.text.DocListener#resetHeader()
  */
 
     public void resetHeader() {
@@ -258,6 +269,7 @@ public abstract class DocWriter implements DocListener {
  * footers.
  *
  * @param footer    the new footer
+ * @see com.lowagie.text.DocListener#setFooter(HeaderFooter)
  */
 
     public void setFooter(HeaderFooter footer) {
@@ -269,6 +281,7 @@ public abstract class DocWriter implements DocListener {
  * This method should be overriden in the specific <CODE>DocWriter<CODE> classes
  * derived from this abstract class if they actually support the use of
  * footers.
+ * @see com.lowagie.text.DocListener#resetFooter()
  */
 
     public void resetFooter() {
@@ -280,6 +293,7 @@ public abstract class DocWriter implements DocListener {
  * This method should be overriden in the specific <CODE>DocWriter<CODE> classes
  * derived from this abstract class if they actually support the use of
  * pagenumbers.
+ * @see com.lowagie.text.DocListener#resetPageCount()
  */
 
     public void resetPageCount() {
@@ -293,6 +307,7 @@ public abstract class DocWriter implements DocListener {
  * pagenumbers.
  *
  * @param pageN   the new page number
+ * @see com.lowagie.text.DocListener#setPageCount(int)
  */
 
     public void setPageCount(int pageN) {
@@ -301,6 +316,7 @@ public abstract class DocWriter implements DocListener {
 /**
  * Signals that the <CODE>Document</CODE> was closed and that no other
  * <CODE>Elements</CODE> will be added.
+ * @see com.lowagie.text.DocListener#close()
  */
 
     public void close() {
@@ -320,8 +336,8 @@ public abstract class DocWriter implements DocListener {
 /** Converts a <CODE>String</CODE> into a <CODE>Byte</CODE> array
  * according to the ISO-8859-1 codepage.
  * @param text the text to be converted
- * @return the conversion result
- */
+
+ * @return the conversion result */
 
     public static final byte[] getISOBytes(String text)
     {
@@ -367,8 +383,8 @@ public abstract class DocWriter implements DocListener {
  * Writes a <CODE>String</CODE> to the <CODE>OutputStream</CODE>.
  *
  * @param string    the <CODE>String</CODE> to write
- * @throws IOException
- */
+
+ * @throws IOException */
 
     protected void write(String string) throws IOException {
         os.write(getISOBytes(string));
@@ -378,8 +394,8 @@ public abstract class DocWriter implements DocListener {
  * Writes a number of tabs.
  *
  * @param   indent  the number of tabs to add
- * @throws IOException
- */
+
+ * @throws IOException */
 
     protected void addTabs(int indent) throws IOException {
         os.write(NEWLINE);
@@ -393,8 +409,8 @@ public abstract class DocWriter implements DocListener {
  *
  * @param   key     the name of an attribute
  * @param   value   the value of an attribute
- * @throws IOException
- */
+
+ * @throws IOException */
 
     protected void write(String key, String value)
     throws IOException {
@@ -410,8 +426,8 @@ public abstract class DocWriter implements DocListener {
  * Writes a starttag to the outputstream.
  *
  * @param   tag     the name of the tag
- * @throws IOException
- */
+
+ * @throws IOException */
 
     protected void writeStart(String tag)
     throws IOException {
@@ -423,8 +439,8 @@ public abstract class DocWriter implements DocListener {
  * Writes an endtag to the outputstream.
  *
  * @param   tag     the name of the tag
- * @throws IOException
- */
+
+ * @throws IOException */
 
     protected void writeEnd(String tag)
     throws IOException {
@@ -436,8 +452,8 @@ public abstract class DocWriter implements DocListener {
 
 /**
  * Writes an endtag to the outputstream.
- * @throws IOException
- */
+
+ * @throws IOException */
 
     protected void writeEnd()
     throws IOException {
@@ -450,9 +466,9 @@ public abstract class DocWriter implements DocListener {
  * Writes the markup attributes of the specified <CODE>MarkupAttributes</CODE>
  * object to the <CODE>OutputStream</CODE>.
  * @param mAtt   the <CODE>MarkupAttributes</CODE> to write.
- * @return true, if writing the markup attributes succeeded
- * @throws IOException
- */
+
+
+ * @return true, if writing the markup attributes succeeded * @throws IOException */
     protected boolean writeMarkupAttributes(MarkupAttributes mAtt)
      throws IOException
     {
@@ -470,17 +486,17 @@ public abstract class DocWriter implements DocListener {
  * Returns <CODE>true</CODE> if the specified <CODE>Element</CODE> implements
  * <CODE>MarkupAttributes</CODE> and has one or more attributes to write.
  * @param element   the <CODE>Element</CODE> to check.
- * @return <CODE>boolean</CODE>.
- */
+
+ * @return <CODE>boolean</CODE>. */
     protected static boolean hasMarkupAttributes(Element element) {
       return (element instanceof MarkupAttributes &&
        !(((MarkupAttributes)element).getMarkupAttributeNames().isEmpty()));
     }
 
     /** Checks if the stream is to be closed on document close
-     * @return true if the stream is closed on documnt close
+    
      *
-     */
+     * @return true if the stream is closed on documnt close */
     public boolean isCloseStream() {
         return closeStream;
     }

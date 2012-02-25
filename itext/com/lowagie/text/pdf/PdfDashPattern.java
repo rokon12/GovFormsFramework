@@ -58,6 +58,8 @@ import java.io.OutputStream;
  * the PDF Reference Manual version 1.3 p 325 (section 8.4.3).
  *
  * @see		PdfArray
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfDashPattern extends PdfArray {
@@ -85,6 +87,7 @@ public class PdfDashPattern extends PdfArray {
     
 /**
  * Constructs a new <CODE>PdfDashPattern</CODE>.
+ * @param dash float
  */
     
     public PdfDashPattern(float dash) {
@@ -94,6 +97,8 @@ public class PdfDashPattern extends PdfArray {
     
 /**
  * Constructs a new <CODE>PdfDashPattern</CODE>.
+ * @param dash float
+ * @param gap float
  */
     
     public PdfDashPattern(float dash, float gap) {
@@ -105,6 +110,9 @@ public class PdfDashPattern extends PdfArray {
     
 /**
  * Constructs a new <CODE>PdfDashPattern</CODE>.
+ * @param dash float
+ * @param gap float
+ * @param phase float
  */
     
     public PdfDashPattern(float dash, float gap, float phase) {
@@ -115,6 +123,10 @@ public class PdfDashPattern extends PdfArray {
         this.phase = phase;
     }
     
+    /**
+     * Method add.
+     * @param n float
+     */
     public void add(float n) {
         add(new PdfNumber(n));
     }
@@ -122,7 +134,10 @@ public class PdfDashPattern extends PdfArray {
 /**
  * Returns the PDF representation of this <CODE>PdfArray</CODE>.
  *
- * @return		an array of <CODE>byte</CODE>s
+
+ * @param writer PdfWriter
+ * @param os OutputStream
+ * @throws IOException
  */
     
     public void toPdf(PdfWriter writer, OutputStream os) throws IOException {

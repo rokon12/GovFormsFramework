@@ -51,6 +51,8 @@ import java.awt.Font;
 import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.DefaultFontMapper;
 
+/**
+ */
 public class AsianFontMapper extends DefaultFontMapper {
 	
 	public static String ChineseSimplifiedFont = "STSong-Light";
@@ -77,6 +79,11 @@ public class AsianFontMapper extends DefaultFontMapper {
 	private String defaultFont;
 	private String encoding;
 
+	/**
+	 * Constructor for AsianFontMapper.
+	 * @param font String
+	 * @param encoding String
+	 */
 	public AsianFontMapper(String font, String encoding) {
 		super();
 		
@@ -84,6 +91,12 @@ public class AsianFontMapper extends DefaultFontMapper {
 		this.encoding = encoding;
 	}
 
+	/**
+	 * Method awtToPdf.
+	 * @param font Font
+	 * @return BaseFont
+	 * @see com.lowagie.text.pdf.FontMapper#awtToPdf(Font)
+	 */
 	public BaseFont awtToPdf(Font font) {
 		try {
 			BaseFontParameters p = getBaseFontParameters(font.getFontName());

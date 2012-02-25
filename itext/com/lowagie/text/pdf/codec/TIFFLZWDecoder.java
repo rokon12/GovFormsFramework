@@ -36,6 +36,8 @@ package com.lowagie.text.pdf.codec;
  * A class for performing LZW decoding.
  *
  *
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class TIFFLZWDecoder {
     
@@ -56,6 +58,12 @@ public class TIFFLZWDecoder {
         4095
     };
     
+    /**
+     * Constructor for TIFFLZWDecoder.
+     * @param w int
+     * @param predictor int
+     * @param samplesPerPixel int
+     */
     public TIFFLZWDecoder(int w, int predictor, int samplesPerPixel) {
         this.w = w;
         this.predictor = predictor;
@@ -68,6 +76,7 @@ public class TIFFLZWDecoder {
      * @param data            The compressed data.
      * @param uncompData      Array to return the uncompressed data in.
      * @param h               The number of rows the compressed data contains.
+     * @return byte[]
      */
     public byte[] decode(byte data[], byte uncompData[], int h) {
         
@@ -169,6 +178,7 @@ public class TIFFLZWDecoder {
     
     /**
      * Write out the string just uncompressed.
+     * @param string byte[]
      */
     public void writeString(byte string[]) {
         
@@ -179,6 +189,8 @@ public class TIFFLZWDecoder {
     
     /**
      * Add a new string to the string table.
+     * @param oldString byte[]
+     * @param newString byte
      */
     public void addStringToTable(byte oldString[], byte newString) {
         int length = oldString.length;
@@ -200,6 +212,7 @@ public class TIFFLZWDecoder {
     
     /**
      * Add a new string to the string table.
+     * @param string byte[]
      */
     public void addStringToTable(byte string[]) {
         
@@ -217,6 +230,9 @@ public class TIFFLZWDecoder {
     
     /**
      * Append <code>newString</code> to the end of <code>oldString</code>.
+     * @param oldString byte[]
+     * @param newString byte
+     * @return byte[]
      */
     public byte[] composeString(byte oldString[], byte newString) {
         int length = oldString.length;
@@ -228,6 +244,10 @@ public class TIFFLZWDecoder {
     }
     
     // Returns the next 9, 10, 11 or 12 bits
+    /**
+     * Method getNextCode.
+     * @return int
+     */
     public int getNextCode() {
         // Attempt to get the next code. The exception is caught to make
         // this robust to cases wherein the EndOfInformation code has been

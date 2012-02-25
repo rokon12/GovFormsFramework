@@ -7,6 +7,8 @@ import java.util.Enumeration;
  * BER TaggedObject - in ASN.1 nottation this is any object proceeded by
  * a [n] where n is some number - these are assume to follow the construction
  * rules (as with sequences).
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class BERTaggedObject
     extends DERTaggedObject
@@ -38,6 +40,7 @@ public class BERTaggedObject
     /**
      * create an implicitly tagged object that contains a zero
      * length sequence.
+     * @param tagNo int
      */
     public BERTaggedObject(
         int             tagNo)
@@ -45,6 +48,11 @@ public class BERTaggedObject
         super(false, tagNo, new BERConstructedSequence());
     }
 
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
+     */
     void encode(
         DEROutputStream  out)
         throws IOException

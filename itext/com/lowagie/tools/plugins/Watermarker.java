@@ -27,6 +27,8 @@ import com.lowagie.tools.arguments.*;
 
 /**
  * This tool lets you add a text watermark to all pages of a document.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class Watermarker extends AbstractTool {
 	
@@ -123,9 +125,9 @@ public class Watermarker extends AbstractTool {
 	 * Gets the PDF file that should be generated (or null if the output isn't a
 	 * PDF file).
 	 * 
-	 * @return the PDF file that should be generated
-	 * @throws InstantiationException
-	 */
+	
+	
+	 * @return the PDF file that should be generated * @throws InstantiationException */
 	protected File getDestPathPDF() throws InstantiationException {
 		return (File) getValue("destfile");
 	}

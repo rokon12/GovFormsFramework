@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Vector;
 
+/**
+ */
 public abstract class ASN1Sequence
     extends DERObject
 {
@@ -13,8 +15,9 @@ public abstract class ASN1Sequence
      * return an ASN1Sequence from the given object.
      *
      * @param obj the object we want converted.
-     * @exception IllegalArgumentException if the object cannot be converted.
-     */
+    
+     * @return ASN1Sequence
+     * @exception IllegalArgumentException if the object cannot be converted. */
     public static ASN1Sequence getInstance(
         Object  obj)
     {
@@ -39,9 +42,10 @@ public abstract class ASN1Sequence
      * @param obj the tagged object.
      * @param explicit true if the object is meant to be explicitly tagged,
      *          false otherwise.
+    
+     * @return ASN1Sequence
      * @exception IllegalArgumentException if the tagged object cannot
-     *          be converted.
-     */
+     *          be converted. */
     public static ASN1Sequence getInstance(
         ASN1TaggedObject    obj,
         boolean             explicit)
@@ -86,6 +90,10 @@ public abstract class ASN1Sequence
                 "unknown object in getInstanceFromTagged");
     }
 
+    /**
+     * Method getObjects.
+     * @return Enumeration
+     */
     public Enumeration getObjects()
     {
         return seq.elements();
@@ -95,8 +103,8 @@ public abstract class ASN1Sequence
      * return the object at the sequence postion indicated by index.
      *
      * @param index the sequence number (starting at zero) of the object
-     * @return the object at the sequence postion indicated by index.
-     */
+    
+     * @return the object at the sequence postion indicated by index. */
     public DEREncodable getObjectAt(
         int index)
     {
@@ -106,13 +114,17 @@ public abstract class ASN1Sequence
     /**
      * return the number of objects in this sequence.
      *
-     * @return the number of objects in this sequence.
-     */
+    
+     * @return the number of objects in this sequence. */
     public int size()
     {
         return seq.size();
     }
 
+    /**
+     * Method hashCode.
+     * @return int
+     */
     public int hashCode()
     {
         Enumeration             e = this.getObjects();
@@ -131,6 +143,11 @@ public abstract class ASN1Sequence
         return hashCode;
     }
 
+    /**
+     * Method equals.
+     * @param o Object
+     * @return boolean
+     */
     public boolean equals(
         Object  o)
     {
@@ -174,12 +191,21 @@ public abstract class ASN1Sequence
         return true;
     }
 
+    /**
+     * Method addObject.
+     * @param obj DEREncodable
+     */
     protected void addObject(
         DEREncodable obj)
     {
         seq.addElement(obj);
     }
 
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
+     */
     abstract void encode(DEROutputStream out)
         throws IOException;
 }

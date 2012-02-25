@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Enumeration;
 
+/**
+ */
 public class DERSequence
     extends ASN1Sequence
 {
@@ -16,6 +18,7 @@ public class DERSequence
 
     /**
      * create a sequence containing one object
+     * @param obj DEREncodable
      */
     public DERSequence(
         DEREncodable    obj)
@@ -25,6 +28,7 @@ public class DERSequence
 
     /**
      * create a sequence containing a vector of objects.
+     * @param v DEREncodableVector
      */
     public DERSequence(
         DEREncodableVector   v)
@@ -42,6 +46,11 @@ public class DERSequence
      * be used for structured types, this varies slightly from the
      * ASN.1 descriptions given. Rather than just outputing SEQUENCE,
      * we also have to specify CONSTRUCTED, and the objects length.
+     */
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
      */
     void encode(
         DEROutputStream out)

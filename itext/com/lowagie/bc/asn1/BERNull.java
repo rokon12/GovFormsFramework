@@ -4,6 +4,8 @@ import java.io.IOException;
 
 /**
  * A BER NULL object.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class BERNull
     extends DERNull
@@ -12,6 +14,11 @@ public class BERNull
     {
     }
 
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
+     */
     void encode(
         DEROutputStream  out)
         throws IOException

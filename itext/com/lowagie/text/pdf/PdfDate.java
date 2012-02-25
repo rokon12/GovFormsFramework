@@ -69,6 +69,8 @@ import java.util.SimpleTimeZone;
  *
  * @see		PdfString
  * @see		java.util.GregorianCalendar
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfDate extends PdfString {
@@ -126,8 +128,8 @@ public class PdfDate extends PdfString {
  *
  * @param		i   		a given number
  * @param		length		the length of the resulting <CODE>String</CODE>
- * @return		the resulting <CODE>String</CODE>
- */
+
+ * @return		the resulting <CODE>String</CODE> */
     
     private String setLength(int i, int length) { // 1.3-1.4 problem fixed by Finn Bock
         StringBuffer tmp = new StringBuffer();
@@ -141,8 +143,8 @@ public class PdfDate extends PdfString {
     
     /**
      * Gives the W3C format of the PdfDate.
-     * @return a formatted date
-     */
+    
+     * @return a formatted date */
     public String getW3CDate() {
         return getW3CDate(value);
     }
@@ -150,8 +152,8 @@ public class PdfDate extends PdfString {
     /**
      * Gives the W3C format of the PdfDate.
      * @param d
-     * @return a formatted date
-     */
+    
+     * @return a formatted date */
     public static String getW3CDate(String d) {
     	SimpleDateFormat w3c = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
     	Calendar c = decode(d);
@@ -161,9 +163,9 @@ public class PdfDate extends PdfString {
     /**
      * Converts a PDF string representing a date into a Calendar.
      * @param s the PDF string representing a date
+    
      * @return a <CODE>Calendar</CODE> representing the date or <CODE>null</CODE> if the string
-     * was not a date
-     */    
+     * was not a date */    
     public static Calendar decode(String s) {
         try {
             if (s.startsWith("D:"))

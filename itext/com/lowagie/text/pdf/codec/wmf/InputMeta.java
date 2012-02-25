@@ -54,15 +54,26 @@ import java.io.*;
 import java.awt.Color;
 import com.lowagie.text.Image;
 
+/**
+ */
 public class InputMeta {
     
     InputStream in;
     int length;
     
+    /**
+     * Constructor for InputMeta.
+     * @param in InputStream
+     */
     public InputMeta(InputStream in) {
         this.in = in;
     }
 
+    /**
+     * Method readWord.
+     * @return int
+     * @throws IOException
+     */
     public int readWord() throws IOException{
         length += 2;
         int k1 = in.read();
@@ -71,6 +82,11 @@ public class InputMeta {
         return (k1 + (in.read() << 8)) & 0xffff;
     }
 
+    /**
+     * Method readShort.
+     * @return int
+     * @throws IOException
+     */
     public int readShort() throws IOException{
         int k = readWord();
         if (k > 0x7fff)
@@ -78,6 +94,11 @@ public class InputMeta {
         return k;
     }
 
+    /**
+     * Method readInt.
+     * @return int
+     * @throws IOException
+     */
     public int readInt() throws IOException{
         length += 4;
         int k1 = in.read();
@@ -88,20 +109,39 @@ public class InputMeta {
         return k1 + k2 + k3 + (in.read() << 24);
     }
     
+    /**
+     * Method readByte.
+     * @return int
+     * @throws IOException
+     */
     public int readByte() throws IOException{
         ++length;
         return in.read() & 0xff;
     }
     
+    /**
+     * Method skip.
+     * @param len int
+     * @throws IOException
+     */
     public void skip(int len) throws IOException{
         length += len;
         Image.skip(in, len);
     }
     
+    /**
+     * Method getLength.
+     * @return int
+     */
     public int getLength() {
         return length;
     }
     
+    /**
+     * Method readColor.
+     * @return Color
+     * @throws IOException
+     */
     public Color readColor() throws IOException{
         int red = readByte();
         int green = readByte();

@@ -60,6 +60,7 @@ import com.lowagie.text.Paragraph;
  *<p>
  * Note: do not use Document.add() inside a page event.
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 
 public class PdfPageEventHelper implements PdfPageEvent {
@@ -69,6 +70,7 @@ public class PdfPageEventHelper implements PdfPageEvent {
  *
  * @param writer the <CODE>PdfWriter</CODE> for this document
  * @param document the document
+ * @see com.lowagie.text.pdf.PdfPageEvent#onOpenDocument(PdfWriter, Document)
  */
     public void onOpenDocument(PdfWriter writer,Document document) {
     }
@@ -82,6 +84,7 @@ public class PdfPageEventHelper implements PdfPageEvent {
  *
  * @param writer the <CODE>PdfWriter</CODE> for this document
  * @param document the document
+ * @see com.lowagie.text.pdf.PdfPageEvent#onStartPage(PdfWriter, Document)
  */
     public void onStartPage(PdfWriter writer,Document document) {
     }
@@ -91,6 +94,7 @@ public class PdfPageEventHelper implements PdfPageEvent {
  *
  * @param writer the <CODE>PdfWriter</CODE> for this document
  * @param document the document
+ * @see com.lowagie.text.pdf.PdfPageEvent#onEndPage(PdfWriter, Document)
  */
     public void onEndPage(PdfWriter writer,Document document) {
     }
@@ -103,6 +107,7 @@ public class PdfPageEventHelper implements PdfPageEvent {
  *
  * @param writer the <CODE>PdfWriter</CODE> for this document
  * @param document the document
+ * @see com.lowagie.text.pdf.PdfPageEvent#onCloseDocument(PdfWriter, Document)
  */
     public void onCloseDocument(PdfWriter writer,Document document) {
     }
@@ -117,6 +122,7 @@ public class PdfPageEventHelper implements PdfPageEvent {
  * @param writer the <CODE>PdfWriter</CODE> for this document
  * @param document the document
  * @param paragraphPosition the position the paragraph will be written to
+ * @see com.lowagie.text.pdf.PdfPageEvent#onParagraph(PdfWriter, Document, float)
  */
     public void onParagraph(PdfWriter writer,Document document,float paragraphPosition) {
     }
@@ -129,6 +135,7 @@ public class PdfPageEventHelper implements PdfPageEvent {
  * @param writer the <CODE>PdfWriter</CODE> for this document
  * @param document the document
  * @param paragraphPosition the position of the end of the paragraph
+ * @see com.lowagie.text.pdf.PdfPageEvent#onParagraphEnd(PdfWriter, Document, float)
  */
     public void onParagraphEnd(PdfWriter writer,Document document,float paragraphPosition) {
     }
@@ -143,6 +150,7 @@ public class PdfPageEventHelper implements PdfPageEvent {
  * @param document          the document
  * @param paragraphPosition the position the chapter will be written to
  * @param title             the title of the Chapter
+ * @see com.lowagie.text.pdf.PdfPageEvent#onChapter(PdfWriter, Document, float, Paragraph)
  */
     public void onChapter(PdfWriter writer,Document document,float paragraphPosition,Paragraph title) {
     }
@@ -155,6 +163,7 @@ public class PdfPageEventHelper implements PdfPageEvent {
  * @param writer the <CODE>PdfWriter</CODE> for this document
  * @param document the document
  * @param position the position of the end of the chapter.
+ * @see com.lowagie.text.pdf.PdfPageEvent#onChapterEnd(PdfWriter, Document, float)
  */
     public void onChapterEnd(PdfWriter writer,Document document,float position) {
     }
@@ -170,6 +179,7 @@ public class PdfPageEventHelper implements PdfPageEvent {
  * @param paragraphPosition the position the section will be written to
  * @param depth				the number depth of the Section
  * @param title             the title of the section
+ * @see com.lowagie.text.pdf.PdfPageEvent#onSection(PdfWriter, Document, float, int, Paragraph)
  */
     public void onSection(PdfWriter writer,Document document,float paragraphPosition,int depth,Paragraph title) {
     }
@@ -182,6 +192,7 @@ public class PdfPageEventHelper implements PdfPageEvent {
  * @param writer the <CODE>PdfWriter</CODE> for this document
  * @param document the document
  * @param position the position of the end of the section
+ * @see com.lowagie.text.pdf.PdfPageEvent#onSectionEnd(PdfWriter, Document, float)
  */
     public void onSectionEnd(PdfWriter writer,Document document,float position) {
     }
@@ -196,6 +207,7 @@ public class PdfPageEventHelper implements PdfPageEvent {
  * @param document the document
  * @param rect the <CODE>Rectangle</CODE> containing the <CODE>Chunk</CODE>
  * @param text the text of the tag
+ * @see com.lowagie.text.pdf.PdfPageEvent#onGenericTag(PdfWriter, Document, Rectangle, String)
  */
     public void onGenericTag(PdfWriter writer,Document document,Rectangle rect,String text) {
     }

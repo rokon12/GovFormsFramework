@@ -49,6 +49,8 @@ package com.lowagie.text.html.simpleparser;
 
 import java.util.HashMap;
 
+/**
+ */
 public class StyleSheet {
     
     public HashMap classMap = new HashMap();
@@ -58,6 +60,11 @@ public class StyleSheet {
     public StyleSheet() {
     }
     
+    /**
+     * Method applyStyle.
+     * @param tag String
+     * @param props HashMap
+     */
     public void applyStyle(String tag, HashMap props) {
         HashMap map = (HashMap)tagMap.get(tag.toLowerCase());
         if (map != null) {
@@ -77,14 +84,30 @@ public class StyleSheet {
         props.putAll(temp);
     }
     
+    /**
+     * Method applyMap.
+     * @param map HashMap
+     * @param props HashMap
+     */
     private void applyMap(HashMap map, HashMap props) {
         
     }
     
+    /**
+     * Method loadStyle.
+     * @param style String
+     * @param props HashMap
+     */
     public void loadStyle(String style, HashMap props) {
         classMap.put(style.toLowerCase(), props);
     }
 
+    /**
+     * Method loadStyle.
+     * @param style String
+     * @param key String
+     * @param value String
+     */
     public void loadStyle(String style, String key, String value) {
         style = style.toLowerCase();
         HashMap props = (HashMap)classMap.get(style);
@@ -95,10 +118,21 @@ public class StyleSheet {
         props.put(key, value);
     }
     
+    /**
+     * Method loadTagStyle.
+     * @param tag String
+     * @param props HashMap
+     */
     public void loadTagStyle(String tag, HashMap props) {
         tagMap.put(tag.toLowerCase(), props);
     }
 
+    /**
+     * Method loadTagStyle.
+     * @param tag String
+     * @param key String
+     * @param value String
+     */
     public void loadTagStyle(String tag, String key, String value) {
         tag = tag.toLowerCase();
         HashMap props = (HashMap)tagMap.get(tag);

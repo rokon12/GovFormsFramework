@@ -60,11 +60,15 @@ import com.lowagie.tools.plugins.AbstractTool;
 
 /**
  * Argument that can be one of several options.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class OptionArgument extends ToolArgument {
 
 	/**
 	 * An Entry that can be chosen as option.
+	 * @author Bazlur Rahman Rokon
+	 * @version $Revision: 1.0 $
 	 */
 	public class Entry {
 		/** Describes the option. */
@@ -90,21 +94,21 @@ public class OptionArgument extends ToolArgument {
 		}
 		/**
 		 * String representation of the Entry.
-		 * @return a description of the entry
-		 */
+		
+		 * @return a description of the entry */
 		public String toString() {
 			return description.toString();
 		}
 		/**
 		 * Gets the value of the String.
-		 * @return the toString of the value
-		 */
+		
+		 * @return the toString of the value */
 		public String getValueToString() {
 			return value.toString();
 		}
 		/**
-		 * @return Returns the description.
-		 */
+		
+		 * @return Returns the description. */
 		public Object getDescription() {
 			return description;
 		}
@@ -115,8 +119,8 @@ public class OptionArgument extends ToolArgument {
 			this.description = description;
 		}
 		/**
-		 * @return Returns the value.
-		 */
+		
+		 * @return Returns the value. */
 		public Object getValue() {
 			return value;
 		}
@@ -151,9 +155,9 @@ public class OptionArgument extends ToolArgument {
 	
 	/**
 	 * Gets the argument as an object.
-	 * @return an object
-	 * @throws InstantiationException
-	 */
+	
+	
+	 * @return an object * @throws InstantiationException */
 	public Object getArgument() throws InstantiationException {
 		if (value == null) return null;
 		try {

@@ -50,13 +50,25 @@ package com.lowagie.text.pdf;
  * at www.pango.org.
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class ArabicLigaturizer {
     
+    /**
+     * Method isVowel.
+     * @param s char
+     * @return boolean
+     */
     static boolean isVowel(char s) {
         return ((s >= 0x064B) && (s <= 0x0655)) || (s == 0x0670);
     }
 
+    /**
+     * Method charshape.
+     * @param s char
+     * @param which int
+     * @return char
+     */
     static char charshape(char s, int which)
     /* which 0=isolated 1=final 2=initial 3=medial */
     {
@@ -82,6 +94,11 @@ public class ArabicLigaturizer {
         return s;
     }
 
+    /**
+     * Method shapecount.
+     * @param s char
+     * @return int
+     */
     static int shapecount(char s) {
         int l, r, m;
         if ((s >= 0x0621) && (s <= 0x06D3) && !isVowel(s)) {
@@ -106,6 +123,12 @@ public class ArabicLigaturizer {
         return 1;
     }
     
+    /**
+     * Method ligature.
+     * @param newchar char
+     * @param oldchar charstruct
+     * @return int
+     */
     static int ligature(char newchar, charstruct oldchar) {
     /* 0 == no ligature possible; 1 == vowel; 2 == two chars; 3 == Lam+Alef */
         int retval = 0;
@@ -221,6 +244,12 @@ public class ArabicLigaturizer {
         return retval;
     }
     
+    /**
+     * Method copycstostring.
+     * @param string StringBuffer
+     * @param s charstruct
+     * @param level int
+     */
     static void copycstostring(StringBuffer string, charstruct s, int level) {
     /* s is a shaped charstruct; i is the index into the string */
         if (s.basechar == 0)
@@ -255,6 +284,11 @@ public class ArabicLigaturizer {
     }
 
     // return len
+    /**
+     * Method doublelig.
+     * @param string StringBuffer
+     * @param level int
+     */
     static void doublelig(StringBuffer string, int level)
     /* Ok. We have presentation ligatures in our font. */
     {
@@ -425,10 +459,21 @@ public class ArabicLigaturizer {
         string.setLength(len);
     }
 
+    /**
+     * Method connects_to_left.
+     * @param a charstruct
+     * @return boolean
+     */
     static boolean connects_to_left(charstruct a) {
         return a.numshapes > 2;
     }
     
+    /**
+     * Method shape.
+     * @param text char[]
+     * @param string StringBuffer
+     * @param level int
+     */
     static void shape(char text[], StringBuffer string, int level) {
   /* string is assumed to be empty and big enough.
    * text is the original text.
@@ -499,6 +544,17 @@ public class ArabicLigaturizer {
         copycstostring(string, curchar, level);
     }
 
+    /**
+     * Method arabic_shape.
+     * @param src char[]
+     * @param srcoffset int
+     * @param srclength int
+     * @param dest char[]
+     * @param destoffset int
+     * @param destlength int
+     * @param level int
+     * @return int
+     */
     static int arabic_shape(char src[], int srcoffset, int srclength, char dest[], int destoffset, int destlength, int level) {
         char str[] = new char[srclength];
         for (int k = srclength + srcoffset - 1; k >= srcoffset; --k)
@@ -512,6 +568,13 @@ public class ArabicLigaturizer {
         return string.length();
     }
 
+    /**
+     * Method processNumbers.
+     * @param text char[]
+     * @param offset int
+     * @param length int
+     * @param options int
+     */
     static void processNumbers(char text[], int offset, int length, int options) {
         int limit = offset + length;
         if ((options & DIGITS_MASK) != 0) {
@@ -567,6 +630,14 @@ public class ArabicLigaturizer {
         }
     }
     
+    /**
+     * Method shapeToArabicDigitsWithContext.
+     * @param dest char[]
+     * @param start int
+     * @param length int
+     * @param digitBase char
+     * @param lastStrongWasAL boolean
+     */
     static void shapeToArabicDigitsWithContext(char[] dest, int start, int length, char digitBase,  boolean lastStrongWasAL) {
         digitBase -= '0'; // move common adjustment out of loop
  
@@ -760,6 +831,8 @@ public class ArabicLigaturizer {
          */
         public static final int DIGIT_TYPE_MASK = 0x0100; // 0x3f00?
 
+        /**
+         */
         static class charstruct {
             char basechar;
             char mark1;               /* has to be initialized to zero */

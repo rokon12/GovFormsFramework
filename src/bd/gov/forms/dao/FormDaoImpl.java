@@ -28,6 +28,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Criteria;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +40,14 @@ import org.springframework.jdbc.core.support.AbstractLobCreatingPreparedStatemen
 import org.springframework.jdbc.support.lob.DefaultLobHandler;
 import org.springframework.jdbc.support.lob.LobCreator;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author asif
+ * @version $Revision: 1.0 $
  */
 @Repository("formDao")
+@Transactional 
 @SuppressWarnings("unchecked")
 public class FormDaoImpl implements FormDao {
 
@@ -49,12 +55,19 @@ public class FormDaoImpl implements FormDao {
 			.getLogger(FormDaoImpl.class);
 
 	private static final int FORM_ENTRY_RESULTS_PER_PAGE = 5;
-
+	
+	@Autowired
+	private SessionFactory sessionFactory;
 	@Autowired
 	DefaultLobHandler lobHandler;
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	/**
+	 * Method saveForm.
+	 * @param form Form
+	 * @see bd.gov.forms.dao.FormDao#saveForm(Form)
+	 */
 	public void saveForm(final Form form) {
 		String sql = "INSERT INTO form";
 		sql += " (form_id, title, subtitle, detail, status, ministry";
@@ -96,7 +109,7 @@ public class FormDaoImpl implements FormDao {
 						ps.setString(i++, form.getDetail());
 						ps.setInt(i++, form.getStatus());
 						ps.setInt(i++, form.getMinistry());
-						
+
 						if (formHasTemplate(form)) {
 							lobCreator.setBlobAsBinaryStream(
 									ps,
@@ -117,40 +130,71 @@ public class FormDaoImpl implements FormDao {
 				});
 	}
 
+	/**
+	 * Method formHasTemplate.
+	 * @param form Form
+	 * @return boolean
+	 */
 	private boolean formHasTemplate(Form form) {
 		return form.getPdfTemplate() != null
 				&& form.getPdfTemplate().length > 0;
 	}
 
+	/**
+	 * Method formHasLogo.
+	 * @param form Form
+	 * @return boolean
+	 */
 	private boolean formHasLogo(Form form) {
 		return form.getLogo() != null && form.getLogo().length > 0;
 	}
 
+	/**
+	 * Method getForm.
+	 * @param formId String
+	 * @return Form
+	 * @see bd.gov.forms.dao.FormDao#getForm(String)
+	 */
 	@Override
 	public Form getForm(String formId) {
-		return (Form) jdbcTemplate.queryForObject(
-				"SELECT * FROM form WHERE form_id = ?",
-				new Object[] { formId }, new RowMapper() {
 
-					public Object mapRow(ResultSet resultSet, int rowNum)
-							throws SQLException {
-						Form form = new Form();
+		// return (Form) jdbcTemplate.queryForObject(
+		// "SELECT * FROM form WHERE form_id = ?",
+		// new Object[] { formId }, new RowMapper() {
+		//
+		// public Object mapRow(ResultSet resultSet, int rowNum)
+		// throws SQLException {
+		// Form form = new Form();
+		//
+		// form.setId(resultSet.getInt("id"));
+		// form.setFormId(resultSet.getString("form_id"));
+		// form.setTitle(resultSet.getString("title"));
+		// form.setSubTitle(resultSet.getString("subtitle"));
+		// form.setDetail(resultSet.getString("detail"));
+		// form.setTableName(resultSet.getString("table_name"));
+		// form.setStatus(resultSet.getInt("status"));
+		// form.setTemplateFileName(resultSet
+		// .getString("template_file_name"));
+		// form.setLogoName(resultSet.getString("logo_name"));
+		// return form;
+		// }
+		// });
 
-						form.setId(resultSet.getInt("id"));
-						form.setFormId(resultSet.getString("form_id"));
-						form.setTitle(resultSet.getString("title"));
-						form.setSubTitle(resultSet.getString("subtitle"));
-						form.setDetail(resultSet.getString("detail"));
-						form.setTableName(resultSet.getString("table_name"));
-						form.setStatus(resultSet.getInt("status"));
-						form.setTemplateFileName(resultSet
-								.getString("template_file_name"));
-						form.setLogoName(resultSet.getString("logo_name"));
-						return form;
-					}
-				});
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				Form.class);
+		criteria.add(Restrictions.eq("form_id", formId));
+		List<Form> list = criteria.list();
+		if (list != null && list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
 	}
 
+	/**
+	 * Method updateForm.
+	 * @param form Form
+	 * @see bd.gov.forms.dao.FormDao#updateForm(Form)
+	 */
 	public void updateForm(final Form form) {
 		String sql = "UPDATE form";
 		sql += " set title = ?, subtitle = ?, detail = ?, status = ?";
@@ -202,6 +246,12 @@ public class FormDaoImpl implements FormDao {
 				});
 	}
 
+	/**
+	 * Method getTemplateContent.
+	 * @param formId String
+	 * @return byte[]
+	 * @see bd.gov.forms.dao.FormDao#getTemplateContent(String)
+	 */
 	public byte[] getTemplateContent(String formId) {
 		Form form = (Form) jdbcTemplate.queryForObject(
 				"SELECT template_file FROM form WHERE form_id = ?",
@@ -220,6 +270,12 @@ public class FormDaoImpl implements FormDao {
 		return form.getPdfTemplate();
 	}
 
+	/**
+	 * Method getLogoContent.
+	 * @param formId String
+	 * @return byte[]
+	 * @see bd.gov.forms.dao.FormDao#getLogoContent(String)
+	 */
 	public byte[] getLogoContent(String formId) {
 
 		Form form = (Form) jdbcTemplate.queryForObject(
@@ -239,6 +295,12 @@ public class FormDaoImpl implements FormDao {
 		return form.getPdfTemplate();
 	}
 
+	/**
+	 * Method getFormWithFields.
+	 * @param formId String
+	 * @return Form
+	 * @see bd.gov.forms.dao.FormDao#getFormWithFields(String)
+	 */
 	public Form getFormWithFields(String formId) {
 		Form form = getForm(formId);
 
@@ -278,6 +340,12 @@ public class FormDaoImpl implements FormDao {
 		return form;
 	}
 
+	/**
+	 * Method getField.
+	 * @param fieldId String
+	 * @return Field
+	 * @see bd.gov.forms.dao.FormDao#getField(String)
+	 */
 	public Field getField(String fieldId) {
 		return (Field) jdbcTemplate.queryForObject(
 				"SELECT * FROM field WHERE field_id = ? ",
@@ -306,6 +374,11 @@ public class FormDaoImpl implements FormDao {
 				});
 	}
 
+	/**
+	 * Method saveField.
+	 * @param field Field
+	 * @see bd.gov.forms.dao.FormDao#saveField(Field)
+	 */
 	public void saveField(final Field field) {
 		String sql = "INSERT INTO field";
 		sql += " (field_id, form_id, type, input_type, label, required, help_text, options, list_data_id, def_value, "
@@ -339,6 +412,11 @@ public class FormDaoImpl implements FormDao {
 				});
 	}
 
+	/**
+	 * Method updateField.
+	 * @param field Field
+	 * @see bd.gov.forms.dao.FormDao#updateField(Field)
+	 */
 	public void updateField(final Field field) {
 		String sql = "UPDATE field";
 		sql += " set type = ?, input_type = ?, label = ?, required = ?, help_text = ?, options = ?, list_data_id = ?, "
@@ -373,6 +451,14 @@ public class FormDaoImpl implements FormDao {
 				});
 	}
 
+	/**
+	 * Method moveField.
+	 * @param formId int
+	 * @param fieldId String
+	 * @param fieldOrder int
+	 * @param order int
+	 * @see bd.gov.forms.dao.FormDao#moveField(int, String, int, int)
+	 */
 	public void moveField(int formId, String fieldId, int fieldOrder, int order) {
 		jdbcTemplate
 				.update("UPDATE field SET field_order = ? WHERE form_id = ? and field_order = ?",
@@ -382,23 +468,46 @@ public class FormDaoImpl implements FormDao {
 						order, formId, fieldId);
 	}
 
+	/**
+	 * Method updateOrder.
+	 * @param formId int
+	 * @param fieldOrder int
+	 * @param operator String
+	 * @see bd.gov.forms.dao.FormDao#updateOrder(int, int, String)
+	 */
 	public void updateOrder(int formId, int fieldOrder, String operator) {
 		jdbcTemplate.update("UPDATE field SET field_order = field_order"
 				+ operator + "1 WHERE form_id = ? and field_order >= ?",
 				formId, fieldOrder);
 	}
 
+	/**
+	 * Method deleteField.
+	 * @param fieldId String
+	 * @param formId int
+	 * @see bd.gov.forms.dao.FormDao#deleteField(String, int)
+	 */
 	public void deleteField(String fieldId, int formId) {
 		jdbcTemplate.update(
 				"DELETE FROM field WHERE field_id = ? and form_id = ?",
 				fieldId, formId);
 	}
 
+	/**
+	 * Method deleteForm.
+	 * @param formId String
+	 * @see bd.gov.forms.dao.FormDao#deleteForm(String)
+	 */
 	public void deleteForm(String formId) {
 		jdbcTemplate.update(
 				"DELETE FROM form WHERE form_id = ? and status = 1", formId);
 	}
 
+	/**
+	 * Method createTable.
+	 * @param frm Form
+	 * @see bd.gov.forms.dao.FormDao#createTable(Form)
+	 */
 	public void createTable(Form frm) {
 		String cols = "";
 
@@ -431,6 +540,11 @@ public class FormDaoImpl implements FormDao {
 		jdbcTemplate.update(sql);
 	}
 
+	/**
+	 * Method saveEntry.
+	 * @param form Form
+	 * @see bd.gov.forms.dao.FormDao#saveEntry(Form)
+	 */
 	public void saveEntry(final Form form) {
 		String cols = "entry_date, entry_time, entry_id, entry_status, ";
 		String val = "CURDATE(), CURTIME(), ?, ?, ";
@@ -493,15 +607,31 @@ public class FormDaoImpl implements FormDao {
 				});
 	}
 
+	/**
+	 * Method notEmpty.
+	 * @param content byte[]
+	 * @return boolean
+	 */
 	private boolean notEmpty(byte[] content) {
 		return content != null && content.length > 0;
 	}
 
+	/**
+	 * Method fieldTypeIsNotFileOrNoteOrSection.
+	 * @param fieldType String
+	 * @return boolean
+	 */
 	private boolean fieldTypeIsNotFileOrNoteOrSection(String fieldType) {
 		return !"file".equals(fieldType) && !"note".equals(fieldType)
 				&& !"section".equals(fieldType);
 	}
 
+	/**
+	 * Method getFormList.
+	 * @param page int
+	 * @return List
+	 * @see bd.gov.forms.dao.FormDao#getFormList(int)
+	 */
 	public List getFormList(int page) {
 		String sql = "select * from form";
 
@@ -517,6 +647,12 @@ public class FormDaoImpl implements FormDao {
 		});
 	}
 
+	/**
+	 * Method populateFormFromResultSet.
+	 * @param rs ResultSet
+	 * @param form Form
+	 * @throws SQLException
+	 */
 	private void populateFormFromResultSet(ResultSet rs, Form form)
 			throws SQLException {
 		form.setFormId(rs.getString("form_id"));
@@ -525,6 +661,11 @@ public class FormDaoImpl implements FormDao {
 		form.setDetail(rs.getString("detail"));
 	}
 
+	/**
+	 * Method getPublicForms.
+	 * @return List
+	 * @see bd.gov.forms.dao.FormDao#getPublicForms()
+	 */
 	public List getPublicForms() {
 		String sql = "select * from form where status=2";
 
@@ -540,11 +681,22 @@ public class FormDaoImpl implements FormDao {
 		});
 	}
 
+	/**
+	 * Method updateStatus.
+	 * @param formId String
+	 * @param status int
+	 * @see bd.gov.forms.dao.FormDao#updateStatus(String, int)
+	 */
 	public void updateStatus(String formId, int status) {
 		jdbcTemplate.update("UPDATE form set status = ? WHERE form_id = ?",
 				status, formId);
 	}
 
+	/**
+	 * Method initDbIdentifiers.
+	 * @param id int
+	 * @see bd.gov.forms.dao.FormDao#initDbIdentifiers(int)
+	 */
 	public void initDbIdentifiers(int id) {
 		jdbcTemplate
 				.update("UPDATE form set table_name = concat('table', id) WHERE id = ?",
@@ -554,6 +706,18 @@ public class FormDaoImpl implements FormDao {
 						id);
 	}
 
+	/**
+	 * Method getEntryList.
+	 * @param form Form
+	 * @param page Integer
+	 * @param colName String
+	 * @param colVal String
+	 * @param sortCol String
+	 * @param sortOrder String
+	 * @param limit boolean
+	 * @return List
+	 * @see bd.gov.forms.dao.FormDao#getEntryList(Form, Integer, String, String, String, String, boolean)
+	 */
 	public List getEntryList(final Form form, Integer page, String colName,
 			String colVal, String sortCol, String sortOrder, boolean limit) {
 		String where;
@@ -630,6 +794,12 @@ public class FormDaoImpl implements FormDao {
 		});
 	}
 
+	/**
+	 * Method getEntry.
+	 * @param form Form
+	 * @return Form
+	 * @see bd.gov.forms.dao.FormDao#getEntry(Form)
+	 */
 	public Form getEntry(final Form form) {
 		String sql = "SELECT * FROM " + form.getTableName()
 				+ " WHERE entry_id = ?";
@@ -654,23 +824,47 @@ public class FormDaoImpl implements FormDao {
 				});
 	}
 
+	/**
+	 * Method updateEntryStatus.
+	 * @param form Form
+	 * @param entryId String
+	 * @param status String
+	 * @see bd.gov.forms.dao.FormDao#updateEntryStatus(Form, String, String)
+	 */
 	public void updateEntryStatus(Form form, String entryId, String status) {
 		jdbcTemplate.update("UPDATE " + form.getTableName()
 				+ " set entry_status = ? WHERE entry_id = ?", status, entryId);
 	}
 
+	/**
+	 * Method removeTemplate.
+	 * @param formId String
+	 * @see bd.gov.forms.dao.FormDao#removeTemplate(String)
+	 */
 	public void removeTemplate(String formId) {
 		jdbcTemplate
 				.update("UPDATE form set  template_file = null, template_file_name = null WHERE form_id = ?",
 						formId);
 	}
 
+	/**
+	 * Method removeLogo.
+	 * @param formId String
+	 * @see bd.gov.forms.dao.FormDao#removeLogo(String)
+	 */
 	public void removeLogo(String formId) {
 		jdbcTemplate
 				.update("UPDATE form set  logo = null, logo_name = null WHERE form_id = ?",
 						formId);
 	}
 
+	/**
+	 * Method getFormEntryCount.
+	 * @param frm Form
+	 * @param status String
+	 * @return int
+	 * @see bd.gov.forms.dao.FormDao#getFormEntryCount(Form, String)
+	 */
 	public int getFormEntryCount(Form frm, String status) {
 
 		String sql = "SELECT COUNT(*) FROM " + frm.getTableName();
@@ -681,6 +875,14 @@ public class FormDaoImpl implements FormDao {
 		return jdbcTemplate.queryForInt(sql);
 	}
 
+	/**
+	 * Method getAttachment.
+	 * @param entryId String
+	 * @param columName String
+	 * @param tableName String
+	 * @return List
+	 * @see bd.gov.forms.dao.FormDao#getAttachment(String, String, String)
+	 */
 	@Override
 	public List getAttachment(String entryId, String columName, String tableName) {
 

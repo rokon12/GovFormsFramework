@@ -67,6 +67,8 @@ import com.lowagie.tools.arguments.ToolArgument;
 
 /**
  * This tool copies an existing PDF and removes potentially dangerous code that launches an application.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class RemoveLaunchApplication
     extends AbstractTool {

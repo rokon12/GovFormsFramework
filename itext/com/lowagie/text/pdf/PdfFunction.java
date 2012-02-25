@@ -51,6 +51,7 @@ import java.io.IOException;
 /** Implements PDF functions.
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PdfFunction {
     
@@ -60,11 +61,16 @@ public class PdfFunction {
     
     protected PdfDictionary dictionary;
     
-    /** Creates new PdfFunction */
+    /** Creates new PdfFunction * @param writer PdfWriter
+     */
     protected PdfFunction(PdfWriter writer) {
         this.writer = writer;
     }
     
+    /**
+     * Method getReference.
+     * @return PdfIndirectReference
+     */
     PdfIndirectReference getReference() {
         try {
             if (reference == null) {
@@ -77,6 +83,19 @@ public class PdfFunction {
         return reference;
     }
         
+    /**
+     * Method type0.
+     * @param writer PdfWriter
+     * @param domain float[]
+     * @param range float[]
+     * @param size int[]
+     * @param bitsPerSample int
+     * @param order int
+     * @param encode float[]
+     * @param decode float[]
+     * @param stream byte[]
+     * @return PdfFunction
+     */
     public static PdfFunction type0(PdfWriter writer, float domain[], float range[], int size[],
         int bitsPerSample, int order, float encode[], float decode[], byte stream[]) {
         PdfFunction func = new PdfFunction(writer);
@@ -96,6 +115,16 @@ public class PdfFunction {
         return func;
     }
 
+    /**
+     * Method type2.
+     * @param writer PdfWriter
+     * @param domain float[]
+     * @param range float[]
+     * @param c0 float[]
+     * @param c1 float[]
+     * @param n float
+     * @return PdfFunction
+     */
     public static PdfFunction type2(PdfWriter writer, float domain[], float range[], float c0[], float c1[], float n) {
         PdfFunction func = new PdfFunction(writer);
         func.dictionary = new PdfDictionary();
@@ -111,6 +140,16 @@ public class PdfFunction {
         return func;
     }
 
+    /**
+     * Method type3.
+     * @param writer PdfWriter
+     * @param domain float[]
+     * @param range float[]
+     * @param functions PdfFunction[]
+     * @param bounds float[]
+     * @param encode float[]
+     * @return PdfFunction
+     */
     public static PdfFunction type3(PdfWriter writer, float domain[], float range[], PdfFunction functions[], float bounds[], float encode[]) {
         PdfFunction func = new PdfFunction(writer);
         func.dictionary = new PdfDictionary();
@@ -127,6 +166,14 @@ public class PdfFunction {
         return func;
     }
     
+    /**
+     * Method type4.
+     * @param writer PdfWriter
+     * @param domain float[]
+     * @param range float[]
+     * @param postscript String
+     * @return PdfFunction
+     */
     public static PdfFunction type4(PdfWriter writer, float domain[], float range[], String postscript) {
         byte b[] = new byte[postscript.length()];
         for (int k = 0; k < b.length; ++k)

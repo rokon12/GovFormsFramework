@@ -23,6 +23,7 @@ import java.util.ArrayList;
  * the hyphenation tree.
  *
  * @author Carlos Villegas <cav@uniscope.co.jp>
+ * @version $Revision: 1.0 $
  */
 public interface PatternConsumer {
 
@@ -41,6 +42,8 @@ public interface PatternConsumer {
      * fails or the user wants to provide his own hyphenation.
      * A hyphenatedword is a vector of alternating String's and
      * {@link Hyphen Hyphen} instances
+     * @param word String
+     * @param hyphenatedword ArrayList
      */
     void addException(String word, ArrayList hyphenatedword);
 

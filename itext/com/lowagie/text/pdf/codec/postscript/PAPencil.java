@@ -18,8 +18,12 @@ import java.awt.font.*;
 import java.awt.geom.*;
 
 
+/**
+ */
 public class PAPencil extends Object {
 
+    /**
+     */
     static protected class State extends Object implements Cloneable {
         public Stroke stroke;
         public Paint paint;
@@ -33,6 +37,10 @@ public class PAPencil extends Object {
             this(null);
         }
 
+        /**
+         * Constructor for State.
+         * @param g Graphics2D
+         */
         public State(Graphics2D g){
             if(g == null){
                 this.stroke = new BasicStroke();
@@ -47,6 +55,10 @@ public class PAPencil extends Object {
             this.path = new GeneralPath();
         }
 
+        /**
+         * Method recordState.
+         * @param g Graphics2D
+         */
         public void recordState(Graphics2D g){
             this.stroke = g.getStroke();
             this.paint = g.getPaint();
@@ -56,6 +68,11 @@ public class PAPencil extends Object {
             this.clipShape = g.getClip();
         }
 
+        /**
+         * Method stampState.
+         * @param g Graphics2D
+         * @param size Dimension
+         */
         public void stampState(Graphics2D g, Dimension size){
             g.setTransform(new AffineTransform());
             g.setClip(new Rectangle(0, 0, size.width, size.height));
@@ -69,6 +86,10 @@ public class PAPencil extends Object {
             }
         }
 
+        /**
+         * Method clone.
+         * @return Object
+         */
         public Object clone(){
             try {
                 State n = (State)super.clone();
@@ -121,12 +142,21 @@ public class PAPencil extends Object {
     // Constructors
     //
 
+    /**
+     * Constructor for PAPencil.
+     * @param component Component
+     */
     public PAPencil(Component component){
 	this.graphics = (Graphics2D) component.getGraphics();
 	this.size = component.getSize();
 	this.initgraphics();
     }
 
+    /**
+     * Constructor for PAPencil.
+     * @param graphics Graphics
+     * @param size Dimension
+     */
     public PAPencil(Graphics graphics, Dimension size){
 	this.graphics = (Graphics2D) graphics;
 	this.size = size;
@@ -186,14 +216,29 @@ public class PAPencil extends Object {
 	this.state.path.reset();
     }
 
+    /**
+     * Method moveto.
+     * @param x double
+     * @param y double
+     */
     public void moveto(double x, double y){
 	this.state.path.moveTo((float) x, (float) y);
     }
 
+    /**
+     * Method moveto.
+     * @param p Point2D
+     */
     public void moveto(Point2D p) {
 	this.moveto(p.getX(), p.getY());
     }
 
+    /**
+     * Method rmoveto.
+     * @param dx double
+     * @param dy double
+     * @throws PainterException
+     */
     public void rmoveto(double dx, double dy) throws PainterException {
         Point2D currentPoint = this.state.path.getCurrentPoint();
 
@@ -203,6 +248,12 @@ public class PAPencil extends Object {
 	this.state.path.moveTo((float) (currentPoint.getX() + dx) , (float) (currentPoint.getY() + dy));
     }
 
+    /**
+     * Method lineto.
+     * @param x double
+     * @param y double
+     * @throws PainterException
+     */
     public void lineto(double x, double y) throws PainterException {
 	Point2D currentPoint = this.state.path.getCurrentPoint();
 
@@ -212,10 +263,21 @@ public class PAPencil extends Object {
 	this.state.path.lineTo((float) x, (float) y);
     }
 
+    /**
+     * Method lineto.
+     * @param p Point2D
+     * @throws PainterException
+     */
     public void lineto(Point2D p) throws PainterException {
 	this.lineto(p.getX(), p.getY());
     }
 
+    /**
+     * Method rlineto.
+     * @param dx double
+     * @param dy double
+     * @throws PainterException
+     */
     public void rlineto(double dx, double dy) throws PainterException {
         Point2D currentPoint = this.state.path.getCurrentPoint();
 
@@ -225,6 +287,14 @@ public class PAPencil extends Object {
         this.state.path.lineTo((float) (currentPoint.getX() + dx) , (float) (currentPoint.getY() + dy));
     }
 
+    /**
+     * Method arc.
+     * @param cx double
+     * @param cy double
+     * @param r double
+     * @param ang1 double
+     * @param ang2 double
+     */
     public void arc(double cx, double cy, double r, double ang1, double ang2){
         Arc2D.Float arc = new Arc2D.Float((float) cx, (float) cy, (float) r, (float) r,
                                           (float) ang1, (float) (ang2 - ang1), Arc2D.OPEN);
@@ -237,6 +307,14 @@ public class PAPencil extends Object {
         }
     }
 
+    /**
+     * Method arcn.
+     * @param cx double
+     * @param cy double
+     * @param r double
+     * @param ang1 double
+     * @param ang2 double
+     */
     public void arcn(double cx, double cy, double r,
     		      double ang1, double ang2) {
 	Arc2D.Float arc = new Arc2D.Float((float) cx, (float) cy, (float) r, (float) r,
@@ -250,6 +328,16 @@ public class PAPencil extends Object {
         }
     }
 
+    /**
+     * Method curveto.
+     * @param x1 double
+     * @param y1 double
+     * @param x2 double
+     * @param y2 double
+     * @param x3 double
+     * @param y3 double
+     * @throws PainterException
+     */
     public void curveto(double x1, double y1, double x2, double y2,
 		         double x3, double y3) throws PainterException {
         Point2D currentPoint = this.state.path.getCurrentPoint();
@@ -261,6 +349,16 @@ public class PAPencil extends Object {
                                   (float) x3, (float) y3);
     }
 
+    /**
+     * Method rcurveto.
+     * @param dx1 double
+     * @param dy1 double
+     * @param dx2 double
+     * @param dy2 double
+     * @param dx3 double
+     * @param dy3 double
+     * @throws PainterException
+     */
     public void rcurveto(double dx1, double dy1, double dx2, double dy2,
 			  double dx3, double dy3) throws PainterException {
         Point2D currentPoint = this.state.path.getCurrentPoint();
@@ -286,6 +384,11 @@ public class PAPencil extends Object {
 	this.graphics.clearRect(0, 0, 800, 800);
     }
 
+    /**
+     * Method charpath.
+     * @param aString String
+     * @param adjustForStroking boolean
+     */
     public void charpath(String aString, boolean adjustForStroking){
 	GlyphVector glyphVector = this.state.font.createGlyphVector(this.graphics.getFontRenderContext(), aString);
 
@@ -297,6 +400,11 @@ public class PAPencil extends Object {
 
     }
 
+    /**
+     * Method show.
+     * @param string String
+     * @throws PainterException
+     */
     public void show(String string) throws PainterException {
         Point2D currentPoint = this.state.path.getCurrentPoint();
         AffineTransform currentTransform = this.graphics.getTransform();
@@ -328,6 +436,13 @@ public class PAPencil extends Object {
         this.newpath();
     }
 
+    /**
+     * Method rectfill.
+     * @param x double
+     * @param y double
+     * @param width double
+     * @param height double
+     */
     public void rectfill(double x, double y, double width, double height){
 	this.gsave();
 	this.rectpath(x, y, width, height);
@@ -335,10 +450,21 @@ public class PAPencil extends Object {
 	this.grestore();
     }
 
+    /**
+     * Method rectfill.
+     * @param rect Rectangle2D
+     */
     public void rectfill(Rectangle2D rect){
         this.rectfill(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
     }
 
+    /**
+     * Method rectstroke.
+     * @param x double
+     * @param y double
+     * @param width double
+     * @param height double
+     */
     public void rectstroke(double x, double y, double width, double height){
 	this.gsave();
 	this.rectpath(x, y, width, height);
@@ -346,10 +472,21 @@ public class PAPencil extends Object {
 	this.grestore();
     }
 
+    /**
+     * Method rectstroke.
+     * @param rect Rectangle2D
+     */
     public void rectstroke(Rectangle2D rect){
 	this.rectstroke(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
     }
 
+    /**
+     * Method rectpath.
+     * @param x double
+     * @param y double
+     * @param width double
+     * @param height double
+     */
     public void rectpath(double x, double y, double width, double height){
 	this.newpath();
 	this.moveto(x, y);
@@ -366,6 +503,11 @@ public class PAPencil extends Object {
 
     // this guy tries to find an appropiate font
     // if he fails returns whatever font he wants
+    /**
+     * Method findFont.
+     * @param fontname String
+     * @return Font
+     */
     public Font findFont(String fontname){
         Font result;
         StringBuffer buffer = new StringBuffer(fontname);

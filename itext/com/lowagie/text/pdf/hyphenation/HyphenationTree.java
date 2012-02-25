@@ -29,6 +29,7 @@ import java.util.HashMap;
  * hyphenate a word.
  *
  * @author Carlos Villegas <cav@uniscope.co.jp>
+ * @version $Revision: 1.0 $
  */
 public class HyphenationTree extends TernaryTree 
             implements PatternConsumer, Serializable {
@@ -66,9 +67,9 @@ public class HyphenationTree extends TernaryTree
      * so we'll add 1 to the value.
      * @param values a string of digits from '0' to '9' representing the
      * interletter values.
+    
      * @return the index into the vspace array where the packed values
-     * are stored.
-     */
+     * are stored. */
     protected int packValues(String values) {
         int i, n = values.length();
         int m = (n & 1) == 1 ? (n >> 1) + 2 : (n >> 1) + 1;
@@ -87,6 +88,11 @@ public class HyphenationTree extends TernaryTree
         return offset;
     }
 
+    /**
+     * Method unpackValues.
+     * @param k int
+     * @return String
+     */
     protected String unpackValues(int k) {
         StringBuffer buf = new StringBuffer();
         byte v = vspace.get(k++);
@@ -104,6 +110,11 @@ public class HyphenationTree extends TernaryTree
         return buf.toString();
     }
 
+    /**
+     * Method loadSimplePatterns.
+     * @param stream InputStream
+     * @throws HyphenationException
+     */
     public void loadSimplePatterns(InputStream stream) throws HyphenationException {
         SimplePatternParser pp = new SimplePatternParser();
         ivalues = new TernaryTree();
@@ -121,6 +132,11 @@ public class HyphenationTree extends TernaryTree
     }
 
 
+    /**
+     * Method findPattern.
+     * @param pat String
+     * @return String
+     */
     public String findPattern(String pat) {
         int k = super.find(pat);
         if (k >= 0) {
@@ -132,6 +148,11 @@ public class HyphenationTree extends TernaryTree
     /**
      * String compare, returns 0 if equal or
      * t is a substring of s
+     * @param s char[]
+     * @param si int
+     * @param t char[]
+     * @param ti int
+     * @return int
      */
     protected int hstrcmp(char[] s, int si, char[] t, int ti) {
         for (; s[si] == t[ti]; si++, ti++) {
@@ -145,6 +166,11 @@ public class HyphenationTree extends TernaryTree
         return s[si] - t[ti];
     }
 
+    /**
+     * Method getValues.
+     * @param k int
+     * @return byte[]
+     */
     protected byte[] getValues(int k) {
         StringBuffer buf = new StringBuffer();
         byte v = vspace.get(k++);
@@ -259,9 +285,9 @@ public class HyphenationTree extends TernaryTree
      * before the hyphenation point.
      * @param pushCharCount Minimum number of characters allowed after
      * the hyphenation point.
+    
      * @return a {@link Hyphenation Hyphenation} object representing
-     * the hyphenated word or null if word is not hyphenated.
-     */
+     * the hyphenated word or null if word is not hyphenated. */
     public Hyphenation hyphenate(String word, int remainCharCount,
                                  int pushCharCount) {
         char[] w = word.toCharArray();
@@ -289,6 +315,12 @@ public class HyphenationTree extends TernaryTree
      * It follows that:
      * index(w) - index(word) = offset - 1 + iIgnoreAtBeginning
      * index(w) = letterindex(word) + offset + iIgnoreAtBeginning
+     * @param w char[]
+     * @param offset int
+     * @param len int
+     * @param remainCharCount int
+     * @param pushCharCount int
+     * @return Hyphenation
      */
 
     /**
@@ -402,6 +434,8 @@ public class HyphenationTree extends TernaryTree
      * files use only lower case characters, in this case a class
      * for letter 'a', for example, should be defined as "aA", the first
      * character being the normalization char.
+     * @param chargroup String
+     * @see com.lowagie.text.pdf.hyphenation.PatternConsumer#addClass(String)
      */
     public void addClass(String chargroup) {
         if (chargroup.length() > 0) {
@@ -422,6 +456,7 @@ public class HyphenationTree extends TernaryTree
      * @param word normalized word
      * @param hyphenatedword a vector of alternating strings and
      * {@link Hyphen hyphen} objects.
+     * @see com.lowagie.text.pdf.hyphenation.PatternConsumer#addException(String, ArrayList)
      */
     public void addException(String word, ArrayList hyphenatedword) {
         stoplist.put(word, hyphenatedword);
@@ -436,6 +471,7 @@ public class HyphenationTree extends TernaryTree
      * desirability and priority of hyphenating at a given point
      * within the pattern. It should contain only digit characters.
      * (i.e. '0' to '9').
+     * @see com.lowagie.text.pdf.hyphenation.PatternConsumer#addPattern(String, String)
      */
     public void addPattern(String pattern, String ivalue) {
         int k = ivalues.find(ivalue);

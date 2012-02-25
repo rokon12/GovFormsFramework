@@ -71,6 +71,8 @@ import com.lowagie.tools.plugins.AbstractTool;
 
 /**
  * This is a utility that allows you to use a number of iText tools.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class Toolbox extends JFrame implements ToolMenuItems, ActionListener {
 	
@@ -108,8 +110,8 @@ public class Toolbox extends JFrame implements ToolMenuItems, ActionListener {
 	
 	/**
 	 * Gets the menubar.
-	 * @return a menubar
-	 */
+	
+	 * @return a menubar */
 	private JMenuBar getMenubar() {
 		Properties p = new Properties();
 		try {
@@ -166,11 +168,11 @@ public class Toolbox extends JFrame implements ToolMenuItems, ActionListener {
 	/**
 	 * Creates an Internal Frame.
 	 * @param name the name of the app
-	 * @throws ClassNotFoundException
-	 * @throws IllegalAccessException
-	 * @throws InstantiationException
-	 * @throws PropertyVetoException
-	 */
+	
+	
+	
+	
+	 * @throws InstantiationException * @throws IllegalAccessException * @throws ClassNotFoundException * @throws PropertyVetoException */
 	private void createFrame(String name) throws InstantiationException, IllegalAccessException, ClassNotFoundException, PropertyVetoException {
 		AbstractTool ti = (AbstractTool)Class.forName((String)toolmap.get(name)).newInstance();
 		JInternalFrame f = ti.getInternalFrame();

@@ -27,6 +27,8 @@ import com.lowagie.text.pdf.*;
 
 /**
  * Takes an existing PDF file and makes handouts.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class handout_pdf extends java.lang.Object {
     

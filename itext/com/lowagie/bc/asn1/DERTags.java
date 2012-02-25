@@ -1,5 +1,7 @@
 package com.lowagie.bc.asn1;
 
+/**
+ */
 public interface DERTags
 {
     public static final int BOOLEAN             = 0x01;

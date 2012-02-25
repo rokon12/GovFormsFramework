@@ -56,6 +56,8 @@ import java.io.IOException;
  * A <CODE>PdfSpotColor</CODE> defines a ColorSpace
  *
  * @see		PdfDictionary
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfSpotColor{
@@ -86,20 +88,26 @@ public class PdfSpotColor{
     
     /**
      * Gets the tint of the SpotColor.
-     * @return a float
-     */
+    
+     * @return a float */
     public float getTint() {
         return tint;
     }
     
     /**
      * Gets the alternative ColorSpace.
-     * @return a Colot
-     */
+    
+     * @return a Colot */
     public Color getAlternativeCS() {
         return altcs;
     }
     
+    /**
+     * Method getSpotObject.
+     * @param writer PdfWriter
+     * @return PdfObject
+     * @throws IOException
+     */
     protected PdfObject getSpotObject(PdfWriter writer) throws IOException {
         PdfArray array = new PdfArray(PdfName.SEPARATION);
         array.add(name);

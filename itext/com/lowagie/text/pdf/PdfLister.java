@@ -57,6 +57,7 @@ import java.util.Iterator;
 /**
  * List a PDF file in human-readable form (for debugging reasons mostly)
  * @author Mark Thompson
+ * @version $Revision: 1.0 $
  */
 
 public class PdfLister {

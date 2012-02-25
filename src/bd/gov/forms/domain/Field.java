@@ -19,192 +19,455 @@ package bd.gov.forms.domain;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import javax.persistence.Entity;
+
 /**
  * @author asif
+ * @version $Revision: 1.0 $
  */
+@Entity
+@Table(name = "FIELD")
 public class Field implements Serializable {
 
-    private int id;
-    private String fieldId;
-    private String colName;
-    private String type;
-    private String label;
-    private int required;
-    private boolean multiCheckEnable; 	// for multiple/single check box
-    private String helpText;
-    private String options;     //not used
-    private int listDataId;
-    private String defaultValue;
-    private int fieldOrder;
-    private String inputType;
-    private String cssClass;    //Transient
-    private boolean lineBreak;
-    private List list;          //generated from options
-    private String strVal;
-    private byte[] byteVal;
-    private int formId;
-    private String formIdStr;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "fId")
+	private int id;
+	@Column(name = "field_id")
+	private String fieldId;
+	@Column(name = "col_name")
+	private String colName;
+	@Column(name = "type")
+	private String type;
+	@Column(name = "label")
+	private String label;
+	@Column(name = "required")
+	private int required;
+	@Column(name = "multi_check_enable")
+	private boolean multiCheckEnable; // for multiple/single check box
+	@Column(name = "help_text")
+	private String helpText;
+	@Transient
+	private String options; // not used
+	@Column(name = "list_data_id")
+	private int listDataId;
+	@Column(name = "default_value")
+	private String defaultValue;
+	@Column(name = "field_order")
+	private int fieldOrder;
+	@Column(name = "input_type")
+	private String inputType;
+	@Column(name = "css_class")
+	private String cssClass; // Transient
+	@Column(name = "line_break")
+	private boolean lineBreak;
 
-    
-    
-    public boolean isMultiCheckEnable() {
+	@Column(name = "str_val")
+	private String strVal;
+	@Column(name = "byte_val")
+	@Lob
+	private byte[] byteVal;
+	@Column(name = "form_id")
+	private int formId;
+	@Column(name = "form_id_str")
+	private String formIdStr;
+
+	// @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	// @JoinColumn(name = "list_data_id", insertable = true, updatable = true)
+	@Transient
+	private List list; // generated from options
+
+	// private List<ListData> lis
+
+	/**
+	 * Method isMultiCheckEnable.
+	 * 
+	 * @return boolean
+	 */
+	public boolean isMultiCheckEnable() {
 		return multiCheckEnable;
 	}
 
+	/**
+	 * Method setMultiCheckEnable.
+	 * 
+	 * @param multiCheckEnable
+	 *            boolean
+	 */
 	public void setMultiCheckEnable(boolean multiCheckEnable) {
 		this.multiCheckEnable = multiCheckEnable;
 	}
 
+	/**
+	 * Method getByteVal.
+	 * 
+	 * @return byte[]
+	 */
 	public byte[] getByteVal() {
-        return byteVal;
-    }
+		return byteVal;
+	}
 
-    public void setByteVal(byte[] byteVal) {
-        this.byteVal = byteVal;
-    }
+	/**
+	 * Method setByteVal.
+	 * 
+	 * @param byteVal
+	 *            byte[]
+	 */
+	public void setByteVal(byte[] byteVal) {
+		this.byteVal = byteVal;
+	}
 
-    public String getColName() {
-        return colName;
-    }
+	/**
+	 * Method getColName.
+	 * 
+	 * @return String
+	 */
+	public String getColName() {
+		return colName;
+	}
 
-    public void setColName(String colName) {
-        this.colName = colName;
-    }
+	/**
+	 * Method setColName.
+	 * 
+	 * @param colName
+	 *            String
+	 */
+	public void setColName(String colName) {
+		this.colName = colName;
+	}
 
-    public String getCssClass() {
-        return cssClass;
-    }
+	/**
+	 * Method getCssClass.
+	 * 
+	 * @return String
+	 */
+	public String getCssClass() {
+		return cssClass;
+	}
 
-    public void setCssClass(String cssClass) {
-        this.cssClass = cssClass;
-    }
+	/**
+	 * Method setCssClass.
+	 * 
+	 * @param cssClass
+	 *            String
+	 */
+	public void setCssClass(String cssClass) {
+		this.cssClass = cssClass;
+	}
 
-    public String getDefaultValue() {
-        return defaultValue;
-    }
+	/**
+	 * Method getDefaultValue.
+	 * 
+	 * @return String
+	 */
+	public String getDefaultValue() {
+		return defaultValue;
+	}
 
-    public void setDefaultValue(String defaultValue) {
-        this.defaultValue = defaultValue;
-    }
+	/**
+	 * Method setDefaultValue.
+	 * 
+	 * @param defaultValue
+	 *            String
+	 */
+	public void setDefaultValue(String defaultValue) {
+		this.defaultValue = defaultValue;
+	}
 
-    public String getFieldId() {
-        return fieldId;
-    }
+	/**
+	 * Method getFieldId.
+	 * 
+	 * @return String
+	 */
+	public String getFieldId() {
+		return fieldId;
+	}
 
-    public void setFieldId(String fieldId) {
-        this.fieldId = fieldId;
-    }
+	/**
+	 * Method setFieldId.
+	 * 
+	 * @param fieldId
+	 *            String
+	 */
+	public void setFieldId(String fieldId) {
+		this.fieldId = fieldId;
+	}
 
-    public int getFieldOrder() {
-        return fieldOrder;
-    }
+	/**
+	 * Method getFieldOrder.
+	 * 
+	 * @return int
+	 */
+	public int getFieldOrder() {
+		return fieldOrder;
+	}
 
-    public void setFieldOrder(int fieldOrder) {
-        this.fieldOrder = fieldOrder;
-    }
+	/**
+	 * Method setFieldOrder.
+	 * 
+	 * @param fieldOrder
+	 *            int
+	 */
+	public void setFieldOrder(int fieldOrder) {
+		this.fieldOrder = fieldOrder;
+	}
 
-    public String getHelpText() {
-        return helpText;
-    }
+	/**
+	 * Method getHelpText.
+	 * 
+	 * @return String
+	 */
+	public String getHelpText() {
+		return helpText;
+	}
 
-    public void setHelpText(String helpText) {
-        this.helpText = helpText;
-    }
+	/**
+	 * Method setHelpText.
+	 * 
+	 * @param helpText
+	 *            String
+	 */
+	public void setHelpText(String helpText) {
+		this.helpText = helpText;
+	}
 
-    public int getId() {
-        return id;
-    }
+	/**
+	 * Method getId.
+	 * 
+	 * @return int
+	 */
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	/**
+	 * Method setId.
+	 * 
+	 * @param id
+	 *            int
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getLabel() {
-        return label;
-    }
+	/**
+	 * Method getLabel.
+	 * 
+	 * @return String
+	 */
+	public String getLabel() {
+		return label;
+	}
 
-    public void setLabel(String label) {
-        this.label = label;
-    }
+	/**
+	 * Method setLabel.
+	 * 
+	 * @param label
+	 *            String
+	 */
+	public void setLabel(String label) {
+		this.label = label;
+	}
 
-    public boolean isLineBreak() {
-        return lineBreak;
-    }
+	/**
+	 * Method isLineBreak.
+	 * 
+	 * @return boolean
+	 */
+	public boolean isLineBreak() {
+		return lineBreak;
+	}
 
-    public void setLineBreak(boolean lineBreak) {
-        this.lineBreak = lineBreak;
-    }
+	/**
+	 * Method setLineBreak.
+	 * 
+	 * @param lineBreak
+	 *            boolean
+	 */
+	public void setLineBreak(boolean lineBreak) {
+		this.lineBreak = lineBreak;
+	}
 
-    public List getList() {
-        return list;
-    }
+	/**
+	 * Method getList.
+	 * 
+	 * @return List
+	 */
+	public List getList() {
+		return list;
+	}
 
-    public void setList(List list) {
-        this.list = list;
-    }
+	/**
+	 * Method setList.
+	 * 
+	 * @param list
+	 *            List
+	 */
+	public void setList(List list) {
+		this.list = list;
+	}
 
-    public int getListDataId() {
-        return listDataId;
-    }
+	/**
+	 * Method getListDataId.
+	 * 
+	 * @return int
+	 */
+	public int getListDataId() {
+		return listDataId;
+	}
 
-    public void setListDataId(int listDataId) {
-        this.listDataId = listDataId;
-    }
+	/**
+	 * Method setListDataId.
+	 * 
+	 * @param listDataId
+	 *            int
+	 */
+	public void setListDataId(int listDataId) {
+		this.listDataId = listDataId;
+	}
 
-    public String getOptions() {
-        return options;
-    }
+	/**
+	 * Method getOptions.
+	 * 
+	 * @return String
+	 */
+	public String getOptions() {
+		return options;
+	}
 
-    public void setOptions(String options) {
-        this.options = options;
-    }
+	/**
+	 * Method setOptions.
+	 * 
+	 * @param options
+	 *            String
+	 */
+	public void setOptions(String options) {
+		this.options = options;
+	}
 
-    public int getRequired() {
-        return required;
-    }
+	/**
+	 * Method getRequired.
+	 * 
+	 * @return int
+	 */
+	public int getRequired() {
+		return required;
+	}
 
-    public void setRequired(int required) {
-        this.required = required;
-    }
+	/**
+	 * Method setRequired.
+	 * 
+	 * @param required
+	 *            int
+	 */
+	public void setRequired(int required) {
+		this.required = required;
+	}
 
-    public String getStrVal() {
-        return strVal;
-    }
+	/**
+	 * Method getStrVal.
+	 * 
+	 * @return String
+	 */
+	public String getStrVal() {
+		return strVal;
+	}
 
-    public void setStrVal(String strVal) {
-        this.strVal = strVal;
-    }
+	/**
+	 * Method setStrVal.
+	 * 
+	 * @param strVal
+	 *            String
+	 */
+	public void setStrVal(String strVal) {
+		this.strVal = strVal;
+	}
 
-    public String getType() {
-        return type;
-    }
+	/**
+	 * Method getType.
+	 * 
+	 * @return String
+	 */
+	public String getType() {
+		return type;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	/**
+	 * Method setType.
+	 * 
+	 * @param type
+	 *            String
+	 */
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    public int getFormId() {
-        return formId;
-    }
+	/**
+	 * Method getFormId.
+	 * 
+	 * @return int
+	 */
+	public int getFormId() {
+		return formId;
+	}
 
-    public void setFormId(int formId) {
-        this.formId = formId;
-    }
+	/**
+	 * Method setFormId.
+	 * 
+	 * @param formId
+	 *            int
+	 */
+	public void setFormId(int formId) {
+		this.formId = formId;
+	}
 
-    public String getFormIdStr() {
-        return formIdStr;
-    }
+	/**
+	 * Method getFormIdStr.
+	 * 
+	 * @return String
+	 */
+	public String getFormIdStr() {
+		return formIdStr;
+	}
 
-    public void setFormIdStr(String formIdStr) {
-        this.formIdStr = formIdStr;
-    }
+	/**
+	 * Method setFormIdStr.
+	 * 
+	 * @param formIdStr
+	 *            String
+	 */
+	public void setFormIdStr(String formIdStr) {
+		this.formIdStr = formIdStr;
+	}
 
-    public String getInputType() {
-        return inputType;
-    }
+	/**
+	 * Method getInputType.
+	 * 
+	 * @return String
+	 */
+	public String getInputType() {
+		return inputType;
+	}
 
-    public void setInputType(String inputType) {
-        this.inputType = inputType;
-    }
-
+	/**
+	 * Method setInputType.
+	 * 
+	 * @param inputType
+	 *            String
+	 */
+	public void setInputType(String inputType) {
+		this.inputType = inputType;
+	}
 }

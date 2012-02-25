@@ -74,6 +74,8 @@ import java.util.Properties;
  * Paragraph someSectionText = new Paragraph("This is some silly paragraph in a chapter and/or section. It contains some text to test the functionality of Chapters and Section.");
  * section1.add(someSectionText);
  * </PRE></BLOCKQUOTE>
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class Chapter extends Section implements TextElementArray {
@@ -134,7 +136,8 @@ public class Chapter extends Section implements TextElementArray {
 /**
  * Gets the type of the text element.
  *
- * @return	a type
+
+ * @return	a type * @see com.lowagie.text.Element#type()
  */
     
     public int type() {
@@ -147,8 +150,8 @@ public class Chapter extends Section implements TextElementArray {
  * Checks if a given tag corresponds with this object.
  *
  * @param   tag     the given tag
- * @return  true if the tag corresponds
- */
+
+ * @return  true if the tag corresponds */
     
     public static boolean isTag(String tag) {
         return ElementTags.CHAPTER.equals(tag);

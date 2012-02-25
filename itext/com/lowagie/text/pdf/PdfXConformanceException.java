@@ -53,6 +53,7 @@ package com.lowagie.text.pdf;
 /**
  *
  * @author  psoares
+ * @version $Revision: 1.0 $
  */
 public class PdfXConformanceException extends RuntimeException {
     

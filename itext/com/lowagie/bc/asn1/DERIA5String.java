@@ -4,6 +4,8 @@ import java.io.IOException;
 
 /**
  * DER IA5String object - this is an ascii string.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class DERIA5String
     extends DERObject
@@ -14,8 +16,10 @@ public class DERIA5String
     /**
      * return a IA5 string from the passed in object
      *
-     * @exception IllegalArgumentException if the object cannot be converted.
-     */
+    
+     * @param obj Object
+     * @return DERIA5String
+     * @exception IllegalArgumentException if the object cannot be converted. */
     public static DERIA5String getInstance(
         Object  obj)
     {
@@ -43,9 +47,10 @@ public class DERIA5String
      * @param obj the tagged object holding the object we want
      * @param explicit true if the object is meant to be explicitly
      *              tagged false otherwise.
+    
+     * @return DERIA5String
      * @exception IllegalArgumentException if the tagged object cannot
-     *               be converted.
-     */
+     *               be converted. */
     public static DERIA5String getInstance(
         ASN1TaggedObject obj,
         boolean          explicit)
@@ -55,6 +60,7 @@ public class DERIA5String
 
     /**
      * basic constructor - with bytes.
+     * @param string byte[]
      */
     public DERIA5String(
         byte[]   string)
@@ -71,6 +77,7 @@ public class DERIA5String
 
     /**
      * basic constructor - with string.
+     * @param string String
      */
     public DERIA5String(
         String   string)
@@ -78,11 +85,20 @@ public class DERIA5String
         this.string = string;
     }
 
+    /**
+     * Method getString.
+     * @return String
+     * @see com.lowagie.bc.asn1.DERString#getString()
+     */
     public String getString()
     {
         return string;
     }
 
+    /**
+     * Method getOctets.
+     * @return byte[]
+     */
     public byte[] getOctets()
     {
         char[]  cs = string.toCharArray();
@@ -96,6 +112,11 @@ public class DERIA5String
         return bs; 
     }
 
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
+     */
     void encode(
         DEROutputStream  out)
         throws IOException
@@ -103,11 +124,20 @@ public class DERIA5String
         out.writeEncoded(IA5_STRING, this.getOctets());
     }
 
+    /**
+     * Method hashCode.
+     * @return int
+     */
     public int hashCode()
     {
         return this.getString().hashCode();
     }
 
+    /**
+     * Method equals.
+     * @param o Object
+     * @return boolean
+     */
     public boolean equals(
         Object  o)
     {

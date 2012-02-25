@@ -4,6 +4,8 @@ import java.io.IOException;
 
 /**
  * We insert one of these when we find a tag we don't recognise.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class DERUnknownTag
     extends DERObject
@@ -23,16 +25,29 @@ public class DERUnknownTag
         this.data = data;
     }
 
+    /**
+     * Method getTag.
+     * @return int
+     */
     public int getTag()
     {
         return tag;
     }
 
+    /**
+     * Method getData.
+     * @return byte[]
+     */
     public byte[] getData()
     {
         return data;
     }
 
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
+     */
     void encode(
         DEROutputStream  out)
         throws IOException
@@ -40,6 +55,11 @@ public class DERUnknownTag
         out.writeEncoded(tag, data);
     }
     
+	/**
+	 * Method equals.
+	 * @param o Object
+	 * @return boolean
+	 */
 	public boolean equals(
 		Object o)
 	{

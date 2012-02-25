@@ -60,6 +60,8 @@ package com.lowagie.text.pdf;
  *
  * @see		PdfObject
  * @see		BadPdfFormatException
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfNumber extends PdfObject {
@@ -125,8 +127,8 @@ public class PdfNumber extends PdfObject {
 /**
  * Returns the primitive <CODE>int</CODE> value of this object.
  *
- * @return		a value
- */
+
+ * @return		a value */
     
     public int intValue() {
         return (int) value;
@@ -135,13 +137,17 @@ public class PdfNumber extends PdfObject {
 /**
  * Returns the primitive <CODE>double</CODE> value of this object.
  *
- * @return		a value
- */
+
+ * @return		a value */
     
     public double doubleValue() {
         return value;
     }
     
+    /**
+     * Method floatValue.
+     * @return float
+     */
     public float floatValue() {
         return (float)value;
     }

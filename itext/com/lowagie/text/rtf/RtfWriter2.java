@@ -63,6 +63,7 @@ import java.io.OutputStream;
  *
  * Version: $Id: RtfWriter2.java,v 1.11 2005/09/11 19:09:57 hallm Exp $
  * @author Mark Hall (mhall@edu.uni-klu.ac.at)
+ * @version $Revision: 1.0 $
  */
 public class RtfWriter2 extends DocWriter implements DocListener {
     /**
@@ -88,8 +89,8 @@ public class RtfWriter2 extends DocWriter implements DocListener {
      * 
      * @param doc The Document that this RtfWriter listens to
      * @param os The OutputStream to write to
-     * @return The new RtfWriter
-     */
+    
+     * @return The new RtfWriter */
     public static RtfWriter2 getInstance(Document doc, OutputStream os) {
         return new RtfWriter2(doc, os);
     }
@@ -98,6 +99,7 @@ public class RtfWriter2 extends DocWriter implements DocListener {
      * Sets the header to use
      * 
      * @param hf The HeaderFooter to use
+     * @see com.lowagie.text.DocListener#setHeader(HeaderFooter)
      */
     public void setHeader(HeaderFooter hf) {
         this.rtfDoc.getDocumentHeader().setHeader(hf);
@@ -105,6 +107,7 @@ public class RtfWriter2 extends DocWriter implements DocListener {
     
     /**
      * Resets the header
+     * @see com.lowagie.text.DocListener#resetHeader()
      */
     public void resetHeader() {
         this.rtfDoc.getDocumentHeader().setHeader(null);
@@ -114,6 +117,7 @@ public class RtfWriter2 extends DocWriter implements DocListener {
      * Sets the footer to use
      * 
      * @param hf The HeaderFooter to use
+     * @see com.lowagie.text.DocListener#setFooter(HeaderFooter)
      */
     public void setFooter(HeaderFooter hf) {
         this.rtfDoc.getDocumentHeader().setFooter(hf);
@@ -121,6 +125,7 @@ public class RtfWriter2 extends DocWriter implements DocListener {
     
     /**
      * Resets the footer
+     * @see com.lowagie.text.DocListener#resetFooter()
      */
     public void resetFooter() {
         this.rtfDoc.getDocumentHeader().setFooter(null);
@@ -129,11 +134,13 @@ public class RtfWriter2 extends DocWriter implements DocListener {
     /**
      * This method is not supported in the RtfWriter
      * @param i Unused
+     * @see com.lowagie.text.DocListener#setPageCount(int)
      */
     public void setPageCount(int i) {}
     
     /**
      * This method is not supported in the RtfWriter
+     * @see com.lowagie.text.DocListener#resetPageCount()
      */
     public void resetPageCount() {}
 
@@ -141,22 +148,26 @@ public class RtfWriter2 extends DocWriter implements DocListener {
      * This method is not supported in the RtfWriter
      *
      * @param wm Unused
-     * @return <code>false</code>
+    
+     * @return <code>false</code> * @see com.lowagie.text.DocListener#add(Watermark)
      */
     public boolean add(Watermark wm) { return false; }
     
     /**
      * This method is not supported in the RtfWriter
+     * @see com.lowagie.text.DocListener#removeWatermark()
      */
     public void removeWatermark() {}
 
     /**
      * This method is not supported in the RtfWriter
+     * @see com.lowagie.text.DocListener#clearTextWrap()
      */
     public void clearTextWrap() {}
 
     /**
      * Opens the RtfDocument
+     * @see com.lowagie.text.DocListener#open()
      */
     public void open() {
     }
@@ -164,6 +175,7 @@ public class RtfWriter2 extends DocWriter implements DocListener {
     /**
      * Closes the RtfDocument. This causes the document to be written
      * to the specified OutputStream
+     * @see com.lowagie.text.DocListener#close()
      */
     public void close() {
         try {
@@ -181,8 +193,9 @@ public class RtfWriter2 extends DocWriter implements DocListener {
      * Adds an Element to the Document
      *
      * @param element The element to be added
-     * @return <code>false</code>
-     * @throws DocumentException
+    
+    
+     * @return <code>false</code> * @throws DocumentException * @see com.lowagie.text.ElementListener#add(Element)
      */
     public boolean add(Element element) throws DocumentException {
         if (pause) {
@@ -200,7 +213,8 @@ public class RtfWriter2 extends DocWriter implements DocListener {
     /**
      * Adds a page break
      *
-     * @return <code>false</code>
+    
+     * @return <code>false</code> * @see com.lowagie.text.DocListener#newPage()
      */
     public boolean newPage() {
         rtfDoc.add(new RtfNewPage(rtfDoc));
@@ -214,7 +228,8 @@ public class RtfWriter2 extends DocWriter implements DocListener {
      * @param right The right margin
      * @param top The top margin
      * @param bottom The bottom margin
-     * @return <code>false</code>
+    
+     * @return <code>false</code> * @see com.lowagie.text.DocListener#setMargins(float, float, float, float)
      */
     public boolean setMargins(float left, float right, float top, float bottom) {
         rtfDoc.getDocumentHeader().getPageSetting().setMarginLeft((int) (left * RtfElement.TWIPS_FACTOR));
@@ -228,7 +243,8 @@ public class RtfWriter2 extends DocWriter implements DocListener {
      * Sets the size of the page
      *
      * @param rect A Rectangle representing the page
-     * @return <code>false</code>
+    
+     * @return <code>false</code> * @see com.lowagie.text.DocListener#setPageSize(Rectangle)
      */
     public boolean setPageSize(Rectangle rect) {
         rtfDoc.getDocumentHeader().getPageSetting().setPageSize(rect);
@@ -250,9 +266,9 @@ public class RtfWriter2 extends DocWriter implements DocListener {
      * RtfDataCache class.
      *  
      * @param dataCacheStyle The style to use.
-     * @throws DocumentException If data has already been written into the data cache.
-     * @throws IOException If the disk cache could not be initialised.
-     */
+    
+    
+     * @throws DocumentException If data has already been written into the data cache. * @throws IOException If the disk cache could not be initialised. */
     public void setDataCacheStyle(int dataCacheStyle) throws DocumentException, IOException {
         this.rtfDoc.setDataCacheStyle(dataCacheStyle);
     }
@@ -260,8 +276,8 @@ public class RtfWriter2 extends DocWriter implements DocListener {
     /**
      * Gets the RtfDocumentSettings that specify how the rtf document is generated.
      * 
-     * @return The current RtfDocumentSettings.
-     */
+    
+     * @return The current RtfDocumentSettings. */
     public RtfDocumentSettings getDocumentSettings() {
         return this.rtfDoc.getDocumentSettings();
     }

@@ -79,6 +79,8 @@ import com.lowagie.text.pdf.PdfArray;
  * 
  * @see Element
  * @see Rectangle
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public abstract class Image extends Rectangle implements Element,
@@ -346,8 +348,8 @@ public abstract class Image extends Rectangle implements Element,
 	 * 
 	 * @param image
 	 *            an Image object
-	 * @return a new Image object
-	 */
+	
+	 * @return a new Image object */
 
 	public static Image getInstance(Image image) {
 		if (image == null)
@@ -367,11 +369,11 @@ public abstract class Image extends Rectangle implements Element,
 	 * 
 	 * @param url
 	 *            an URL
-	 * @return an Image
-	 * @throws BadElementException
-	 * @throws MalformedURLException
-	 * @throws IOException
-	 */
+	
+	
+	
+	
+	 * @return an Image * @throws BadElementException * @throws MalformedURLException * @throws IOException */
 
 	public static Image getInstance(URL url) throws BadElementException,
 			MalformedURLException, IOException {
@@ -438,11 +440,11 @@ public abstract class Image extends Rectangle implements Element,
 	 * 
 	 * @param imgb
 	 *            raw image date
-	 * @return an Image object
-	 * @throws BadElementException
-	 * @throws MalformedURLException
-	 * @throws IOException
-	 */
+	
+	
+	
+	
+	 * @return an Image object * @throws BadElementException * @throws MalformedURLException * @throws IOException */
 	public static Image getInstance(byte imgb[]) throws BadElementException,
 			MalformedURLException, IOException {
 		InputStream is = null;
@@ -509,12 +511,12 @@ public abstract class Image extends Rectangle implements Element,
 	 *            are replaced by this color
 	 * @param forceBW
 	 *            if <CODE>true</CODE> the image is treated as black and white
-	 * @return an object of type <CODE>ImgRaw</CODE>
-	 * @throws BadElementException
-	 *             on error
-	 * @throws IOException
-	 *             on error
-	 */
+	
+	
+	
+	 * @return an object of type <CODE>ImgRaw</CODE> * @throws BadElementException
+	 *             on error * @throws IOException
+	 *             on error */
 
 	public static Image getInstance(java.awt.Image image, java.awt.Color color,
 			boolean forceBW) throws BadElementException, IOException {
@@ -672,12 +674,12 @@ public abstract class Image extends Rectangle implements Element,
 	 * @param color
 	 *            if different from <CODE>null</CODE> the transparency pixels
 	 *            are replaced by this color
-	 * @return an object of type <CODE>ImgRaw</CODE>
-	 * @throws BadElementException
-	 *             on error
-	 * @throws IOException
-	 *             on error
-	 */
+	
+	
+	
+	 * @return an object of type <CODE>ImgRaw</CODE> * @throws BadElementException
+	 *             on error * @throws IOException
+	 *             on error */
 	public static Image getInstance(java.awt.Image image, java.awt.Color color)
 			throws BadElementException, IOException {
 		return Image.getInstance(image, color, false);
@@ -688,12 +690,12 @@ public abstract class Image extends Rectangle implements Element,
 	 * 
 	 * @param filename
 	 *            a filename
+	
+	
+	
+	
 	 * @return an object of type <CODE>Gif</CODE>,<CODE>Jpeg</CODE> or
-	 *         <CODE>Png</CODE>
-	 * @throws BadElementException
-	 * @throws MalformedURLException
-	 * @throws IOException
-	 */
+	 *         <CODE>Png</CODE> * @throws BadElementException * @throws MalformedURLException * @throws IOException */
 
 	public static Image getInstance(String filename)
 			throws BadElementException, MalformedURLException, IOException {
@@ -713,10 +715,10 @@ public abstract class Image extends Rectangle implements Element,
 	 *            the image data
 	 * @param bpc
 	 *            bits per component
-	 * @return an object of type <CODE>ImgRaw</CODE>
-	 * @throws BadElementException
-	 *             on error
-	 */
+	
+	
+	 * @return an object of type <CODE>ImgRaw</CODE> * @throws BadElementException
+	 *             on error */
 
 	public static Image getInstance(int width, int height, int components,
 			int bpc, byte data[]) throws BadElementException {
@@ -728,9 +730,9 @@ public abstract class Image extends Rectangle implements Element,
 	 * 
 	 * @param template
 	 *            a PdfTemplate that has to be wrapped in an Image object
-	 * @return an Image object
-	 * @throws BadElementException
-	 */
+	
+	
+	 * @return an Image object * @throws BadElementException */
 	public static Image getInstance(PdfTemplate template)
 			throws BadElementException {
 		return new ImgTemplate(template);
@@ -756,10 +758,10 @@ public abstract class Image extends Rectangle implements Element,
 	 *            CCITT_ENDOFBLOCK or a combination of them
 	 * @param data
 	 *            the image data
-	 * @return an Image object
-	 * @throws BadElementException
-	 *             on error
-	 */
+	
+	
+	 * @return an Image object * @throws BadElementException
+	 *             on error */
 	public static Image getInstance(int width, int height, boolean reverseBits,
 			int typeCCITT, int parameters, byte[] data)
 			throws BadElementException {
@@ -790,10 +792,10 @@ public abstract class Image extends Rectangle implements Element,
 	 * @param transparency
 	 *            transparency information in the Mask format of the image
 	 *            dictionary
-	 * @return an Image object
-	 * @throws BadElementException
-	 *             on error
-	 */
+	
+	
+	 * @return an Image object * @throws BadElementException
+	 *             on error */
 	public static Image getInstance(int width, int height, boolean reverseBits,
 			int typeCCITT, int parameters, byte[] data, int transparency[])
 			throws BadElementException {
@@ -822,10 +824,10 @@ public abstract class Image extends Rectangle implements Element,
 	 * @param transparency
 	 *            transparency information in the Mask format of the image
 	 *            dictionary
-	 * @return an object of type <CODE>ImgRaw</CODE>
-	 * @throws BadElementException
-	 *             on error
-	 */
+	
+	
+	 * @return an object of type <CODE>ImgRaw</CODE> * @throws BadElementException
+	 *             on error */
 
 	public static Image getInstance(int width, int height, int components,
 			int bpc, byte data[], int transparency[])
@@ -849,11 +851,11 @@ public abstract class Image extends Rectangle implements Element,
 	 * 
 	 * @param attributes
 	 *            Some attributes
-	 * @return an <CODE>Image</CODE>
-	 * @throws BadElementException
-	 * @throws MalformedURLException
-	 * @throws IOException
-	 */
+	
+	
+	
+	
+	 * @return an <CODE>Image</CODE> * @throws BadElementException * @throws MalformedURLException * @throws IOException */
 
 	public static Image getInstance(Properties attributes)
 			throws BadElementException, MalformedURLException, IOException {
@@ -1072,8 +1074,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Gets the annotation.
 	 * 
-	 * @return the annotation that is linked to this image
-	 */
+	
+	 * @return the annotation that is linked to this image */
 
 	public Annotation annotation() {
 		return annotation;
@@ -1087,8 +1089,8 @@ public abstract class Image extends Rectangle implements Element,
 	 * Remark: this only makes sense for Images of the type <CODE>RawImage
 	 * </CODE>.
 	 * 
-	 * @return a bpc value
-	 */
+	
+	 * @return a bpc value */
 
 	public int bpc() {
 		return bpc;
@@ -1100,8 +1102,8 @@ public abstract class Image extends Rectangle implements Element,
 	 * Remark: this only makes sense for Images of the type <CODE>RawImage
 	 * </CODE>.
 	 * 
-	 * @return the raw data
-	 */
+	
+	 * @return the raw data */
 
 	public byte[] rawData() {
 		return rawData;
@@ -1113,8 +1115,8 @@ public abstract class Image extends Rectangle implements Element,
 	 * Remark: this only makes sense for Images of the type <CODE>ImgTemplate
 	 * </CODE>.
 	 * 
-	 * @return the template
-	 */
+	
+	 * @return the template */
 
 	public PdfTemplate templateData() {
 		return template[0];
@@ -1134,8 +1136,8 @@ public abstract class Image extends Rectangle implements Element,
 	 * Checks if the <CODE>Images</CODE> has to be added at an absolute
 	 * position.
 	 * 
-	 * @return a boolean
-	 */
+	
+	 * @return a boolean */
 
 	public boolean hasAbsolutePosition() {
 		return !Float.isNaN(absoluteY);
@@ -1145,8 +1147,8 @@ public abstract class Image extends Rectangle implements Element,
 	 * Checks if the <CODE>Images</CODE> has to be added at an absolute X
 	 * position.
 	 * 
-	 * @return a boolean
-	 */
+	
+	 * @return a boolean */
 
 	public boolean hasAbsoluteX() {
 		return !Float.isNaN(absoluteX);
@@ -1155,8 +1157,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Returns the absolute X position.
 	 * 
-	 * @return a position
-	 */
+	
+	 * @return a position */
 
 	public float absoluteX() {
 		return absoluteX;
@@ -1165,8 +1167,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Returns the absolute Y position.
 	 * 
-	 * @return a position
-	 */
+	
+	 * @return a position */
 
 	public float absoluteY() {
 		return absoluteY;
@@ -1175,7 +1177,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Returns the type.
 	 * 
-	 * @return a type
+	
+	 * @return a type * @see com.lowagie.text.Element#type()
 	 */
 
 	public int type() {
@@ -1186,8 +1189,8 @@ public abstract class Image extends Rectangle implements Element,
 	 * Returns <CODE>true</CODE> if the image is a <CODE>Jpeg</CODE>
 	 * -object.
 	 * 
-	 * @return a <CODE>boolean</CODE>
-	 */
+	
+	 * @return a <CODE>boolean</CODE> */
 
 	public boolean isJpeg() {
 		return type == JPEG;
@@ -1197,8 +1200,8 @@ public abstract class Image extends Rectangle implements Element,
 	 * Returns <CODE>true</CODE> if the image is a <CODE>ImgRaw</CODE>
 	 * -object.
 	 * 
-	 * @return a <CODE>boolean</CODE>
-	 */
+	
+	 * @return a <CODE>boolean</CODE> */
 
 	public boolean isImgRaw() {
 		return type == IMGRAW;
@@ -1208,8 +1211,8 @@ public abstract class Image extends Rectangle implements Element,
 	 * Returns <CODE>true</CODE> if the image is an <CODE>ImgTemplate</CODE>
 	 * -object.
 	 * 
-	 * @return a <CODE>boolean</CODE>
-	 */
+	
+	 * @return a <CODE>boolean</CODE> */
 
 	public boolean isImgTemplate() {
 		return type == IMGTEMPLATE;
@@ -1219,8 +1222,8 @@ public abstract class Image extends Rectangle implements Element,
 	 * Gets the <CODE>String</CODE> -representation of the reference to the
 	 * image.
 	 * 
-	 * @return a <CODE>String</CODE>
-	 */
+	
+	 * @return a <CODE>String</CODE> */
 
 	public URL url() {
 		return url;
@@ -1229,8 +1232,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Gets the alignment for the image.
 	 * 
-	 * @return a value
-	 */
+	
+	 * @return a value */
 
 	public int alignment() {
 		return alignment;
@@ -1239,8 +1242,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Gets the alternative text for the image.
 	 * 
-	 * @return a <CODE>String</CODE>
-	 */
+	
+	 * @return a <CODE>String</CODE> */
 
 	public String alt() {
 		return alt;
@@ -1249,8 +1252,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Gets the scaled width of the image.
 	 * 
-	 * @return a value
-	 */
+	
+	 * @return a value */
 
 	public float scaledWidth() {
 		return scaledWidth;
@@ -1259,8 +1262,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Gets the scaled height of the image.
 	 * 
-	 * @return a value
-	 */
+	
+	 * @return a value */
 
 	public float scaledHeight() {
 		return scaledHeight;
@@ -1271,8 +1274,8 @@ public abstract class Image extends Rectangle implements Element,
 	 * <P>
 	 * Remark: this only makes sense for Images of the type <CODE>Jpeg</CODE>.
 	 * 
-	 * @return a colorspace value
-	 */
+	
+	 * @return a colorspace value */
 
 	public int colorspace() {
 		return colorspace;
@@ -1281,8 +1284,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Returns the transformation matrix of the image.
 	 * 
-	 * @return an array [AX, AY, BX, BY, CX, CY, DX, DY]
-	 */
+	
+	 * @return an array [AX, AY, BX, BY, CX, CY, DX, DY] */
 
 	public float[] matrix() {
 		float[] matrix = new float[8];
@@ -1325,8 +1328,8 @@ public abstract class Image extends Rectangle implements Element,
 	 *            the <CODE>InputStream</CODE>
 	 * @param size
 	 *            the number of bytes to skip
-	 * @throws IOException
-	 */
+	
+	 * @throws IOException */
 
 	static public void skip(InputStream is, int size) throws IOException {
         long n;
@@ -1348,9 +1351,9 @@ public abstract class Image extends Rectangle implements Element,
 	 * 
 	 * @param filename
 	 *            a given filename
-	 * @return a valid URL
-	 * @throws MalformedURLException
-	 */
+	
+	
+	 * @return a valid URL * @throws MalformedURLException */
 
 	public static URL toURL(String filename) throws MalformedURLException {
 		if (filename.startsWith("file:/") || filename.startsWith("http://")
@@ -1385,8 +1388,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Returns the transparency.
 	 * 
-	 * @return the transparency values
-	 */
+	
+	 * @return the transparency values */
 
 	public int[] getTransparency() {
 		return transparency;
@@ -1407,8 +1410,8 @@ public abstract class Image extends Rectangle implements Element,
 	 * 
 	 * @param tag
 	 *            the given tag
-	 * @return true if the tag corresponds
-	 */
+	
+	 * @return true if the tag corresponds */
 
 	public static boolean isTag(String tag) {
 		return ElementTags.IMAGE.equals(tag);
@@ -1417,8 +1420,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Gets the plain width of the image.
 	 * 
-	 * @return a value
-	 */
+	
+	 * @return a value */
 
 	public float plainWidth() {
 		return plainWidth;
@@ -1427,13 +1430,17 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Gets the plain height of the image.
 	 * 
-	 * @return a value
-	 */
+	
+	 * @return a value */
 
 	public float plainHeight() {
 		return plainHeight;
 	}
 
+	/**
+	 * Method getSerialId.
+	 * @return Long
+	 */
 	static protected synchronized Long getSerialId() {
 		++serialId;
 		return new Long(serialId);
@@ -1442,8 +1449,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Returns a serial id for the Image (reuse the same image more than once)
 	 * 
-	 * @return a serialId
-	 */
+	
+	 * @return a serialId */
 	public Long getMySerialId() {
 		return mySerialId;
 	}
@@ -1451,8 +1458,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Gets the dots-per-inch in the X direction. Returns 0 if not available.
 	 * 
-	 * @return the dots-per-inch in the X direction
-	 */
+	
+	 * @return the dots-per-inch in the X direction */
 	public int getDpiX() {
 		return dpiX;
 	}
@@ -1460,8 +1467,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Gets the dots-per-inch in the Y direction. Returns 0 if not available.
 	 * 
-	 * @return the dots-per-inch in the Y direction
-	 */
+	
+	 * @return the dots-per-inch in the Y direction */
 	public int getDpiY() {
 		return dpiY;
 	}
@@ -1483,8 +1490,8 @@ public abstract class Image extends Rectangle implements Element,
 	 * Returns <CODE>true</CODE> if this <CODE>Image</CODE> has the
 	 * requisites to be a mask.
 	 * 
-	 * @return <CODE>true</CODE> if this <CODE>Image</CODE> can be a mask
-	 */
+	
+	 * @return <CODE>true</CODE> if this <CODE>Image</CODE> can be a mask */
 	public boolean isMaskCandidate() {
 		if (type == IMGRAW) {
 			if (bpc > 0xff)
@@ -1496,9 +1503,9 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Make this <CODE>Image</CODE> a mask.
 	 * 
+	
 	 * @throws DocumentException
-	 *             if this <CODE>Image</CODE> can not be a mask
-	 */
+	 *             if this <CODE>Image</CODE> can not be a mask */
 	public void makeMask() throws DocumentException {
 		if (!isMaskCandidate())
 			throw new DocumentException("This image can not be an image mask.");
@@ -1510,9 +1517,9 @@ public abstract class Image extends Rectangle implements Element,
 	 * 
 	 * @param mask
 	 *            the mask to be applied
+	
 	 * @throws DocumentException
-	 *             on error
-	 */
+	 *             on error */
 	public void setImageMask(Image mask) throws DocumentException {
 		if (this.mask)
 			throw new DocumentException(
@@ -1527,8 +1534,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Gets the explicit masking.
 	 * 
-	 * @return the explicit masking
-	 */
+	
+	 * @return the explicit masking */
 	public Image getImageMask() {
 		return imageMask;
 	}
@@ -1536,8 +1543,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Returns <CODE>true</CODE> if this <CODE>Image</CODE> is a mask.
 	 * 
-	 * @return <CODE>true</CODE> if this <CODE>Image</CODE> is a mask
-	 */
+	
+	 * @return <CODE>true</CODE> if this <CODE>Image</CODE> is a mask */
 	public boolean isMask() {
 		return mask;
 	}
@@ -1556,8 +1563,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Returns <CODE>true</CODE> if the bits are to be inverted in the mask.
 	 * 
-	 * @return <CODE>true</CODE> if the bits are to be inverted in the mask
-	 */
+	
+	 * @return <CODE>true</CODE> if the bits are to be inverted in the mask */
 	public boolean isInvertMask() {
 		return invert;
 	}
@@ -1565,8 +1572,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Getter for the inverted value
 	 * 
-	 * @return true if the image is inverted
-	 */
+	
+	 * @return true if the image is inverted */
 	public boolean isInverted() {
 		return invert;
 	}
@@ -1584,8 +1591,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Getter for property interpolation.
 	 * 
-	 * @return Value of property interpolation.
-	 */
+	
+	 * @return Value of property interpolation. */
 	public boolean isInterpolation() {
 		return interpolation;
 	}
@@ -1652,8 +1659,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Checks is the image has an ICC profile.
 	 * 
-	 * @return the ICC profile or <CODE>null</CODE>
-	 */
+	
+	 * @return the ICC profile or <CODE>null</CODE> */
 	public boolean hasICCProfile() {
 		return (this.profile != null);
 	}
@@ -1661,8 +1668,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Gets the images ICC profile.
 	 * 
-	 * @return the ICC profile
-	 */
+	
+	 * @return the ICC profile */
 	public ICC_Profile getICCProfile() {
 		return profile;
 	}
@@ -1670,9 +1677,9 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Getter for property deflated.
 	 * 
-	 * @return Value of property deflated.
+	
 	 *  
-	 */
+	 * @return Value of property deflated. */
 	public boolean isDeflated() {
 		return this.deflated;
 	}
@@ -1691,9 +1698,9 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Getter for property indexed.
 	 * 
-	 * @return Value of property indexed.
+	
 	 *  
-	 */
+	 * @return Value of property indexed. */
 	public PdfDictionary getAdditional() {
 		return this.additional;
 	}
@@ -1711,9 +1718,9 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Getter for property smask.
 	 * 
-	 * @return Value of property smask.
+	
 	 *  
-	 */
+	 * @return Value of property smask. */
 	public boolean isSmask() {
 		return this.smask;
 	}
@@ -1732,8 +1739,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Gets the X/Y pixel dimensionless aspect ratio.
 	 * 
-	 * @return the X/Y pixel dimensionless aspect ratio
-	 */
+	
+	 * @return the X/Y pixel dimensionless aspect ratio */
 	public float getXYRatio() {
 		return this.XYRatio;
 	}
@@ -1751,8 +1758,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Gets the left indentation.
 	 * 
-	 * @return the left indentation
-	 */
+	
+	 * @return the left indentation */
 	public float indentationLeft() {
 		return indentationLeft;
 	}
@@ -1760,8 +1767,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Gets the right indentation.
 	 * 
-	 * @return the right indentation
-	 */
+	
+	 * @return the right indentation */
 	public float indentationRight() {
 		return indentationRight;
 	}
@@ -1787,9 +1794,9 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Getter for property originalType.
 	 * 
-	 * @return Value of property originalType.
+	
 	 *  
-	 */
+	 * @return Value of property originalType. */
 	public int getOriginalType() {
 		return this.originalType;
 	}
@@ -1808,9 +1815,9 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Getter for property originalData.
 	 * 
-	 * @return Value of property originalData.
+	
 	 *  
-	 */
+	 * @return Value of property originalData. */
 	public byte[] getOriginalData() {
 		return this.originalData;
 	}
@@ -1861,8 +1868,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Gets the spacing before this image.
 	 * 
-	 * @return the spacing
-	 */
+	
+	 * @return the spacing */
 
 	public float spacingBefore() {
 		return spacingBefore;
@@ -1871,8 +1878,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Gets the spacing before this image.
 	 * 
-	 * @return the spacing
-	 */
+	
+	 * @return the spacing */
 
 	public float spacingAfter() {
 		return spacingAfter;
@@ -1881,8 +1888,8 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Getter for property widthPercentage.
 	 * 
-	 * @return Value of property widthPercentage.
-	 */
+	
+	 * @return Value of property widthPercentage. */
 	public float getWidthPercentage() {
 		return this.widthPercentage;
 	}
@@ -1900,9 +1907,9 @@ public abstract class Image extends Rectangle implements Element,
 	/**
 	 * Gets the layer this image belongs to.
 	 * 
+	
 	 * @return the layer this image belongs to or <code>null</code> for no
-	 *         layer defined
-	 */
+	 *         layer defined */
 	public PdfOCG getLayer() {
 		return layer;
 	}
@@ -1917,6 +1924,11 @@ public abstract class Image extends Rectangle implements Element,
 		this.layer = layer;
 	}
 
+    /**
+     * Method simplifyColorspace.
+     * @param obj PdfObject
+     * @return PdfObject
+     */
     private PdfObject simplifyColorspace(PdfObject obj) {
         if (obj == null || !obj.isArray())
             return obj;
@@ -1955,8 +1967,8 @@ public abstract class Image extends Rectangle implements Element,
     
     /**
      * Getter for property initialRotation.
-     * @return Value of property initialRotation.
-     */
+    
+     * @return Value of property initialRotation. */
     public float getInitialRotation() {
         return this.initialRotation;
     }

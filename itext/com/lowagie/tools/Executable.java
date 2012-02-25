@@ -55,6 +55,8 @@ import java.lang.reflect.Method;
 
 /**
  * This class enables you to call an executable that will show a PDF file.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class Executable {
 	
@@ -69,9 +71,9 @@ public class Executable {
 	 * @param fileName
 	 * @param parameters
 	 * @param waitForTermination
-	 * @return a process
-	 * @throws IOException
-	 */
+	
+	
+	 * @return a process * @throws IOException */
 	private static Process action(final String fileName,
 			String parameters, boolean waitForTermination) throws IOException {
 		Process process = null;
@@ -117,9 +119,9 @@ public class Executable {
 	 * Opens a PDF document.
 	 * @param fileName
 	 * @param waitForTermination
-	 * @return a process
-	 * @throws IOException
-	 */
+	
+	
+	 * @return a process * @throws IOException */
 	public static final Process openDocument(String fileName,
 			boolean waitForTermination) throws IOException {
 		return action(fileName, "", waitForTermination);
@@ -129,9 +131,9 @@ public class Executable {
 	 * Opens a PDF document.
 	 * @param file
 	 * @param waitForTermination
-	 * @return a process
-	 * @throws IOException
-	 */
+	
+	
+	 * @return a process * @throws IOException */
 	public static final Process openDocument(File file,
 			boolean waitForTermination) throws IOException {
 		return openDocument(file.getAbsolutePath(), waitForTermination);
@@ -140,9 +142,9 @@ public class Executable {
 	/**
 	 * Opens a PDF document.
 	 * @param fileName
-	 * @return a process
-	 * @throws IOException
-	 */
+	
+	
+	 * @return a process * @throws IOException */
 	public static final Process openDocument(String fileName) throws IOException {
 		return openDocument(fileName, false);
 	}
@@ -150,9 +152,9 @@ public class Executable {
 	/**
 	 * Opens a PDF document.
 	 * @param file
-	 * @return a process
-	 * @throws IOException
-	 */
+	
+	
+	 * @return a process * @throws IOException */
 	public static final Process openDocument(File file) throws IOException {
 		return openDocument(file, false);
 	}
@@ -161,9 +163,9 @@ public class Executable {
 	 * Prints a PDF document.
 	 * @param fileName
 	 * @param waitForTermination
-	 * @return a process
-	 * @throws IOException
-	 */
+	
+	
+	 * @return a process * @throws IOException */
 	public static final Process printDocument(String fileName,
 			boolean waitForTermination) throws IOException {
 		return action(fileName, "/p", waitForTermination);
@@ -173,9 +175,9 @@ public class Executable {
 	 * Prints a PDF document.
 	 * @param file
 	 * @param waitForTermination
-	 * @return a process
-	 * @throws IOException
-	 */
+	
+	
+	 * @return a process * @throws IOException */
 	public static final Process printDocument(File file,
 			boolean waitForTermination) throws IOException {
 		return printDocument(file.getAbsolutePath(), waitForTermination);
@@ -184,9 +186,9 @@ public class Executable {
 	/**
 	 * Prints a PDF document.
 	 * @param fileName
-	 * @return a process
-	 * @throws IOException
-	 */
+	
+	
+	 * @return a process * @throws IOException */
 	public static final Process printDocument(String fileName) throws IOException {
 		return printDocument(fileName, false);
 	}
@@ -194,9 +196,9 @@ public class Executable {
 	/**
 	 * Prints a PDF document.
 	 * @param file
-	 * @return a process
-	 * @throws IOException
-	 */
+	
+	
+	 * @return a process * @throws IOException */
 	public static final Process printDocument(File file) throws IOException {
 		return printDocument(file, false);
 	}
@@ -205,9 +207,9 @@ public class Executable {
 	 * Prints a PDF document without opening a Dialog box.
 	 * @param fileName
 	 * @param waitForTermination
-	 * @return a process
-	 * @throws IOException
-	 */
+	
+	
+	 * @return a process * @throws IOException */
 	public static final Process printDocumentSilent(String fileName,
 			boolean waitForTermination) throws IOException {
 		return action(fileName, "/p /h", waitForTermination);
@@ -217,9 +219,9 @@ public class Executable {
 	 * Prints a PDF document without opening a Dialog box.
 	 * @param file
 	 * @param waitForTermination
-	 * @return a process
-	 * @throws IOException
-	 */
+	
+	
+	 * @return a process * @throws IOException */
 	public static final Process printDocumentSilent(File file,
 			boolean waitForTermination) throws IOException {
 		return printDocumentSilent(file.getAbsolutePath(), waitForTermination);
@@ -228,9 +230,9 @@ public class Executable {
 	/**
 	 * Prints a PDF document without opening a Dialog box.
 	 * @param fileName
-	 * @return a process
-	 * @throws IOException
-	 */
+	
+	
+	 * @return a process * @throws IOException */
 	public static final Process printDocumentSilent(String fileName) throws IOException {
 		return printDocumentSilent(fileName, false);
 	}
@@ -238,9 +240,9 @@ public class Executable {
 	/**
 	 * Prints a PDF document without opening a Dialog box.
 	 * @param file
-	 * @return a process
-	 * @throws IOException
-	 */
+	
+	
+	 * @return a process * @throws IOException */
 	public static final Process printDocumentSilent(File file) throws IOException {
 		return printDocumentSilent(file, false);
 	}
@@ -251,8 +253,8 @@ public class Executable {
 	 * found at <a href="http://www.centerkey.com/java/browser/myapp/BareBonesBrowserLaunch.java">Centerkey</a>.
 	 * 
 	 * @param url the URL you want to open in the browser
-	 * @throws IOException
-	 */
+	
+	 * @throws IOException */
 	public static final void launchBrowser(String url) throws IOException {
 		try {
 			if (isMac()) {
@@ -283,8 +285,8 @@ public class Executable {
 	/**
 	 * Checks the Operating System.
 	 * 
-	 * @return true if the current os is Windows
-	 */
+	
+	 * @return true if the current os is Windows */
 	public static boolean isWindows() {
 		String os = System.getProperty("os.name").toLowerCase();
 		return os.indexOf("windows") != -1 || os.indexOf("nt") != -1;
@@ -293,8 +295,8 @@ public class Executable {
 	/**
 	 * Checks the Operating System.
 	 * 
-	 * @return true if the current os is Windows
-	 */
+	
+	 * @return true if the current os is Windows */
 	public static boolean isWindows9X() {
 		String os = System.getProperty("os.name").toLowerCase();
 		return os.equals("windows 95") || os.equals("windows 98");
@@ -303,8 +305,8 @@ public class Executable {
 	/**
 	 * Checks the Operating System.
 	 * 
-	 * @return true if the current os is Apple
-	 */
+	
+	 * @return true if the current os is Apple */
 	public static boolean isMac() {
 		String os = System.getProperty("os.name").toLowerCase();
 		return os.indexOf("mac") != -1;
@@ -313,8 +315,8 @@ public class Executable {
 	/**
 	 * Checks the Operating System.
 	 * 
-	 * @return true if the current os is Linux
-	 */
+	
+	 * @return true if the current os is Linux */
 	public static boolean isLinux() {
 		String os = System.getProperty("os.name").toLowerCase();
 		return os.indexOf("linux") != -1;

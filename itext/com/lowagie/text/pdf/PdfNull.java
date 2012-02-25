@@ -57,6 +57,8 @@ package com.lowagie.text.pdf;
  * section 4.9 (page 53).
  *
  * @see		PdfObject
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfNull extends PdfObject {

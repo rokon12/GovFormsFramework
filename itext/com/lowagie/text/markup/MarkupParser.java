@@ -74,6 +74,7 @@ import com.lowagie.text.SimpleTable;
  * return an iText object with the according style.
  * 
  * @author blowagie
+ * @version $Revision: 1.0 $
  */
 public class MarkupParser extends HashMap {
 	/**
@@ -139,8 +140,8 @@ public class MarkupParser extends HashMap {
 	 *            the String that marks the start of a Comment section
 	 * @param endComment
 	 *            the String that marks the end of a Comment section.
-	 * @return the String stripped of its comment section
-	 */
+	
+	 * @return the String stripped of its comment section */
 	public static String removeComment(String string, String startComment,
 			String endComment) {
 		StringBuffer result = new StringBuffer();
@@ -163,8 +164,8 @@ public class MarkupParser extends HashMap {
 	 * @param string
 	 *            a String of this form: 'key1="value1"; key2="value2";...
 	 *            keyN="valueN" '
-	 * @return a Properties object
-	 */
+	
+	 * @return a Properties object */
 	public static Properties parseAttributes(String string) {
 		Properties result = new Properties();
 		if (string == null)
@@ -200,8 +201,8 @@ public class MarkupParser extends HashMap {
 	 * @param string
 	 *            a length in the form of an optional + or -, followed by a
 	 *            number and a unit.
-	 * @return a float
-	 */
+	
+	 * @return a float */
 
 	public static float parseLength(String string) {
 		int pos = 0;
@@ -260,8 +261,8 @@ public class MarkupParser extends HashMap {
 	 * 
 	 * @param color
 	 *            the <CODE>Color</CODE> that has to be converted.
-	 * @return the HTML representation of this <COLOR>Color </COLOR>
-	 */
+	
+	 * @return the HTML representation of this <COLOR>Color </COLOR> */
 
 	public static Color decodeColor(String color) {
 		int red = 0;
@@ -286,8 +287,8 @@ public class MarkupParser extends HashMap {
 	 * @param attributes
 	 *            a Properties object with the tagname and the attributes of the
 	 *            tag.
-	 * @return a key
-	 */
+	
+	 * @return a key */
 	private String getKey(Properties attributes) {
 		String tag = attributes.getProperty(MarkupTags.ITEXT_TAG);
 		String id = attributes.getProperty(MarkupTags.HTML_ATTR_CSS_ID);
@@ -331,8 +332,8 @@ public class MarkupParser extends HashMap {
 	 * Returns pagebreak information.
 	 * 
 	 * @param attributes
-	 * @return true if a page break is needed before the tag
-	 */
+	
+	 * @return true if a page break is needed before the tag */
 	public boolean getPageBreakBefore(Properties attributes) {
 		String key = getKey(attributes);
 		Properties styleattributes = (Properties) stylecache.get(key);
@@ -348,8 +349,8 @@ public class MarkupParser extends HashMap {
 	 * Returns pagebreak information.
 	 * 
 	 * @param attributes
-	 * @return true if a page break is needed after the tag
-	 */
+	
+	 * @return true if a page break is needed after the tag */
 	public boolean getPageBreakAfter(Properties attributes) {
 		String key = getKey(attributes);
 		Properties styleattributes = (Properties) stylecache.get(key);
@@ -367,8 +368,8 @@ public class MarkupParser extends HashMap {
 	 * @param attributes
 	 *            a Properties object with the tagname and the attributes of the
 	 *            tag.
-	 * @return an iText object
-	 */
+	
+	 * @return an iText object */
 	public Element getObject(Properties attributes) {
 		String key = getKey(attributes);
 		Properties styleattributes = (Properties) stylecache.get(key);
@@ -402,8 +403,8 @@ public class MarkupParser extends HashMap {
 	 * @param attributes
 	 *            a Properties object with the tagname and the attributes of the
 	 *            tag.
-	 * @return an iText Font;
-	 */
+	
+	 * @return an iText Font; */
 	public Font getFont(Properties attributes) {
 		String key = getKey(attributes);
 		Font f = (Font) fontcache.get(key);
@@ -423,8 +424,8 @@ public class MarkupParser extends HashMap {
 	 * 
 	 * @param attrs
 	 *            the attributes that came with the tag
-	 * @return an iText Rectangle object
-	 */
+	
+	 * @return an iText Rectangle object */
 	public Rectangle getRectangle(Properties attrs) {
 		String width = null;
 		String height = null;
@@ -451,8 +452,8 @@ public class MarkupParser extends HashMap {
 	 * @param font
 	 * @param styleattributes
 	 *            a Properties object containing keys and values
-	 * @return an iText Phrase object
-	 */
+	
+	 * @return an iText Phrase object */
 	public Element retrievePhrase(Font font, Properties styleattributes) {
 		Phrase p = new Phrase("", font);
 		if (styleattributes == null)
@@ -475,8 +476,8 @@ public class MarkupParser extends HashMap {
 	 * @param font
 	 * @param styleattributes
 	 *            a Properties object containing keys and values
-	 * @return an iText Paragraph object
-	 */
+	
+	 * @return an iText Paragraph object */
 	public Element retrieveParagraph(Font font, Properties styleattributes) {
 		Paragraph p = new Paragraph((Phrase) retrievePhrase(font,
 				styleattributes));
@@ -530,8 +531,8 @@ public class MarkupParser extends HashMap {
 	 * 
 	 * @param attributes
 	 * @param styleattributes
-	 * @return an iText Table
-	 */
+	
+	 * @return an iText Table */
 	private Element retrieveTable(Properties attributes,
 			Properties styleattributes) {
 		SimpleTable table = new SimpleTable();
@@ -544,8 +545,8 @@ public class MarkupParser extends HashMap {
 	 * 
 	 * @param attributes
 	 * @param styleattributes
-	 * @return an iText Cell
-	 */
+	
+	 * @return an iText Cell */
 	private Element retrieveTableRow(Properties attributes,
 			Properties styleattributes) {
 		SimpleCell row = new SimpleCell(SimpleCell.ROW);
@@ -621,8 +622,8 @@ public class MarkupParser extends HashMap {
 	 * 
 	 * @param attributes
 	 * @param styleattributes
-	 * @return an iText Cell
-	 */
+	
+	 * @return an iText Cell */
 	private Element retrieveTableCell(Properties attributes,
 			Properties styleattributes) {
 		SimpleCell cell = (SimpleCell) retrieveTableRow(attributes,
@@ -636,8 +637,8 @@ public class MarkupParser extends HashMap {
 	 * 
 	 * @param font
 	 * @param styleattributes
-	 * @return an iText ListItem
-	 */
+	
+	 * @return an iText ListItem */
 	private Element retrieveListItem(Font font, Properties styleattributes) {
 		ListItem li = new ListItem();
 		return li;
@@ -689,8 +690,8 @@ public class MarkupParser extends HashMap {
 	 * 
 	 * @param styleAttributes
 	 *            a Properties object containing keys and values
-	 * @return an iText Font object
-	 */
+	
+	 * @return an iText Font object */
 
 	public Font retrieveFont(Properties styleAttributes) {
 		String fontname = null;

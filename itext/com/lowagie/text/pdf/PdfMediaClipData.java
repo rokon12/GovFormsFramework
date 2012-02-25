@@ -48,8 +48,17 @@ package com.lowagie.text.pdf;
 
 import java.io.IOException;
 
+/**
+ */
 public class PdfMediaClipData extends PdfDictionary {
     
+    /**
+     * Constructor for PdfMediaClipData.
+     * @param file String
+     * @param fs PdfFileSpecification
+     * @param mimeType String
+     * @throws IOException
+     */
     PdfMediaClipData(String file, PdfFileSpecification fs, String mimeType) throws IOException {
         put(PdfName.TYPE,new PdfName("MediaClip"));
         put(PdfName.S, new PdfName("MCD"));

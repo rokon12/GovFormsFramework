@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author asif
+ * @version $Revision: 1.0 $
  */
 public class Role {
 
@@ -30,6 +31,12 @@ public class Role {
     public static final int ROLE_ADMIN = 1;
     
 
+    /**
+     * Method checkRole.
+     * @param role int
+     * @param user User
+     * @return String
+     */
     public static String checkRole(int role, User user) {
         if (user == null) {
             log.debug("User is null");

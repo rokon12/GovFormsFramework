@@ -93,8 +93,8 @@ public class RomanList extends List {
 	/**
 	 * Checks if the list is roman-letter with lowercase
 	 *
-	 * @return	<CODE>true</CODE> if the roman-letter is lowercase, <CODE>false</CODE> otherwise.
-	 */
+	
+	 * @return	<CODE>true</CODE> if the roman-letter is lowercase, <CODE>false</CODE> otherwise. */
 	public boolean isRomanLower() {
 		return romanlower;
 	}
@@ -103,7 +103,8 @@ public class RomanList extends List {
 	 * Adds an <CODE>Object</CODE> to the <CODE>List</CODE>.
 	 *
 	 * @param	o	the object to add.
-	 * @return true if adding the object succeeded
+	
+	 * @return true if adding the object succeeded * @see com.lowagie.text.TextElementArray#add(Object)
 	 */
 	public boolean add(Object o) {
 		if (o instanceof ListItem) {
@@ -186,8 +187,8 @@ public class RomanList extends List {
 	/** 
 	 * changes an int into a lower case roman number.
 	 * @param number the original number
-	 * @return the roman number (lower case)
-	 */
+	
+	 * @return the roman number (lower case) */
 	public static String toRoman(int number) {
 		return toRomanLowerCase(number);
 	}
@@ -195,8 +196,8 @@ public class RomanList extends List {
 	/** 
 	 * Changes an int into an upper case roman number.
 	 * @param number the original number
-	 * @return the roman number (upper case)
-	 */
+	
+	 * @return the roman number (upper case) */
 	public static String toRomanUppercase(int number) {
 		return toRomanLowerCase(number).toUpperCase();
 	}
@@ -204,8 +205,8 @@ public class RomanList extends List {
 	/** 
 	 * Changes an int into a lower case roman number.
 	 * @param number the original number
-	 * @return the roman number (lower case)
-	 */
+	
+	 * @return the roman number (lower case) */
 	public static String toRomanLowerCase(int number) {
 
 		// Buffer
@@ -263,6 +264,8 @@ public class RomanList extends List {
 
 	/**
 	 * Helper class for Roman Digits
+	 * @author Bazlur Rahman Rokon
+	 * @version $Revision: 1.0 $
 	 */
 	private static class RomanDigit {
 

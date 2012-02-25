@@ -54,6 +54,7 @@ import java.awt.Color;
 /**
  *
  * @author  Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class ExtendedColor extends Color{
     
@@ -95,8 +96,8 @@ public class ExtendedColor extends Color{
     
     /**
      * Gets the type of this color.
-     * @return one of the types (see constants)
-     */
+    
+     * @return one of the types (see constants) */
     public int getType() {
         return type;
     }
@@ -104,14 +105,19 @@ public class ExtendedColor extends Color{
     /**
      * Gets the type of a given color.
      * @param color
-     * @return one of the types (see constants)
-     */
+    
+     * @return one of the types (see constants) */
     public static int getType(Color color) {
         if (color instanceof ExtendedColor)
             return ((ExtendedColor)color).getType();
         return TYPE_RGB;
     }
 
+    /**
+     * Method normalize.
+     * @param value float
+     * @return float
+     */
     static final float normalize(float value) {
         if (value < 0)
             return 0;

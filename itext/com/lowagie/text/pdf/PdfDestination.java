@@ -54,6 +54,8 @@ package com.lowagie.text.pdf;
  * A <CODE>PdfColor</CODE> defines a Color (it's a <CODE>PdfArray</CODE> containing 3 values).
  *
  * @see		PdfDictionary
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfDestination extends PdfArray {
@@ -197,8 +199,8 @@ public class PdfDestination extends PdfArray {
 /**
  * Checks if an indirect reference to a page has been added.
  *
- * @return	<CODE>true</CODE> or <CODE>false</CODE>
- */
+
+ * @return	<CODE>true</CODE> or <CODE>false</CODE> */
     
     public boolean hasPage() {
         return status;
@@ -207,8 +209,8 @@ public class PdfDestination extends PdfArray {
 /** Adds the indirect reference of the destination page.
  *
  * @param page	an indirect reference
- * @return true if the page reference was added
- */
+
+ * @return true if the page reference was added */
     
     public boolean addPage(PdfIndirectReference page) {
         if (!status) {

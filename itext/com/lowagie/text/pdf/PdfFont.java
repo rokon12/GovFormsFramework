@@ -66,6 +66,8 @@ import com.lowagie.text.ExceptionConverter;
  * @see		PdfName
  * @see		PdfDictionary
  * @see		BadPdfFormatException
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 class PdfFont implements Comparable {
@@ -84,6 +86,11 @@ class PdfFont implements Comparable {
     
     // constructors
     
+    /**
+     * Constructor for PdfFont.
+     * @param bf BaseFont
+     * @param size float
+     */
     PdfFont(BaseFont bf, float size) {
         this.size = size;
         font = bf;
@@ -95,8 +102,8 @@ class PdfFont implements Comparable {
      * Compares this <CODE>PdfFont</CODE> with another
      *
      * @param	object	the other <CODE>PdfFont</CODE>
-     * @return	a value
-     */
+    
+     * @return	a value */
     
     public int compareTo(Object object) {
         if (image != null)
@@ -123,8 +130,8 @@ class PdfFont implements Comparable {
     /**
      * Returns the size of this font.
      *
-     * @return		a size
-     */
+    
+     * @return		a size */
     
     float size() {
         if (image == null)
@@ -137,8 +144,8 @@ class PdfFont implements Comparable {
     /**
      * Returns the approximative width of 1 character of this font.
      *
-     * @return		a width in Text Space
-     */
+    
+     * @return		a width in Text Space */
     
     float width() {
         return width(' ');
@@ -148,8 +155,8 @@ class PdfFont implements Comparable {
      * Returns the width of a certain character of this font.
      *
      * @param		character	a certain character
-     * @return		a width in Text Space
-     */
+    
+     * @return		a width in Text Space */
     
     float width(char character) {
         if (image == null)
@@ -158,6 +165,11 @@ class PdfFont implements Comparable {
             return image.scaledWidth();
     }
     
+    /**
+     * Method width.
+     * @param s String
+     * @return float
+     */
     float width(String s) {
         if (image == null)
             return font.getWidthPoint(s, size) * hScale;
@@ -165,14 +177,26 @@ class PdfFont implements Comparable {
             return image.scaledWidth();
     }
     
+    /**
+     * Method getFont.
+     * @return BaseFont
+     */
     BaseFont getFont() {
         return font;
     }
     
+    /**
+     * Method setImage.
+     * @param image Image
+     */
     void setImage(Image image) {
         this.image = image;
     }
     
+    /**
+     * Method getDefaultFont.
+     * @return PdfFont
+     */
     static PdfFont getDefaultFont() {
         try {
             BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.WINANSI, false);
@@ -182,6 +206,10 @@ class PdfFont implements Comparable {
             throw new ExceptionConverter(ee);
         }
     }
+    /**
+     * Method setHorizontalScaling.
+     * @param hScale float
+     */
     void setHorizontalScaling(float hScale) {
         this.hScale = hScale;
     }

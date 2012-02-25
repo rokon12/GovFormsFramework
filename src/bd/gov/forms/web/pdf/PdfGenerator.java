@@ -24,14 +24,26 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
 
+/**
+ */
 public class PdfGenerator {
 	private static final Logger log = LoggerFactory.getLogger(PdfFilter.class);
 	private OutputStream outputStream;
 
+	/**
+	 * Constructor for PdfGenerator.
+	 * @param os OutputStream
+	 */
 	public PdfGenerator(OutputStream os) {
 		this.outputStream = os;
 	}
 
+	/**
+	 * Method renderPdf.
+	 * @param htmlContent String
+	 * @param request HttpServletRequest
+	 * @throws Exception
+	 */
 	public void renderPdf(String htmlContent, HttpServletRequest request)
 			throws Exception {
 		log.debug("renderPdf");
@@ -85,6 +97,10 @@ public class PdfGenerator {
 		outputStream.close();
 	}
 
+	/**
+	 * Method addFonts.
+	 * @param resolver ITextFontResolver
+	 */
 	private void addFonts(ITextFontResolver resolver) {
 		try {
 			String fonts[] = { "Godhuli_03-09-2005.ttf",
@@ -110,6 +126,11 @@ public class PdfGenerator {
 		}
 	}
 
+	/**
+	 * Method getFontFilePath.
+	 * @param classpathRelativePath String
+	 * @return String
+	 */
 	private String getFontFilePath(String classpathRelativePath) {
 		Resource rsrc = new ClassPathResource(classpathRelativePath);
 		try {
@@ -122,6 +143,11 @@ public class PdfGenerator {
 		return classpathRelativePath;
 	}
 
+	/**
+	 * Method cleanUpHtml.
+	 * @param data String
+	 * @return String
+	 */
 	private String cleanUpHtml(String data) {
 		log.debug("cleanUpHtml-e:");
 
@@ -142,17 +168,33 @@ public class PdfGenerator {
 		return data;
 	}
 
+	/**
+	 * Method addHeadBodyTag.
+	 * @param data String
+	 * @return String
+	 */
 	private String addHeadBodyTag(String data) {
 		// data = "<html><head></head><body>" + data + "</body></html>";
 		return data;
 	}
 
+	/**
+	 * Method addCss.
+	 * @param data String
+	 * @return String
+	 */
 	private String addCss(String data) {
 		log.debug("addCss-e:");
 
 		return data;
 	}
 
+	/**
+	 * Method addHead.
+	 * @param data String
+	 * @param request HttpServletRequest
+	 * @return String
+	 */
 	private String addHead(String data, HttpServletRequest request) {
 		log.debug("addHeader-e:");
 		StringBuilder sb = new StringBuilder(500);
@@ -163,6 +205,11 @@ public class PdfGenerator {
 
 	}
 
+	/**
+	 * Method addFooter.
+	 * @param data String
+	 * @return String
+	 */
 	private String addFooter(String data) {
 		log.debug("addFooter-e:");
 

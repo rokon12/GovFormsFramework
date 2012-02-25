@@ -3,6 +3,8 @@ package com.lowagie.bc.asn1;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+/**
+ */
 public class DERBitString
     extends DERObject
     implements DERString
@@ -15,6 +17,8 @@ public class DERBitString
     /**
      * return the correct number of pad bits for a bit string defined in
      * a 32 bit constant
+     * @param bitString int
+     * @return int
      */
     static protected int getPadBits(
         int bitString)
@@ -63,6 +67,8 @@ public class DERBitString
     /**
      * return the correct number of bytes for a bit string defined in
      * a 32 bit constant
+     * @param bitString int
+     * @return byte[]
      */
     static protected byte[] getBytes(int bitString)
     {
@@ -88,8 +94,10 @@ public class DERBitString
     /**
      * return a Bit String from the passed in object
      *
-     * @exception IllegalArgumentException if the object cannot be converted.
-     */
+    
+     * @param obj Object
+     * @return DERBitString
+     * @exception IllegalArgumentException if the object cannot be converted. */
     public static DERBitString getInstance(
         Object  obj)
     {
@@ -123,9 +131,10 @@ public class DERBitString
      * @param obj the tagged object holding the object we want
      * @param explicit true if the object is meant to be explicitly
      *              tagged false otherwise.
+    
+     * @return DERBitString
      * @exception IllegalArgumentException if the tagged object cannot
-     *               be converted.
-     */
+     *               be converted. */
     public static DERBitString getInstance(
         ASN1TaggedObject obj,
         boolean          explicit)
@@ -133,6 +142,11 @@ public class DERBitString
         return getInstance(obj.getObject());
     }
     
+    /**
+     * Constructor for DERBitString.
+     * @param data byte
+     * @param padBits int
+     */
     protected DERBitString(
         byte    data,
         int     padBits)
@@ -154,12 +168,20 @@ public class DERBitString
         this.padBits = padBits;
     }
 
+    /**
+     * Constructor for DERBitString.
+     * @param data byte[]
+     */
     public DERBitString(
         byte[]  data)
     {
         this(data, 0);
     }
 
+    /**
+     * Constructor for DERBitString.
+     * @param obj DEREncodable
+     */
     public DERBitString(
         DEREncodable  obj)
     {
@@ -180,16 +202,29 @@ public class DERBitString
         }
     }
 
+    /**
+     * Method getBytes.
+     * @return byte[]
+     */
     public byte[] getBytes()
     {
         return data;
     }
 
+    /**
+     * Method getPadBits.
+     * @return int
+     */
     public int getPadBits()
     {
         return padBits;
     }
 
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
+     */
     void encode(
         DEROutputStream  out)
         throws IOException
@@ -202,6 +237,10 @@ public class DERBitString
         out.writeEncoded(BIT_STRING, bytes);
     }
 
+    /**
+     * Method hashCode.
+     * @return int
+     */
     public int hashCode()
     {
         int     value = 0;
@@ -214,6 +253,11 @@ public class DERBitString
         return value;
     }
     
+    /**
+     * Method equals.
+     * @param o Object
+     * @return boolean
+     */
     public boolean equals(
         Object  o)
     {
@@ -240,6 +284,11 @@ public class DERBitString
         return (padBits == other.padBits);
     }
 
+    /**
+     * Method getString.
+     * @return String
+     * @see com.lowagie.bc.asn1.DERString#getString()
+     */
     public String getString()
     {
 		StringBuffer    buf = new StringBuffer("#");

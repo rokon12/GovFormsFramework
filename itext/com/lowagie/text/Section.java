@@ -79,6 +79,8 @@ import java.util.Properties;
  * <STRONG>Section section11 = section1.addSection(40, title211, 2);</STRONG>
  * <STRONG>section11.add(someSectionText);</STRONG>
  * </PRE></BLOCKQUOTE>
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class Section extends ArrayList implements TextElementArray {
@@ -156,7 +158,8 @@ public class Section extends ArrayList implements TextElementArray {
  * <CODE>ElementListener</CODE>.
  *
  * @param	listener		the <CODE>ElementListener</CODE>
- * @return	<CODE>true</CODE> if the element was processed successfully
+
+ * @return	<CODE>true</CODE> if the element was processed successfully * @see com.lowagie.text.Element#process(ElementListener)
  */
     
     public boolean process(ElementListener listener) {
@@ -174,7 +177,8 @@ public class Section extends ArrayList implements TextElementArray {
 /**
  * Gets the type of the text element.
  *
- * @return	a type
+
+ * @return	a type * @see com.lowagie.text.Element#type()
  */
     
     public int type() {
@@ -184,7 +188,8 @@ public class Section extends ArrayList implements TextElementArray {
 /**
  * Gets all the chunks in this element.
  *
- * @return	an <CODE>ArrayList</CODE>
+
+ * @return	an <CODE>ArrayList</CODE> * @see com.lowagie.text.Element#getChunks()
  */
     
     public ArrayList getChunks() {
@@ -203,8 +208,8 @@ public class Section extends ArrayList implements TextElementArray {
  *
  * @param	index	index at which the specified element is to be inserted
  * @param	o   	an object of type <CODE>Paragraph</CODE>, <CODE>List</CODE> or <CODE>Table</CODE>=
- * @throws	ClassCastException if the object is not a <CODE>Paragraph</CODE>, <CODE>List</CODE> or <CODE>Table</CODE>
- */
+
+ * @throws	ClassCastException if the object is not a <CODE>Paragraph</CODE>, <CODE>List</CODE> or <CODE>Table</CODE> */
     
     public void add(int index, Object o) {
         try {
@@ -236,8 +241,9 @@ public class Section extends ArrayList implements TextElementArray {
  * to this <CODE>Section</CODE>.
  *
  * @param	o   	an object of type <CODE>Paragraph</CODE>, <CODE>List</CODE>, <CODE>Table</CODE> or another <CODE>Section</CODE>
- * @return	a boolean
- * @throws	ClassCastException if the object is not a <CODE>Paragraph</CODE>, <CODE>List</CODE>, <CODE>Table</CODE> or <CODE>Section</CODE>
+
+
+ * @return	a boolean * @throws	ClassCastException if the object is not a <CODE>Paragraph</CODE>, <CODE>List</CODE>, <CODE>Table</CODE> or <CODE>Section</CODE> * @see com.lowagie.text.TextElementArray#add(Object)
  */
     
     public boolean add(Object o) {
@@ -275,8 +281,9 @@ public class Section extends ArrayList implements TextElementArray {
  * to this <CODE>Section</CODE>.
  *
  * @param	collection	a collection of <CODE>Paragraph</CODE>s, <CODE>List</CODE>s and/or <CODE>Table</CODE>s
- * @return	<CODE>true</CODE> if the action succeeded, <CODE>false</CODE> if not.
- * @throws	ClassCastException if one of the objects isn't a <CODE>Paragraph</CODE>, <CODE>List</CODE>, <CODE>Table</CODE>
+
+
+ * @return	<CODE>true</CODE> if the action succeeded, <CODE>false</CODE> if not. * @throws	ClassCastException if one of the objects isn't a <CODE>Paragraph</CODE>, <CODE>List</CODE>, <CODE>Table</CODE> * @see java.util.List#addAll(Collection)
  */
     
     public boolean addAll(Collection collection) {
@@ -294,8 +301,8 @@ public class Section extends ArrayList implements TextElementArray {
  * @param	indentation	the indentation of the new section
  * @param	title		the title of the new section
  * @param	numberDepth	the numberDepth of the section
- * @return  a new Section object
- */
+
+ * @return  a new Section object */
     
     public Section addSection(float indentation, Paragraph title, int numberDepth) {
         Section section = new Section(title, numberDepth);
@@ -309,8 +316,8 @@ public class Section extends ArrayList implements TextElementArray {
  *
  * @param	indentation	the indentation of the new section
  * @param	title		the title of the new section
- * @return  a new Section object
- */
+
+ * @return  a new Section object */
     
     public Section addSection(float indentation, Paragraph title) {
         Section section = new Section(title, 1);
@@ -324,8 +331,8 @@ public class Section extends ArrayList implements TextElementArray {
  *
  * @param	title		the title of the new section
  * @param	numberDepth	the numberDepth of the section
- * @return  a new Section object
- */
+
+ * @return  a new Section object */
     
     public Section addSection(Paragraph title, int numberDepth) {
         Section section = new Section(title, numberDepth);
@@ -337,8 +344,8 @@ public class Section extends ArrayList implements TextElementArray {
  * Creates a <CODE>Section</CODE>, adds it to this <CODE>Section</CODE> and returns it.
  *
  * @param	title		the title of the new section
- * @return  a new Section object
- */
+
+ * @return  a new Section object */
     
     public Section addSection(Paragraph title) {
         Section section = new Section(title, numberDepth + 1);
@@ -352,8 +359,8 @@ public class Section extends ArrayList implements TextElementArray {
  * @param	indentation	the indentation of the new section
  * @param	title		the title of the new section
  * @param	numberDepth	the numberDepth of the section
- * @return  a new Section object
- */
+
+ * @return  a new Section object */
     
     public Section addSection(float indentation, String title, int numberDepth) {
         Section section = new Section(new Paragraph(title), numberDepth);
@@ -367,8 +374,8 @@ public class Section extends ArrayList implements TextElementArray {
  *
  * @param	title		the title of the new section
  * @param	numberDepth	the numberDepth of the section
- * @return  a new Section object
- */
+
+ * @return  a new Section object */
     
     public Section addSection(String title, int numberDepth) {
         Section section = new Section(new Paragraph(title), numberDepth);
@@ -381,8 +388,8 @@ public class Section extends ArrayList implements TextElementArray {
  *
  * @param	indentation	the indentation of the new section
  * @param	title		the title of the new section
- * @return  a new Section object
- */
+
+ * @return  a new Section object */
     
     public Section addSection(float indentation, String title) {
         Section section = new Section(new Paragraph(title), 1);
@@ -395,8 +402,8 @@ public class Section extends ArrayList implements TextElementArray {
  * Adds a <CODE>Section</CODE> to this <CODE>Section</CODE> and returns it.
  *
  * @param	title		the title of the new section
- * @return  a new Section object
- */
+
+ * @return  a new Section object */
     
     public Section addSection(String title) {
         Section section = new Section(new Paragraph(title), numberDepth + 1);
@@ -408,8 +415,8 @@ public class Section extends ArrayList implements TextElementArray {
  * Creates a given <CODE>Section</CODE> following a set of attributes and adds it to this one.
  *
  * @param	attributes	the attributes
- * @return      a Section
- */
+
+ * @return      a Section */
     
     public Section addSection(Properties attributes) {
         Section section = new Section(new Paragraph(""), 1);
@@ -506,9 +513,9 @@ public class Section extends ArrayList implements TextElementArray {
 /**
  * Checks if this object is a <CODE>Chapter</CODE>.
  *
+
  * @return	<CODE>true</CODE> if it is a <CODE>Chapter</CODE>,
- *			<CODE>false</CODE> if it is a <CODE>Section</CODE>.
- */
+ *			<CODE>false</CODE> if it is a <CODE>Section</CODE>. */
     
     public boolean isChapter() {
         return type() == Element.CHAPTER;
@@ -517,9 +524,9 @@ public class Section extends ArrayList implements TextElementArray {
 /**
  * Checks if this object is a <CODE>Section</CODE>.
  *
+
  * @return	<CODE>true</CODE> if it is a <CODE>Section</CODE>,
- *			<CODE>false</CODE> if it is a <CODE>Chapter</CODE>.
- */
+ *			<CODE>false</CODE> if it is a <CODE>Chapter</CODE>. */
     
     public boolean isSection() {
         return type() == Element.SECTION;
@@ -528,8 +535,8 @@ public class Section extends ArrayList implements TextElementArray {
 /**
  * Returns the numberdepth of this <CODE>Section</CODE>.
  *
- * @return	the numberdepth
- */
+
+ * @return	the numberdepth */
     
     public int numberDepth() {
         return numberDepth;
@@ -538,8 +545,8 @@ public class Section extends ArrayList implements TextElementArray {
 /**
  * Returns the indentation of this <CODE>Section</CODE> on the left side.
  *
- * @return	the indentation
- */
+
+ * @return	the indentation */
     
     public float indentationLeft() {
         return indentationLeft;
@@ -548,8 +555,8 @@ public class Section extends ArrayList implements TextElementArray {
 /**
  * Returns the indentation of this <CODE>Section</CODE> on the right side.
  *
- * @return	the indentation
- */
+
+ * @return	the indentation */
     
     public float indentationRight() {
         return indentationRight;
@@ -558,8 +565,8 @@ public class Section extends ArrayList implements TextElementArray {
 /**
  * Returns the indentation of the content of this <CODE>Section</CODE>.
  *
- * @return	the indentation
- */
+
+ * @return	the indentation */
     
     public float indentation() {
         return sectionIndent;
@@ -568,8 +575,8 @@ public class Section extends ArrayList implements TextElementArray {
 /**
  * Returns the depth of this section.
  *
- * @return	the depth
- */
+
+ * @return	the depth */
     
     public int depth() {
         return numbers.size();
@@ -578,8 +585,8 @@ public class Section extends ArrayList implements TextElementArray {
 /**
  * Returns the title, preceeded by a certain number of sectionnumbers.
  *
- * @return	a <CODE>Paragraph</CODE>
- */
+
+ * @return	a <CODE>Paragraph</CODE> */
     
     public Paragraph title() {
         if (title == null) {
@@ -604,8 +611,8 @@ public class Section extends ArrayList implements TextElementArray {
  * Checks if a given tag corresponds with a title tag for this object.
  *
  * @param   tag     the given tag
- * @return  true if the tag corresponds
- */
+
+ * @return  true if the tag corresponds */
     
     public static boolean isTitle(String tag) {
         return ElementTags.TITLE.equals(tag);
@@ -615,16 +622,16 @@ public class Section extends ArrayList implements TextElementArray {
  * Checks if a given tag corresponds with this object.
  *
  * @param   tag     the given tag
- * @return  true if the tag corresponds
- */
+
+ * @return  true if the tag corresponds */
     
     public static boolean isTag(String tag) {
         return ElementTags.SECTION.equals(tag);
     }
     
     /** Getter for property bookmarkOpen.
-     * @return Value of property bookmarkOpen.
-     */
+    
+     * @return Value of property bookmarkOpen. */
     public boolean isBookmarkOpen() {
         return bookmarkOpen;
     }
@@ -639,8 +646,8 @@ public class Section extends ArrayList implements TextElementArray {
     
     /**
      * Gets the bookmark title.
-     * @return the bookmark title
-     */    
+    
+     * @return the bookmark title */    
     public Paragraph getBookmarkTitle() {
         if (bookmarkTitle == null)
             return title();

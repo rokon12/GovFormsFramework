@@ -60,6 +60,8 @@ package com.lowagie.text;
  * @see		Chapter
  * @see		Anchor
  * @see		Cell
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public interface TextElementArray extends Element {
@@ -68,8 +70,8 @@ public interface TextElementArray extends Element {
    * Adds an object to the <CODE>TextElementArray</CODE>.
    *
    * @param	o			an object that has to be added
-   * @return	<CODE>true</CODE> if the addition succeeded; <CODE>false</CODE> otherwise
-   */
+  
+   * @return	<CODE>true</CODE> if the addition succeeded; <CODE>false</CODE> otherwise */
     
     public boolean add(Object o);
 }

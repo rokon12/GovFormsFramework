@@ -55,6 +55,7 @@ import com.lowagie.text.ExceptionConverter;
 /**
  *
  * @author  psoares
+ * @version $Revision: 1.0 $
  */
 public class DocumentFont extends BaseFont {
     
@@ -99,7 +100,8 @@ public class DocumentFont extends BaseFont {
         0,198,0,170,0,0,0,0,321,216,338,186,0,0,0,0,
         0,230,0,0,0,305,0,0,322,248,339,223,0,0,0,0};
 
-    /** Creates a new instance of DocumentFont */
+    /** Creates a new instance of DocumentFont * @param refFont PRIndirectReference
+     */
     DocumentFont(PRIndirectReference refFont) {
         encoding = "";
         fontSpecific = false;
@@ -229,6 +231,10 @@ public class DocumentFont extends BaseFont {
         }
     }
     
+    /**
+     * Method fillEncoding.
+     * @param encoding PdfName
+     */
     void fillEncoding(PdfName encoding) {
         if (PdfName.MAC_ROMAN_ENCODING.equals(encoding) || PdfName.WIN_ANSI_ENCODING.equals(encoding)) {
             byte b[] = new byte[256];
@@ -254,9 +260,9 @@ public class DocumentFont extends BaseFont {
      * found in the Open Type specification, chapter 2, in the 'name' table.<br>
      * For the other fonts the array has a single element with {"", "", "",
      * font name}.
-     * @return the family name of the font
+    
      *
-     */
+     * @return the family name of the font */
     public String[][] getFamilyFontName() {
         return null;
     }
@@ -267,9 +273,9 @@ public class DocumentFont extends BaseFont {
      * and <CODE>BBOXURY</CODE>.
      * @param key the parameter to be extracted
      * @param fontSize the font size in points
-     * @return the parameter in points
+    
      *
-     */
+     * @return the parameter in points */
     public float getFontDescriptor(int key, float fontSize) {
         if (cjkMirror != null)
             return cjkMirror.getFontDescriptor(key, fontSize);
@@ -306,9 +312,9 @@ public class DocumentFont extends BaseFont {
      * found in the Open Type specification, chapter 2, in the 'name' table.<br>
      * For the other fonts the array has a single element with {"", "", "",
      * font name}.
-     * @return the full name of the font
+    
      *
-     */
+     * @return the full name of the font */
     public String[][] getFullFontName() {
         return null;
     }
@@ -316,17 +322,17 @@ public class DocumentFont extends BaseFont {
     /** Gets the kerning between two Unicode chars.
      * @param char1 the first char
      * @param char2 the second char
-     * @return the kerning to be applied
+    
      *
-     */
+     * @return the kerning to be applied */
     public int getKerning(char char1, char char2) {
         return 0;
     }
     
     /** Gets the postscript font name.
-     * @return the postscript font name
+    
      *
-     */
+     * @return the postscript font name */
     public String getPostscriptFontName() {
         return fontName;
     }
@@ -335,17 +341,17 @@ public class DocumentFont extends BaseFont {
      * or the <CODE>name</CODE>. If the <CODE>name</CODE> is null it's a symbolic font.
      * @param c the unicode char
      * @param name the glyph name
-     * @return the width of the char
+    
      *
-     */
+     * @return the width of the char */
     int getRawWidth(int c, String name) {
         return 0;
     }
     
     /** Checks if the font has any kerning pairs.
-     * @return <CODE>true</CODE> if the font has any kerning pairs
+    
      *
-     */
+     * @return <CODE>true</CODE> if the font has any kerning pairs */
     public boolean hasKernPairs() {
         return false;
     }
@@ -354,13 +360,18 @@ public class DocumentFont extends BaseFont {
      * @param writer the writer for this document
      * @param ref the font indirect reference
      * @param params several parameters that depend on the font type
-     * @throws IOException on error
-     * @throws DocumentException error in generating the object
+    
+    
      *
-     */
+     * @throws DocumentException error in generating the object * @throws IOException on error */
     void writeFont(PdfWriter writer, PdfIndirectReference ref, Object[] params) throws DocumentException, IOException {
     }
 
+    /**
+     * Method getWidth.
+     * @param text String
+     * @return int
+     */
     public int getWidth(String text) {
         if (cjkMirror != null)
             return cjkMirror.getWidth(text);
@@ -368,6 +379,11 @@ public class DocumentFont extends BaseFont {
             return super.getWidth(text);
     }
     
+    /**
+     * Method convertToBytes.
+     * @param text String
+     * @return byte[]
+     */
     byte[] convertToBytes(String text) {
         if (cjkMirror != null)
             return PdfEncodings.convertToBytes(text, CJKFont.CJK_ENCODING);
@@ -380,10 +396,19 @@ public class DocumentFont extends BaseFont {
         }
     }
     
+    /**
+     * Method getIndirectReference.
+     * @return PdfIndirectReference
+     */
     PdfIndirectReference getIndirectReference() {
         return refFont;
     }
     
+    /**
+     * Method charExists.
+     * @param c char
+     * @return boolean
+     */
     public boolean charExists(char c) {
         if (cjkMirror != null)
             return cjkMirror.charExists(c);
@@ -399,14 +424,32 @@ public class DocumentFont extends BaseFont {
     public void setPostscriptFontName(String name) {
     }
     
+    /**
+     * Method setKerning.
+     * @param char1 char
+     * @param char2 char
+     * @param kern int
+     * @return boolean
+     */
     public boolean setKerning(char char1, char char2, int kern) {
         return false;
     }
     
+    /**
+     * Method getCharBBox.
+     * @param c char
+     * @return int[]
+     */
     public int[] getCharBBox(char c) {
         return null;
     }
     
+    /**
+     * Method getRawCharBBox.
+     * @param c int
+     * @param name String
+     * @return int[]
+     */
     protected int[] getRawCharBBox(int c, String name) {
         return null;
     }

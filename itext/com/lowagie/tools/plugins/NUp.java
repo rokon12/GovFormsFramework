@@ -33,6 +33,8 @@ import com.lowagie.tools.arguments.ToolArgument;
 
 /**
  * This tool lets you generate a PDF that shows N pages on 1.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class NUp extends AbstractTool {
 	

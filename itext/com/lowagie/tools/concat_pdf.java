@@ -29,6 +29,8 @@ import java.util.ArrayList;
 
 /**
  * Tool that can be used to concatenate existing PDF files.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class concat_pdf {
     

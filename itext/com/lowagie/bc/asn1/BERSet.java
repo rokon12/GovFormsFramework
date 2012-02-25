@@ -3,6 +3,8 @@ package com.lowagie.bc.asn1;
 import java.io.IOException;
 import java.util.Enumeration;
 
+/**
+ */
 public class BERSet
     extends DERSet
 {
@@ -15,6 +17,7 @@ public class BERSet
 
     /**
      * create a set containing one object
+     * @param obj DEREncodable
      */
     public BERSet(
         DEREncodable    obj)
@@ -24,6 +27,7 @@ public class BERSet
 
     /**
      * create a set containing a vector of objects.
+     * @param v DEREncodableVector
      */
     public BERSet(
         DEREncodableVector   v)
@@ -32,6 +36,11 @@ public class BERSet
     }
 
     /*
+     */
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
      */
     void encode(
         DEROutputStream out)

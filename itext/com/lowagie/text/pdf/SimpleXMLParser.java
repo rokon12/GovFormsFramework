@@ -68,11 +68,18 @@ import java.util.HashMap;
  * The code is based on <A HREF="http://www.javaworld.com/javaworld/javatips/javatip128/">
  * http://www.javaworld.com/javaworld/javatips/javatip128/</A> with some extra
  * code from XERCES to recognize the encoding.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class SimpleXMLParser {
     private static final HashMap fIANA2JavaMap = new HashMap();
     private static final HashMap entityMap = new HashMap();
     
+    /**
+     * Method popMode.
+     * @param st Stack
+     * @return int
+     */
     private static int popMode(Stack st) {
         if(!st.empty())
             return ((Integer)st.pop()).intValue();
@@ -105,8 +112,8 @@ public class SimpleXMLParser {
      * Parses the XML document firing the events to the handler.
      * @param doc the document handler
      * @param in the document. The encoding is deduced from the stream. The stream is not closed
-     * @throws IOException on error
-     */    
+    
+     * @throws IOException on error */    
     public static void parse(SimpleXMLDocHandler doc, InputStream in) throws IOException {
         byte b4[] = new byte[4];
         int count = in.read(b4);
@@ -142,6 +149,11 @@ public class SimpleXMLParser {
         parse(doc, new InputStreamReader(in, getJavaEncoding(encoding)));
     }
     
+    /**
+     * Method getDeclaredEncoding.
+     * @param decl String
+     * @return String
+     */
     private static String getDeclaredEncoding(String decl) {
         if (decl == null)
             return null;
@@ -171,8 +183,8 @@ public class SimpleXMLParser {
      * Gets the java encoding from the IANA encoding. If the encoding cannot be found
      * it returns the input.
      * @param iana the IANA encoding
-     * @return the java encoding
-     */    
+    
+     * @return the java encoding */    
     public static String getJavaEncoding(String iana) {
         String IANA = iana.toUpperCase();
         String jdec = (String)fIANA2JavaMap.get(IANA);
@@ -181,6 +193,12 @@ public class SimpleXMLParser {
         return jdec;
     }
     
+    /**
+     * Method parse.
+     * @param doc SimpleXMLDocHandler
+     * @param r Reader
+     * @throws IOException
+     */
     public static void parse(SimpleXMLDocHandler doc,Reader r) throws IOException {
         parse(doc, null, r, false);
     }
@@ -189,8 +207,10 @@ public class SimpleXMLParser {
      * Parses the XML document firing the events to the handler.
      * @param doc the document handler
      * @param r the document. The encoding is already resolved. The reader is not closed
-     * @throws IOException on error
-     */
+    
+     * @param comment SimpleXMLDocHandlerComment
+     * @param html boolean
+     * @throws IOException on error */
     public static void parse(SimpleXMLDocHandler doc, SimpleXMLDocHandlerComment comment, Reader r, boolean html) throws IOException {
         BufferedReader reader;
         if (r instanceof BufferedReader)
@@ -573,6 +593,13 @@ public class SimpleXMLParser {
         else
             exc("missing end tag",line,col);
     }
+    /**
+     * Method exc.
+     * @param s String
+     * @param line int
+     * @param col int
+     * @throws IOException
+     */
     private static void exc(String s,int line,int col) throws IOException {
         throw new IOException(s+" near line "+line+", column "+col);
     }
@@ -581,8 +608,8 @@ public class SimpleXMLParser {
      * Escapes a string with the appropriated XML codes.
      * @param s the string to be escaped
      * @param onlyASCII codes above 127 will always be escaped with &amp;#nn; if <CODE>true</CODE>
-     * @return the escaped string
-     */    
+    
+     * @return the escaped string */    
     public static String escapeXML(String s, boolean onlyASCII) {
         char cc[] = s.toCharArray();
         int len = cc.length;
@@ -615,6 +642,11 @@ public class SimpleXMLParser {
         return sb.toString();
     }
     
+    /**
+     * Method decodeEntity.
+     * @param s String
+     * @return char
+     */
     public static char decodeEntity(String s) {
         Character c = (Character)entityMap.get(s);
         if (c == null)
@@ -623,6 +655,11 @@ public class SimpleXMLParser {
             return c.charValue();
     }
     
+    /**
+     * Method getEncodingName.
+     * @param b4 byte[]
+     * @return String
+     */
     private static String getEncodingName(byte[] b4) {
         
         // UTF-16, with BOM

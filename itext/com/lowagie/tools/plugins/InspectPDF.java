@@ -64,6 +64,8 @@ import com.lowagie.tools.arguments.ToolArgument;
 
 /**
  * Allows you to inspect an existing PDF file.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class InspectPDF extends AbstractTool {
 	static {

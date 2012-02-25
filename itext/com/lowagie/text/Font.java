@@ -68,6 +68,8 @@ import com.lowagie.text.markup.MarkupTags;
  * </PRE>
  * 
  * </BLOCKQUOTE>
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class Font implements Comparable {
@@ -280,8 +282,8 @@ public class Font implements Comparable {
 	 * 
 	 * @param object
 	 *            the other <CODE>Font</CODE>
-	 * @return a value
-	 */
+	
+	 * @return a value */
 
 	public int compareTo(Object object) {
 		if (object == null) {
@@ -340,8 +342,8 @@ public class Font implements Comparable {
 	 * 
 	 * @param family
 	 *            A <CODE>String</CODE> representing a certain font-family
-	 * @return the corresponding index
-	 */
+	
+	 * @return the corresponding index */
 
 	public static int getFamilyIndex(String family) {
 		if (family.equalsIgnoreCase(FontFactory.COURIER)) {
@@ -365,8 +367,8 @@ public class Font implements Comparable {
 	/**
 	 * Gets the familyname as a String.
 	 * 
-	 * @return the familyname
-	 */
+	
+	 * @return the familyname */
 
 	public String getFamilyname() {
 		String tmp = "unknown";
@@ -444,8 +446,8 @@ public class Font implements Comparable {
 	 * 
 	 * @param style
 	 *            A <CODE>String</CODE>
-	 * @return the corresponding value
-	 */
+	
+	 * @return the corresponding value */
 
 	public static int getStyleValue(String style) {
 		int s = 0;
@@ -501,8 +503,8 @@ public class Font implements Comparable {
 	 * 
 	 * @param linespacing
 	 *            a certain linespacing
-	 * @return the height of a line
-	 */
+	
+	 * @return the height of a line */
 
 	public float leading(float linespacing) {
 		if (size == UNDEFINED) {
@@ -516,8 +518,8 @@ public class Font implements Comparable {
 	 * <P>
 	 * If so, the standard should be used.
 	 * 
-	 * @return a <CODE>boolean</CODE>
-	 */
+	
+	 * @return a <CODE>boolean</CODE> */
 
 	public boolean isStandardFont() {
 		return (family == UNDEFINED && size == UNDEFINED && style == UNDEFINED
@@ -530,8 +532,8 @@ public class Font implements Comparable {
 	 * 
 	 * @param font
 	 *            the font of a bigger element class
-	 * @return a <CODE>Font</CODE>
-	 */
+	
+	 * @return a <CODE>Font</CODE> */
 
 	public Font difference(Font font) {
 		// size
@@ -578,8 +580,8 @@ public class Font implements Comparable {
 	/**
 	 * Gets the family of this font.
 	 * 
-	 * @return the value of the family
-	 */
+	
+	 * @return the value of the family */
 
 	public int family() {
 		return family;
@@ -588,8 +590,8 @@ public class Font implements Comparable {
 	/**
 	 * Gets the size of this font.
 	 * 
-	 * @return a size
-	 */
+	
+	 * @return a size */
 
 	public float size() {
 		return size;
@@ -598,8 +600,8 @@ public class Font implements Comparable {
 	/**
 	 * Gets the style of this font.
 	 * 
-	 * @return a size
-	 */
+	
+	 * @return a size */
 
 	public int style() {
 		return style;
@@ -608,8 +610,8 @@ public class Font implements Comparable {
 	/**
 	 * checks if this font is Bold.
 	 * 
-	 * @return a <CODE>boolean</CODE>
-	 */
+	
+	 * @return a <CODE>boolean</CODE> */
 
 	public boolean isBold() {
 		if (style == UNDEFINED) {
@@ -621,8 +623,8 @@ public class Font implements Comparable {
 	/**
 	 * checks if this font is Bold.
 	 * 
-	 * @return a <CODE>boolean</CODE>
-	 */
+	
+	 * @return a <CODE>boolean</CODE> */
 
 	public boolean isItalic() {
 		if (style == UNDEFINED) {
@@ -634,8 +636,8 @@ public class Font implements Comparable {
 	/**
 	 * checks if this font is underlined.
 	 * 
-	 * @return a <CODE>boolean</CODE>
-	 */
+	
+	 * @return a <CODE>boolean</CODE> */
 
 	public boolean isUnderlined() {
 		if (style == UNDEFINED) {
@@ -647,8 +649,8 @@ public class Font implements Comparable {
 	/**
 	 * checks if the style of this font is STRIKETHRU.
 	 * 
-	 * @return a <CODE>boolean</CODE>
-	 */
+	
+	 * @return a <CODE>boolean</CODE> */
 
 	public boolean isStrikethru() {
 		if (style == UNDEFINED) {
@@ -660,8 +662,8 @@ public class Font implements Comparable {
 	/**
 	 * Gets the color of this font.
 	 * 
-	 * @return a color
-	 */
+	
+	 * @return a color */
 
 	public Color color() {
 		return color;
@@ -670,8 +672,8 @@ public class Font implements Comparable {
 	/**
 	 * Gets the <CODE>BaseFont</CODE> inside this object.
 	 * 
-	 * @return the <CODE>BaseFont</CODE>
-	 */
+	
+	 * @return the <CODE>BaseFont</CODE> */
 
 	public BaseFont getBaseFont() {
 		return baseFont;
@@ -685,8 +687,8 @@ public class Font implements Comparable {
 	 *            <CODE>true</CODE> to use the special encoding for Symbol and
 	 *            ZapfDingbats, <CODE>false</CODE> to always use <CODE>Cp1252
 	 *            </CODE>
-	 * @return the <CODE>BaseFont</CODE> this class represents
-	 */
+	
+	 * @return the <CODE>BaseFont</CODE> this class represents */
 	public BaseFont getCalculatedBaseFont(boolean specialEncoding) {
 		if (baseFont != null)
 			return baseFont;
@@ -773,9 +775,9 @@ public class Font implements Comparable {
 	 * Gets the style that can be used with the calculated <CODE>BaseFont
 	 * </CODE>.
 	 * 
+	
 	 * @return the style that can be used with the calculated <CODE>BaseFont
-	 *         </CODE>
-	 */
+	 *         </CODE> */
 	public int getCalculatedStyle() {
 		int style = this.style;
 		if (style == UNDEFINED) {
@@ -793,9 +795,9 @@ public class Font implements Comparable {
 	 * Gets the size that can be used with the calculated <CODE>BaseFont
 	 * </CODE>.
 	 * 
+	
 	 * @return the size that can be used with the calculated <CODE>BaseFont
-	 *         </CODE>
-	 */
+	 *         </CODE> */
 	public float getCalculatedSize() {
 		float s = this.size;
 		if (s == UNDEFINED) {

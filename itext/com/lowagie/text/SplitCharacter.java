@@ -55,6 +55,7 @@ import com.lowagie.text.pdf.PdfChunk;
 /** Interface for customizing the split character.
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 
 public interface SplitCharacter {
@@ -91,8 +92,8 @@ public interface SplitCharacter {
      * {@link PdfChunk#getUnicodeEquivalent(char)}. It may be <CODE>null</CODE>
      * or shorter than <CODE>end</CODE>. If <CODE>null</CODE> no convertion takes place.
      * If shorter than <CODE>end</CODE> the last element is used
-     * @return <CODE>true</CODE> if the character(s) can split a line
-     */
+    
+     * @return <CODE>true</CODE> if the character(s) can split a line */
     
     public boolean isSplitCharacter(int start, int current, int end, char cc[], PdfChunk ck[]);
 }

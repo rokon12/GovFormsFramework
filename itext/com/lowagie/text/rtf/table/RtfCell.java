@@ -169,8 +169,8 @@ public class RtfCell extends Cell implements RtfExtendedElement {
      * Constructs a RtfCell based upon an Element
      * 
      * @param element The Element to base the RtfCell on
-     * @throws BadElementException If the Element is not valid
-     */
+    
+     * @throws BadElementException If the Element is not valid */
     public RtfCell(Element element) throws BadElementException {
         super(element);
         this.borders = new RtfBorderGroup();
@@ -285,7 +285,8 @@ public class RtfCell extends Cell implements RtfExtendedElement {
     /**
      * Write the cell definition part of this RtfCell
      * 
-     * @return A byte array with the cell definition
+    
+     * @return A byte array with the cell definition * @see com.lowagie.text.rtf.RtfExtendedElement#writeDefinition()
      */
     public byte[] writeDefinition() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -349,7 +350,8 @@ public class RtfCell extends Cell implements RtfExtendedElement {
     /**
      * Write the content of this RtfCell
      * 
-     * @return A byte array with the content of this RtfCell
+    
+     * @return A byte array with the content of this RtfCell * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -392,8 +394,8 @@ public class RtfCell extends Cell implements RtfExtendedElement {
     /**
      * Gets the right margin of this RtfCell
      * 
-     * @return The right margin of this RtfCell.
-     */
+    
+     * @return The right margin of this RtfCell. */
     protected int getCellRight() {
         return this.cellRight;
     }
@@ -410,8 +412,8 @@ public class RtfCell extends Cell implements RtfExtendedElement {
     /**
      * Gets the cell width of this RtfCell
      * 
-     * @return The cell width of this RtfCell
-     */
+    
+     * @return The cell width of this RtfCell */
     protected int getCellWidth() {
         return this.cellWidth;
     }
@@ -419,8 +421,8 @@ public class RtfCell extends Cell implements RtfExtendedElement {
     /**
      * Gets the number of columns this RtfCell spans
      * 
-     * @return The number of columns this RtfCell spans
-     */
+    
+     * @return The number of columns this RtfCell spans */
     protected int getColspan() {
         return this.colspan;
     }
@@ -428,8 +430,8 @@ public class RtfCell extends Cell implements RtfExtendedElement {
     /**
      * Gets the number of rows this RtfCell spans
      * 
-     * @return The number of rows this RtfCell spans
-     */
+    
+     * @return The number of rows this RtfCell spans */
     protected int getRowspan() {
         return this.rowspan;
     }
@@ -437,8 +439,8 @@ public class RtfCell extends Cell implements RtfExtendedElement {
     /**
      * Gets the cell padding of this RtfCell
      * 
-     * @return The cell padding of this RtfCell
-     */
+    
+     * @return The cell padding of this RtfCell */
     protected int getCellpadding() {
         return this.cellPadding;
     }
@@ -446,8 +448,8 @@ public class RtfCell extends Cell implements RtfExtendedElement {
     /**
      * Gets the borders of this RtfCell
      * 
-     * @return The borders of this RtfCell
-     */
+    
+     * @return The borders of this RtfCell */
     protected RtfBorderGroup getBorders() {
         return this.borders;
     }
@@ -464,8 +466,8 @@ public class RtfCell extends Cell implements RtfExtendedElement {
     /**
      * Get the vertical alignment of this RtfCell
      * 
-     * @return The vertical alignment of this RtfCell
-     */
+    
+     * @return The vertical alignment of this RtfCell */
     protected int getVerticalAlignment() {
         return this.verticalAlignment;
     }
@@ -473,8 +475,8 @@ public class RtfCell extends Cell implements RtfExtendedElement {
     /**
      * Get the background color of this RtfCell
      * 
-     * @return The background color of this RtfCell
-     */
+    
+     * @return The background color of this RtfCell */
     protected RtfColor getBackgroundColor() {
         return this.backgroundColor;
     }
@@ -498,6 +500,7 @@ public class RtfCell extends Cell implements RtfExtendedElement {
      * Sets the RtfDocument this RtfCell belongs to
      * 
      * @param doc The RtfDocument to use
+     * @see com.lowagie.text.rtf.RtfBasicElement#setRtfDocument(RtfDocument)
      */
     public void setRtfDocument(RtfDocument doc) {
         this.document = doc;
@@ -506,6 +509,7 @@ public class RtfCell extends Cell implements RtfExtendedElement {
     /**
      * Unused
      * @param inTable
+     * @see com.lowagie.text.rtf.RtfBasicElement#setInTable(boolean)
      */
     public void setInTable(boolean inTable) {
     }
@@ -514,6 +518,7 @@ public class RtfCell extends Cell implements RtfExtendedElement {
      * Sets whether this RtfCell is in a header
      * 
      * @param inHeader <code>True</code> if this RtfCell is in a header, <code>false</code> otherwise
+     * @see com.lowagie.text.rtf.RtfBasicElement#setInHeader(boolean)
      */
     public void setInHeader(boolean inHeader) {
         this.inHeader = inHeader;
@@ -527,8 +532,8 @@ public class RtfCell extends Cell implements RtfExtendedElement {
      * of that string.
      *
      * @param i The integer to convert
-     * @return A byte array representing the integer
-     */
+    
+     * @return A byte array representing the integer */
     private byte[] intToByteArray(int i) {
         return Integer.toString(i).getBytes();
     }

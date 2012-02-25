@@ -54,6 +54,7 @@ import com.lowagie.text.Paragraph;
  * Chapter with auto numbering.
  *
  * @author Michael Niedermair
+ * @version $Revision: 1.0 $
  */
 public class ChapterAutoNumber extends Chapter {
 
@@ -84,8 +85,8 @@ public class ChapterAutoNumber extends Chapter {
      * Create a new section for this chapter and ad it.
      *
      * @param title  the Section title (as a <CODE>String</CODE>)
-     * @return Returns the new section.
-     */
+    
+     * @return Returns the new section. */
     public Section addSection(final String title) {
         return addSection(title, 2);
     }
@@ -94,8 +95,8 @@ public class ChapterAutoNumber extends Chapter {
      * Create a new section for this chapter and add it.
      *
      * @param title  the Section title (as a <CODE>Paragraph</CODE>)
-     * @return Returns the new section.
-     */
+    
+     * @return Returns the new section. */
     public Section addSection(final Paragraph title) {
         return addSection(title, 2);
     }

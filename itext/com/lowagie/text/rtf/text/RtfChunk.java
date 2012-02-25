@@ -135,7 +135,8 @@ public class RtfChunk extends RtfElement {
      * Writes the content of this RtfChunk. First the font information
      * is written, then the content, and then more font information
      * 
-     * @return A byte array with the content of this RtfChunk
+    
+     * @return A byte array with the content of this RtfChunk * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -176,6 +177,7 @@ public class RtfChunk extends RtfElement {
      * Sets the RtfDocument this RtfChunk belongs to.
      * 
      * @param doc The RtfDocument to use
+     * @see com.lowagie.text.rtf.RtfBasicElement#setRtfDocument(RtfDocument)
      */
     public void setRtfDocument(RtfDocument doc) {
         super.setRtfDocument(doc);
@@ -194,8 +196,8 @@ public class RtfChunk extends RtfElement {
     /**
      * Gets whether to use soft line breaks instead of default hard ones.
      * 
-     * @return whether to use soft line breaks instead of default hard ones.
-     */
+    
+     * @return whether to use soft line breaks instead of default hard ones. */
     public boolean getSoftLineBreaks() {
         return this.softLineBreaks;
     }

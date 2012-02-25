@@ -58,6 +58,8 @@ import java.util.ArrayList;
  * A <CODE>TextArray</CODE> is used with the operator <VAR>TJ</VAR> in <CODE>PdfText</CODE>.
  * The first object in this array has to be a <CODE>PdfString</CODE>;
  * see reference manual version 1.3 section 8.7.5, pages 346-347.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfTextArray{
@@ -65,6 +67,10 @@ public class PdfTextArray{
     // constructors
     
     
+    /**
+     * Constructor for PdfTextArray.
+     * @param str String
+     */
     public PdfTextArray(String str) {
         arrayList.add(str);
     }
@@ -83,16 +89,28 @@ public class PdfTextArray{
         arrayList.add(new Float(number.doubleValue()));
     }
     
+    /**
+     * Method add.
+     * @param number float
+     */
     public void add(float number)
     {
         arrayList.add(new Float(number));
     }
     
+    /**
+     * Method add.
+     * @param str String
+     */
     public void add(String str)
     {
         arrayList.add(str);
     }
     
+    /**
+     * Method getArrayList.
+     * @return ArrayList
+     */
     ArrayList getArrayList() {
         return arrayList;
     }

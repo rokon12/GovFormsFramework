@@ -93,6 +93,7 @@ import java.io.IOException;
  * document.close();
  * </PRE>
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class RadioCheckField extends BaseField {
 
@@ -141,8 +142,8 @@ public class RadioCheckField extends BaseField {
     
     /**
      * Getter for property checkType.
-     * @return Value of property checkType.
-     */
+    
+     * @return Value of property checkType. */
     public int getCheckType() {
         return this.checkType;
     }
@@ -172,8 +173,8 @@ public class RadioCheckField extends BaseField {
     
     /**
      * Getter for property onValue.
-     * @return Value of property onValue.
-     */
+    
+     * @return Value of property onValue. */
     public String getOnValue() {
         return this.onValue;
     }
@@ -188,8 +189,8 @@ public class RadioCheckField extends BaseField {
     
     /**
      * Getter for property checked.
-     * @return Value of property checked.
-     */
+    
+     * @return Value of property checked. */
     public boolean isChecked() {
         return this.checked;
     }
@@ -209,10 +210,10 @@ public class RadioCheckField extends BaseField {
      * for a check field
      * @param on <CODE>true</CODE> for the checked state, <CODE>false</CODE>
      * otherwise
-     * @throws IOException on error
-     * @throws DocumentException on error
-     * @return the appearance
-     */    
+    
+    
+    
+     * @return the appearance * @throws IOException on error * @throws DocumentException on error */    
     public PdfAppearance getAppearance(boolean isRadio, boolean on) throws IOException, DocumentException {
         if (isRadio && checkType == TYPE_CIRCLE)
             return getAppearanceRadioCircle(on);
@@ -264,8 +265,8 @@ public class RadioCheckField extends BaseField {
      * Gets the special field appearance for the radio circle.
      * @param on <CODE>true</CODE> for the checked state, <CODE>false</CODE>
      * otherwise
-     * @return the appearance
-     */    
+    
+     * @return the appearance */    
     public PdfAppearance getAppearanceRadioCircle(boolean on) {
         PdfAppearance app = writer.getDirectContent().createAppearance(box.width(), box.height());
         switch (rotation) {
@@ -318,8 +319,8 @@ public class RadioCheckField extends BaseField {
      * use the same value for the on state will turn on and off in unison; that is if
      * one is checked, they are all checked. If <CODE>false</CODE>, the buttons are mutually exclusive
      * (the same behavior as HTML radio buttons)
-     * @return the radio group
-     */    
+    
+     * @return the radio group */    
     public PdfFormField getRadioGroup(boolean noToggleToOff, boolean radiosInUnison) {
         PdfFormField field = PdfFormField.createRadioButton(writer, noToggleToOff);
         if (radiosInUnison)
@@ -336,20 +337,20 @@ public class RadioCheckField extends BaseField {
     /**
      * Gets the radio field. It's only composed of the widget keys and must be used
      * with {@link #getRadioGroup(boolean,boolean)}.
-     * @return the radio field
-     * @throws IOException on error
-     * @throws DocumentException on error
-     */    
+    
+    
+    
+     * @return the radio field * @throws IOException on error * @throws DocumentException on error */    
     public PdfFormField getRadioField() throws IOException, DocumentException {
         return getField(true);
     }
     
     /**
      * Gets the check field.
-     * @return the check field
-     * @throws IOException on error
-     * @throws DocumentException on error
-     */    
+    
+    
+    
+     * @return the check field * @throws IOException on error * @throws DocumentException on error */    
     public PdfFormField getCheckField() throws IOException, DocumentException {
         return getField(false);
     }
@@ -358,10 +359,10 @@ public class RadioCheckField extends BaseField {
      * Gets a radio or check field.
      * @param isRadio <CODE>true</CODE> to get a radio field, <CODE>false</CODE> to get
      * a check field
-     * @throws IOException on error
-     * @throws DocumentException on error
-     * @return the field
-     */    
+    
+    
+    
+     * @return the field * @throws IOException on error * @throws DocumentException on error */    
     protected PdfFormField getField(boolean isRadio) throws IOException, DocumentException {
         PdfFormField field = null;
         if (isRadio)

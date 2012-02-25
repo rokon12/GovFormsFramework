@@ -47,6 +47,8 @@ package com.lowagie.text;
 /**
  * The ExceptionConverter changes a checked exception into an
  * unchecked exception.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class ExceptionConverter extends RuntimeException {
     /** we keep a handle to the wrapped exception */
@@ -65,32 +67,32 @@ public class ExceptionConverter extends RuntimeException {
 
     /**
      * and allow the user of ExceptionConverter to get a handle to it. 
-     * @return the original exception
-     */
+    
+     * @return the original exception */
     public Exception getException() {
         return ex;
     }
 
     /**
      * We print the message of the checked exception 
-     * @return message of the original exception
-     */
+    
+     * @return message of the original exception */
     public String getMessage() {
         return ex.getMessage();
     }
 
     /**
      * and make sure we also produce a localized version
-     * @return localized version of the message
-     */
+    
+     * @return localized version of the message */
     public String getLocalizedMessage() {
         return ex.getLocalizedMessage();
     }
 
     /**
      * The toString() is changed to be prefixed with ExceptionConverter 
-     * @return Stringversion of the exception
-     */
+    
+     * @return Stringversion of the exception */
     public String toString() {
         return prefix + ex;
     }
@@ -127,8 +129,8 @@ public class ExceptionConverter extends RuntimeException {
      * requests to fill in the stack trace we will have to ignore.
      * We can't throw an exception here, because this method
      * is called by the constructor of Throwable 
-     * @return a Throwable
-     */
+    
+     * @return a Throwable */
     public Throwable fillInStackTrace() {
         return this;
     }

@@ -54,6 +54,8 @@ import java.util.HashMap;
 
 /**
  * This class contains entities that can be used in an entity tag.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class Entities {
@@ -343,8 +345,8 @@ public class Entities {
   * Gets a chunk with a symbol character.
   * @param e a symbol value (see Entities class: alfa is greek alfa,...)
   * @param font the font if the symbol isn't found (otherwise Font.SYMBIL)
-  * @return a Chunk
-  */
+ 
+  * @return a Chunk */
     
     public static Chunk get(String e, Font font) {
         int s = getCorrespondingSymbol(e);
@@ -364,8 +366,8 @@ public class Entities {
  * Looks for the corresponding symbol in the font Symbol.
  *
  * @param	c	the original ASCII-char
- * @return	the corresponding symbol in font Symbol
- */
+
+ * @return	the corresponding symbol in font Symbol */
     
     public static int getCorrespondingSymbol(String c) {
         Integer integer = (Integer) map.get(c);
@@ -379,8 +381,8 @@ public class Entities {
  * Checks if a given tag corresponds with this object.
  *
  * @param   tag     the given tag
- * @return  true if the tag corresponds
- */
+
+ * @return  true if the tag corresponds */
     
     public static boolean isTag(String tag) {
         return ElementTags.ENTITY.equals(tag);

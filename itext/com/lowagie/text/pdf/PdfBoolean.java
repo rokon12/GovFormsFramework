@@ -58,6 +58,8 @@ package com.lowagie.text.pdf;
  *
  * @see		PdfObject
  * @see		BadPdfFormatException
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfBoolean extends PdfObject {
@@ -100,8 +102,8 @@ public class PdfBoolean extends PdfObject {
  *
  * @param		value			the value of the new <CODE>PdfObject</CODE>, represented as a <CODE>String</CODE>
  *
- * @throws		BadPdfFormatException	thrown if the <VAR>value</VAR> isn't '<CODE>true</CODE>' or '<CODE>false</CODE>'
- */
+
+ * @throws		BadPdfFormatException	thrown if the <VAR>value</VAR> isn't '<CODE>true</CODE>' or '<CODE>false</CODE>' */
     
     public PdfBoolean(String value) throws BadPdfFormatException {
         super(BOOLEAN, value);
@@ -121,8 +123,8 @@ public class PdfBoolean extends PdfObject {
 /**
  * Returns the primitive value of the <CODE>PdfBoolean</CODE>-object.
  *
- * @return		the actual value of the object.
- */
+
+ * @return		the actual value of the object. */
     
     public boolean booleanValue() {
         return value;

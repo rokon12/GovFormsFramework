@@ -58,6 +58,8 @@ import java.awt.Color;
  * to horizontal text although it referrs to vertical text.
  * A line with the alignment Element.LEFT_ALIGN will actually
  * be top aligned.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class VerticalText {
 
@@ -154,8 +156,8 @@ public class VerticalText {
     }
 
     /** Gets the separation between the vertical lines.
-     * @return the vertical line separation
-     */    
+    
+     * @return the vertical line separation */    
     public float getLeading() {
         return leading;
     }
@@ -163,8 +165,8 @@ public class VerticalText {
     /**
      * Creates a line from the chunk array.
      * @param width the width of the line
-     * @return the line or null if no more chunks
-     */
+    
+     * @return the line or null if no more chunks */
     protected PdfLine createLine(float width) {
         if (chunks.size() == 0)
             return null;
@@ -204,10 +206,10 @@ public class VerticalText {
 
     /**
      * Outputs the lines to the document. It is equivalent to <CODE>go(false)</CODE>.
+    
+    
      * @return returns the result of the operation. It can be <CODE>NO_MORE_TEXT</CODE>
-     * and/or <CODE>NO_MORE_COLUMN</CODE>
-     * @throws DocumentException on error
-     */
+     * and/or <CODE>NO_MORE_COLUMN</CODE> * @throws DocumentException on error */
     public int go() throws DocumentException {
         return go(false);
     }
@@ -215,10 +217,10 @@ public class VerticalText {
     /**
      * Outputs the lines to the document. The output can be simulated.
      * @param simulate <CODE>true</CODE> to simulate the writting to the document
+    
+    
      * @return returns the result of the operation. It can be <CODE>NO_MORE_TEXT</CODE>
-     * and/or <CODE>NO_MORE_COLUMN</CODE>
-     * @throws DocumentException on error
-     */
+     * and/or <CODE>NO_MORE_COLUMN</CODE> * @throws DocumentException on error */
     public int go(boolean simulate) throws DocumentException {
         boolean dirty = false;
         PdfContentByte graphics = null;
@@ -259,6 +261,13 @@ public class VerticalText {
         return status;
     }
     
+    /**
+     * Method writeLine.
+     * @param line PdfLine
+     * @param text PdfContentByte
+     * @param graphics PdfContentByte
+     * @throws DocumentException
+     */
     void writeLine(PdfLine line, PdfContentByte text, PdfContentByte graphics)  throws DocumentException {
         PdfFont currentFont = null;
         PdfChunk chunk;
@@ -289,23 +298,23 @@ public class VerticalText {
     
     /** Gets the X coordinate where the next line will be writen. This value will change
      * after each call to <code>go()</code>.
-     * @return  the X coordinate
-     */    
+    
+     * @return  the X coordinate */    
     public float getOriginX() {
         return startX;
     }
 
     /** Gets the Y coordinate where the next line will be writen.
-     * @return  the Y coordinate
-     */    
+    
+     * @return  the Y coordinate */    
     public float getOriginY() {
         return startY;
     }
     
     /** Gets the maximum number of available lines. This value will change
      * after each call to <code>go()</code>.
-     * @return Value of property maxLines.
-     */
+    
+     * @return Value of property maxLines. */
     public int getMaxLines() {
         return maxLines;
     }
@@ -318,8 +327,8 @@ public class VerticalText {
     }
     
     /** Gets the height of the line
-     * @return the height
-     */
+    
+     * @return the height */
     public float getHeight() {
         return height;
     }
@@ -341,8 +350,8 @@ public class VerticalText {
     
     /**
      * Gets the alignment.
-     * @return the alignment
-     */
+    
+     * @return the alignment */
     public int getAlignment() {
         return alignment;
     }

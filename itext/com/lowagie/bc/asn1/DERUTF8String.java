@@ -5,6 +5,8 @@ import java.io.IOException;
 
 /**
  * DER UTF8String object.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class DERUTF8String
     extends DERObject
@@ -15,8 +17,10 @@ public class DERUTF8String
     /**
      * return an UTF8 string from the passed in object.
      *
-     * @exception IllegalArgumentException if the object cannot be converted.
-     */
+    
+     * @param obj Object
+     * @return DERUTF8String
+     * @exception IllegalArgumentException if the object cannot be converted. */
     public static DERUTF8String getInstance(
         Object  obj)
     {
@@ -44,9 +48,10 @@ public class DERUTF8String
      * @param obj the tagged object holding the object we want
      * @param explicit true if the object is meant to be explicitly
      *              tagged false otherwise.
+    
+     * @return DERUTF8String
      * @exception IllegalArgumentException if the tagged object cannot
-     *               be converted.
-     */
+     *               be converted. */
     public static DERUTF8String getInstance(
         ASN1TaggedObject obj,
         boolean          explicit)
@@ -56,6 +61,7 @@ public class DERUTF8String
 
     /**
      * basic constructor - byte encoded string.
+     * @param string byte[]
      */
     DERUTF8String(
         byte[]   string)
@@ -114,6 +120,7 @@ public class DERUTF8String
 
     /**
      * basic constructor
+     * @param string String
      */
     public DERUTF8String(
         String   string)
@@ -121,16 +128,30 @@ public class DERUTF8String
         this.string = string;
     }
 
+    /**
+     * Method getString.
+     * @return String
+     * @see com.lowagie.bc.asn1.DERString#getString()
+     */
     public String getString()
     {
         return string;
     }
 
+    /**
+     * Method hashCode.
+     * @return int
+     */
     public int hashCode()
     {
         return this.getString().hashCode();
     }
 
+    /**
+     * Method equals.
+     * @param o Object
+     * @return boolean
+     */
     public boolean equals(
         Object  o)
     {
@@ -144,6 +165,11 @@ public class DERUTF8String
         return this.getString().equals(s.getString());
     }
 
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
+     */
     void encode(
         DEROutputStream  out)
         throws IOException

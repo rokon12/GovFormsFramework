@@ -54,6 +54,8 @@ package com.lowagie.text.pdf;
  * A <CODE>PdfBorderDictionary</CODE> define the appearance of a Border (Annotations).
  *
  * @see		PdfDictionary
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfBorderDictionary extends PdfDictionary {
@@ -67,6 +69,9 @@ public class PdfBorderDictionary extends PdfDictionary {
     
 /**
  * Constructs a <CODE>PdfBorderDictionary</CODE>.
+ * @param borderWidth float
+ * @param borderStyle int
+ * @param dashes PdfDashPattern
  */
     
     public PdfBorderDictionary(float borderWidth, int borderStyle, PdfDashPattern dashes) {
@@ -94,6 +99,11 @@ public class PdfBorderDictionary extends PdfDictionary {
         }
     }
     
+    /**
+     * Constructor for PdfBorderDictionary.
+     * @param borderWidth float
+     * @param borderStyle int
+     */
     public PdfBorderDictionary(float borderWidth, int borderStyle) {
         this(borderWidth, borderStyle, null);
     }

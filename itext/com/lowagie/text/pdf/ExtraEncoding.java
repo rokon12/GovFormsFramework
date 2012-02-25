@@ -51,6 +51,7 @@ package com.lowagie.text.pdf;
  * Classes implementing this interface can create custom encodings or
  * replace existing ones. It is used in the context of <code>PdfEncoding</code>.
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public interface ExtraEncoding {
     
@@ -59,8 +60,8 @@ public interface ExtraEncoding {
      * @param text the Unicode string
      * @param encoding the requested encoding. It's mainly of use if the same class
      * supports more than one encoding.
-     * @return the conversion or <CODE>null</CODE> if no conversion is supported
-     */    
+    
+     * @return the conversion or <CODE>null</CODE> if no conversion is supported */    
     public byte[] charToByte(String text, String encoding);
     
     /**
@@ -68,7 +69,7 @@ public interface ExtraEncoding {
      * @param b the input byte array
      * @param encoding the requested encoding. It's mainly of use if the same class
      * supports more than one encoding.
-     * @return the conversion or <CODE>null</CODE> if no conversion is supported
-     */
+    
+     * @return the conversion or <CODE>null</CODE> if no conversion is supported */
     public String byteToChar(byte b[], String encoding);   
 }

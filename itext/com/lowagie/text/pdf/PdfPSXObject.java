@@ -50,6 +50,8 @@ import java.io.IOException;
 
 /**
  * Implements the PostScript XObject.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class PdfPSXObject extends PdfTemplate {
     
@@ -69,9 +71,9 @@ public class PdfPSXObject extends PdfTemplate {
     /**
      * Gets the stream representing this object.
      *
-     * @return the stream representing this object
-     * @throws IOException
-     */
+    
+    
+     * @return the stream representing this object * @throws IOException */
     
     PdfStream getFormXObject() throws IOException {
         PdfStream s = new PdfStream(content.toByteArray());
@@ -84,8 +86,8 @@ public class PdfPSXObject extends PdfTemplate {
     /**
      * Gets a duplicate of this <CODE>PdfPSXObject</CODE>. All
      * the members are copied by reference but the buffer stays different.
-     * @return a copy of this <CODE>PdfPSXObject</CODE>
-     */
+    
+     * @return a copy of this <CODE>PdfPSXObject</CODE> */
     
     public PdfContentByte getDuplicate() {
         PdfPSXObject tpl = new PdfPSXObject();

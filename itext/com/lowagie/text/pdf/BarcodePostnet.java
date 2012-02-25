@@ -61,6 +61,7 @@ import java.awt.image.MemoryImageSource;
  * </pre>
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class BarcodePostnet extends Barcode{
 
@@ -91,8 +92,8 @@ public class BarcodePostnet extends Barcode{
     
     /** Creates the bars for Postnet.
      * @param text the code to be created without checksum
-     * @return the bars
-     */    
+    
+     * @return the bars */    
     public static byte[] getBarsPostnet(String text) {
         int total = 0;
         for (int k = text.length() - 1; k >= 0; --k) {
@@ -112,8 +113,8 @@ public class BarcodePostnet extends Barcode{
 
     /** Gets the maximum area that the barcode and the text, if
      * any, will occupy. The lower left corner is always (0, 0).
-     * @return the size the barcode occupies.
-     */
+    
+     * @return the size the barcode occupies. */
     public Rectangle getBarcodeSize() {
         float width = ((code.length() + 1) * 5 + 1) * n + x;
         return new Rectangle(width, barHeight);
@@ -153,8 +154,8 @@ public class BarcodePostnet extends Barcode{
      * @param cb the <CODE>PdfContentByte</CODE> where the barcode will be placed
      * @param barColor the color of the bars. It can be <CODE>null</CODE>
      * @param textColor the color of the text. It can be <CODE>null</CODE>
-     * @return the dimensions the barcode occupies
-     */
+    
+     * @return the dimensions the barcode occupies */
     public Rectangle placeBarcode(PdfContentByte cb, Color barColor, Color textColor) {
         if (barColor != null)
             cb.setColorFill(barColor);
@@ -178,9 +179,9 @@ public class BarcodePostnet extends Barcode{
      * contains the bars without any text.
      * @param foreground the color of the bars
      * @param background the color of the background
-     * @return the image
+    
      *
-     */
+     * @return the image */
     public java.awt.Image createAwtImage(Color foreground, Color background) {
         int f = foreground.getRGB();
         int g = background.getRGB();

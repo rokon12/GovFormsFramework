@@ -58,6 +58,7 @@ import java.util.HashMap;
 
 /** Common field variables.
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public abstract class BaseField {
     
@@ -160,6 +161,12 @@ public abstract class BaseField {
         this.fieldName = fieldName;
     }
     
+    /**
+     * Method getRealFont.
+     * @return BaseFont
+     * @throws IOException
+     * @throws DocumentException
+     */
     protected BaseFont getRealFont() throws IOException, DocumentException {
         if (font == null)
             return BaseFont.createFont(BaseFont.HELVETICA, BaseFont.WINANSI, false);
@@ -167,6 +174,12 @@ public abstract class BaseField {
             return font;
     }
     
+    /**
+     * Method getBorderAppearance.
+     * @return PdfAppearance
+     * @throws IOException
+     * @throws DocumentException
+     */
     protected PdfAppearance getBorderAppearance() throws IOException, DocumentException {
         PdfAppearance app = writer.getDirectContent().createAppearance(box.width(), box.height());
         switch (rotation) {
@@ -249,6 +262,11 @@ public abstract class BaseField {
         return app;
     }
     
+    /**
+     * Method getHardBreaks.
+     * @param text String
+     * @return ArrayList
+     */
     protected static ArrayList getHardBreaks(String text) {
         ArrayList arr = new ArrayList();
         char cs[] = text.toCharArray();
@@ -273,6 +291,10 @@ public abstract class BaseField {
         return arr;
     }
     
+    /**
+     * Method trimRight.
+     * @param buf StringBuffer
+     */
     protected static void trimRight(StringBuffer buf) {
         int len = buf.length();
         while (true) {
@@ -284,6 +306,14 @@ public abstract class BaseField {
         }
     }
     
+    /**
+     * Method breakLines.
+     * @param breaks ArrayList
+     * @param font BaseFont
+     * @param fontSize float
+     * @param width float
+     * @return ArrayList
+     */
     protected static ArrayList breakLines(ArrayList breaks, BaseFont font, float fontSize, float width) {
         ArrayList lines = new ArrayList();
         StringBuffer buf = new StringBuffer();
@@ -367,6 +397,10 @@ public abstract class BaseField {
         return lines;
     }
         
+    /**
+     * Method drawTopFrame.
+     * @param app PdfAppearance
+     */
     private void drawTopFrame(PdfAppearance app) {
         app.moveTo(borderWidth, borderWidth);
         app.lineTo(borderWidth, box.height() - borderWidth);
@@ -378,6 +412,10 @@ public abstract class BaseField {
         app.fill();
     }
     
+    /**
+     * Method drawBottomFrame.
+     * @param app PdfAppearance
+     */
     private void drawBottomFrame(PdfAppearance app) {
         app.moveTo(borderWidth, borderWidth);
         app.lineTo(box.width() - borderWidth, borderWidth);
@@ -389,8 +427,8 @@ public abstract class BaseField {
         app.fill();
     }
     /** Gets the border width in points.
-     * @return the border width in points
-     */
+    
+     * @return the border width in points */
     public float getBorderWidth() {
         return this.borderWidth;
     }
@@ -404,8 +442,8 @@ public abstract class BaseField {
     }
     
     /** Gets the border style.
-     * @return the border style
-     */
+    
+     * @return the border style */
     public int getBorderStyle() {
         return this.borderStyle;
     }
@@ -421,8 +459,8 @@ public abstract class BaseField {
     }
     
     /** Gets the border color.
-     * @return the border color
-     */
+    
+     * @return the border color */
     public Color getBorderColor() {
         return this.borderColor;
     }
@@ -436,8 +474,8 @@ public abstract class BaseField {
     }
     
     /** Gets the background color.
-     * @return the background color
-     */
+    
+     * @return the background color */
     public Color getBackgroundColor() {
         return this.backgroundColor;
     }
@@ -451,8 +489,8 @@ public abstract class BaseField {
     }
     
     /** Gets the text color.
-     * @return the text color
-     */
+    
+     * @return the text color */
     public Color getTextColor() {
         return this.textColor;
     }
@@ -466,8 +504,8 @@ public abstract class BaseField {
     }
     
     /** Gets the text font.
-     * @return the text font
-     */
+    
+     * @return the text font */
     public BaseFont getFont() {
         return this.font;
     }
@@ -481,8 +519,8 @@ public abstract class BaseField {
     }
     
     /** Gets the font size.
-     * @return the font size
-     */
+    
+     * @return the font size */
     public float getFontSize() {
         return this.fontSize;
     }
@@ -496,8 +534,8 @@ public abstract class BaseField {
     }
     
     /** Gets the text horizontal alignment.
-     * @return the text horizontal alignment
-     */
+    
+     * @return the text horizontal alignment */
     public int getAlignment() {
         return this.alignment;
     }
@@ -511,8 +549,8 @@ public abstract class BaseField {
     }
     
     /** Gets the text.
-     * @return the text
-     */
+    
+     * @return the text */
     public String getText() {
         return this.text;
     }
@@ -525,8 +563,8 @@ public abstract class BaseField {
     }
     
     /** Gets the field dimension and position.
-     * @return the field dimension and position
-     */
+    
+     * @return the field dimension and position */
     public Rectangle getBox() {
         return this.box;
     }
@@ -539,8 +577,8 @@ public abstract class BaseField {
     }
     
     /** Gets the field rotation.
-     * @return the field rotation
-     */
+    
+     * @return the field rotation */
     public int getRotation() {
         return this.rotation;
     }
@@ -567,8 +605,8 @@ public abstract class BaseField {
     }
     
     /** Gets the field visibility flag.
-     * @return the field visibility flag
-     */
+    
+     * @return the field visibility flag */
     public int getVisibility() {
         return this.visibility;
     }
@@ -583,8 +621,8 @@ public abstract class BaseField {
     }
     
     /** Gets the field name.
-     * @return the field name
-     */
+    
+     * @return the field name */
     public String getFieldName() {
         return this.fieldName;
     }
@@ -598,8 +636,8 @@ public abstract class BaseField {
     }
     
     /** Gets the option flags.
-     * @return the option flags
-     */
+    
+     * @return the option flags */
     public int getOptions() {
         return this.options;
     }
@@ -616,8 +654,8 @@ public abstract class BaseField {
     }
     
     /** Gets the maximum length of the field’s text, in characters.
-     * @return the maximum length of the field’s text, in characters.
-     */
+    
+     * @return the maximum length of the field’s text, in characters. */
     public int getMaxCharacterLength() {
         return this.maxCharacterLength;
     }
@@ -632,8 +670,8 @@ public abstract class BaseField {
     
     /**
      * Getter for property writer.
-     * @return Value of property writer.
-     */
+    
+     * @return Value of property writer. */
     public PdfWriter getWriter() {
         return writer;
     }

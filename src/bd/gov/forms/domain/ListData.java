@@ -16,91 +16,73 @@
  */
 package bd.gov.forms.domain;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * @author asif
+ * @version $Revision: 1.0 $
  */
+
+@Entity
+@Table(name = "list_data")
 public class ListData {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
+	@Column(name = "sys_id")
+	private String sysId;
+	@Column(name = "name")
+	private String name;
+	@Column(name = "detail")
+	private String detail;
+	@Column(name = "list_values")
+	private String value;
 
-    private int id;
-    private String sysId;
-    private String name;
-    private String detail;
-    private String values;
+	public int getId() {
+		return id;
+	}
 
-	public List getList(String type) throws Exception {
-        List<String> list = new ArrayList<String>();
+	public void setId(int id) {
+		this.id = id;
+	}
 
-        if ("select".equals(type)) {
-            list.add("");
-        }
-        
-        if (values != null) {
-            list.addAll(getNewlineDelimitedValuesAsList(values));
-        }
+	public String getSysId() {
+		return sysId;
+	}
 
-        return list;
-    }
+	public void setSysId(String sysId) {
+		this.sysId = sysId;
+	}
 
-    private List<String> getNewlineDelimitedValuesAsList(String values) throws IOException {
-        List<String> list = new ArrayList<String>();
+	public String getName() {
+		return name;
+	}
 
-        BufferedReader reader = new BufferedReader(new StringReader(values));
+	public void setName(String name) {
+		this.name = name;
+	}
 
-        String str;
-        while ((str = reader.readLine()) != null) {
-            str = str.trim();
-            if (str.length() > 0) {
-                list.add(str);
-            }
-        }
-        
-        return list;
-    }
+	public String getDetail() {
+		return detail;
+	}
 
-    public String getDetail() {
-        return detail;
-    }
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
 
-    public void setDetail(String details) {
-        this.detail = details;
-    }
+	public String getValues() {
+		return value;
+	}
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getValues() {
-        return values;
-    }
-
-    public void setValues(String values) {
-        this.values = values;
-    }
-
-    public String getSysId() {
-        return sysId;
-    }
-
-    public void setSysId(String sysId) {
-        this.sysId = sysId;
-    }
+	public void setValues(String values) {
+		this.value = values;
+	}
 
 }

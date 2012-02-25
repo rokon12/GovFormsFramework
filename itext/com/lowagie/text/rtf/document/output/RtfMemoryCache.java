@@ -78,6 +78,8 @@ public class RtfMemoryCache implements RtfDataCache {
     
     /**
      * Gets the ByteArrayOutputStream.
+     * @return OutputStream
+     * @see com.lowagie.text.rtf.document.output.RtfDataCache#getOutputStream()
      */
     public OutputStream getOutputStream() {
         return this.data;
@@ -85,6 +87,9 @@ public class RtfMemoryCache implements RtfDataCache {
 
     /**
      * Writes the content of the ByteArrayOutputStream into the OutputStream.
+     * @param target OutputStream
+     * @throws IOException
+     * @see com.lowagie.text.rtf.document.output.RtfDataCache#writeTo(OutputStream)
      */
     public void writeTo(OutputStream target) throws IOException {
         this.data.writeTo(target);

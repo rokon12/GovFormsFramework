@@ -49,6 +49,7 @@ package com.lowagie.text.pdf;
 /** The graphic state dictionary.
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PdfGState extends PdfDictionary {
     /** A possible blend mode */

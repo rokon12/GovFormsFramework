@@ -57,6 +57,8 @@ package com.lowagie.text;
  * @see		ElementListener
  * @see		Document
  * @see		DocWriter
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public interface DocListener extends ElementListener {
@@ -74,8 +76,8 @@ public interface DocListener extends ElementListener {
  * Sets the pagesize.
  *
  * @param	pageSize	the new pagesize
- * @return	a <CODE>boolean</CODE>
- */
+
+ * @return	a <CODE>boolean</CODE> */
     
     public boolean setPageSize(Rectangle pageSize);
     
@@ -83,8 +85,8 @@ public interface DocListener extends ElementListener {
  * Signals that a <CODE>Watermark</CODE> was added to the <CODE>Document</CODE>.
  * 
  * @param watermark the Watermark object
- * @return	<CODE>true</CODE> if the element was added, <CODE>false</CODE> if not.
- */
+
+ * @return	<CODE>true</CODE> if the element was added, <CODE>false</CODE> if not. */
     
     public boolean add(Watermark watermark);
     
@@ -101,24 +103,24 @@ public interface DocListener extends ElementListener {
  * @param	marginRight		the margin on the right
  * @param	marginTop		the margin on the top
  * @param	marginBottom	the margin on the bottom
- * @return	a <CODE>boolean</CODE>
- */
+
+ * @return	a <CODE>boolean</CODE> */
     
     public boolean setMargins(float marginLeft, float marginRight, float marginTop, float marginBottom);
     
     /**
      * Parameter that allows you to do margin mirroring (odd/even pages)
      * @param marginMirroring
-     * @return true if succesfull
-     */
+    
+     * @return true if succesfull */
     public boolean setMarginMirroring(boolean marginMirroring);
     
 /**
  * Signals that an new page has to be started.
  *
- * @return	<CODE>true</CODE> if the page was added, <CODE>false</CODE> if not.
- * @throws	DocumentException	when a document isn't open yet, or has been closed
- */
+
+
+ * @return	<CODE>true</CODE> if the page was added, <CODE>false</CODE> if not. * @throws	DocumentException	when a document isn't open yet, or has been closed */
     
     public boolean newPage() throws DocumentException;
     
@@ -167,8 +169,8 @@ public interface DocListener extends ElementListener {
 /**
  * Clears text wrapping around images (if applicable).
  * Method suggested by Pelikan Stephan
- * @throws DocumentException
- */
+
+ * @throws DocumentException */
 	public void clearTextWrap() throws DocumentException;
     
 /**

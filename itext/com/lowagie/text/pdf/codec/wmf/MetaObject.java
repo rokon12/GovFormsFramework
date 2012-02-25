@@ -50,6 +50,8 @@
 
 package com.lowagie.text.pdf.codec.wmf;
 
+/**
+ */
 public class MetaObject {
     public static final int META_NOT_SUPPORTED = 0;
     public static final int META_PEN = 1;
@@ -60,10 +62,18 @@ public class MetaObject {
     public MetaObject() {
     }
 
+    /**
+     * Constructor for MetaObject.
+     * @param type int
+     */
     public MetaObject(int type) {
         this.type = type;
     }
     
+    /**
+     * Method getType.
+     * @return int
+     */
     public int getType() {
         return type;
     }

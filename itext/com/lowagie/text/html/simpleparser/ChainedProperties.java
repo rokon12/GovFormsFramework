@@ -50,6 +50,8 @@ package com.lowagie.text.html.simpleparser;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ */
 public class ChainedProperties {
     
     public final static int fontSizes[] = {8, 10, 12, 14, 18, 24, 36};
@@ -59,6 +61,11 @@ public class ChainedProperties {
     public ChainedProperties() {
     }
     
+    /**
+     * Method getProperty.
+     * @param key String
+     * @return String
+     */
     public String getProperty(String key) {
         for (int k = chain.size() - 1; k >= 0; --k) {
             Object obj[] = (Object[])chain.get(k);
@@ -70,6 +77,11 @@ public class ChainedProperties {
         return null;
     }
     
+    /**
+     * Method hasProperty.
+     * @param key String
+     * @return boolean
+     */
     public boolean hasProperty(String key) {
         for (int k = chain.size() - 1; k >= 0; --k) {
             Object obj[] = (Object[])chain.get(k);
@@ -80,6 +92,11 @@ public class ChainedProperties {
         return false;
     }
     
+    /**
+     * Method addToChain.
+     * @param key String
+     * @param prop HashMap
+     */
     public void addToChain(String key, HashMap prop) {
         // adjust the font size
         String value = (String)prop.get("size");
@@ -116,6 +133,10 @@ public class ChainedProperties {
         chain.add(new Object[]{key, prop});
     }
     
+    /**
+     * Method removeChain.
+     * @param key String
+     */
     public void removeChain(String key) {
         for (int k = chain.size() - 1; k >= 0; --k) {
             if (key.equals(((Object[])chain.get(k))[0])) {

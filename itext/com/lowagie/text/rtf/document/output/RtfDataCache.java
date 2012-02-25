@@ -73,14 +73,14 @@ public interface RtfDataCache {
     /**
      * Get the OutputStream that the RtfDocument can write to.
      * 
-     * @return The OutputStream the RtfDocument can use.
-     */
+    
+     * @return The OutputStream the RtfDocument can use. */
     public OutputStream getOutputStream();
     /**
      * Write the content of the cache into the OutputStream.
      * 
      * @param target The OutputStream to write the content into.
-     * @throws IOException If an error occurs reading/writing.
-     */
+    
+     * @throws IOException If an error occurs reading/writing. */
     public void writeTo(OutputStream target) throws IOException;
 }

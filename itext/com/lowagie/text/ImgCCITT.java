@@ -59,6 +59,7 @@ import java.net.URL;
  * @see		Image
  *
  * @author  Paulo Soares
+ * @version $Revision: 1.0 $
  */
 
 public class ImgCCITT extends Image implements Element {
@@ -107,6 +108,10 @@ public class ImgCCITT extends Image implements Element {
             data[k] = bitReversal[(int)data[k] & 0xff];
     }
 
+    /**
+     * Constructor for ImgCCITT.
+     * @param image Image
+     */
     ImgCCITT(Image image) {
         super(image);
     }
@@ -123,8 +128,8 @@ public class ImgCCITT extends Image implements Element {
      * CCITT_BLACKIS1, CCITT_ENCODEDBYTEALIGN, CCITT_ENDOFLINE and CCITT_ENDOFBLOCK or a
      * combination of them
      * @param data the image data
-     * @throws BadElementException on error
-     */
+    
+     * @throws BadElementException on error */
 
     public ImgCCITT(int width, int height, boolean reverseBits, int typeCCITT, int parameters, byte[] data) throws BadElementException{
         super((URL)null);

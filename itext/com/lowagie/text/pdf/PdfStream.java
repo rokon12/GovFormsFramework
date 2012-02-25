@@ -79,6 +79,8 @@ import com.lowagie.text.ExceptionConverter;
  *
  * @see		PdfObject
  * @see		PdfDictionary
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfStream extends PdfDictionary {
@@ -153,9 +155,9 @@ public class PdfStream extends PdfDictionary {
      * <p>
      * This method must be called and can only be called if the contructor {@link #PdfStream(InputStream,PdfWriter)}
      * is used to create the stream.
-     * @throws IOException on error
-     * @see #PdfStream(InputStream,PdfWriter)
-     */
+    
+    
+     * @throws IOException on error * @see #PdfStream(InputStream,PdfWriter) */
     public void writeLength() throws IOException {
         if (inputStream == null)
             throw new UnsupportedOperationException("writeLength() can only be called in a contructed PdfStream(InputStream,PdfWriter).");
@@ -166,8 +168,8 @@ public class PdfStream extends PdfDictionary {
     
     /**
      * Gets the raw length of the stream.
-     * @return the raw length of the stream
-     */
+    
+     * @return the raw length of the stream */
     public int getRawLength() {
         return rawLength;
     }
@@ -237,6 +239,12 @@ public class PdfStream extends PdfDictionary {
 //            return bytes.length + dicBytes.length + SIZESTREAM;
 //    }
     
+    /**
+     * Method superToPdf.
+     * @param writer PdfWriter
+     * @param os OutputStream
+     * @throws IOException
+     */
     protected void superToPdf(PdfWriter writer, OutputStream os) throws IOException {
         super.toPdf(writer, os);
     }
@@ -303,8 +311,8 @@ public class PdfStream extends PdfDictionary {
     /**
      * Writes the data content to an <CODE>OutputStream</CODE>.
      * @param os the destination to write to
-     * @throws IOException on error
-     */    
+    
+     * @throws IOException on error */    
     public void writeContent(OutputStream os) throws IOException {
         if (streamBytes != null)
             streamBytes.writeTo(os);

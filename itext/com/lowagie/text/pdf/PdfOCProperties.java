@@ -53,6 +53,7 @@ package com.lowagie.text.pdf;
  * about the default and alternate configurations for optional content.
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PdfOCProperties extends PdfDictionary {
     

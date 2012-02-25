@@ -52,6 +52,7 @@ import java.util.ArrayList;
 import java.net.URL;
 /** Reads an FDF form and makes the fields available
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class FdfReader extends PdfReader {
     
@@ -61,24 +62,24 @@ public class FdfReader extends PdfReader {
     
     /** Reads an FDF form.
      * @param filename the file name of the form
-     * @throws IOException on error
-     */    
+    
+     * @throws IOException on error */    
     public FdfReader(String filename) throws IOException {
         super(filename);
     }
     
     /** Reads an FDF form.
      * @param pdfIn the byte array with the form
-     * @throws IOException on error
-     */    
+    
+     * @throws IOException on error */    
     public FdfReader(byte pdfIn[]) throws IOException {
         super(pdfIn);
     }
     
     /** Reads an FDF form.
      * @param url the URL of the document
-     * @throws IOException on error
-     */    
+    
+     * @throws IOException on error */    
     public FdfReader(URL url) throws IOException {
         super(url);
     }
@@ -86,12 +87,16 @@ public class FdfReader extends PdfReader {
     /** Reads an FDF form.
      * @param is the <CODE>InputStream</CODE> containing the document. The stream is read to the
      * end but is not closed
-     * @throws IOException on error
-     */    
+    
+     * @throws IOException on error */    
     public FdfReader(InputStream is) throws IOException {
         super(is);
     }
     
+    /**
+     * Method readPdf.
+     * @throws IOException
+     */
     protected void readPdf() throws IOException {
         fields = new HashMap();
         try {
@@ -110,6 +115,11 @@ public class FdfReader extends PdfReader {
         readFields();
     }
     
+    /**
+     * Method kidNode.
+     * @param merged PdfDictionary
+     * @param name String
+     */
     protected void kidNode(PdfDictionary merged, String name) {
         PdfArray kids = (PdfArray)getPdfObject(merged.get(PdfName.KIDS));
         if (kids == null || kids.getArrayList().size() == 0) {
@@ -135,6 +145,10 @@ public class FdfReader extends PdfReader {
         }
     }
     
+    /**
+     * Method readFields.
+     * @throws IOException
+     */
     protected void readFields() throws IOException {
         catalog = (PdfDictionary)getPdfObject(trailer.get(PdfName.ROOT));
         PdfDictionary fdf = (PdfDictionary)getPdfObject(catalog.get(PdfName.FDF));
@@ -153,16 +167,16 @@ public class FdfReader extends PdfReader {
     /** Gets all the fields. The map is keyed by the fully qualified
      * field name and the value is a merged <CODE>PdfDictionary</CODE>
      * with the field content.
-     * @return all the fields
-     */    
+    
+     * @return all the fields */    
     public HashMap getFields() {
         return fields;
     }
     
     /** Gets the field dictionary.
      * @param name the fully qualified field name
-     * @return the field dictionary
-     */    
+    
+     * @return the field dictionary */    
     public PdfDictionary getField(String name) {
         return (PdfDictionary)fields.get(name);
     }
@@ -170,8 +184,8 @@ public class FdfReader extends PdfReader {
     /** Gets the field value or <CODE>null</CODE> if the field does not
      * exist or has no value defined.
      * @param name the fully qualified field name
-     * @return the field value or <CODE>null</CODE>
-     */    
+    
+     * @return the field value or <CODE>null</CODE> */    
     public String getFieldValue(String name) {
         PdfDictionary field = (PdfDictionary)fields.get(name);
         if (field == null)
@@ -206,8 +220,8 @@ public class FdfReader extends PdfReader {
     }
     
     /** Gets the PDF file specification contained in the FDF.
-     * @return the PDF file specification contained in the FDF
-     */    
+    
+     * @return the PDF file specification contained in the FDF */    
     public String getFileSpec() {
         return fileSpec;
     }

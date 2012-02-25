@@ -67,6 +67,8 @@ import com.lowagie.tools.arguments.ToolArgument;
 
 /**
  * Concatenates two PDF files
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class Concat extends AbstractTool {
 	

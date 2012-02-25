@@ -57,6 +57,7 @@ import com.lowagie.text.rtf.document.RtfDocument;
  *
  * Version: $Id: RtfElement.java,v 1.8 2004/12/14 15:14:44 blowagie Exp $
  * @author Mark Hall (mhall@edu.uni-klu.ac.at)
+ * @version $Revision: 1.0 $
  */
 public class RtfElement implements RtfBasicElement {
     /**
@@ -96,8 +97,8 @@ public class RtfElement implements RtfBasicElement {
      * of that string.
      *
      * @param i The integer to convert
-     * @return A byte array representing the integer
-     */
+    
+     * @return A byte array representing the integer */
     public byte[] intToByteArray(int i) {
         return Integer.toString(i).getBytes();
     }
@@ -105,7 +106,8 @@ public class RtfElement implements RtfBasicElement {
     /**
      * Returns the content of the RtfElement in a byte array.
      *
-     * @return An empty byte array
+    
+     * @return An empty byte array * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         return new byte[0];
@@ -115,6 +117,7 @@ public class RtfElement implements RtfBasicElement {
      * Sets the RtfDocument this RtfElement belongs to
      * 
      * @param doc The RtfDocument to use
+     * @see com.lowagie.text.rtf.RtfBasicElement#setRtfDocument(RtfDocument)
      */
     public void setRtfDocument(RtfDocument doc) {
         this.document = doc;
@@ -123,8 +126,8 @@ public class RtfElement implements RtfBasicElement {
     /**
      * Gets whether this RtfElement is in a table
      * 
-     * @return Whether this RtfElement is in a table
-     */
+    
+     * @return Whether this RtfElement is in a table */
     public boolean isInTable() {
         return inTable;
     }
@@ -133,6 +136,7 @@ public class RtfElement implements RtfBasicElement {
      * Sets whether this RtfElement is in a table
      * 
      * @param inTable <code>True</code> if this RtfElement is in a table, <code>false</code> otherwise
+     * @see com.lowagie.text.rtf.RtfBasicElement#setInTable(boolean)
      */
     public void setInTable(boolean inTable) {
         this.inTable = inTable;
@@ -142,6 +146,7 @@ public class RtfElement implements RtfBasicElement {
      * Sets whether this RtfElement is in a header
      * 
      * @param inHeader <code>True</code> if this RtfElement is in a header, <code>false</code> otherwise
+     * @see com.lowagie.text.rtf.RtfBasicElement#setInHeader(boolean)
      */
     public void setInHeader(boolean inHeader) {
         this.inHeader = inHeader;

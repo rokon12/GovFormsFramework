@@ -8,16 +8,29 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+/**
+ */
 public class MyResolver implements EntityResolver {
     private static final Logger log = Logger.getLogger(MyResolver.class);
     private HttpServletRequest request;
 
+    /**
+     * Constructor for MyResolver.
+     * @param request HttpServletRequest
+     */
     public MyResolver(HttpServletRequest request) {
         this.request = request;
     }
 
     // This method is called whenever an external entity is accessed
     // for the first time.
+    /**
+     * Method resolveEntity.
+     * @param publicId String
+     * @param systemId String
+     * @return InputSource
+     * @see org.xml.sax.EntityResolver#resolveEntity(String, String)
+     */
     public InputSource resolveEntity(String publicId, String systemId) {
         try {
             log.debug("publicId: " + publicId + " systemId: " + systemId);

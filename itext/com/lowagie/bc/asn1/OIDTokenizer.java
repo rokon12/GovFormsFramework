@@ -5,12 +5,18 @@ package com.lowagie.bc.asn1;
  * java.util.StringTokenizer. We need this class as some of the
  * lightweight Java environment don't support classes like
  * StringTokenizer.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class OIDTokenizer
 {
     private String  oid;
     private int     index;
 
+    /**
+     * Constructor for OIDTokenizer.
+     * @param oid String
+     */
     public OIDTokenizer(
         String oid)
     {
@@ -18,11 +24,19 @@ public class OIDTokenizer
         this.index = 0;
     }
 
+    /**
+     * Method hasMoreTokens.
+     * @return boolean
+     */
     public boolean hasMoreTokens()
     {
         return (index != -1);
     }
 
+    /**
+     * Method nextToken.
+     * @return String
+     */
     public String nextToken()
     {
         if (index == -1)

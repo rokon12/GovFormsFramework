@@ -32,6 +32,8 @@ import com.lowagie.tools.arguments.ToolArgument;
 
 /**
  * This tool lets you split a PDF in several separate PDF files (1 per page).
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class Burst extends AbstractTool {
 	

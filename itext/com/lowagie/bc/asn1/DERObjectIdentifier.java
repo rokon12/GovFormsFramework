@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ */
 public class DERObjectIdentifier
     extends DERObject
 {
@@ -12,8 +14,10 @@ public class DERObjectIdentifier
     /**
      * return an OID from the passed in object
      *
-     * @exception IllegalArgumentException if the object cannot be converted.
-     */
+    
+     * @param obj Object
+     * @return DERObjectIdentifier
+     * @exception IllegalArgumentException if the object cannot be converted. */
     public static DERObjectIdentifier getInstance(
         Object  obj)
     {
@@ -41,9 +45,10 @@ public class DERObjectIdentifier
      * @param obj the tagged object holding the object we want
      * @param explicit true if the object is meant to be explicitly
      *              tagged false otherwise.
+    
+     * @return DERObjectIdentifier
      * @exception IllegalArgumentException if the tagged object cannot
-     *               be converted.
-     */
+     *               be converted. */
     public static DERObjectIdentifier getInstance(
         ASN1TaggedObject obj,
         boolean          explicit)
@@ -52,6 +57,10 @@ public class DERObjectIdentifier
     }
     
 
+    /**
+     * Constructor for DERObjectIdentifier.
+     * @param bytes byte[]
+     */
     DERObjectIdentifier(
         byte[]  bytes)
     {
@@ -93,17 +102,31 @@ public class DERObjectIdentifier
         this.identifier = objId.toString();
     }
 
+    /**
+     * Constructor for DERObjectIdentifier.
+     * @param identifier String
+     */
     public DERObjectIdentifier(
         String  identifier)
     {
         this.identifier = identifier;
     }
 
+    /**
+     * Method getId.
+     * @return String
+     */
     public String getId()
     {
         return identifier;
     }
 
+    /**
+     * Method writeField.
+     * @param out OutputStream
+     * @param fieldValue int
+     * @throws IOException
+     */
     private void writeField(
         OutputStream    out,
         int             fieldValue)
@@ -128,6 +151,11 @@ public class DERObjectIdentifier
         out.write(fieldValue & 0x7f);
     }
 
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
+     */
     void encode(
         DEROutputStream out)
         throws IOException
@@ -152,11 +180,20 @@ public class DERObjectIdentifier
         out.writeEncoded(OBJECT_IDENTIFIER, bytes);
     }
 
+    /**
+     * Method hashCode.
+     * @return int
+     */
     public int hashCode()
     {
         return identifier.hashCode();
     }
 
+    /**
+     * Method equals.
+     * @param o Object
+     * @return boolean
+     */
     public boolean equals(
         Object  o)
     {

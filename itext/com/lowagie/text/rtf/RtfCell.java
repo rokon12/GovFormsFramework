@@ -66,6 +66,8 @@ import java.awt.Color;
  * Parts of this Class were contributed by Steffen Stundzig. Many thanks for the
  * improvements.
  * Updates by Benoit WIART <b.wiart@proxiad.com>
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class RtfCell {
     /** Constants for merging Cells */
@@ -182,8 +184,8 @@ public class RtfCell {
      * @param x The column index of this <code>RtfCell</code>
      * @param y The row index of this <code>RtfCell</code>
      * @param cellpadding the cellpadding
-     * @return the position of the right side of the cell
-     */
+    
+     * @return the position of the right side of the cell */
     public int importCell(Cell cell, int cellLeft, int cellWidth, int x, int y, int cellpadding) {
         this.cellpadding = cellpadding;
 
@@ -229,9 +231,9 @@ public class RtfCell {
      *
      * @param os The <code>OutputStream</code> to which to write the properties
      * of the <code>RtfCell</code> to.
-     * @return true if writing the cell settings succeeded
-     * @throws DocumentException
-     */
+    
+    
+     * @return true if writing the cell settings succeeded * @throws DocumentException */
     public boolean writeCellSettings(ByteArrayOutputStream os) throws DocumentException {
         try {
             float lWidth, tWidth, rWidth, bWidth;
@@ -420,9 +422,9 @@ public class RtfCell {
      *
      * @param os The <code>OutputStream</code> to which to write the content of
      * the <code>RtfCell</code> to.
-     * @return true if writing the cell content succeeded
-     * @throws DocumentException
-     */
+    
+    
+     * @return true if writing the cell content succeeded * @throws DocumentException */
     public boolean writeCellContent(ByteArrayOutputStream os) throws DocumentException {
         try {
             if (mergeType == MERGE_HORIZ_PREV || mergeType == MERGE_BOTH_PREV) {
@@ -498,8 +500,8 @@ public class RtfCell {
     /**
      * Get the <code>Cell</code> with the actual content.
      *
-     * @return <code>Cell</code> which is contained in the <code>RtfCell</code>
-     */
+    
+     * @return <code>Cell</code> which is contained in the <code>RtfCell</code> */
     public Cell getStore() {
         return store;
     }
@@ -507,8 +509,8 @@ public class RtfCell {
     /**
      * Get the with of this <code>RtfCell</code>
      *
-     * @return Width of the current <code>RtfCell</code>
-     */
+    
+     * @return Width of the current <code>RtfCell</code> */
     public int getCellWidth() {
         return cellWidth;
     }
@@ -523,8 +525,8 @@ public class RtfCell {
 
     /**
      * Get the position of the right border of this <code>RtfCell</code>.
-     * @return position of the right border
-     */
+    
+     * @return position of the right border */
     public int getCellRight() {
         return cellRight;
     }
@@ -543,8 +545,8 @@ public class RtfCell {
      *
      * @param out The <code>OutputStream</code> to be written to.
      * @param i The int to be written.
-     * @throws IOException
-     */
+    
+     * @throws IOException */
     private void writeInt(ByteArrayOutputStream out, int i) throws IOException {
         out.write(Integer.toString(i).getBytes());
     }

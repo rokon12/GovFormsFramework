@@ -54,6 +54,8 @@ package com.lowagie.text.pdf;
  * A <CODE>PdfBorderArray</CODE> defines the border of a <CODE>PdfAnnotation</CODE>.
  *
  * @see		PdfArray
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfBorderArray extends PdfArray {
@@ -62,6 +64,9 @@ public class PdfBorderArray extends PdfArray {
     
 /**
  * Constructs a new <CODE>PdfBorderArray</CODE>.
+ * @param hRadius float
+ * @param vRadius float
+ * @param width float
  */
     
     public PdfBorderArray(float hRadius, float vRadius, float width) {
@@ -70,6 +75,10 @@ public class PdfBorderArray extends PdfArray {
     
 /**
  * Constructs a new <CODE>PdfBorderArray</CODE>.
+ * @param hRadius float
+ * @param vRadius float
+ * @param width float
+ * @param dash PdfDashPattern
  */
     
     public PdfBorderArray(float hRadius, float vRadius, float width, PdfDashPattern dash) {

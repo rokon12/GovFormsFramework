@@ -3,6 +3,8 @@ package com.lowagie.bc.asn1;
 import java.io.IOException;
 import java.math.BigInteger;
 
+/**
+ */
 public class DERInteger
     extends DERObject
 {
@@ -11,8 +13,10 @@ public class DERInteger
     /**
      * return an integer from the passed in object
      *
-     * @exception IllegalArgumentException if the object cannot be converted.
-     */
+    
+     * @param obj Object
+     * @return DERInteger
+     * @exception IllegalArgumentException if the object cannot be converted. */
     public static DERInteger getInstance(
         Object  obj)
     {
@@ -40,9 +44,10 @@ public class DERInteger
      * @param obj the tagged object holding the object we want
      * @param explicit true if the object is meant to be explicitly
      *              tagged false otherwise.
+    
+     * @return DERInteger
      * @exception IllegalArgumentException if the tagged object cannot
-     *               be converted.
-     */
+     *               be converted. */
     public static DERInteger getInstance(
         ASN1TaggedObject obj,
         boolean          explicit)
@@ -50,24 +55,40 @@ public class DERInteger
         return getInstance(obj.getObject());
     }
 
+    /**
+     * Constructor for DERInteger.
+     * @param value int
+     */
     public DERInteger(
         int         value)
     {
         bytes = BigInteger.valueOf(value).toByteArray();
     }
 
+    /**
+     * Constructor for DERInteger.
+     * @param value BigInteger
+     */
     public DERInteger(
         BigInteger   value)
     {
         bytes = value.toByteArray();
     }
 
+    /**
+     * Constructor for DERInteger.
+     * @param bytes byte[]
+     */
     public DERInteger(
         byte[]   bytes)
     {
         this.bytes = bytes;
     }
 
+    /**
+     * Method getValue.
+     * @return BigInteger
+     */
     public BigInteger getValue()
     {
         return new BigInteger(bytes);
@@ -76,12 +97,18 @@ public class DERInteger
     /**
      * in some cases positive values get crammed into a space,
      * that's not quite big enough...
+     * @return BigInteger
      */
     public BigInteger getPositiveValue()
     {
         return new BigInteger(1, bytes);
     }
 
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
+     */
     void encode(
         DEROutputStream out)
         throws IOException
@@ -89,6 +116,10 @@ public class DERInteger
         out.writeEncoded(INTEGER, bytes);
     }
     
+    /**
+     * Method hashCode.
+     * @return int
+     */
     public int hashCode()
     {
          int     value = 0;
@@ -101,6 +132,11 @@ public class DERInteger
          return value;
     }
 
+    /**
+     * Method equals.
+     * @param o Object
+     * @return boolean
+     */
     public boolean equals(
         Object  o)
     {

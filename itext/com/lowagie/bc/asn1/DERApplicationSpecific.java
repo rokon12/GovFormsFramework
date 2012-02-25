@@ -6,6 +6,8 @@ import java.io.IOException;
 
 /**
  * Base class for an application specific object
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class DERApplicationSpecific 
 	extends DERObject
@@ -13,6 +15,11 @@ public class DERApplicationSpecific
 	private int		tag;
 	private byte[]	octets;
 	
+	/**
+	 * Constructor for DERApplicationSpecific.
+	 * @param tag int
+	 * @param octets byte[]
+	 */
 	public DERApplicationSpecific(
 		int		tag,
 		byte[]	octets)
@@ -21,6 +28,12 @@ public class DERApplicationSpecific
 		this.octets = octets;
 	}
 	
+	/**
+	 * Constructor for DERApplicationSpecific.
+	 * @param tag int
+	 * @param object DEREncodable
+	 * @throws IOException
+	 */
 	public DERApplicationSpecific(
 		int 							tag, 
 		DEREncodable 		object) 
@@ -36,21 +49,38 @@ public class DERApplicationSpecific
 		this.octets = baos.toByteArray();
 	}
 	
+	/**
+	 * Method isConstructed.
+	 * @return boolean
+	 */
 	public boolean isConstructed()
 	{
 		return (tag & DERTags.CONSTRUCTED) != 0;
 	}
 	
+	/**
+	 * Method getContents.
+	 * @return byte[]
+	 */
 	public byte[] getContents()
 	{
 		return octets;
 	}
 	
+	/**
+	 * Method getApplicationTag.
+	 * @return int
+	 */
 	public int getApplicationTag() 
 	{
 		return tag & 0x1F;
 	}
  	
+	/**
+	 * Method getObject.
+	 * @return DERObject
+	 * @throws IOException
+	 */
 	public DERObject getObject() 
 		throws IOException 
 	{

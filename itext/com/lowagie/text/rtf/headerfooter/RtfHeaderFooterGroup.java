@@ -154,6 +154,7 @@ public class RtfHeaderFooterGroup extends HeaderFooter implements RtfBasicElemen
      * Sets the RtfDocument this RtfElement belongs to
      * 
      * @param doc The RtfDocument to use
+     * @see com.lowagie.text.rtf.RtfBasicElement#setRtfDocument(RtfDocument)
      */
     public void setRtfDocument(RtfDocument doc) {
         this.document = doc;
@@ -174,7 +175,8 @@ public class RtfHeaderFooterGroup extends HeaderFooter implements RtfBasicElemen
     /**
      * Write the content of this RtfHeaderFooterGroup.
      * 
-     * @return A byte array with the content of this RtfHeaderFooterGroup
+    
+     * @return A byte array with the content of this RtfHeaderFooterGroup * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -294,8 +296,8 @@ public class RtfHeaderFooterGroup extends HeaderFooter implements RtfBasicElemen
     /**
      * Get whether this RtfHeaderFooterGroup has a titlepage
      * 
-     * @return Whether this RtfHeaderFooterGroup has a titlepage
-     */
+    
+     * @return Whether this RtfHeaderFooterGroup has a titlepage */
     public boolean hasTitlePage() {
         return (headerFirst != null);
     }
@@ -303,8 +305,8 @@ public class RtfHeaderFooterGroup extends HeaderFooter implements RtfBasicElemen
     /**
      * Get whether this RtfHeaderFooterGroup has facing pages
      * 
-     * @return Whether this RtfHeaderFooterGroup has facing pages
-     */
+    
+     * @return Whether this RtfHeaderFooterGroup has facing pages */
     public boolean hasFacingPages() {
         return (headerLeft != null || headerRight != null);
     }
@@ -312,6 +314,7 @@ public class RtfHeaderFooterGroup extends HeaderFooter implements RtfBasicElemen
     /**
      * Unused
      * @param inTable
+     * @see com.lowagie.text.rtf.RtfBasicElement#setInTable(boolean)
      */
     public void setInTable(boolean inTable) {
     }
@@ -319,6 +322,7 @@ public class RtfHeaderFooterGroup extends HeaderFooter implements RtfBasicElemen
     /**
      * Unused
      * @param inHeader
+     * @see com.lowagie.text.rtf.RtfBasicElement#setInHeader(boolean)
      */
     public void setInHeader(boolean inHeader) {
     }
@@ -349,8 +353,8 @@ public class RtfHeaderFooterGroup extends HeaderFooter implements RtfBasicElemen
     /**
      * Gets the mode of this RtfHeaderFooterGroup
      * 
-     * @return The mode of this RtfHeaderFooterGroup
-     */
+    
+     * @return The mode of this RtfHeaderFooterGroup */
     protected int getMode() {
         return this.mode;
     }
@@ -358,8 +362,8 @@ public class RtfHeaderFooterGroup extends HeaderFooter implements RtfBasicElemen
     /**
      * Gets the RtfHeaderFooter for all pages
      * 
-     * @return The RtfHeaderFooter for all pages 
-     */
+    
+     * @return The RtfHeaderFooter for all pages  */
     protected RtfHeaderFooter getHeaderAll() {
         return headerAll;
     }
@@ -367,8 +371,8 @@ public class RtfHeaderFooterGroup extends HeaderFooter implements RtfBasicElemen
     /**
      * Gets the RtfHeaderFooter for the title page
      * 
-     * @return The RtfHeaderFooter for the title page 
-     */
+    
+     * @return The RtfHeaderFooter for the title page  */
     protected RtfHeaderFooter getHeaderFirst() {
         return headerFirst;
     }
@@ -376,8 +380,8 @@ public class RtfHeaderFooterGroup extends HeaderFooter implements RtfBasicElemen
     /**
      * Gets the RtfHeaderFooter for all left hand pages
      * 
-     * @return The RtfHeaderFooter for all left hand pages 
-     */
+    
+     * @return The RtfHeaderFooter for all left hand pages  */
     protected RtfHeaderFooter getHeaderLeft() {
         return headerLeft;
     }
@@ -385,8 +389,8 @@ public class RtfHeaderFooterGroup extends HeaderFooter implements RtfBasicElemen
     /**
      * Gets the RtfHeaderFooter for all right hand pages
      * 
-     * @return The RtfHeaderFooter for all right hand pages 
-     */
+    
+     * @return The RtfHeaderFooter for all right hand pages  */
     protected RtfHeaderFooter getHeaderRight() {
         return headerRight;
     }

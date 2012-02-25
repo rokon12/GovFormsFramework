@@ -53,6 +53,7 @@ package com.lowagie.text.pdf;
 /** An interface that can be used to retrieve the position of cells in <CODE>PdfPTable</CODE>.
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public interface PdfPTableEvent {
     

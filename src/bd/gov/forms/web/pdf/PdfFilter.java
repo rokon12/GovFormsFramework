@@ -9,19 +9,39 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ */
 public class PdfFilter implements Filter, ApplicationContextAware {
 	@SuppressWarnings({ "UnusedDeclaration" })
 	private static final Logger log = Logger.getLogger(PdfFilter.class);
 	protected ApplicationContext applicationContext;
 
+	/**
+	 * Method init.
+	 * @param config FilterConfig
+	 * @see javax.servlet.Filter#init(FilterConfig)
+	 */
 	public void init(FilterConfig config) {
 		/* do nothing */
 	}
 
+	/**
+	 * Method destroy.
+	 * @see javax.servlet.Filter#destroy()
+	 */
 	public void destroy() {
 		/* do nothing */
 	}
 
+	/**
+	 * Method doFilter.
+	 * @param req ServletRequest
+	 * @param resp ServletResponse
+	 * @param filterChain FilterChain
+	 * @throws IOException
+	 * @throws ServletException
+	 * @see javax.servlet.Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
+	 */
 	public void doFilter(ServletRequest req, ServletResponse resp,
 			FilterChain filterChain) throws IOException, ServletException {
 
@@ -57,6 +77,11 @@ public class PdfFilter implements Filter, ApplicationContextAware {
 		}
 	}
 
+	/**
+	 * Method setApplicationContext.
+	 * @param applicationContext ApplicationContext
+	 * @see org.springframework.context.ApplicationContextAware#setApplicationContext(ApplicationContext)
+	 */
 	public void setApplicationContext(ApplicationContext applicationContext) {
 		this.applicationContext = applicationContext;
 	}

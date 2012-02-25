@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
+/**
+ */
 public class HtmlUtils {
 	private static final Logger log = Logger.getLogger(HtmlUtils.class);
 
@@ -20,7 +22,8 @@ public class HtmlUtils {
 	 * @param startTag
 	 * @param endTag
 	 * @param pattern
-	 * @return
+	
+	 * @return String
 	 */
 	public static String removeTag(String text, String startTag, String endTag,
 			String pattern) {
@@ -71,6 +74,14 @@ public class HtmlUtils {
 
 	}
 
+	/**
+	 * Method removeAllTags.
+	 * @param text String
+	 * @param startTag String
+	 * @param endTag String
+	 * @param pattern String
+	 * @return String
+	 */
 	public static String removeAllTags(String text, String startTag,
 			String endTag, String pattern) {
 		String output = "";
@@ -82,6 +93,13 @@ public class HtmlUtils {
 		return text;
 	}
 
+	/**
+	 * Method replaceAll.
+	 * @param text String
+	 * @param regex String
+	 * @param replaceWith String
+	 * @return String
+	 */
 	public static String replaceAll(String text, String regex,
 			String replaceWith) {
 		Pattern p = Pattern.compile(regex, Pattern.DOTALL);
@@ -95,6 +113,13 @@ public class HtmlUtils {
 		return buffer.toString();
 	}
 
+	/**
+	 * Method getGroupTextList.
+	 * @param text String
+	 * @param regex String
+	 * @param groupNumber int
+	 * @return List<String>
+	 */
 	public static List<String> getGroupTextList(String text, String regex,
 			int groupNumber) {
 		log.debug("getGroupTextList-e:");
@@ -109,6 +134,13 @@ public class HtmlUtils {
 		return groupTextList;
 	}
 
+	/**
+	 * Method getGroupText.
+	 * @param text String
+	 * @param regex String
+	 * @param groupNumber int
+	 * @return String
+	 */
 	public static String getGroupText(String text, String regex, int groupNumber) {
 		log.debug("getGroupText-e:");
 
@@ -119,6 +151,14 @@ public class HtmlUtils {
 		return "";
 	}
 
+	/**
+	 * Method insertText.
+	 * @param text String
+	 * @param string String
+	 * @param startTag String
+	 * @param endTag String
+	 * @return String
+	 */
 	public static String insertText(String text, String string,
 			String startTag, String endTag) {
 

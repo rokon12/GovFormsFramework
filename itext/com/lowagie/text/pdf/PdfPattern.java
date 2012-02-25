@@ -50,10 +50,16 @@ import com.lowagie.text.ExceptionConverter;
  * A <CODE>PdfPattern</CODE> defines a ColorSpace
  *
  * @see		PdfStream
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfPattern extends PdfStream {
     
+    /**
+     * Constructor for PdfPattern.
+     * @param painter PdfPatternPainter
+     */
     PdfPattern(PdfPatternPainter painter) {
         super();
         PdfNumber one = new PdfNumber(1);

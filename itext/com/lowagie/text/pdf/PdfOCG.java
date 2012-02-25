@@ -50,18 +50,19 @@ package com.lowagie.text.pdf;
  * The interface common to all layer types.
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public interface PdfOCG {
 
     /**
      * Gets the <CODE>PdfIndirectReference</CODE> that represents this layer.
-     * @return the <CODE>PdfIndirectReference</CODE> that represents this layer
-     */    
+    
+     * @return the <CODE>PdfIndirectReference</CODE> that represents this layer */    
     public PdfIndirectReference getRef();
     
     /**
      * Gets the object representing the layer.
-     * @return the object representing the layer
-     */    
+    
+     * @return the object representing the layer */    
     public PdfObject getPdfObject();
 }

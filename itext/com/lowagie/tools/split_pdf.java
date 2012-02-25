@@ -23,6 +23,7 @@ import com.lowagie.text.pdf.*;
 /**
  * This class demonstrates how to split a PDF file using iText.
  * @author Bruno Lowagie
+ * @version $Revision: 1.0 $
  */
 public class split_pdf extends java.lang.Object {
     

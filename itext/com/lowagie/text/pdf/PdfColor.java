@@ -54,6 +54,8 @@ import java.awt.Color;
  * A <CODE>PdfColor</CODE> defines a Color (it's a <CODE>PdfArray</CODE> containing 3 values).
  *
  * @see		PdfDictionary
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 class PdfColor extends PdfArray {
@@ -74,6 +76,10 @@ class PdfColor extends PdfArray {
         add(new PdfNumber((double)(blue & 0xFF) / 0xFF));
     }
     
+    /**
+     * Constructor for PdfColor.
+     * @param color Color
+     */
     PdfColor(Color color) {
         this(color.getRed(), color.getGreen(), color.getBlue());
     }

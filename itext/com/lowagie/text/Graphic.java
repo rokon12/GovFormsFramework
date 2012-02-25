@@ -64,6 +64,8 @@ import com.lowagie.text.pdf.PdfContentByte;
  * the PDF Reference Manual version 1.3 first.
  *
  * @see		Element
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class Graphic extends PdfContentByte implements Element {
@@ -95,7 +97,8 @@ public class Graphic extends PdfContentByte implements Element {
  *
  * @param	listener	an <CODE>ElementListener</CODE>
  * <CODE>true</CODE> if the element was processed successfully
- * @return true if processing this object succeeded
+
+ * @return true if processing this object succeeded * @see com.lowagie.text.Element#process(ElementListener)
  */
     
     public boolean process(ElementListener listener) {
@@ -110,7 +113,8 @@ public class Graphic extends PdfContentByte implements Element {
 /**
  * Gets the type of the text element.
  *
- * @return	a type
+
+ * @return	a type * @see com.lowagie.text.Element#type()
  */
     
     public int type() {
@@ -120,7 +124,8 @@ public class Graphic extends PdfContentByte implements Element {
 /**
  * Gets all the chunks in this element.
  *
- * @return	an <CODE>ArrayList</CODE>
+
+ * @return	an <CODE>ArrayList</CODE> * @see com.lowagie.text.Element#getChunks()
  */
     
     public ArrayList getChunks() {

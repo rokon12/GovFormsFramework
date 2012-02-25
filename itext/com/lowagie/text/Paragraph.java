@@ -74,6 +74,8 @@ import com.lowagie.text.markup.MarkupParser;
  * @see		Element
  * @see		Phrase
  * @see		ListItem
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class Paragraph extends Phrase implements TextElementArray, MarkupAttributes {
@@ -257,7 +259,8 @@ public class Paragraph extends Phrase implements TextElementArray, MarkupAttribu
 /**
  * Gets the type of the text element.
  *
- * @return	a type
+
+ * @return	a type * @see com.lowagie.text.Element#type()
  */
     
     public int type() {
@@ -270,7 +273,8 @@ public class Paragraph extends Phrase implements TextElementArray, MarkupAttribu
  * Adds an <CODE>Object</CODE> to the <CODE>Paragraph</CODE>.
  *
  * @param	o   object		the object to add.
- * @return true is adding the object succeeded
+
+ * @return true is adding the object succeeded * @see com.lowagie.text.TextElementArray#add(Object)
  */
     
     public boolean add(Object o) {
@@ -383,8 +387,8 @@ public class Paragraph extends Phrase implements TextElementArray, MarkupAttribu
 /**
  * Checks if this paragraph has to be kept together on one page.
  *
- * @return  true if the paragraph may not be split over 2 pages.
- */
+
+ * @return  true if the paragraph may not be split over 2 pages. */
     
     public boolean getKeepTogether() {
         return keeptogether;
@@ -395,8 +399,8 @@ public class Paragraph extends Phrase implements TextElementArray, MarkupAttribu
 /**
  * Gets the alignment of this paragraph.
  *
- * @return	alignment
- */
+
+ * @return	alignment */
     
     public int alignment() {
         return alignment;
@@ -405,8 +409,8 @@ public class Paragraph extends Phrase implements TextElementArray, MarkupAttribu
 /**
  * Gets the indentation of this paragraph on the left side.
  *
- * @return	the indentation
- */
+
+ * @return	the indentation */
     
     public float indentationLeft() {
         return indentationLeft;
@@ -415,8 +419,8 @@ public class Paragraph extends Phrase implements TextElementArray, MarkupAttribu
 /**
  * Gets the indentation of this paragraph on the right side.
  *
- * @return	the indentation
- */
+
+ * @return	the indentation */
     
     public float indentationRight() {
         return indentationRight;
@@ -425,8 +429,8 @@ public class Paragraph extends Phrase implements TextElementArray, MarkupAttribu
 /**
  * Gets the spacing before this paragraph.
  *
- * @return	the spacing
- */
+
+ * @return	the spacing */
     
     public float spacingBefore() {
         return spacingBefore;
@@ -435,8 +439,8 @@ public class Paragraph extends Phrase implements TextElementArray, MarkupAttribu
 /**
  * Gets the spacing before this paragraph.
  *
- * @return	the spacing
- */
+
+ * @return	the spacing */
     
     public float spacingAfter() {
         return spacingAfter;
@@ -446,8 +450,8 @@ public class Paragraph extends Phrase implements TextElementArray, MarkupAttribu
  * Checks if a given tag corresponds with this object.
  *
  * @param   tag     the given tag
- * @return  true if the tag corresponds
- */
+
+ * @return  true if the tag corresponds */
     
     public static boolean isTag(String tag) {
         return ElementTags.PARAGRAPH.equals(tag);
@@ -475,16 +479,16 @@ public class Paragraph extends Phrase implements TextElementArray, MarkupAttribu
     
     /**
      * Gets the variable leading
-     * @return the leading
-     */
+    
+     * @return the leading */
     public float getMultipliedLeading() {
         return multipliedLeading;
     }
     
     /**
      * Getter for property firstLineIndent.
-     * @return Value of property firstLineIndent.
-     */
+    
+     * @return Value of property firstLineIndent. */
     public float getFirstLineIndent() {
         return this.firstLineIndent;
     }
@@ -499,8 +503,8 @@ public class Paragraph extends Phrase implements TextElementArray, MarkupAttribu
     
     /**
      * Getter for property extraParagraphSpace.
-     * @return Value of property extraParagraphSpace.
-     */
+    
+     * @return Value of property extraParagraphSpace. */
     public float getExtraParagraphSpace() {
         return this.extraParagraphSpace;
     }

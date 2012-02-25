@@ -62,6 +62,8 @@ import java.util.Set;
  * 
  * @see Element
  * @see Anchor
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class Annotation implements Element, MarkupAttributes {
@@ -184,6 +186,10 @@ public class Annotation implements Element, MarkupAttributes {
 		this.ury = ury;
 	}
 
+    /**
+     * Constructor for Annotation.
+     * @param an Annotation
+     */
     public Annotation(Annotation an) {
         annotationtype = an.annotationtype;
         annotationAttributes = an.annotationAttributes;
@@ -483,7 +489,8 @@ public class Annotation implements Element, MarkupAttributes {
 	/**
 	 * Gets the type of the text element.
 	 * 
-	 * @return a type
+	
+	 * @return a type * @see com.lowagie.text.Element#type()
 	 */
 
 	public int type() {
@@ -498,7 +505,8 @@ public class Annotation implements Element, MarkupAttributes {
 	 * 
 	 * @param listener
 	 *            an <CODE>ElementListener</CODE>
-	 * @return <CODE>true</CODE> if the element was processed successfully
+	
+	 * @return <CODE>true</CODE> if the element was processed successfully * @see com.lowagie.text.Element#process(ElementListener)
 	 */
 
 	public boolean process(ElementListener listener) {
@@ -512,7 +520,8 @@ public class Annotation implements Element, MarkupAttributes {
 	/**
 	 * Gets all the chunks in this element.
 	 * 
-	 * @return an <CODE>ArrayList</CODE>
+	
+	 * @return an <CODE>ArrayList</CODE> * @see com.lowagie.text.Element#getChunks()
 	 */
 
 	public ArrayList getChunks() {
@@ -546,8 +555,8 @@ public class Annotation implements Element, MarkupAttributes {
 	/**
 	 * Returns the lower left x-value.
 	 * 
-	 * @return a value
-	 */
+	
+	 * @return a value */
 
 	public float llx() {
 		return llx;
@@ -556,8 +565,8 @@ public class Annotation implements Element, MarkupAttributes {
 	/**
 	 * Returns the lower left y-value.
 	 * 
-	 * @return a value
-	 */
+	
+	 * @return a value */
 
 	public float lly() {
 		return lly;
@@ -566,8 +575,8 @@ public class Annotation implements Element, MarkupAttributes {
 	/**
 	 * Returns the uppper right x-value.
 	 * 
-	 * @return a value
-	 */
+	
+	 * @return a value */
 
 	public float urx() {
 		return urx;
@@ -576,8 +585,8 @@ public class Annotation implements Element, MarkupAttributes {
 	/**
 	 * Returns the uppper right y-value.
 	 * 
-	 * @return a value
-	 */
+	
+	 * @return a value */
 
 	public float ury() {
 		return ury;
@@ -588,8 +597,8 @@ public class Annotation implements Element, MarkupAttributes {
 	 * 
 	 * @param def
 	 *            the default value
-	 * @return a value
-	 */
+	
+	 * @return a value */
 
 	public float llx(float def) {
 		if (Float.isNaN(llx))
@@ -602,8 +611,8 @@ public class Annotation implements Element, MarkupAttributes {
 	 * 
 	 * @param def
 	 *            the default value
-	 * @return a value
-	 */
+	
+	 * @return a value */
 
 	public float lly(float def) {
 		if (Float.isNaN(lly))
@@ -616,8 +625,8 @@ public class Annotation implements Element, MarkupAttributes {
 	 * 
 	 * @param def
 	 *            the default value
-	 * @return a value
-	 */
+	
+	 * @return a value */
 
 	public float urx(float def) {
 		if (Float.isNaN(urx))
@@ -630,8 +639,8 @@ public class Annotation implements Element, MarkupAttributes {
 	 * 
 	 * @param def
 	 *            the default value
-	 * @return a value
-	 */
+	
+	 * @return a value */
 
 	public float ury(float def) {
 		if (Float.isNaN(ury))
@@ -642,8 +651,8 @@ public class Annotation implements Element, MarkupAttributes {
 	/**
 	 * Returns the type of this <CODE>Annotation</CODE>.
 	 * 
-	 * @return a type
-	 */
+	
+	 * @return a type */
 
 	public int annotationType() {
 		return annotationtype;
@@ -652,8 +661,8 @@ public class Annotation implements Element, MarkupAttributes {
 	/**
 	 * Returns the title of this <CODE>Annotation</CODE>.
 	 * 
-	 * @return a name
-	 */
+	
+	 * @return a name */
 
 	public String title() {
 		String s = (String) annotationAttributes.get(TITLE);
@@ -665,8 +674,8 @@ public class Annotation implements Element, MarkupAttributes {
 	/**
 	 * Gets the content of this <CODE>Annotation</CODE>.
 	 * 
-	 * @return a reference
-	 */
+	
+	 * @return a reference */
 
 	public String content() {
 		String s = (String) annotationAttributes.get(CONTENT);
@@ -678,8 +687,8 @@ public class Annotation implements Element, MarkupAttributes {
 	/**
 	 * Gets the content of this <CODE>Annotation</CODE>.
 	 * 
-	 * @return a reference
-	 */
+	
+	 * @return a reference */
 
 	public HashMap attributes() {
 		return annotationAttributes;
@@ -690,8 +699,8 @@ public class Annotation implements Element, MarkupAttributes {
 	 * 
 	 * @param tag
 	 *            the given tag
-	 * @return true if the tag corresponds
-	 */
+	
+	 * @return true if the tag corresponds */
 
 	public static boolean isTag(String tag) {
 		return ElementTags.ANNOTATION.equals(tag);

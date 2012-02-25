@@ -205,7 +205,8 @@ public class RtfBorderGroup extends RtfElement {
     /**
      * Writes the borders of this RtfBorderGroup
      * 
-     * @return A byte array with the borders of this RtfBorderGroup
+    
+     * @return A byte array with the borders of this RtfBorderGroup * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -224,8 +225,8 @@ public class RtfBorderGroup extends RtfElement {
     /**
      * Gets the RtfBorders of this RtfBorderGroup
      * 
-     * @return The RtfBorders of this RtfBorderGroup
-     */
+    
+     * @return The RtfBorders of this RtfBorderGroup */
     protected Hashtable getBorders() {
         return this.borders;
     }

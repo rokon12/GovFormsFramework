@@ -59,6 +59,7 @@ import java.util.HashMap;
  * http://en.wikipedia.org/wiki/Web_colors )
  * 
  * @author blowagie
+ * @version $Revision: 1.0 $
  */
 public class WebColors extends HashMap {
 
@@ -213,10 +214,10 @@ public class WebColors extends HashMap {
 	 * 
 	 * @param name
 	 *            a name such as black, violet, cornflowerblue
-	 * @return the corresponding Color object
-	 * @throws IllegalArgumentException
-	 *             if the String isn't a know representation of a color.
-	 */
+	
+	
+	 * @return the corresponding Color object * @throws IllegalArgumentException
+	 *             if the String isn't a know representation of a color. */
 	public static Color getRGBColor(String name)
 			throws IllegalArgumentException {
 		int[] c = { 0, 0, 0, 0 };

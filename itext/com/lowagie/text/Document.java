@@ -98,6 +98,8 @@ import java.util.Date;
  * </PRE>
  * 
  * </BLOCKQUOTE>
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class Document implements DocListener {
@@ -240,11 +242,12 @@ public class Document implements DocListener {
  *
 	 * @param element
 	 *            the <CODE>Element</CODE> to add
-	 * @return <CODE>true</CODE> if the element was added, <CODE>false
-	 *         </CODE> if not
-	 * @throws DocumentException
-	 *             when a document isn't open yet, or has been closed
- */
+	
+	
+ * @return <CODE>true</CODE> if the element was added, <CODE>false
+	 *         </CODE> if not * @throws DocumentException
+	 *             when a document isn't open yet, or has been closed * @see com.lowagie.text.ElementListener#add(Element)
+	 */
     
     public boolean add(Element element) throws DocumentException {
         if (close) {
@@ -289,7 +292,8 @@ public class Document implements DocListener {
 	 * Once the document is opened, you can't write any Header- or
 	 * Meta-information anymore. You have to open the document before you can
 	 * begin to add content to the body of the document.
- */
+ * @see com.lowagie.text.DocListener#open()
+	 */
     
     public void open() {
 		if (!close) {
@@ -310,8 +314,9 @@ public class Document implements DocListener {
  *
 	 * @param pageSize
 	 *            the new pagesize
- * @return	a <CODE>boolean</CODE>
- */
+
+ * @return	a <CODE>boolean</CODE> * @see com.lowagie.text.DocListener#setPageSize(Rectangle)
+	 */
     
     public boolean setPageSize(Rectangle pageSize) {
         this.pageSize = pageSize;
@@ -328,9 +333,10 @@ public class Document implements DocListener {
  *
 	 * @param watermark
 	 *            the watermark to add
-	 * @return <CODE>true</CODE> if the element was added, <CODE>false
-	 *         </CODE> if not.
- */
+	
+ * @return <CODE>true</CODE> if the element was added, <CODE>false
+	 *         </CODE> if not. * @see com.lowagie.text.DocListener#add(Watermark)
+	 */
     
     public boolean add(Watermark watermark) {
         this.watermark = watermark;
@@ -344,7 +350,8 @@ public class Document implements DocListener {
     
 	/**
  * Removes the <CODE>Watermark</CODE>.
- */
+ * @see com.lowagie.text.DocListener#removeWatermark()
+	 */
     
     public void removeWatermark() {
         this.watermark = null;
@@ -366,8 +373,9 @@ public class Document implements DocListener {
 	 *            the margin on the top
 	 * @param marginBottom
 	 *            the margin on the bottom
- * @return	a <CODE>boolean</CODE>
- */
+
+ * @return	a <CODE>boolean</CODE> * @see com.lowagie.text.DocListener#setMargins(float, float, float, float)
+	 */
     
 	public boolean setMargins(float marginLeft, float marginRight,
 			float marginTop, float marginBottom) {
@@ -387,11 +395,12 @@ public class Document implements DocListener {
 	/**
  * Signals that an new page has to be started.
  *
-	 * @return <CODE>true</CODE> if the page was added, <CODE>false</CODE>
-	 *         if not.
-	 * @throws DocumentException
-	 *             when a document isn't open yet, or has been closed
- */
+	
+	
+ * @return <CODE>true</CODE> if the page was added, <CODE>false</CODE>
+	 *         if not. * @throws DocumentException
+	 *             when a document isn't open yet, or has been closed * @see com.lowagie.text.DocListener#newPage()
+	 */
     
     public boolean newPage() throws DocumentException {
         if (!open || close) {
@@ -410,7 +419,8 @@ public class Document implements DocListener {
  *
 	 * @param header
 	 *            the new header
- */
+ * @see com.lowagie.text.DocListener#setHeader(HeaderFooter)
+	 */
     
     public void setHeader(HeaderFooter header) {
         this.header = header;
@@ -423,7 +433,8 @@ public class Document implements DocListener {
     
 	/**
  * Resets the header of this document.
- */
+ * @see com.lowagie.text.DocListener#resetHeader()
+	 */
     
     public void resetHeader() {
         this.header = null;
@@ -439,7 +450,8 @@ public class Document implements DocListener {
  *
 	 * @param footer
 	 *            the new footer
- */
+ * @see com.lowagie.text.DocListener#setFooter(HeaderFooter)
+	 */
     
     public void setFooter(HeaderFooter footer) {
         this.footer = footer;
@@ -452,7 +464,8 @@ public class Document implements DocListener {
     
 	/**
  * Resets the footer of this document.
- */
+ * @see com.lowagie.text.DocListener#resetFooter()
+	 */
     
     public void resetFooter() {
         this.footer = null;
@@ -465,7 +478,8 @@ public class Document implements DocListener {
     
 	/**
  * Sets the page number to 0.
- */
+ * @see com.lowagie.text.DocListener#resetPageCount()
+	 */
     
     public void resetPageCount() {
         pageN = 0;
@@ -481,7 +495,8 @@ public class Document implements DocListener {
  *
 	 * @param pageN
 	 *            the new page number
- */
+ * @see com.lowagie.text.DocListener#setPageCount(int)
+	 */
     
     public void setPageCount(int pageN) {
         this.pageN = pageN;
@@ -495,8 +510,8 @@ public class Document implements DocListener {
 	/**
  * Returns the current page number.
  *
- * @return the current page number
- */
+
+ * @return the current page number */
     
     public int getPageNumber() {
         return this.pageN;
@@ -507,7 +522,8 @@ public class Document implements DocListener {
  * <P>
 	 * Once all the content has been written in the body, you have to close the
 	 * body. After that nothing can be written to the body anymore.
- */
+ * @see com.lowagie.text.DocListener#close()
+	 */
     
     public void close() {
 		if (!close) {
@@ -530,8 +546,8 @@ public class Document implements DocListener {
 	 *            the name of the header
 	 * @param content
 	 *            the content of the header
- * @return	<CODE>true</CODE> if successful, <CODE>false</CODE> otherwise
- */
+
+ * @return	<CODE>true</CODE> if successful, <CODE>false</CODE> otherwise */
     
     public boolean addHeader(String name, String content) {
         try {
@@ -546,8 +562,8 @@ public class Document implements DocListener {
  *
 	 * @param title
 	 *            the title
- * @return	<CODE>true</CODE> if successful, <CODE>false</CODE> otherwise
- */
+
+ * @return	<CODE>true</CODE> if successful, <CODE>false</CODE> otherwise */
     
     public boolean addTitle(String title) {
         try {
@@ -562,8 +578,8 @@ public class Document implements DocListener {
  *
 	 * @param subject
 	 *            the subject
- * @return	<CODE>true</CODE> if successful, <CODE>false</CODE> otherwise
- */
+
+ * @return	<CODE>true</CODE> if successful, <CODE>false</CODE> otherwise */
     
     public boolean addSubject(String subject) {
         try {
@@ -578,8 +594,8 @@ public class Document implements DocListener {
  *
 	 * @param keywords
 	 *            adds the keywords to the document
- * @return <CODE>true</CODE> if successful, <CODE>false</CODE> otherwise
- */
+
+ * @return <CODE>true</CODE> if successful, <CODE>false</CODE> otherwise */
     
     public boolean addKeywords(String keywords) {
         try {
@@ -594,8 +610,8 @@ public class Document implements DocListener {
  *
 	 * @param author
 	 *            the name of the author
- * @return	<CODE>true</CODE> if successful, <CODE>false</CODE> otherwise
- */
+
+ * @return	<CODE>true</CODE> if successful, <CODE>false</CODE> otherwise */
     
     public boolean addAuthor(String author) {
         try {
@@ -610,8 +626,8 @@ public class Document implements DocListener {
  *
 	 * @param creator
 	 *            the name of the creator
- * @return	<CODE>true</CODE> if successful, <CODE>false</CODE> otherwise
- */
+
+ * @return	<CODE>true</CODE> if successful, <CODE>false</CODE> otherwise */
     
     public boolean addCreator(String creator) {
         try {
@@ -624,8 +640,8 @@ public class Document implements DocListener {
 	/**
  * Adds the producer to a Document.
  *
- * @return	<CODE>true</CODE> if successful, <CODE>false</CODE> otherwise
- */
+
+ * @return	<CODE>true</CODE> if successful, <CODE>false</CODE> otherwise */
     
     public boolean addProducer() {
         try {
@@ -638,8 +654,8 @@ public class Document implements DocListener {
 	/**
  * Adds the current date and time to a Document.
  *
- * @return	<CODE>true</CODE> if successful, <CODE>false</CODE> otherwise
- */
+
+ * @return	<CODE>true</CODE> if successful, <CODE>false</CODE> otherwise */
     
     public boolean addCreationDate() {
         try {
@@ -657,8 +673,8 @@ public class Document implements DocListener {
 	/**
  * Returns the left margin.
  *
- * @return	the left margin
- */
+
+ * @return	the left margin */
     
     public float leftMargin() {
         return marginLeft;
@@ -667,8 +683,8 @@ public class Document implements DocListener {
 	/**
  * Return the right margin.
  *
- * @return	the right margin
- */
+
+ * @return	the right margin */
     
     public float rightMargin() {
         return marginRight;
@@ -677,8 +693,8 @@ public class Document implements DocListener {
 	/**
  * Returns the top margin.
  *
- * @return	the top margin
- */
+
+ * @return	the top margin */
     
     public float topMargin() {
         return marginTop;
@@ -687,8 +703,8 @@ public class Document implements DocListener {
 	/**
  * Returns the bottom margin.
  *
- * @return	the bottom margin
- */
+
+ * @return	the bottom margin */
     
     public float bottomMargin() {
         return marginBottom;
@@ -697,8 +713,8 @@ public class Document implements DocListener {
 	/**
  * Returns the lower left x-coordinate.
  *
- * @return	the lower left x-coordinate
- */
+
+ * @return	the lower left x-coordinate */
     
     public float left() {
         return pageSize.left(marginLeft);
@@ -707,8 +723,8 @@ public class Document implements DocListener {
 	/**
  * Returns the upper right x-coordinate.
  *
- * @return	the upper right x-coordinate
- */
+
+ * @return	the upper right x-coordinate */
     
     public float right() {
         return pageSize.right(marginRight);
@@ -717,8 +733,8 @@ public class Document implements DocListener {
 	/**
  * Returns the upper right y-coordinate.
  *
- * @return	the upper right y-coordinate
- */
+
+ * @return	the upper right y-coordinate */
     
     public float top() {
         return pageSize.top(marginTop);
@@ -727,8 +743,8 @@ public class Document implements DocListener {
 	/**
  * Returns the lower left y-coordinate.
  *
- * @return	the lower left y-coordinate
- */
+
+ * @return	the lower left y-coordinate */
     
     public float bottom() {
         return pageSize.bottom(marginBottom);
@@ -739,8 +755,8 @@ public class Document implements DocListener {
  *
 	 * @param margin
 	 *            a margin
- * @return	the lower left x-coordinate
- */
+
+ * @return	the lower left x-coordinate */
     
     public float left(float margin) {
         return pageSize.left(marginLeft + margin);
@@ -751,8 +767,8 @@ public class Document implements DocListener {
  *
 	 * @param margin
 	 *            a margin
- * @return	the upper right x-coordinate
- */
+
+ * @return	the upper right x-coordinate */
     
     public float right(float margin) {
         return pageSize.right(marginRight + margin);
@@ -763,8 +779,8 @@ public class Document implements DocListener {
  *
 	 * @param margin
 	 *            a margin
- * @return	the upper right y-coordinate
- */
+
+ * @return	the upper right y-coordinate */
     
     public float top(float margin) {
         return pageSize.top(marginTop + margin);
@@ -775,8 +791,8 @@ public class Document implements DocListener {
  *
 	 * @param margin
 	 *            a margin
- * @return	the lower left y-coordinate
- */
+
+ * @return	the lower left y-coordinate */
     
     public float bottom(float margin) {
         return pageSize.bottom(marginBottom + margin);
@@ -785,8 +801,8 @@ public class Document implements DocListener {
 	/**
  * Gets the pagesize.
 	 * 
- * @return the page size
- */
+
+ * @return the page size */
     
 	public Rectangle getPageSize() {
         return this.pageSize;
@@ -795,8 +811,8 @@ public class Document implements DocListener {
 	/**
 	 * Checks if the document is open.
 	 * 
-     * @return <CODE>true</CODE> if the document is open
-     */    
+    
+     * @return <CODE>true</CODE> if the document is open */    
     public boolean isOpen() {
         return open;
     }
@@ -804,8 +820,8 @@ public class Document implements DocListener {
 	/**
 	 * Gets the iText version.
 	 * This method may only be changed by Paulo Soares and/or Bruno Lowagie.
-     * @return iText version
-     */    
+    
+     * @return iText version */    
     public static final String getVersion() {
         return ITEXT_VERSION;
     }
@@ -824,8 +840,8 @@ public class Document implements DocListener {
 	/**
  * Gets the JavaScript onLoad command.
 	 * 
- * @return the JavaScript onLoad command
- */
+
+ * @return the JavaScript onLoad command */
 
     public String getJavaScript_onLoad() {
         return this.javaScript_onLoad;
@@ -845,8 +861,8 @@ public class Document implements DocListener {
 	/**
  * Gets the JavaScript onUnLoad command.
 	 * 
- * @return the JavaScript onUnLoad command
- */
+
+ * @return the JavaScript onUnLoad command */
 
     public String getJavaScript_onUnLoad() {
         return this.javaScript_onUnLoad;
@@ -866,8 +882,8 @@ public class Document implements DocListener {
 	/**
  * Gets the style class of the HTML body tag
  *
- * @return		the style class of the HTML body tag
- */
+
+ * @return		the style class of the HTML body tag */
     
     public String getHtmlStyleClass() {
         return this.htmlStyleClass;
@@ -893,7 +909,8 @@ public class Document implements DocListener {
 	 * 
 	 * @param marginMirroring
 	 *            <CODE>true</CODE> to mirror the margins
-     * @return always <CODE>true</CODE>
+    
+     * @return always <CODE>true</CODE> * @see com.lowagie.text.DocListener#setMarginMirroring(boolean)
      */    
     public boolean setMarginMirroring(boolean marginMirroring) {
         this.marginMirroring = marginMirroring;
@@ -908,8 +925,8 @@ public class Document implements DocListener {
     /**
      * Gets the margin mirroring flag.
 	 * 
-     * @return the margin mirroring flag
-     */    
+    
+     * @return the margin mirroring flag */    
     public boolean isMarginMirroring() {
         return marginMirroring;
     }

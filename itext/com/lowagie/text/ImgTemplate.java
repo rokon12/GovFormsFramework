@@ -60,10 +60,15 @@ import com.lowagie.text.pdf.PdfTemplate;
  * @see		Image
  *
  * @author  Paulo Soares
+ * @version $Revision: 1.0 $
  */
 
 public class ImgTemplate extends Image implements Element {
     
+    /**
+     * Constructor for ImgTemplate.
+     * @param image Image
+     */
     ImgTemplate(Image image) {
         super(image);
     }
@@ -71,8 +76,8 @@ public class ImgTemplate extends Image implements Element {
     /** Creats an Image from a PdfTemplate.
      *
      * @param template the PdfTemplate
-     * @throws BadElementException on error
-     */
+    
+     * @throws BadElementException on error */
     public ImgTemplate(PdfTemplate template) throws BadElementException{
         super((URL)null);
         if (template == null)

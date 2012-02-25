@@ -103,8 +103,8 @@ public class GreekList extends List {
 	/**
 	 * Checks if the list is greek-letter with lowercase
 	 *
-	 * @return	<CODE>true</CODE> if the greek-letter is lowercase, <CODE>false</CODE> otherwise.
-	 */
+	
+	 * @return	<CODE>true</CODE> if the greek-letter is lowercase, <CODE>false</CODE> otherwise. */
 	public boolean isGreekLower() {
 		return greeklower;
 	}
@@ -113,7 +113,8 @@ public class GreekList extends List {
 	 * Adds an <CODE>Object</CODE> to the <CODE>List</CODE>.
 	 *
 	 * @param	o	the object to add.
-	 * @return true if adding the object succeeded
+	
+	 * @return true if adding the object succeeded * @see com.lowagie.text.TextElementArray#add(Object)
 	 */
 	public boolean add(Object o) {
 		if (o instanceof ListItem) {

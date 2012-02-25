@@ -60,6 +60,8 @@ import java.util.HashMap;
 
 /**
  * Label for the FileChooser
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class LabelAccessory
     extends JPanel implements PropertyChangeListener {
@@ -90,6 +92,10 @@ public class LabelAccessory
     }
   }
 
+  /**
+   * Method createTextFromPDF.
+   * @param file File
+   */
   public void createTextFromPDF(File file) {
     if (file.exists()) {
       int page = 1;
@@ -137,6 +143,11 @@ public class LabelAccessory
     }
   }
 
+  /**
+   * Method propertyChange.
+   * @param evt PropertyChangeEvent
+   * @see java.beans.PropertyChangeListener#propertyChange(PropertyChangeEvent)
+   */
   public void propertyChange(PropertyChangeEvent evt) {
     filename = evt.getPropertyName();
     if (filename.equals(JFileChooser.SELECTED_FILE_CHANGED_PROPERTY)) {

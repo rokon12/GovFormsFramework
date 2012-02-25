@@ -68,6 +68,8 @@ import java.util.Set;
  * @see Table
  * @see Cell
  * @see HeaderFooter
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class Rectangle implements Element, MarkupAttributes {
@@ -279,7 +281,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	 * 
 	 * @param listener
 	 *            an <CODE>ElementListener</CODE>
-	 * @return <CODE>true</CODE> if the element was processed successfully
+	
+	 * @return <CODE>true</CODE> if the element was processed successfully * @see com.lowagie.text.Element#process(ElementListener)
 	 */
 
 	public boolean process(ElementListener listener) {
@@ -293,7 +296,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Gets the type of the text element.
 	 * 
-	 * @return a type
+	
+	 * @return a type * @see com.lowagie.text.Element#type()
 	 */
 
 	public int type() {
@@ -303,7 +307,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Gets all the chunks in this element.
 	 * 
-	 * @return an <CODE>ArrayList</CODE>
+	
+	 * @return an <CODE>ArrayList</CODE> * @see com.lowagie.text.Element#getChunks()
 	 */
 
 	public ArrayList getChunks() {
@@ -335,8 +340,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	 *            the top position
 	 * @param bottom
 	 *            the bottom position
-	 * @return a <CODE>Rectangle</CODE>
-	 */
+	
+	 * @return a <CODE>Rectangle</CODE> */
 
 	public Rectangle rectangle(float top, float bottom) {
 		Rectangle tmp = new Rectangle(this);
@@ -355,8 +360,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	 * Swaps the values of urx and ury and of lly and llx in order to rotate the
 	 * rectangle.
 	 * 
-	 * @return a <CODE>Rectangle</CODE>
-	 */
+	
+	 * @return a <CODE>Rectangle</CODE> */
 
 	public Rectangle rotate() {
 		Rectangle rect = new Rectangle(lly, llx, ury, urx);
@@ -416,11 +421,11 @@ public class Rectangle implements Element, MarkupAttributes {
 	 * specified as an integer bitwise combination of the constants: <CODE>
 	 * LEFT, RIGHT, TOP, BOTTOM</CODE>.
 	 * 
-	 * @see #enableBorderSide(int)
-	 * @see #disableBorderSide(int)
+	
+	
 	 * @param value
 	 *            the new value
-	 */
+	 * @see #enableBorderSide(int) * @see #disableBorderSide(int) */
 
 	public void setBorder(int value) {
 		border = value;
@@ -545,8 +550,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Returns the lower left x-coordinate.
 	 * 
-	 * @return the lower left x-coordinate
-	 */
+	
+	 * @return the lower left x-coordinate */
 
 	public float left() {
 		return llx;
@@ -555,8 +560,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Returns the upper right x-coordinate.
 	 * 
-	 * @return the upper right x-coordinate
-	 */
+	
+	 * @return the upper right x-coordinate */
 
 	public float right() {
 		return urx;
@@ -565,8 +570,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Returns the upper right y-coordinate.
 	 * 
-	 * @return the upper right y-coordinate
-	 */
+	
+	 * @return the upper right y-coordinate */
 
 	public float top() {
 		return ury;
@@ -575,8 +580,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Returns the lower left y-coordinate.
 	 * 
-	 * @return the lower left y-coordinate
-	 */
+	
+	 * @return the lower left y-coordinate */
 
 	public float bottom() {
 		return lly;
@@ -587,8 +592,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	 * 
 	 * @param margin
 	 *            a margin
-	 * @return the lower left x-coordinate
-	 */
+	
+	 * @return the lower left x-coordinate */
 
 	public float left(float margin) {
 		return llx + margin;
@@ -599,8 +604,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	 * 
 	 * @param margin
 	 *            a margin
-	 * @return the upper right x-coordinate
-	 */
+	
+	 * @return the upper right x-coordinate */
 
 	public float right(float margin) {
 		return urx - margin;
@@ -611,8 +616,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	 * 
 	 * @param margin
 	 *            a margin
-	 * @return the upper right y-coordinate
-	 */
+	
+	 * @return the upper right y-coordinate */
 
 	public float top(float margin) {
 		return ury - margin;
@@ -623,8 +628,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	 * 
 	 * @param margin
 	 *            a margin
-	 * @return the lower left y-coordinate
-	 */
+	
+	 * @return the lower left y-coordinate */
 
 	public float bottom(float margin) {
 		return lly + margin;
@@ -633,8 +638,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Returns the width of the rectangle.
 	 * 
-	 * @return a width
-	 */
+	
+	 * @return a width */
 
 	public float width() {
 		return urx - llx;
@@ -643,13 +648,17 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Returns the height of the rectangle.
 	 * 
-	 * @return a height
-	 */
+	
+	 * @return a height */
 
 	public float height() {
 		return ury - lly;
 	}
 
+	/**
+	 * Method getHeight.
+	 * @return float
+	 */
 	public float getHeight() {
 		return ury - lly;
 	}
@@ -657,8 +666,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Indicates if the table has borders.
 	 * 
-	 * @return a boolean
-	 */
+	
+	 * @return a boolean */
 
 	public boolean hasBorders() {
 		return (border > 0)
@@ -671,8 +680,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	 * 
 	 * @param type
 	 *            the type of border
-	 * @return a boolean
-	 */
+	
+	 * @return a boolean */
 
 	public boolean hasBorder(int type) {
 		return border != UNDEFINED && (border & type) == type;
@@ -681,8 +690,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Returns the exact type of the border.
 	 * 
-	 * @return a value
-	 */
+	
+	 * @return a value */
 
 	public int border() {
 		return border;
@@ -691,8 +700,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Gets the borderwidth.
 	 * 
-	 * @return a value
-	 */
+	
+	 * @return a value */
 
 	public float borderWidth() {
 		return borderWidth;
@@ -701,8 +710,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Gets the color of the border.
 	 * 
-	 * @return a value
-	 */
+	
+	 * @return a value */
 
 	public Color borderColor() {
 		return color;
@@ -711,8 +720,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Gets the backgroundcolor.
 	 * 
-	 * @return a value
-	 */
+	
+	 * @return a value */
 
 	public Color backgroundColor() {
 		return background;
@@ -721,8 +730,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Gets the grayscale.
 	 * 
-	 * @return a value
-	 */
+	
+	 * @return a value */
 
 	public float grayFill() {
 		return grayFill;
@@ -731,8 +740,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Gets the rotation of the rectangle
 	 * 
-	 * @return a rotation value
-	 */
+	
+	 * @return a rotation value */
 	public int getRotation() {
 		return rotation;
 	}
@@ -779,8 +788,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Gets the color of a border.
 	 * 
-	 * @return a color value
-	 */
+	
+	 * @return a color value */
 	public Color getBorderColorLeft() {
 		return borderColorLeft;
 	}
@@ -788,8 +797,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Gets the color of a border.
 	 * 
-	 * @return a color value
-	 */
+	
+	 * @return a color value */
 	public Color getBorderColorRight() {
 		return borderColorRight;
 	}
@@ -797,8 +806,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Gets the color of a border.
 	 * 
-	 * @return a color value
-	 */
+	
+	 * @return a color value */
 	public Color getBorderColorTop() {
 		return borderColorTop;
 	}
@@ -806,8 +815,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Gets the color of a border.
 	 * 
-	 * @return a color value
-	 */
+	
+	 * @return a color value */
 	public Color getBorderColorBottom() {
 		return borderColorBottom;
 	}
@@ -815,8 +824,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Gets the width of a border.
 	 * 
-	 * @return a width
-	 */
+	
+	 * @return a width */
 	public float getBorderWidthLeft() {
 		return getVariableBorderWidth(borderWidthLeft, LEFT);
 	}
@@ -835,8 +844,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Gets the width of a border.
 	 * 
-	 * @return a width
-	 */
+	
+	 * @return a width */
 	public float getBorderWidthRight() {
 		return getVariableBorderWidth(borderWidthRight, RIGHT);
 	}
@@ -855,8 +864,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Gets the width of a border.
 	 * 
-	 * @return a width
-	 */
+	
+	 * @return a width */
 	public float getBorderWidthTop() {
 		return getVariableBorderWidth(borderWidthTop, TOP);
 	}
@@ -875,8 +884,8 @@ public class Rectangle implements Element, MarkupAttributes {
 	/**
 	 * Gets the width of a border.
 	 * 
-	 * @return a width
-	 */
+	
+	 * @return a width */
 	public float getBorderWidthBottom() {
 		return getVariableBorderWidth(borderWidthBottom, BOTTOM);
 	}
@@ -911,6 +920,12 @@ public class Rectangle implements Element, MarkupAttributes {
 		}
 	}
 
+	/**
+	 * Method getVariableBorderWidth.
+	 * @param variableWidthValue float
+	 * @param side int
+	 * @return float
+	 */
 	private float getVariableBorderWidth(float variableWidthValue, int side) {
 		if ((border & side) != 0) {
 			return variableWidthValue != UNDEFINED ? variableWidthValue
@@ -925,9 +940,9 @@ public class Rectangle implements Element, MarkupAttributes {
 	 * <CODE>setBorderWidthLeft, setBorderWidthRight, setBorderWidthTop, or
 	 * setBorderWidthBottom</CODE> has been called.
 	 * 
-	 * @return true if variable width borders are in use
+	
 	 * 
-	 */
+	 * @return true if variable width borders are in use */
 	public boolean isUseVariableBorders() {
 		return useVariableBorders;
 	}

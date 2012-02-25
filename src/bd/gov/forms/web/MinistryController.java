@@ -20,12 +20,19 @@ import bd.gov.forms.domain.User;
 
 import bd.gov.forms.utils.FormUtil;
 
+/**
+ */
 @Controller
 @RequestMapping("/ministry")
 public class MinistryController {
 	@Autowired
 	MinistryDao ministryDao;
 
+	/**
+	 * Method index.
+	 * @param model ModelMap
+	 * @return String
+	 */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public String index(ModelMap model) {
 		List<Ministry> list = ministryDao.getAll();
@@ -35,6 +42,13 @@ public class MinistryController {
 		return "ministry/index";
 	}
 
+	/**
+	 * Method insertForm.
+	 * @param request HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @param map ModelMap
+	 * @return String
+	 */
 	@RequestMapping(value = "create", method = RequestMethod.GET)
 	public String insertForm(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
@@ -44,6 +58,14 @@ public class MinistryController {
 		return "ministry/create";
 	}
 
+	/**
+	 * Method submitForm.
+	 * @param ministry Ministry
+	 * @param request HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @param model ModelMap
+	 * @return String
+	 */
 	@RequestMapping(value = "create", method = RequestMethod.POST)
 	public String submitForm(@ModelAttribute("ministry") Ministry ministry,
 			HttpServletRequest request, HttpServletResponse response,
@@ -65,6 +87,14 @@ public class MinistryController {
 		return "redirect:index.htm";
 	}
 
+	/**
+	 * Method ministryDashBoard.
+	 * @param ministryId int
+	 * @param request HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @param model ModelMap
+	 * @return String
+	 */
 	@RequestMapping(value = "dashboard", method = RequestMethod.GET)
 	public String ministryDashBoard(
 			@RequestParam(value = "ministry", required = true) int ministryId,

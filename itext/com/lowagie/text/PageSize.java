@@ -54,6 +54,8 @@ package com.lowagie.text;
  * The <CODE>PageSize</CODE>-object contains a number of rectangles representing the most common papersizes.
  *
  * @see		Rectangle
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PageSize {

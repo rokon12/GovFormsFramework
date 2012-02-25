@@ -53,6 +53,8 @@ import java.util.Iterator;
 
 /**
  * A class to support Type3 fonts.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class Type3Font extends BaseFont {
     
@@ -134,8 +136,8 @@ public class Type3Font extends BaseFont {
      * <CODE>true</CODE> the value is ignored
      * @param ury the Y upper right corner of the glyph bounding box. If the <CODE>colorize</CODE> option is
      * <CODE>true</CODE> the value is ignored
-     * @return a content where the glyph can be defined
-     */    
+    
+     * @return a content where the glyph can be defined */    
     public PdfContentByte defineGlyph(char c, float wx, float llx, float lly, float urx, float ury) {
         if (!char2byte.containsKey(c))
             throw new IllegalArgumentException("The char " + (int)c + " doesn't belong in this Type3 font");
@@ -163,45 +165,104 @@ public class Type3Font extends BaseFont {
         return glyph;
     }
     
+    /**
+     * Method getFamilyFontName.
+     * @return String[][]
+     */
     public String[][] getFamilyFontName() {
         return new String[0][];
     }
     
+    /**
+     * Method getFontDescriptor.
+     * @param key int
+     * @param fontSize float
+     * @return float
+     */
     public float getFontDescriptor(int key, float fontSize) {
         return 0;
     }
     
+    /**
+     * Method getFullFontName.
+     * @return String[][]
+     */
     public String[][] getFullFontName() {
         return new String[0][];
     }
     
+    /**
+     * Method getKerning.
+     * @param char1 char
+     * @param char2 char
+     * @return int
+     */
     public int getKerning(char char1, char char2) {
         return 0;
     }
     
+    /**
+     * Method getPostscriptFontName.
+     * @return String
+     */
     public String getPostscriptFontName() {
         return "";
     }
     
+    /**
+     * Method getRawCharBBox.
+     * @param c int
+     * @param name String
+     * @return int[]
+     */
     protected int[] getRawCharBBox(int c, String name) {
         return null;
     }
     
+    /**
+     * Method getRawWidth.
+     * @param c int
+     * @param name String
+     * @return int
+     */
     int getRawWidth(int c, String name) {
         return 0;
     }
     
+    /**
+     * Method hasKernPairs.
+     * @return boolean
+     */
     public boolean hasKernPairs() {
         return false;
     }
     
+    /**
+     * Method setKerning.
+     * @param char1 char
+     * @param char2 char
+     * @param kern int
+     * @return boolean
+     */
     public boolean setKerning(char char1, char char2, int kern) {
         return false;
     }
     
+    /**
+     * Method setPostscriptFontName.
+     * @param name String
+     */
     public void setPostscriptFontName(String name) {
     }
     
+    /**
+     * Method writeFont.
+     * @param writer PdfWriter
+     * @param ref PdfIndirectReference
+     * @param params Object[]
+     * @throws com.lowagie.text.DocumentException
+     * @throws java.io.IOException
+     */
     void writeFont(PdfWriter writer, PdfIndirectReference ref, Object[] params) throws com.lowagie.text.DocumentException, java.io.IOException {
         if (this.writer != writer)
             throw new IllegalArgumentException("Type3 font used with the wrong PdfWriter");
@@ -261,6 +322,11 @@ public class Type3Font extends BaseFont {
         writer.addToBody(font, ref);
     }
     
+    /**
+     * Method convertToBytes.
+     * @param text String
+     * @return byte[]
+     */
     byte[] convertToBytes(String text) {
         char[] cc = text.toCharArray();
         byte[] b = new byte[cc.length];
@@ -277,12 +343,22 @@ public class Type3Font extends BaseFont {
         return b2;
     }
     
+    /**
+     * Method getWidth.
+     * @param char1 char
+     * @return int
+     */
     public int getWidth(char char1) {
         if (!widths3.containsKey(char1))
             throw new IllegalArgumentException("The char " + (int)char1 + " is not defined in a Type3 font");
         return widths3.get(char1);
     }
     
+    /**
+     * Method getWidth.
+     * @param text String
+     * @return int
+     */
     public int getWidth(String text) {
         char[] c = text.toCharArray();
         int total = 0;
@@ -291,14 +367,30 @@ public class Type3Font extends BaseFont {
         return total;
     }
     
+    /**
+     * Method getCharBBox.
+     * @param c char
+     * @return int[]
+     */
     public int[] getCharBBox(char c) {
         return null;
     }
     
+    /**
+     * Method charExists.
+     * @param c char
+     * @return boolean
+     */
     public boolean charExists(char c) {
         return char2byte.containsKey(c);
     }
     
+    /**
+     * Method setCharAdvance.
+     * @param c char
+     * @param advance int
+     * @return boolean
+     */
     public boolean setCharAdvance(char c, int advance) {
         return false;
     }

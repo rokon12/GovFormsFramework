@@ -91,6 +91,8 @@ import com.lowagie.text.pdf.PdfPCell;
  * @see		Element
  * @see		Table
  * @see		Row
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class Cell extends Rectangle implements TextElementArray {
@@ -100,8 +102,8 @@ public class Cell extends Rectangle implements TextElementArray {
     // This accessor replaces the dangerous static member DUMMY_CELL
     /**
      * Get dummy cell used when merging inner tables. 
-     * @return a cell with colspan 3 and no border
-     */
+    
+     * @return a cell with colspan 3 and no border */
     public static Cell getDummyCell() {
         Cell cell = new Cell(true);
         cell.setColspan(3);
@@ -208,8 +210,8 @@ public class Cell extends Rectangle implements TextElementArray {
  * <CODE>Cell</CODE>, an exception will be thrown.
  *
  * @param	element		the element
- * @throws	BadElementException when the creator was called with a <CODE>ListItem</CODE>, <CODE>Row</CODE> or <CODE>Cell</CODE>
- */
+
+ * @throws	BadElementException when the creator was called with a <CODE>ListItem</CODE>, <CODE>Row</CODE> or <CODE>Cell</CODE> */
 
 	public Cell(Element element) throws BadElementException {
 		// creates a Rectangle with BY DEFAULT a border of 0.5
@@ -322,7 +324,8 @@ public class Cell extends Rectangle implements TextElementArray {
  * <CODE>ElementListener</CODE>.
  *
  * @param	listener	an <CODE>ElementListener</CODE>
- * @return	<CODE>true</CODE> if the element was processed successfully
+
+ * @return	<CODE>true</CODE> if the element was processed successfully * @see com.lowagie.text.Element#process(ElementListener)
  */
 
 	public boolean process(ElementListener listener) {
@@ -337,7 +340,8 @@ public class Cell extends Rectangle implements TextElementArray {
 /**
  * Gets the type of the text element.
  *
- * @return	a type
+
+ * @return	a type * @see com.lowagie.text.Element#type()
  */
 
 	public int type() {
@@ -347,7 +351,8 @@ public class Cell extends Rectangle implements TextElementArray {
 /**
  * Gets all the chunks in this element.
  *
- * @return	an <CODE>ArrayList</CODE>
+
+ * @return	an <CODE>ArrayList</CODE> * @see com.lowagie.text.Element#getChunks()
  */
 
 	public ArrayList getChunks() {
@@ -367,8 +372,8 @@ public class Cell extends Rectangle implements TextElementArray {
  * <CODE>JPEG</CODE>s, <CODE>GIF</CODE>s or <CODE>PNG</CODE>s to a <CODE>Cell</CODE>.
  *
  * @param element The <CODE>Element</CODE> to add
- * @throws BadElementException if the method was called with a <CODE>ListItem</CODE>, <CODE>Row</CODE> or <CODE>Cell</CODE>
- */
+
+ * @throws BadElementException if the method was called with a <CODE>ListItem</CODE>, <CODE>Row</CODE> or <CODE>Cell</CODE> */
 
 	public void addElement(Element element) throws BadElementException {
 		if (isTable()) {
@@ -454,7 +459,8 @@ public class Cell extends Rectangle implements TextElementArray {
  * Add an <CODE>Object</CODE> to this cell.
  *
  * @param o the object to add
- * @return always <CODE>true</CODE>
+
+ * @return always <CODE>true</CODE> * @see com.lowagie.text.TextElementArray#add(Object)
  */
 
 	public boolean add(Object o) {
@@ -603,8 +609,8 @@ public class Cell extends Rectangle implements TextElementArray {
 /**
  * Gets the number of <CODE>Element</CODE>s in the Cell.
  *
- * @return	a <CODE>size</CODE>.
- */
+
+ * @return	a <CODE>size</CODE>. */
 
 	public int size() {
 		return arrayList.size();
@@ -613,8 +619,8 @@ public class Cell extends Rectangle implements TextElementArray {
 /**
  * Checks if the <CODE>Cell</CODE> is empty.
  *
- * @return	<CODE>false</CODE> if there are non-empty <CODE>Element</CODE>s in the <CODE>Cell</CODE>.
- */
+
+ * @return	<CODE>false</CODE> if there are non-empty <CODE>Element</CODE>s in the <CODE>Cell</CODE>. */
 
 	public boolean isEmpty() {
 		switch(size()) {
@@ -651,8 +657,8 @@ public class Cell extends Rectangle implements TextElementArray {
 /**
  * Checks if the <CODE>Cell</CODE> is empty.
  *
- * @return	<CODE>false</CODE> if there are non-empty <CODE>Element</CODE>s in the <CODE>Cell</CODE>.
- */
+
+ * @return	<CODE>false</CODE> if there are non-empty <CODE>Element</CODE>s in the <CODE>Cell</CODE>. */
 
 	public boolean isTable() {
 		return (size() == 1) && (((Element)arrayList.get(0)).type() == Element.TABLE);
@@ -661,8 +667,8 @@ public class Cell extends Rectangle implements TextElementArray {
 /**
  * Gets an iterator of <CODE>Element</CODE>s.
  *
- * @return	an <CODE>Iterator</CODE>.
- */
+
+ * @return	an <CODE>Iterator</CODE>. */
 
 	public Iterator getElements() {
 		return arrayList.iterator();
@@ -671,8 +677,8 @@ public class Cell extends Rectangle implements TextElementArray {
 /**
  * Gets the horizontal alignment.
  *
- * @return	a value
- */
+
+ * @return	a value */
 
 	public int horizontalAlignment() {
 		return horizontalAlignment;
@@ -681,8 +687,8 @@ public class Cell extends Rectangle implements TextElementArray {
 /**
  * Gets the vertical alignment.
  *
- * @return	a value
- */
+
+ * @return	a value */
 
 	public int verticalAlignment() {
 		return verticalAlignment;
@@ -691,8 +697,8 @@ public class Cell extends Rectangle implements TextElementArray {
 /**
  * Gets the width.
  *
- * @return	a value
- */
+
+ * @return	a value */
 
 	public String cellWidth() {
 		return width;
@@ -701,8 +707,8 @@ public class Cell extends Rectangle implements TextElementArray {
 /**
  * Gets the colspan.
  *
- * @return	a value
- */
+
+ * @return	a value */
 
 	public int colspan() {
 		return colspan;
@@ -711,8 +717,8 @@ public class Cell extends Rectangle implements TextElementArray {
 /**
  * Gets the rowspan.
  *
- * @return	a value
- */
+
+ * @return	a value */
 
 	public int rowspan() {
 		return rowspan;
@@ -721,8 +727,8 @@ public class Cell extends Rectangle implements TextElementArray {
 /**
  * Gets the leading.
  *
- * @return	a value
- */
+
+ * @return	a value */
 
 	public float leading() {
 		if (Float.isNaN(leading)) {
@@ -734,8 +740,8 @@ public class Cell extends Rectangle implements TextElementArray {
 /**
  * Is this <CODE>Cell</CODE> a header?
  *
- * @return	a value
- */
+
+ * @return	a value */
 
 	public boolean header() {
 		return header;
@@ -744,8 +750,8 @@ public class Cell extends Rectangle implements TextElementArray {
 /**
  * Get nowrap.
  *
- * @return	a value
- */
+
+ * @return	a value */
 
 	public boolean noWrap() {
 		return maxLines == 1;
@@ -760,32 +766,32 @@ public class Cell extends Rectangle implements TextElementArray {
 
 /**
  * This method throws an <CODE>UnsupportedOperationException</CODE>.
- * @return NA
- */
+
+ * @return NA */
 	public float top() {
 		throw new UnsupportedOperationException("Dimensions of a Cell can't be calculated. See the FAQ.");
 	}
 
 /**
  * This method throws an <CODE>UnsupportedOperationException</CODE>.
- * @return NA
- */
+
+ * @return NA */
 	public float bottom() {
 		throw new UnsupportedOperationException("Dimensions of a Cell can't be calculated. See the FAQ.");
 	}
 
 /**
  * This method throws an <CODE>UnsupportedOperationException</CODE>.
- * @return NA
- */
+
+ * @return NA */
 	public float left() {
 		throw new UnsupportedOperationException("Dimensions of a Cell can't be calculated. See the FAQ.");
 	}
 
 /**
  * This method throws an <CODE>UnsupportedOperationException</CODE>.
- * @return NA
- */
+
+ * @return NA */
 	public float right() {
 		throw new UnsupportedOperationException("Dimensions of a Cell can't be calculated. See the FAQ.");
 	}
@@ -793,8 +799,8 @@ public class Cell extends Rectangle implements TextElementArray {
 /**
  * This method throws an <CODE>UnsupportedOperationException</CODE>.
  * @param margin
- * @return NA
- */
+
+ * @return NA */
 	public float top(int margin) {
 		throw new UnsupportedOperationException("Dimensions of a Cell can't be calculated. See the FAQ.");
 	}
@@ -802,8 +808,8 @@ public class Cell extends Rectangle implements TextElementArray {
 /**
  * This method throws an <CODE>UnsupportedOperationException</CODE>.
  * @param margin
- * @return NA
- */
+
+ * @return NA */
 	public float bottom(int margin) {
 		throw new UnsupportedOperationException("Dimensions of a Cell can't be calculated. See the FAQ.");
 	}
@@ -811,8 +817,8 @@ public class Cell extends Rectangle implements TextElementArray {
 /**
  * This method throws an <CODE>UnsupportedOperationException</CODE>.
  * @param margin
- * @return NA
- */
+
+ * @return NA */
 	public float left(int margin) {
 		throw new UnsupportedOperationException("Dimensions of a Cell can't be calculated. See the FAQ.");
 	}
@@ -820,8 +826,8 @@ public class Cell extends Rectangle implements TextElementArray {
 /**
  * This method throws an <CODE>UnsupportedOperationException</CODE>.
  * @param margin NA
- * @return NA
- */
+
+ * @return NA */
 	public float right(int margin) {
 		throw new UnsupportedOperationException("Dimensions of a Cell can't be calculated. See the FAQ.");
 	}
@@ -862,8 +868,8 @@ public class Cell extends Rectangle implements TextElementArray {
  * Checks if a given tag corresponds with this object.
  *
  * @param   tag     the given tag
- * @return  true if the tag corresponds
- */
+
+ * @return  true if the tag corresponds */
 
 	public static boolean isTag(String tag) {
 		return ElementTags.CELL.equals(tag);
@@ -875,8 +881,8 @@ public class Cell extends Rectangle implements TextElementArray {
 /**
  * Does this <CODE>Cell</CODE> force a group change?
  *
- * @return	a value
- */
+
+ * @return	a value */
 
 	public boolean getGroupChange() {
 		return groupChange;
@@ -894,8 +900,8 @@ public class Cell extends Rectangle implements TextElementArray {
 	
 	/**
 	 * Getter for {@link #maxLines}
-	 * @return the maxLines value
-	 */
+	
+	 * @return the maxLines value */
 	public int getMaxLines() {
 		return maxLines;
 	}
@@ -919,8 +925,8 @@ public class Cell extends Rectangle implements TextElementArray {
 	}
 	/**
 	 * Getter for {@link #showTruncation}
-	 * @return the showTruncation value
-	 */
+	
+	 * @return the showTruncation value */
 	public String getShowTruncation() {
 		return showTruncation;
 	}
@@ -944,8 +950,8 @@ public class Cell extends Rectangle implements TextElementArray {
 
     /**
      * Gets the value of {@link #useAscender}
-     * @return useAscender
-     */
+    
+     * @return useAscender */
     public boolean isUseAscender() {
         return useAscender;
     }
@@ -960,8 +966,8 @@ public class Cell extends Rectangle implements TextElementArray {
 
     /**
      * gets the value of {@link #useDescender }
-     * @return useDescender
-     */
+    
+     * @return useDescender */
     public boolean isUseDescender() {
         return useDescender;
     }
@@ -976,17 +982,17 @@ public class Cell extends Rectangle implements TextElementArray {
 
     /**
      * Gets the value of {@link #useBorderPadding}.
-     * @return useBorderPadding
-     */
+    
+     * @return useBorderPadding */
     public boolean isUseBorderPadding() {
         return useBorderPadding;
     }
 
 	/**
 	 * Creates a PdfPCell based on this Cell object.
-	 * @return a PdfPCell
-	 * @throws BadElementException
-	 */
+	
+	
+	 * @return a PdfPCell * @throws BadElementException */
 	public PdfPCell createPdfPCell() throws BadElementException {
 		if (rowspan > 1) throw new BadElementException("PdfPCells can't have a rowspan > 1");
 		if (isTable()) return new PdfPCell(((Table)arrayList.get(0)).createPdfPTable());

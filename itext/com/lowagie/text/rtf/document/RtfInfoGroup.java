@@ -96,7 +96,8 @@ public class RtfInfoGroup extends RtfElement {
     /**
      * Writes the RtfInfoGroup and its RtfInfoElement elements.
      * 
-     * @return A byte array containing the group and its elements
+    
+     * @return A byte array containing the group and its elements * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();

@@ -57,6 +57,7 @@ import java.util.ArrayList;
 /** Supports text, combo and list fields generating the correct appearances.
  * All the option in the Acrobat GUI are supported in an easy to use API.
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class TextField extends BaseField {
     
@@ -89,10 +90,10 @@ public class TextField extends BaseField {
     
     /**
      * Gets the appearance for this TextField.
-     * @return the appearance object for this TextField
-     * @throws IOException
-     * @throws DocumentException
-     */
+    
+    
+    
+     * @return the appearance object for this TextField * @throws IOException * @throws DocumentException */
     public PdfAppearance getAppearance() throws IOException, DocumentException {
         PdfAppearance app = getBorderAppearance();
         app.beginVariableText();
@@ -247,6 +248,12 @@ public class TextField extends BaseField {
         return app;
     }
 
+    /**
+     * Method getListAppearance.
+     * @return PdfAppearance
+     * @throws IOException
+     * @throws DocumentException
+     */
     PdfAppearance getListAppearance() throws IOException, DocumentException {
         PdfAppearance app = getBorderAppearance();
         app.beginVariableText();
@@ -317,10 +324,10 @@ public class TextField extends BaseField {
     }
 
     /** Gets a new text field.
-     * @throws IOException on error
-     * @throws DocumentException on error
-     * @return a new text field
-     */    
+    
+    
+    
+     * @return a new text field * @throws IOException on error * @throws DocumentException on error */    
     public PdfFormField getTextField() throws IOException, DocumentException {
         if (maxCharacterLength <= 0)
             options &= ~COMB;
@@ -391,23 +398,30 @@ public class TextField extends BaseField {
     }
     
     /** Gets a new combo field.
-     * @throws IOException on error
-     * @throws DocumentException on error
-     * @return a new combo field
-     */    
+    
+    
+    
+     * @return a new combo field * @throws IOException on error * @throws DocumentException on error */    
     public PdfFormField getComboField() throws IOException, DocumentException {
         return getChoiceField(false);
     }
     
     /** Gets a new list field.
-     * @throws IOException on error
-     * @throws DocumentException on error
-     * @return a new list field
-     */    
+    
+    
+    
+     * @return a new list field * @throws IOException on error * @throws DocumentException on error */    
     public PdfFormField getListField() throws IOException, DocumentException {
         return getChoiceField(true);
     }
 
+    /**
+     * Method getChoiceField.
+     * @param isList boolean
+     * @return PdfFormField
+     * @throws IOException
+     * @throws DocumentException
+     */
     protected PdfFormField getChoiceField(boolean isList) throws IOException, DocumentException {
         options &= (~MULTILINE) & (~COMB);
         String uchoices[] = choices;
@@ -503,8 +517,8 @@ public class TextField extends BaseField {
     }
     
     /** Gets the default text.
-     * @return the default text
-     */
+    
+     * @return the default text */
     public String getDefaultText() {
         return this.defaultText;
     }
@@ -518,8 +532,8 @@ public class TextField extends BaseField {
     
     /** Gets the choices to be presented to the user in list/combo
      * fields.
-     * @return the choices to be presented to the user
-     */
+    
+     * @return the choices to be presented to the user */
     public String[] getChoices() {
         return this.choices;
     }
@@ -533,8 +547,8 @@ public class TextField extends BaseField {
     }
     
     /** Gets the export values in list/combo fields.
-     * @return the export values in list/combo fields
-     */
+    
+     * @return the export values in list/combo fields */
     public String[] getChoiceExports() {
         return this.choiceExports;
     }
@@ -549,8 +563,8 @@ public class TextField extends BaseField {
     }
     
     /** Gets the zero based index of the selected item.
-     * @return the zero based index of the selected item
-     */
+    
+     * @return the zero based index of the selected item */
     public int getChoiceSelection() {
         return this.choiceSelection;
     }
@@ -562,6 +576,10 @@ public class TextField extends BaseField {
         this.choiceSelection = choiceSelection;
     }
     
+    /**
+     * Method getTopFirst.
+     * @return int
+     */
     int getTopFirst() {
         return topFirst;
     }

@@ -162,7 +162,8 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
     /**
      * Writes the page size / page margin definition
      * 
-     * @return A byte array with the page size / page margin definition
+    
+     * @return A byte array with the page size / page margin definition * @see com.lowagie.text.rtf.RtfExtendedElement#writeDefinition()
      */
     public byte[] writeDefinition() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -189,8 +190,8 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
     /**
      * Writes the definition part for a new section
      * 
-     * @return A byte array containing the definition for a new section
-     */
+    
+     * @return A byte array containing the definition for a new section */
     public byte[] writeSectionDefinition() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
         try {
@@ -225,8 +226,8 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
     /**
      * Gets the bottom margin
      *  
-     * @return Returns the bottom margin
-     */
+    
+     * @return Returns the bottom margin */
     public int getMarginBottom() {
         return marginBottom;
     }
@@ -243,8 +244,8 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
     /**
      * Gets the left margin
      * 
-     * @return Returns the left margin
-     */
+    
+     * @return Returns the left margin */
     public int getMarginLeft() {
         return marginLeft;
     }
@@ -261,8 +262,8 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
     /**
      * Gets the right margin
      * 
-     * @return Returns the right margin
-     */
+    
+     * @return Returns the right margin */
     public int getMarginRight() {
         return marginRight;
     }
@@ -279,8 +280,8 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
     /**
      * Gets the top margin
      * 
-     * @return Returns the top margin
-     */
+    
+     * @return Returns the top margin */
     public int getMarginTop() {
         return marginTop;
     }
@@ -297,8 +298,8 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
     /**
      * Gets the page height
      * 
-     * @return Returns the page height
-     */
+    
+     * @return Returns the page height */
     public int getPageHeight() {
         return pageHeight;
     }
@@ -315,8 +316,8 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
     /**
      * Gets the page width
      * 
-     * @return Returns the page width
-     */
+    
+     * @return Returns the page width */
     public int getPageWidth() {
         return pageWidth;
     }
@@ -353,8 +354,8 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
      * 
      * @param pageSize the page size for which to guess the correct format
      * @param rotate Whether we should try to rotate the size befor guessing the format
-     * @return <code>True</code> if the format was guessed, <code>false/<code> otherwise
-     */
+    
+     * @return <code>True</code> if the format was guessed, <code>false/<code> otherwise */
     private boolean guessFormat(Rectangle pageSize, boolean rotate) {
         if (rotate) {
             pageSize = pageSize.rotate();
@@ -427,8 +428,8 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
      * 
      * @param rect1 The first Rectangle to compare
      * @param rect2 The second Rectangle to compare
-     * @return <code>True</code> if the Rectangles equal, <code>false</code> otherwise
-     */
+    
+     * @return <code>True</code> if the Rectangles equal, <code>false</code> otherwise */
     private boolean rectEquals(Rectangle rect1, Rectangle rect2) {
         return (rect1.width() == rect2.width()) && (rect1.height() == rect2.height());
     }

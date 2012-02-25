@@ -12,6 +12,8 @@
 
 package com.lowagie.text.pdf.codec.postscript;
 
+/**
+ */
 public class PAToken extends Object {
 
     static public final int IDENTIFIER = 0;
@@ -27,12 +29,21 @@ public class PAToken extends Object {
     public Object value;
     public int type;
 
+    /**
+     * Constructor for PAToken.
+     * @param value Object
+     * @param type int
+     */
     public PAToken(Object value, int type){
         super();
         this.value = value;
         this.type = type;
     }
 
+    /**
+     * Method toString.
+     * @return String
+     */
     public String toString(){
         switch(this.type){
         case IDENTIFIER:

@@ -18,17 +18,33 @@ package bd.gov.forms.utils;
 
 /**
  * @author asif
+ * @version $Revision: 1.0 $
  */
 public class FormUtil {
 
+    /**
+     * Method formatValue.
+     * @param s String
+     * @return String
+     */
     public static String formatValue(String s) {
         return s == null ? "" : s.trim();
     }
 
+    /**
+     * Method formatValue.
+     * @param s Integer
+     * @return String
+     */
     public static String formatValue(Integer s) {
         return s == null ? "0" : s.toString();
     }
 
+    /**
+     * Method isEmpty.
+     * @param s String
+     * @return boolean
+     */
     public static boolean isEmpty(String s) {
         return s == null || "".equals(s.trim());
     }

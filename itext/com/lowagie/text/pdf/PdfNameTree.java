@@ -55,6 +55,7 @@ import com.lowagie.text.StringCompare;
 /**
  * Creates a name tree.
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PdfNameTree {
     
@@ -69,10 +70,10 @@ public class PdfNameTree {
      * with the same lower byte and different upper byte. This will generate a wrong
      * tree name.
      * @param writer the writer
-     * @throws IOException on error
+    
+    
      * @return the dictionary with the name tree. This dictionary is the one
-     * generally pointed to by the key /Dests
-     */    
+     * generally pointed to by the key /Dests * @throws IOException on error */    
     public static PdfDictionary writeTree(HashMap items, PdfWriter writer) throws IOException {
         if (items.size() == 0)
             return null;
@@ -138,6 +139,11 @@ public class PdfNameTree {
         }
     }
     
+    /**
+     * Method iterateItems.
+     * @param dic PdfDictionary
+     * @param items HashMap
+     */
     private static void iterateItems(PdfDictionary dic, HashMap items) {
         PdfArray nn = (PdfArray)PdfReader.getPdfObjectRelease(dic.get(PdfName.NAMES));
         if (nn != null) {
@@ -156,6 +162,11 @@ public class PdfNameTree {
         }
     }
     
+    /**
+     * Method readTree.
+     * @param dic PdfDictionary
+     * @return HashMap
+     */
     public static HashMap readTree(PdfDictionary dic) {
         HashMap items = new HashMap();
         if (dic != null)

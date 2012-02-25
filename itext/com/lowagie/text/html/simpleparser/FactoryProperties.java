@@ -56,6 +56,7 @@ import java.awt.Color;
 /**
  *
  * @author  psoares
+ * @version $Revision: 1.0 $
  */
 public class FactoryProperties {
     
@@ -63,6 +64,12 @@ public class FactoryProperties {
     public FactoryProperties() {
     }
     
+    /**
+     * Method createChunk.
+     * @param text String
+     * @param props ChainedProperties
+     * @return Chunk
+     */
     public static Chunk createChunk(String text, ChainedProperties props) {
         Chunk ck = new Chunk(text, getFont(props));
         if (props.hasProperty("sub"))
@@ -72,6 +79,11 @@ public class FactoryProperties {
         return ck;
     }
     
+    /**
+     * Method createParagraph.
+     * @param props HashMap
+     * @return Paragraph
+     */
     public static Paragraph createParagraph(HashMap props) {
         Paragraph p = new Paragraph();
         String value = (String)props.get("align");
@@ -87,6 +99,11 @@ public class FactoryProperties {
         return p;
     }
     
+    /**
+     * Method createParagraph.
+     * @param props ChainedProperties
+     * @return Paragraph
+     */
     public static Paragraph createParagraph(ChainedProperties props) {
         Paragraph p = new Paragraph();
         String value = props.getProperty("align");
@@ -102,6 +119,11 @@ public class FactoryProperties {
         return p;
     }
     
+    /**
+     * Method getFont.
+     * @param props ChainedProperties
+     * @return Font
+     */
     public static Font getFont(ChainedProperties props) {
         String face = props.getProperty("face");
         if (face != null) {
@@ -127,6 +149,11 @@ public class FactoryProperties {
         return FontFactory.getFont(face, BaseFont.WINANSI, true, size, style, color);
     }
     
+    /**
+     * Method decodeColor.
+     * @param s String
+     * @return Color
+     */
     public static Color decodeColor(String s) {
         if (s == null)
             return null;

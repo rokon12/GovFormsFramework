@@ -73,6 +73,7 @@ import java.awt.image.MemoryImageSource;
  * codeType = CODE128;
  * </pre>
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class Barcode128 extends Barcode{
 
@@ -245,8 +246,8 @@ public class Barcode128 extends Barcode{
     /**
      * Removes the FNC1 codes in the text.
      * @param code the text to clean
-     * @return the cleaned text
-     */    
+    
+     * @return the cleaned text */    
     public static String removeFNC1(String code) {
         int len = code.length();
         StringBuffer buf = new StringBuffer(len);
@@ -261,8 +262,8 @@ public class Barcode128 extends Barcode{
     /**
      * Gets the human readable text of a sequence of AI.
      * @param code the text
-     * @return the human readable text
-     */    
+    
+     * @return the human readable text */    
     public static String getHumanReadableUCCEAN(String code) {
         StringBuffer buf = new StringBuffer();
         String fnc1 = String.valueOf(FNC1);
@@ -314,8 +315,8 @@ public class Barcode128 extends Barcode{
      * @param text the text to check
      * @param textIndex where to check from
      * @param numDigits the number of digits to check
-     * @return the check result
-     */    
+    
+     * @return the check result */    
     static boolean isNextDigits(String text, int textIndex, int numDigits) {
         int len = text.length();
         while (textIndex < len && numDigits > 0) {
@@ -341,8 +342,8 @@ public class Barcode128 extends Barcode{
      * @param text the text to pack
      * @param textIndex where to pack from
      * @param numDigits the number of digits to pack. It is always an even number
-     * @return the packed digits, two digits per character
-     */    
+    
+     * @return the packed digits, two digits per character */    
     static String getPackedRawDigits(String text, int textIndex, int numDigits) {
         String out = "";
         int start = textIndex;
@@ -365,8 +366,8 @@ public class Barcode128 extends Barcode{
      * @param text the text to convert
      * @param ucc <CODE>true</CODE> if it is an UCC/EAN-128. In this case
      * the character FNC1 is added
-     * @return the code ready to be fed to getBarsCode128Raw()
-     */    
+    
+     * @return the code ready to be fed to getBarsCode128Raw() */    
     public static String getRawText(String text, boolean ucc) {
         String out = "";
         int tLen = text.length();
@@ -495,8 +496,8 @@ public class Barcode128 extends Barcode{
     /** Generates the bars. The input has the actual barcodes, not
      * the human readable text.
      * @param text the barcode
-     * @return the bars
-     */    
+    
+     * @return the bars */    
     public static byte[] getBarsCode128Raw(String text) {
         int idx = text.indexOf('\uffff');
         if (idx >= 0)
@@ -516,8 +517,8 @@ public class Barcode128 extends Barcode{
     
     /** Gets the maximum area that the barcode and the text, if
      * any, will occupy. The lower left corner is always (0, 0).
-     * @return the size the barcode occupies.
-     */
+    
+     * @return the size the barcode occupies. */
     public Rectangle getBarcodeSize() {
         float fontX = 0;
         float fontY = 0;
@@ -591,8 +592,8 @@ public class Barcode128 extends Barcode{
      * @param cb the <CODE>PdfContentByte</CODE> where the barcode will be placed
      * @param barColor the color of the bars. It can be <CODE>null</CODE>
      * @param textColor the color of the text. It can be <CODE>null</CODE>
-     * @return the dimensions the barcode occupies
-     */
+    
+     * @return the dimensions the barcode occupies */
     public Rectangle placeBarcode(PdfContentByte cb, Color barColor, Color textColor) {
         String fullCode;
         if (codeType == CODE128_RAW) {
@@ -679,8 +680,8 @@ public class Barcode128 extends Barcode{
      * contains the bars without any text.
      * @param foreground the color of the bars
      * @param background the color of the background
-     * @return the image
-     */    
+    
+     * @return the image */    
     public java.awt.Image createAwtImage(Color foreground, Color background) {
         int f = foreground.getRGB();
         int g = background.getRGB();

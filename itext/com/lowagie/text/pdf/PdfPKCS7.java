@@ -102,6 +102,8 @@ import com.lowagie.bc.asn1.ASN1OutputStream;
  * signature.
  * <p>
  * It's based in code found at org.bouncycastle.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class PdfPKCS7 {
 
@@ -160,14 +162,14 @@ public class PdfPKCS7 {
      * @param contentsKey the /Contents key
      * @param certsKey the /Cert key
      * @param provider the provider or <code>null</code> for the default provider
-     * @throws SecurityException on error
-     * @throws CRLException on error
-     * @throws InvalidKeyException on error
-     * @throws CertificateException on error
-     * @throws NoSuchProviderException on error
-     * @throws NoSuchAlgorithmException on error
-     * @throws IOException on error
-     */    
+    
+    
+    
+    
+    
+    
+    
+     * @throws SecurityException on error * @throws CRLException on error * @throws InvalidKeyException on error * @throws CertificateException on error * @throws NoSuchProviderException on error * @throws NoSuchAlgorithmException on error * @throws IOException on error */    
     public PdfPKCS7(byte[] contentsKey, byte[] certsKey, String provider) throws SecurityException, CRLException, InvalidKeyException, CertificateException, NoSuchProviderException, NoSuchAlgorithmException, IOException {
         CertificateFactory cf;
         if (provider == null)
@@ -192,13 +194,13 @@ public class PdfPKCS7 {
      * adbe.pkcs7.sha1.
      * @param contentsKey the /Contents key
      * @param provider the provider or <code>null</code> for the default provider
-     * @throws SecurityException on error
-     * @throws CRLException on error
-     * @throws InvalidKeyException on error
-     * @throws CertificateException on error
-     * @throws NoSuchProviderException on error
-     * @throws NoSuchAlgorithmException on error
-     */    
+    
+    
+    
+    
+    
+    
+     * @throws SecurityException on error * @throws CRLException on error * @throws InvalidKeyException on error * @throws CertificateException on error * @throws NoSuchProviderException on error * @throws NoSuchAlgorithmException on error */    
     public PdfPKCS7(byte[] contentsKey, String provider) throws SecurityException, CRLException, InvalidKeyException, CertificateException, NoSuchProviderException, NoSuchAlgorithmException {
         ASN1InputStream din = new ASN1InputStream(new ByteArrayInputStream(contentsKey));
         
@@ -338,11 +340,11 @@ public class PdfPKCS7 {
      * @param hashAlgorithm the hash algorithm
      * @param provider the provider or <code>null</code> for the default provider
      * @param hasRSAdata <CODE>true</CODE> if the sub-filter is adbe.pkcs7.sha1
-     * @throws SecurityException on error
-     * @throws InvalidKeyException on error
-     * @throws NoSuchProviderException on error
-     * @throws NoSuchAlgorithmException on error
-     */    
+    
+    
+    
+    
+     * @throws SecurityException on error * @throws InvalidKeyException on error * @throws NoSuchProviderException on error * @throws NoSuchAlgorithmException on error */    
     public PdfPKCS7(PrivateKey privKey, Certificate[] certChain, CRL[] crlList,
                     String hashAlgorithm, String provider, boolean hasRSAdata)
       throws SecurityException, InvalidKeyException, NoSuchProviderException,
@@ -424,8 +426,8 @@ public class PdfPKCS7 {
      * @param buf the data buffer
      * @param off the offset in the data buffer
      * @param len the data length
-     * @throws SignatureException on error
-     */
+    
+     * @throws SignatureException on error */
     public void update(byte[] buf, int off, int len) throws SignatureException {
         if (RSAdata != null || digestAttr != null)
             messageDigest.update(buf, off, len);
@@ -435,9 +437,9 @@ public class PdfPKCS7 {
     
     /**
      * Verify the digest.
-     * @throws SignatureException on error
-     * @return <CODE>true</CODE> if the signature checks out, <CODE>false</CODE> otherwise
-     */
+    
+    
+     * @return <CODE>true</CODE> if the signature checks out, <CODE>false</CODE> otherwise * @throws SignatureException on error */
     public boolean verify() throws SignatureException {
         if (verified)
             return verifyResult;
@@ -460,48 +462,48 @@ public class PdfPKCS7 {
     
     /**
      * Get the X.509 certificates associated with this PKCS#7 object
-     * @return the X.509 certificates associated with this PKCS#7 object
-     */
+    
+     * @return the X.509 certificates associated with this PKCS#7 object */
     public Certificate[] getCertificates() {
         return (X509Certificate[])certs.toArray(new X509Certificate[0]);
     }
     
     /**
      * Get the X.509 certificate revocation lists associated with this PKCS#7 object
-     * @return the X.509 certificate revocation lists associated with this PKCS#7 object
-     */
+    
+     * @return the X.509 certificate revocation lists associated with this PKCS#7 object */
     public Collection getCRLs() {
         return crls;
     }
     
     /**
      * Get the X.509 certificate actually used to sign the digest.
-     * @return the X.509 certificate actually used to sign the digest
-     */
+    
+     * @return the X.509 certificate actually used to sign the digest */
     public X509Certificate getSigningCertificate() {
         return signCert;
     }
     
     /**
      * Get the version of the PKCS#7 object. Always 1
-     * @return the version of the PKCS#7 object. Always 1
-     */
+    
+     * @return the version of the PKCS#7 object. Always 1 */
     public int getVersion() {
         return version;
     }
     
     /**
      * Get the version of the PKCS#7 "SignerInfo" object. Always 1
-     * @return the version of the PKCS#7 "SignerInfo" object. Always 1
-     */
+    
+     * @return the version of the PKCS#7 "SignerInfo" object. Always 1 */
     public int getSigningInfoVersion() {
         return signerversion;
     }
     
     /**
      * Get the algorithm used to calculate the message digest
-     * @return the algorithm used to calculate the message digest
-     */
+    
+     * @return the algorithm used to calculate the message digest */
     public String getDigestAlgorithm() {
         String dea = digestEncryptionAlgorithm;
         
@@ -517,8 +519,8 @@ public class PdfPKCS7 {
 
     /**
      * Returns the algorithm.
-     * @return the digest algorithm
-     */
+    
+     * @return the digest algorithm */
     public String getHashAlgorithm() {
         String da = digestAlgorithm;
         
@@ -537,8 +539,8 @@ public class PdfPKCS7 {
     /**
      * Loads the default root certificates at &lt;java.home&gt;/lib/security/cacerts
      * with the default provider.
-     * @return a <CODE>KeyStore</CODE>
-     */    
+    
+     * @return a <CODE>KeyStore</CODE> */    
     public static KeyStore loadCacertsKeyStore() {
         return loadCacertsKeyStore(null);
     }
@@ -546,8 +548,8 @@ public class PdfPKCS7 {
     /**
      * Loads the default root certificates at &lt;java.home&gt;/lib/security/cacerts.
      * @param provider the provider or <code>null</code> for the default provider
-     * @return a <CODE>KeyStore</CODE>
-     */    
+    
+     * @return a <CODE>KeyStore</CODE> */    
     public static KeyStore loadCacertsKeyStore(String provider) {
         File file = new File(System.getProperty("java.home"), "lib");
         file = new File(file, "security");
@@ -576,9 +578,9 @@ public class PdfPKCS7 {
      * @param cert the certificate to verify
      * @param crls the certificate revocation list or <CODE>null</CODE>
      * @param calendar the date or <CODE>null</CODE> for the current date
+    
      * @return a <CODE>String</CODE> with the error description or <CODE>null</CODE>
-     * if no error
-     */    
+     * if no error */    
     public static String verifyCertificate(X509Certificate cert, Collection crls, Calendar calendar) {
         if (calendar == null)
             calendar = new GregorianCalendar();
@@ -605,10 +607,10 @@ public class PdfPKCS7 {
      * @param keystore the <CODE>KeyStore</CODE>
      * @param crls the certificate revocation list or <CODE>null</CODE>
      * @param calendar the date or <CODE>null</CODE> for the current date
+    
      * @return <CODE>null</CODE> if the certificate chain could be validade or a
      * <CODE>Object[]{cert,error}</CODE> where <CODE>cert</CODE> is the
-     * failed certificate and <CODE>error</CODE> is the error message
-     */    
+     * failed certificate and <CODE>error</CODE> is the error message */    
     public static Object[] verifyCertificates(Certificate certs[], KeyStore keystore, Collection crls, Calendar calendar) {
         if (calendar == null)
             calendar = new GregorianCalendar();
@@ -662,8 +664,8 @@ public class PdfPKCS7 {
     /**
      * Get the "issuer" from the TBSCertificate bytes that are passed in
      * @param enc a TBSCertificate in a byte array
-     * @return a DERObject
-     */
+    
+     * @return a DERObject */
     private static DERObject getIssuer(byte[] enc) {
         try {
             ASN1InputStream in = new ASN1InputStream(new ByteArrayInputStream(enc));
@@ -678,8 +680,8 @@ public class PdfPKCS7 {
     /**
      * Get the "subject" from the TBSCertificate bytes that are passed in
      * @param enc A TBSCertificate in a byte array
-     * @return a DERObject
-     */
+    
+     * @return a DERObject */
     private static DERObject getSubject(byte[] enc) {
         try {
             ASN1InputStream in = new ASN1InputStream(new ByteArrayInputStream(enc));
@@ -694,8 +696,8 @@ public class PdfPKCS7 {
     /**
      * Get the issuer fields from an X509 Certificate
      * @param cert an X509Certificate
-     * @return an X509Name
-     */
+    
+     * @return an X509Name */
     public static X509Name getIssuerFields(X509Certificate cert) {
         try {
             return new X509Name((ASN1Sequence)getIssuer(cert.getTBSCertificate()));
@@ -708,8 +710,8 @@ public class PdfPKCS7 {
     /**
      * Get the subject fields from an X509 Certificate
      * @param cert an X509Certificate
-     * @return an X509Name
-     */
+    
+     * @return an X509Name */
     public static X509Name getSubjectFields(X509Certificate cert) {
         try {
             return new X509Name((ASN1Sequence)getSubject(cert.getTBSCertificate()));
@@ -721,8 +723,8 @@ public class PdfPKCS7 {
     
     /**
      * Gets the bytes for the PKCS#1 object.
-     * @return a byte array
-     */
+    
+     * @return a byte array */
     public byte[] getEncodedPKCS1() {
         try {
             if (externalDigest != null)
@@ -767,8 +769,8 @@ public class PdfPKCS7 {
     
     /**
      * Gets the bytes for the PKCS7SignedData object.
-     * @return the bytes for the PKCS7SignedData object
-     */
+    
+     * @return the bytes for the PKCS7SignedData object */
     public byte[] getEncodedPKCS7() {
         return getEncodedPKCS7(null, null);
     }
@@ -778,8 +780,8 @@ public class PdfPKCS7 {
      * in the signerInfo can also be set. If either of the parameters is <CODE>null</CODE>, none will be used.
      * @param secondDigest the digest in the authenticatedAttributes
      * @param signingTime the signing time in the authenticatedAttributes
-     * @return the bytes for the PKCS7SignedData object
-     */
+    
+     * @return the bytes for the PKCS7SignedData object */
     public byte[] getEncodedPKCS7(byte secondDigest[], Calendar signingTime) {
         try {
             if (externalDigest != null) {
@@ -938,8 +940,8 @@ public class PdfPKCS7 {
      * </pre>
      * @param secondDigest the content digest
      * @param signingTime the signing time
-     * @return the byte array representation of the authenticatedAttributes ready to be signed
-     */    
+    
+     * @return the byte array representation of the authenticatedAttributes ready to be signed */    
     public byte[] getAuthenticatedAttributeBytes(byte secondDigest[], Calendar signingTime) {
         try {
             ASN1EncodableVector attribute = new ASN1EncodableVector();
@@ -969,8 +971,8 @@ public class PdfPKCS7 {
     }
     /**
      * Getter for property reason.
-     * @return Value of property reason.
-     */
+    
+     * @return Value of property reason. */
     public String getReason() {
         return this.reason;
     }
@@ -985,8 +987,8 @@ public class PdfPKCS7 {
     
     /**
      * Getter for property location.
-     * @return Value of property location.
-     */
+    
+     * @return Value of property location. */
     public String getLocation() {
         return this.location;
     }
@@ -1001,8 +1003,8 @@ public class PdfPKCS7 {
     
     /**
      * Getter for property signDate.
-     * @return Value of property signDate.
-     */
+    
+     * @return Value of property signDate. */
     public Calendar getSignDate() {
         return this.signDate;
     }
@@ -1017,8 +1019,8 @@ public class PdfPKCS7 {
     
     /**
      * Getter for property sigName.
-     * @return Value of property sigName.
-     */
+    
+     * @return Value of property sigName. */
     public String getSignName() {
         return this.signName;
     }
@@ -1033,6 +1035,8 @@ public class PdfPKCS7 {
     
     /**
      * a class that holds an X509 name
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     public static class X509Name {
         /**
@@ -1177,6 +1181,11 @@ public class PdfPKCS7 {
             
         }
         
+        /**
+         * Method getField.
+         * @param name String
+         * @return String
+         */
         public String getField(String name) {
             ArrayList vs = (ArrayList)values.get(name);
             return vs == null ? null : (String)vs.get(0);
@@ -1185,8 +1194,8 @@ public class PdfPKCS7 {
         /**
          * gets a field array from the values Hashmap
          * @param name
-         * @return an ArrayList
-         */
+        
+         * @return an ArrayList */
         public ArrayList getFieldArray(String name) {
             ArrayList vs = (ArrayList)values.get(name);
             return vs == null ? null : vs;
@@ -1194,8 +1203,8 @@ public class PdfPKCS7 {
         
         /**
          * getter for values
-         * @return a HashMap with the fields of the X509 name
-         */
+        
+         * @return a HashMap with the fields of the X509 name */
         public HashMap getFields() {
             return values;
         }
@@ -1213,22 +1222,36 @@ public class PdfPKCS7 {
      * java.util.StringTokenizer. We need this class as some of the
      * lightweight Java environment don't support classes like
      * StringTokenizer.
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     public static class X509NameTokenizer {
         private String          oid;
         private int             index;
         private StringBuffer    buf = new StringBuffer();
         
+        /**
+         * Constructor for X509NameTokenizer.
+         * @param oid String
+         */
         public X509NameTokenizer(
         String oid) {
             this.oid = oid;
             this.index = -1;
         }
         
+        /**
+         * Method hasMoreTokens.
+         * @return boolean
+         */
         public boolean hasMoreTokens() {
             return (index != oid.length());
         }
         
+        /**
+         * Method nextToken.
+         * @return String
+         */
         public String nextToken() {
             if (index == oid.length()) {
                 return null;

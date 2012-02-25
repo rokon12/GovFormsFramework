@@ -69,6 +69,7 @@ import java.io.IOException;
  * @author Craig Fleming (rythos@rhana.dhs.org)
  * @author Renaud Michel (r.michel@immedia.be)
  * @author Werner Daehn (Werner.Daehn@BusinessObjects.com)
+ * @version $Revision: 1.0 $
  */
 public class RtfFont extends Font implements RtfExtendedElement {
     /**
@@ -300,7 +301,8 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * Writes the font definition
      *
-     * @return A byte array with the font definition
+    
+     * @return A byte array with the font definition * @see com.lowagie.text.rtf.RtfExtendedElement#writeDefinition()
      */
     public byte[] writeDefinition() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -319,8 +321,8 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * Writes the font beginning
      *
-     * @return A byte array with the font start data
-     */
+    
+     * @return A byte array with the font start data */
     public byte[] writeBegin() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
         try {
@@ -377,8 +379,8 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * Write the font end
      *
-     * @return A byte array with the end of font data
-     */
+    
+     * @return A byte array with the end of font data */
     public byte[] writeEnd() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
         try {
@@ -432,7 +434,8 @@ public class RtfFont extends Font implements RtfExtendedElement {
 
     /**
      * Unused
-     * @return an empty byte array
+    
+     * @return an empty byte array * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         return new byte[0];
@@ -443,8 +446,8 @@ public class RtfFont extends Font implements RtfExtendedElement {
      * fontSize, fontStyle and fontSuperSubscript are equal
      * 
      * @param obj The RtfFont to compare with this RtfFont
-     * @return <code>True</code> if the RtfFonts are equal, <code>false</code> otherwise
-     */
+    
+     * @return <code>True</code> if the RtfFonts are equal, <code>false</code> otherwise */
     public boolean equals(Object obj) {
         if(!(obj instanceof RtfFont)) {
             return false;
@@ -461,8 +464,8 @@ public class RtfFont extends Font implements RtfExtendedElement {
      * string containing the font name + font size + "-" + the font style + "-" + the
      * font super/supscript value.
      * 
-     * @return The hash code of this RtfFont
-     */
+    
+     * @return The hash code of this RtfFont */
     public int hashCode() {
         return (this.fontName + this.fontSize + "-" + this.fontStyle).hashCode();
     }
@@ -470,8 +473,8 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * Gets the font name of this RtfFont
      * 
-     * @return The font name
-     */
+    
+     * @return The font name */
     public String getFontName() {
         return this.fontName;
     }
@@ -522,8 +525,8 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * Gets the font size of this RtfFont
      * 
-     * @return The font size
-     */
+    
+     * @return The font size */
     public int getFontSize() {
         return this.fontSize;
     }
@@ -539,8 +542,8 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * Gets the font style of this RtfFont
      * 
-     * @return The font style
-     */
+    
+     * @return The font style */
     public int getFontStyle() {
         return this.fontStyle;
     }
@@ -564,8 +567,8 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * Gets the font number of this RtfFont
      * 
-     * @return The font number
-     */
+    
+     * @return The font number */
     public int getFontNumber() {
         return fontNumber;
     }
@@ -574,6 +577,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
      * Sets the RtfDocument this RtfFont belongs to
      * 
      * @param doc The RtfDocument to use
+     * @see com.lowagie.text.rtf.RtfBasicElement#setRtfDocument(RtfDocument)
      */
     public void setRtfDocument(RtfDocument doc) {
         this.document = doc;
@@ -588,6 +592,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * Unused
      * @param inTable
+     * @see com.lowagie.text.rtf.RtfBasicElement#setInTable(boolean)
      */
     public void setInTable(boolean inTable) {
     }
@@ -595,6 +600,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * Unused
      * @param inHeader
+     * @see com.lowagie.text.rtf.RtfBasicElement#setInHeader(boolean)
      */
     public void setInHeader(boolean inHeader) {
     }
@@ -624,8 +630,8 @@ public class RtfFont extends Font implements RtfExtendedElement {
      * of that string.
      *
      * @param i The integer to convert
-     * @return A byte array representing the integer
-     */
+    
+     * @return A byte array representing the integer */
     protected byte[] intToByteArray(int i) {
         return Integer.toString(i).getBytes();
     }
@@ -635,8 +641,8 @@ public class RtfFont extends Font implements RtfExtendedElement {
      * the attributes of a given font.
      *
      * @param font The surrounding font
-     * @return A RtfFont
-     */
+    
+     * @return A RtfFont */
     public Font difference(Font font) {
         String dFamilyname = font.getFamilyname();
         if(dFamilyname == null || dFamilyname.trim().equals("") || dFamilyname.trim().equalsIgnoreCase("unknown")) {

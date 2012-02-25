@@ -74,6 +74,8 @@ import com.lowagie.tools.arguments.ToolArgument;
 
 /**
  * Every iText tool has to implement this interface.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public abstract class AbstractTool implements ToolMenuItems, ActionListener {
 	 
@@ -82,6 +84,8 @@ public abstract class AbstractTool implements ToolMenuItems, ActionListener {
 	
     /**
      * A Class that redirects output to System.out and System.err.
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     public class Console {
         PipedInputStream piOut;
@@ -94,8 +98,8 @@ public abstract class AbstractTool implements ToolMenuItems, ActionListener {
          * Creates a new Console object.
          * @param columns
          * @param rows
-         * @throws IOException
-         */
+        
+         * @throws IOException */
         public Console(int columns, int rows) throws IOException {
             // Set up System.out
             piOut = new PipedInputStream();
@@ -117,9 +121,15 @@ public abstract class AbstractTool implements ToolMenuItems, ActionListener {
             new ReaderThread(piErr).start();
         }
     
+        /**
+         */
         class ReaderThread extends Thread {
             PipedInputStream pi;
     
+            /**
+             * Constructor for ReaderThread.
+             * @param pi PipedInputStream
+             */
             ReaderThread(PipedInputStream pi) {
                 this.pi = pi;
             }
@@ -189,8 +199,8 @@ public abstract class AbstractTool implements ToolMenuItems, ActionListener {
 	
 	/**
 	 * Gets the arguments.
-	 * @return Returns the arguments.
-	 */
+	
+	 * @return Returns the arguments. */
 	public ArrayList getArguments() {
 		return arguments;
 	}
@@ -198,9 +208,9 @@ public abstract class AbstractTool implements ToolMenuItems, ActionListener {
 	/**
 	 * Gets the value of a given argument.
 	 * @param name the name of the argument
-	 * @return the value of an argument as an Object.
-	 * @throws InstantiationException
-	 */
+	
+	
+	 * @return the value of an argument as an Object. * @throws InstantiationException */
 	public Object getValue(String name) throws InstantiationException {
 		ToolArgument argument;
 		for (Iterator i = arguments.iterator(); i.hasNext(); ) {
@@ -222,8 +232,8 @@ public abstract class AbstractTool implements ToolMenuItems, ActionListener {
 	
 	/**
 	 * Returns the internal frame. Creates one if it's null.
-	 * @return Returns the internalFrame.
-	 */
+	
+	 * @return Returns the internalFrame. */
 	public JInternalFrame getInternalFrame() {
 		if (internalFrame == null) {
 			createFrame();
@@ -233,8 +243,8 @@ public abstract class AbstractTool implements ToolMenuItems, ActionListener {
 	
 	/**
 	 * Gets the menubar.
-	 * @return a menubar for this tool
-	 */
+	
+	 * @return a menubar for this tool */
 	public JMenuBar getMenubar() {
 		JMenuBar menubar = new JMenuBar();
 		JMenu tool = new JMenu(TOOL);
@@ -294,8 +304,8 @@ public abstract class AbstractTool implements ToolMenuItems, ActionListener {
 	 * Gets a console JScrollPanel that listens to the System.err and System.out.
 	 * @param columns a number of columns for the console
 	 * @param rows	 a number of rows for the console
-	 * @return a JScrollPane with a Console that shows everything that was written to System.out or System.err
-	 */
+	
+	 * @return a JScrollPane with a Console that shows everything that was written to System.out or System.err */
 	public JScrollPane getConsole(int columns, int rows) {
 		try {
 			Console console = new Console(columns, rows);
@@ -309,8 +319,8 @@ public abstract class AbstractTool implements ToolMenuItems, ActionListener {
 	
 	/**
 	 * Gets the usage of the tool.
-	 * @return a String describing how to use the tool.
-	 */
+	
+	 * @return a String describing how to use the tool. */
 	public String getUsage() {
 		StringBuffer buf = new StringBuffer("java ");
 		buf.append(getClass().getName());
@@ -330,8 +340,8 @@ public abstract class AbstractTool implements ToolMenuItems, ActionListener {
 	
 	/**
 	 * Gets the current arguments of the tool.
-	 * @return a String with the list of arguments and their values.
-	 */
+	
+	 * @return a String with the list of arguments and their values. */
 	public String getArgs() {
 		StringBuffer buf = new StringBuffer("Current arguments:\n");
 		ToolArgument argument;
@@ -395,9 +405,9 @@ public abstract class AbstractTool implements ToolMenuItems, ActionListener {
 	
 	/**
 	 * Gets the PDF file that should be generated (or null if the output isn't a PDF file).
-	 * @return the PDF file that should be generated 
-	 * @throws InstantiationException
-	 */
+	
+	
+	 * @return the PDF file that should be generated  * @throws InstantiationException */
 	protected abstract File getDestPathPDF() throws InstantiationException;
 	
 	/**

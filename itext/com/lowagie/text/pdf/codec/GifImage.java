@@ -55,6 +55,7 @@ import java.util.ArrayList;
 /** Reads gif images of all types. All the images in a gif are read in the constructors
  * and can be retrieved with other methods.
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class GifImage {
     
@@ -105,8 +106,8 @@ public class GifImage {
 
     /** Reads gif images from an URL.
      * @param url the URL
-     * @throws IOException on error
-     */    
+    
+     * @throws IOException on error */    
     public GifImage(URL url) throws IOException {
         fromUrl = url;
         InputStream is = null;
@@ -123,16 +124,16 @@ public class GifImage {
     
     /** Reads gif images from a file.
      * @param file the file
-     * @throws IOException on error
-     */    
+    
+     * @throws IOException on error */    
     public GifImage(String file) throws IOException {
         this(Image.toURL(file));
     }
     
     /** Reads gif images from a byte array.
      * @param data the byte array
-     * @throws IOException on error
-     */    
+    
+     * @throws IOException on error */    
     public GifImage(byte data[]) throws IOException {
         fromData = data;
         InputStream is = null;
@@ -149,23 +150,23 @@ public class GifImage {
     
     /** Reads gif images from a stream. The stream is not closed.
      * @param is the stream
-     * @throws IOException on error
-     */    
+    
+     * @throws IOException on error */    
     public GifImage(InputStream is) throws IOException {
         process(is);
     }
     
     /** Gets the number of frames the gif has.
-     * @return the number of frames the gif has
-     */    
+    
+     * @return the number of frames the gif has */    
     public int getFrameCount() {
         return frames.size();
     }
     
     /** Gets the image from a frame. The first frame is 1.
      * @param frame the frame to get the image from
-     * @return the image
-     */    
+    
+     * @return the image */    
     public Image getImage(int frame) {
         GifFrame gf = (GifFrame)frames.get(frame - 1);
         return gf.image;
@@ -174,8 +175,8 @@ public class GifImage {
     /** Gets the [x,y] position of the frame in reference to the
      * logical screen.
      * @param frame the frame
-     * @return the [x,y] position of the frame
-     */    
+    
+     * @return the [x,y] position of the frame */    
     public int[] getFramePosition(int frame) {
         GifFrame gf = (GifFrame)frames.get(frame - 1);
         return new int[]{gf.ix, gf.iy};
@@ -185,12 +186,17 @@ public class GifImage {
     /** Gets the logical screen. The images may be smaller and placed
      * in some position in this screen to playback some animation.
      * No image will be be bigger that this.
-     * @return the logical screen dimensions as [x,y]
-     */    
+    
+     * @return the logical screen dimensions as [x,y] */    
     public int[] getLogicalScreen() {
         return new int[]{width, height};
     }
     
+    /**
+     * Method process.
+     * @param is InputStream
+     * @throws IOException
+     */
     void process(InputStream is) throws IOException {
         in = new DataInputStream(new BufferedInputStream(is));
         readHeader();
@@ -201,6 +207,7 @@ public class GifImage {
     
     /**
      * Reads GIF file header information.
+     * @throws IOException
      */
     protected void readHeader() throws IOException {
         String id = "";
@@ -218,6 +225,7 @@ public class GifImage {
 
     /**
      * Reads Logical Screen Descriptor
+     * @throws IOException
      */
     protected void readLSD() throws IOException {
         
@@ -235,6 +243,8 @@ public class GifImage {
 
     /**
      * Reads next 16-bit value, LSB first
+     * @return int
+     * @throws IOException
      */
     protected int readShort() throws IOException {
         // read 16-bit value, LSB first
@@ -244,7 +254,8 @@ public class GifImage {
     /**
      * Reads next variable length block from input.
      *
-     * @return number of bytes stored in "buffer"
+    
+     * @return number of bytes stored in "buffer" * @throws IOException
      */
     protected int readBlock() throws IOException {
         blockSize = in.read();
@@ -260,6 +271,12 @@ public class GifImage {
         return blockSize;
     }
 
+    /**
+     * Method readColorTable.
+     * @param bpc int
+     * @return byte[]
+     * @throws IOException
+     */
     protected byte[] readColorTable(int bpc) throws IOException {
         int ncolors = 1 << bpc;
         int nbytes = 3*ncolors;
@@ -270,6 +287,11 @@ public class GifImage {
     }
  
     
+    /**
+     * Method newBpc.
+     * @param bpc int
+     * @return int
+     */
     static protected int newBpc(int bpc) {
         switch (bpc) {
             case 1:
@@ -284,6 +306,10 @@ public class GifImage {
         return bpc;
     }
     
+    /**
+     * Method readContents.
+     * @throws IOException
+     */
     protected void readContents() throws IOException {
         // read GIF file content blocks
         boolean done = false;
@@ -322,6 +348,7 @@ public class GifImage {
 
     /**
      * Reads next frame image
+     * @throws IOException
      */
     protected void readImage() throws IOException {
         ix = readShort();    // (sub)image position & size
@@ -387,6 +414,11 @@ public class GifImage {
         
     }
     
+    /**
+     * Method decodeImageData.
+     * @return boolean
+     * @throws IOException
+     */
     protected boolean decodeImageData() throws IOException {
         int NullCode = -1;
         int npix = iw * ih;
@@ -539,6 +571,12 @@ public class GifImage {
     }
     
     
+    /**
+     * Method setPixel.
+     * @param x int
+     * @param y int
+     * @param v int
+     */
     protected void setPixel(int x, int y, int v) {
         if (m_bpc == 8) {
             int pos = x + iw * y;
@@ -561,6 +599,7 @@ public class GifImage {
 
     /**
      * Reads Graphics Control Extension values
+     * @throws IOException
      */
     protected void readGraphicControlExt() throws IOException {
         in.read();    // block size
@@ -577,6 +616,7 @@ public class GifImage {
     /**
      * Skips variable length blocks up to and including
      * next zero length block.
+     * @throws IOException
      */
     protected void skip() throws IOException {
         do {
@@ -584,6 +624,8 @@ public class GifImage {
         } while (blockSize > 0);
     }
 
+    /**
+     */
     static class GifFrame {
         Image image;
         int ix;

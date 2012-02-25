@@ -55,22 +55,32 @@ import java.util.Collections;
 /**
  *
  * @author  psoares
+ * @version $Revision: 1.0 $
  */
 public class IncTable {
     public HashMap props = new HashMap();
     public ArrayList rows = new ArrayList();
     public ArrayList cols;
-    /** Creates a new instance of IncTable */
+    /** Creates a new instance of IncTable * @param props HashMap
+     */
     public IncTable(HashMap props) {
         this.props.putAll(props);
     }
     
+    /**
+     * Method addCol.
+     * @param cell PdfPCell
+     */
     public void addCol(PdfPCell cell) {
         if (cols == null)
             cols = new ArrayList();
         cols.add(cell);
     }
     
+    /**
+     * Method addCols.
+     * @param ncols ArrayList
+     */
     public void addCols(ArrayList ncols) {
         if (cols == null)
             cols = new ArrayList(ncols);
@@ -86,10 +96,18 @@ public class IncTable {
         }
     }
     
+    /**
+     * Method getRows.
+     * @return ArrayList
+     */
     public ArrayList getRows() {
         return rows;
     }
     
+    /**
+     * Method buildTable.
+     * @return PdfPTable
+     */
     public PdfPTable buildTable() {
         if (rows.size() == 0)
             return new PdfPTable(1);

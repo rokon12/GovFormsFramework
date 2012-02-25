@@ -89,6 +89,8 @@ import com.lowagie.text.markup.MarkupTags;
  * // this will close the document and all the OutputStreams listening to it
  * <STRONG>document.close();</CODE>
  * </PRE></BLOCKQUOTE>
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class HtmlWriter extends DocWriter implements DocListener {
@@ -160,8 +162,8 @@ public class HtmlWriter extends DocWriter implements DocListener {
  *
  * @param document  The <CODE>Document</CODE> that has to be written
  * @param os  The <CODE>OutputStream</CODE> the writer has to write to.
- * @return  a new <CODE>HtmlWriter</CODE>
- */
+
+ * @return  a new <CODE>HtmlWriter</CODE> */
     
     public static HtmlWriter getInstance(Document document, OutputStream os) {
         return new HtmlWriter(document, os);
@@ -172,8 +174,9 @@ public class HtmlWriter extends DocWriter implements DocListener {
 /**
  * Signals that an new page has to be started.
  *
- * @return  <CODE>true</CODE> if this action succeeded, <CODE>false</CODE> if not.
- * @throws  DocumentException when a document isn't open yet, or has been closed
+
+
+ * @return  <CODE>true</CODE> if this action succeeded, <CODE>false</CODE> if not. * @throws  DocumentException when a document isn't open yet, or has been closed * @see com.lowagie.text.DocListener#newPage()
  */
     
     public boolean newPage() throws DocumentException {
@@ -196,8 +199,9 @@ public class HtmlWriter extends DocWriter implements DocListener {
  * Signals that an <CODE>Element</CODE> was added to the <CODE>Document</CODE>.
  * 
  * @param element a high level object that has to be translated to HTML
- * @return  <CODE>true</CODE> if the element was added, <CODE>false</CODE> if not.
- * @throws  DocumentException when a document isn't open yet, or has been closed
+
+
+ * @return  <CODE>true</CODE> if the element was added, <CODE>false</CODE> if not. * @throws  DocumentException when a document isn't open yet, or has been closed * @see com.lowagie.text.ElementListener#add(Element)
  */
     
     public boolean add(Element element) throws DocumentException {
@@ -262,6 +266,7 @@ public class HtmlWriter extends DocWriter implements DocListener {
  * <CODE>Elements</CODE> can be added.
  * <P>
  * The <CODE>HEAD</CODE>-section of the HTML-document is written.
+ * @see com.lowagie.text.DocListener#open()
  */
     
     public void open() {
@@ -308,6 +313,7 @@ public class HtmlWriter extends DocWriter implements DocListener {
 /**
  * Signals that the <CODE>Document</CODE> was closed and that no other
  * <CODE>Elements</CODE> will be added.
+ * @see com.lowagie.text.DocListener#close()
  */
     
     public void close() {
@@ -363,8 +369,8 @@ public class HtmlWriter extends DocWriter implements DocListener {
  * Writes a Metatag in the header.
  *
  * @param   meta   the element that has to be written
- * @throws  IOException
- */
+
+ * @throws  IOException */
     
     protected void writeHeader(Meta meta) throws IOException {
         addTabs(2);
@@ -391,8 +397,8 @@ public class HtmlWriter extends DocWriter implements DocListener {
  * Writes a link in the header.
  *
  * @param   header   the element that has to be written
- * @throws  IOException
- */
+
+ * @throws  IOException */
     
     protected void writeLink(Header header) throws IOException {
         addTabs(2);
@@ -407,8 +413,8 @@ public class HtmlWriter extends DocWriter implements DocListener {
  * Writes a JavaScript section or, if the markup attribute HtmlTags.URL is set, a JavaScript reference in the header.
  *
  * @param   header   the element that has to be written
- * @throws  IOException
- */
+
+ * @throws  IOException */
     
     protected void writeJavaScript(Header header) throws IOException {
         addTabs(2);
@@ -450,8 +456,8 @@ public class HtmlWriter extends DocWriter implements DocListener {
  * This method writes some comment.
  *
  * @param comment   the comment that has to be written
- * @throws  IOException
- */
+
+ * @throws  IOException */
     
     protected void writeComment(String comment) throws IOException {
         addTabs(2);
@@ -476,8 +482,8 @@ public class HtmlWriter extends DocWriter implements DocListener {
  * Checks if a given font is the same as the font that was last used.
  *
  * @param   font    the font of an object
- * @return  true if the font differs
- */
+
+ * @return  true if the font differs */
     
     public boolean isOtherFont(Font font) {
         try {
@@ -519,6 +525,7 @@ public class HtmlWriter extends DocWriter implements DocListener {
  * Changes the header of this document.
  *
  * @param header    the new header
+ * @see com.lowagie.text.DocListener#setHeader(HeaderFooter)
  */
     
     public void setHeader(HeaderFooter header) {
@@ -529,6 +536,7 @@ public class HtmlWriter extends DocWriter implements DocListener {
  * Changes the footer of this document.
  *
  * @param footer    the new footer
+ * @see com.lowagie.text.DocListener#setFooter(HeaderFooter)
  */
     
     public void setFooter(HeaderFooter footer) {
@@ -539,9 +547,9 @@ public class HtmlWriter extends DocWriter implements DocListener {
  * Signals that a <CODE>String</CODE> was added to the <CODE>Document</CODE>.
  * 
  * @param string a String to add to the HTML
- * @return  <CODE>true</CODE> if the string was added, <CODE>false</CODE> if not.
- * @throws  DocumentException when a document isn't open yet, or has been closed
- */
+
+
+ * @return  <CODE>true</CODE> if the string was added, <CODE>false</CODE> if not. * @throws  DocumentException when a document isn't open yet, or has been closed */
     
     public boolean add(String string) throws DocumentException{
         if (pause) {
@@ -562,8 +570,8 @@ public class HtmlWriter extends DocWriter implements DocListener {
  *
  * @param   element     the element
  * @param   indent      the indentation
- * @throws IOException
- */
+
+ * @throws IOException */
     
     protected void write(Element element, int indent) throws IOException {
         Properties styleAttributes = null;
@@ -986,8 +994,8 @@ public class HtmlWriter extends DocWriter implements DocListener {
  *
  * @param   section     the section to write
  * @param   indent      the indentation
- * @throws IOException
- */
+
+ * @throws IOException */
     
     protected void writeSection(Section section, int indent) throws IOException {
         if (section.title() != null) {
@@ -1029,8 +1037,8 @@ public class HtmlWriter extends DocWriter implements DocListener {
      *
      * @param font              a <CODE>Font</CODE>
      * @param styleAttributes   the style of the font
-     * @throws IOException
-     */
+    
+     * @throws IOException */
     
     protected void write(Font font, Properties styleAttributes) throws IOException {
         if (font == null || !isOtherFont(font) /* || styleAttributes == null*/) return;
@@ -1086,8 +1094,8 @@ public class HtmlWriter extends DocWriter implements DocListener {
      * Writes out a CSS property.
      * @param prop a CSS property
      * @param value the value of the CSS property
-     * @throws IOException
-     */
+    
+     * @throws IOException */
     protected void writeCssProperty(String prop, String value) throws IOException {
         write(new StringBuffer(prop).append(": ").append(value).append("; ").toString());
     }

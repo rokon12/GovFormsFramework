@@ -81,7 +81,8 @@ public class RtfListItem extends RtfParagraph {
     /**
      * Writes the content of this RtfListItem.
      * 
-     * @return A byte array with the content of this RtfListItem.
+    
+     * @return A byte array with the content of this RtfListItem. * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();

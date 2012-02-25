@@ -50,6 +50,7 @@ import com.lowagie.text.Rectangle;
 
 /** An event called for a single cell.
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public interface PdfPCellEvent {
     /** This method is called at the end of the cell rendering. The text or graphics are added to

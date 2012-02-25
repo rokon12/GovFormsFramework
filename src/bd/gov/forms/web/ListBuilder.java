@@ -39,6 +39,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author asif
+ * @version $Revision: 1.0 $
  */
 @Controller
 @RequestMapping("/listBuilder")
@@ -49,6 +50,12 @@ public class ListBuilder {
     @Autowired
     private ListDao listDao;
 
+    /**
+     * Method newList.
+     * @param model ModelMap
+     * @param request HttpServletRequest
+     * @return String
+     */
     @RequestMapping(value = "/newList", method = RequestMethod.GET)
     public String newList(ModelMap model, HttpServletRequest request) {
         String access = UserAccessChecker.check(request);
@@ -64,6 +71,14 @@ public class ListBuilder {
         return "list/listData";
     }
 
+    /**
+     * Method saveForm.
+     * @param listData ListData
+     * @param result BindingResult
+     * @param request HttpServletRequest
+     * @param model ModelMap
+     * @return String
+     */
     @RequestMapping(value = "/saveList", method = RequestMethod.POST)
     public String saveForm(@ModelAttribute("listDataCmd") ListData listData,
                            BindingResult result, HttpServletRequest request, ModelMap model) {
@@ -91,6 +106,13 @@ public class ListBuilder {
         return "redirect:list.htm";
     }
 
+    /**
+     * Method editList.
+     * @param sysId String
+     * @param model ModelMap
+     * @param request HttpServletRequest
+     * @return String
+     */
     @RequestMapping(value = "/editList", method = RequestMethod.GET)
     public String editList(@RequestParam(value = "sysId", required = true) String sysId,
                            ModelMap model, HttpServletRequest request) {
@@ -112,6 +134,14 @@ public class ListBuilder {
         return "list/listData";
     }
 
+    /**
+     * Method updateForm.
+     * @param listData ListData
+     * @param result BindingResult
+     * @param request HttpServletRequest
+     * @param model ModelMap
+     * @return String
+     */
     @RequestMapping(value = "/updateList", method = RequestMethod.POST)
     public String updateForm(@ModelAttribute("listDataCmd") ListData listData,
                              BindingResult result, HttpServletRequest request, ModelMap model) {
@@ -138,6 +168,13 @@ public class ListBuilder {
         return "redirect:list.htm";
     }
 
+    /**
+     * Method list.
+     * @param model ModelMap
+     * @param request HttpServletRequest
+     * @return String
+     * @throws IOException
+     */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(ModelMap model, HttpServletRequest request) throws IOException {
         String access = UserAccessChecker.check(request);

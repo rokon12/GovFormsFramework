@@ -66,6 +66,8 @@ import com.lowagie.text.Table;
  * @see		com.lowagie.text.Row
  * @see		com.lowagie.text.Cell
  * @see		PdfCell
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfTable extends Rectangle {
@@ -214,6 +216,7 @@ public class PdfTable extends Rectangle {
 
 	/**
 	 * Get the number of rows
+	 * @return int
 	 */
 	
 	int rows() {
@@ -228,8 +231,8 @@ public class PdfTable extends Rectangle {
 	/**
 	 * Returns the arraylist with the cells of the table header.
 	 *
-	 * @return	an <CODE>ArrayList</CODE>
-	 */
+	
+	 * @return	an <CODE>ArrayList</CODE> */
     
 	ArrayList getHeaderCells() {
 		return headercells;
@@ -238,8 +241,8 @@ public class PdfTable extends Rectangle {
 	/**
 	 * Checks if there is a table header.
 	 *
-	 * @return	an <CODE>ArrayList</CODE>
-	 */
+	
+	 * @return	an <CODE>ArrayList</CODE> */
     
 	boolean hasHeader() {
 		return headercells.size() > 0;
@@ -248,8 +251,8 @@ public class PdfTable extends Rectangle {
 	/**
 	 * Returns the arraylist with the cells of the table.
 	 *
-	 * @return	an <CODE>ArrayList</CODE>
-	 */
+	
+	 * @return	an <CODE>ArrayList</CODE> */
     
 	ArrayList getCells() {
 		return cells;
@@ -258,8 +261,8 @@ public class PdfTable extends Rectangle {
 	/**
 	 * Returns the number of columns of the table.
 	 *
-	 * @return	the number of columns
-	 */
+	
+	 * @return	the number of columns */
     
 	int columns() {
 		return columns;
@@ -268,8 +271,8 @@ public class PdfTable extends Rectangle {
 	/**
 	 * Returns the cellpadding of the table.
 	 *
-	 * @return	the cellpadding
-	 */
+	
+	 * @return	the cellpadding */
     
 	final float cellpadding() {
 		return table.cellpadding();
@@ -278,8 +281,8 @@ public class PdfTable extends Rectangle {
 	/**
 	 * Returns the cellspacing of the table.
 	 *
-	 * @return	the cellspacing
-	 */
+	
+	 * @return	the cellspacing */
     
 	final float cellspacing() {
 		return table.cellspacing();
@@ -288,8 +291,8 @@ public class PdfTable extends Rectangle {
 	/**
 	 * Checks if this <CODE>Table</CODE> has to fit a page.
 	 *
-	 * @return  true if the table may not be split
-	 */
+	
+	 * @return  true if the table may not be split */
 
 	public final boolean hasToFitPageTable() {
 		return table.hasToFitPageTable();
@@ -298,8 +301,8 @@ public class PdfTable extends Rectangle {
 	/**
 	 * Checks if the cells of this <CODE>Table</CODE> have to fit a page.
 	 *
-	 * @return  true if the cells may not be split
-	 */
+	
+	 * @return  true if the cells may not be split */
 	
 	public final boolean hasToFitPageCells() {
 		return table.hasToFitPageCells();
@@ -308,8 +311,8 @@ public class PdfTable extends Rectangle {
 	/**
 	 * Gets the offset of this table.
 	 *
-	 * @return  the space between this table and the previous element.
-	 */
+	
+	 * @return  the space between this table and the previous element. */
 	public float getOffset() {
 		return table.getOffset();
 	}

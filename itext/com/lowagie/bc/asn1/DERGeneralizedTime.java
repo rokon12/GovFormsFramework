@@ -8,6 +8,8 @@ import java.util.SimpleTimeZone;
 
 /**
  * Generalized time object.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class DERGeneralizedTime
     extends DERObject
@@ -17,8 +19,10 @@ public class DERGeneralizedTime
     /**
      * return a generalized time from the passed in object
      *
-     * @exception IllegalArgumentException if the object cannot be converted.
-     */
+    
+     * @param obj Object
+     * @return DERGeneralizedTime
+     * @exception IllegalArgumentException if the object cannot be converted. */
     public static DERGeneralizedTime getInstance(
         Object  obj)
     {
@@ -41,9 +45,10 @@ public class DERGeneralizedTime
      * @param obj the tagged object holding the object we want
      * @param explicit true if the object is meant to be explicitly
      *              tagged false otherwise.
+    
+     * @return DERGeneralizedTime
      * @exception IllegalArgumentException if the tagged object cannot
-     *               be converted.
-     */
+     *               be converted. */
     public static DERGeneralizedTime getInstance(
         ASN1TaggedObject obj,
         boolean          explicit)
@@ -67,6 +72,7 @@ public class DERGeneralizedTime
 
     /**
      * base constructer from a java.util.date object
+     * @param time Date
      */
     public DERGeneralizedTime(
         Date time)
@@ -78,6 +84,10 @@ public class DERGeneralizedTime
         this.time = dateF.format(time);
     }
 
+    /**
+     * Constructor for DERGeneralizedTime.
+     * @param bytes byte[]
+     */
     DERGeneralizedTime(
         byte[]  bytes)
     {
@@ -105,6 +115,7 @@ public class DERGeneralizedTime
      * </pre>
      * To read in the time and get a date which is compatible with our local
      * time zone.
+     * @return String
      */
     public String getTime()
     {
@@ -144,6 +155,11 @@ public class DERGeneralizedTime
         return time;
     }
 
+    /**
+     * Method getDate.
+     * @return Date
+     * @throws ParseException
+     */
     public Date getDate() 
     	throws ParseException
     {
@@ -154,6 +170,10 @@ public class DERGeneralizedTime
         return dateF.parse(time);
     }
     
+    /**
+     * Method getOctets.
+     * @return byte[]
+     */
     private byte[] getOctets()
     {
         char[]  cs = time.toCharArray();
@@ -168,6 +188,11 @@ public class DERGeneralizedTime
     }
 
 
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
+     */
     void encode(
         DEROutputStream  out)
         throws IOException
@@ -175,6 +200,11 @@ public class DERGeneralizedTime
         out.writeEncoded(GENERALIZED_TIME, this.getOctets());
     }
     
+    /**
+     * Method equals.
+     * @param o Object
+     * @return boolean
+     */
     public boolean equals(
         Object  o)
     {

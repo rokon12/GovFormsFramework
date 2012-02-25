@@ -74,6 +74,8 @@ import java.util.Set;
  * @see		PdfObject
  * @see		PdfName
  * @see		BadPdfFormatException
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfDictionary extends PdfObject {
@@ -131,7 +133,10 @@ public class PdfDictionary extends PdfObject {
 /**
  * Returns the PDF representation of this <CODE>PdfDictionary</CODE>.
  *
- * @return		an array of <CODE>byte</CODE>
+
+ * @param writer PdfWriter
+ * @param os OutputStream
+ * @throws IOException
  */
     
     public void toPdf(PdfWriter writer, OutputStream os) throws IOException {
@@ -162,7 +167,7 @@ public class PdfDictionary extends PdfObject {
  *
  * @param		key		key of the entry (a <CODE>PdfName</CODE>)
  * @param		value	value of the entry (a <CODE>PdfObject</CODE>)
- * @return		the previous </CODE>PdfObject</CODE> corresponding with the <VAR>key</VAR>
+
  */
     
     public void put(PdfName key, PdfObject value) {
@@ -175,7 +180,7 @@ public class PdfDictionary extends PdfObject {
  *
  * @param		key		key of the entry (a <CODE>PdfName</CODE>)
  * @param		value	value of the entry (a <CODE>PdfObject</CODE>)
- * @return		the previous </CODE>PdfObject</CODE> corresponding with the <VAR>key</VAR>
+
  */
     public void putEx(PdfName key, PdfObject value) {
         if (value == null)
@@ -189,7 +194,7 @@ public class PdfDictionary extends PdfObject {
  *
  * @param		key		key of the entry (a <CODE>PdfName</CODE>)
  * @param		value	value of the entry (a <CODE>PdfObject</CODE>)
- * @return		the previous </CODE>PdfObject</CODE> corresponding with the <VAR>key</VAR>
+
  */
     public void putDel(PdfName key, PdfObject value) {
         if (value == null) {
@@ -203,7 +208,7 @@ public class PdfDictionary extends PdfObject {
  * Removes a <CODE>PdfObject</CODE> and its key from the <CODE>PdfDictionary</CODE>.
  *
  * @param		key		key of the entry (a <CODE>PdfName</CODE>)
- * @return		the previous </CODE>PdfObject</CODE> corresponding with the <VAR>key</VAR>
+
  */
     
     public void remove(PdfName key) {
@@ -214,8 +219,8 @@ public class PdfDictionary extends PdfObject {
  * Gets a <CODE>PdfObject</CODE> with a certain key from the <CODE>PdfDictionary</CODE>.
  *
  * @param		key		key of the entry (a <CODE>PdfName</CODE>)
- * @return		the previous </CODE>PdfObject</CODE> corresponding with the <VAR>key</VAR>
- */
+
+ * @return		the previous </CODE>PdfObject</CODE> corresponding with the <VAR>key</VAR> */
     
     public PdfObject get(PdfName key) {
         return (PdfObject) hashMap.get(key);
@@ -227,10 +232,11 @@ public class PdfDictionary extends PdfObject {
  * Checks if a <CODE>PdfDictionary</CODE> is of a certain type.
  *
  * @param		type	a type of dictionary
- * @return		<CODE>true</CODE> of <CODE>false</CODE>
+
  *
- * @deprecated
- */
+
+ * @deprecated since <unknown>
+ * @return		<CODE>true</CODE> of <CODE>false</CODE> */
     
     public boolean isDictionaryType(PdfName type) {
         return dictionaryType.compareTo(type) == 0;
@@ -239,8 +245,8 @@ public class PdfDictionary extends PdfObject {
 /**
  *  Checks if a <CODE>Dictionary</CODE> is of the type FONT.
  *
- * @return		<CODE>true</CODE> if it is, <CODE>false</CODE> if it isn't.
- */
+
+ * @return		<CODE>true</CODE> if it is, <CODE>false</CODE> if it isn't. */
     
     public boolean isFont() {
         return dictionaryType.compareTo(FONT) == 0;
@@ -249,8 +255,8 @@ public class PdfDictionary extends PdfObject {
 /**
  *  Checks if a <CODE>Dictionary</CODE> is of the type PAGE.
  *
- * @return		<CODE>true</CODE> if it is, <CODE>false</CODE> if it isn't.
- */
+
+ * @return		<CODE>true</CODE> if it is, <CODE>false</CODE> if it isn't. */
     
     public boolean isPage() {
         return dictionaryType.compareTo(PAGE) == 0;
@@ -259,8 +265,8 @@ public class PdfDictionary extends PdfObject {
 /**
  *  Checks if a <CODE>Dictionary</CODE> is of the type PAGES.
  *
- * @return		<CODE>true</CODE> if it is, <CODE>false</CODE> if it isn't.
- */
+
+ * @return		<CODE>true</CODE> if it is, <CODE>false</CODE> if it isn't. */
     
     public boolean isPages() {
         return dictionaryType.compareTo(PAGES) == 0;
@@ -269,8 +275,8 @@ public class PdfDictionary extends PdfObject {
 /**
  *  Checks if a <CODE>Dictionary</CODE> is of the type CATALOG.
  *
- * @return		<CODE>true</CODE> if it is, <CODE>false</CODE> if it isn't.
- */
+
+ * @return		<CODE>true</CODE> if it is, <CODE>false</CODE> if it isn't. */
     
     public boolean isCatalog() {
         return dictionaryType.compareTo(CATALOG) == 0;
@@ -279,17 +285,25 @@ public class PdfDictionary extends PdfObject {
 /**
  *  Checks if a <CODE>Dictionary</CODE> is of the type OUTLINES.
  *
- * @return		<CODE>true</CODE> if it is, <CODE>false</CODE> if it isn't.
- */
+
+ * @return		<CODE>true</CODE> if it is, <CODE>false</CODE> if it isn't. */
     
     public boolean isOutlineTree() {
         return dictionaryType.compareTo(OUTLINES) == 0;
     }
     
+    /**
+     * Method merge.
+     * @param other PdfDictionary
+     */
     public void merge(PdfDictionary other) {
         hashMap.putAll(other.hashMap);
     }
     
+    /**
+     * Method mergeDifferent.
+     * @param other PdfDictionary
+     */
     public void mergeDifferent(PdfDictionary other) {
         for (Iterator i = other.hashMap.keySet().iterator(); i.hasNext();) {
             Object key = i.next();
@@ -299,18 +313,35 @@ public class PdfDictionary extends PdfObject {
         }
     }
     
+    /**
+     * Method getKeys.
+     * @return Set
+     */
     public Set getKeys() {
         return hashMap.keySet();
     }
 
+    /**
+     * Method putAll.
+     * @param dic PdfDictionary
+     */
     public void putAll(PdfDictionary dic) {
         hashMap.putAll(dic.hashMap);
     }
     
+    /**
+     * Method size.
+     * @return int
+     */
     public int size() {
         return hashMap.size();
     }
     
+    /**
+     * Method contains.
+     * @param key PdfName
+     * @return boolean
+     */
     public boolean contains(PdfName key) {
         return hashMap.containsKey(key);
     }

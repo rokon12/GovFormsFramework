@@ -426,7 +426,8 @@ public class RtfBorder extends RtfElement {
     /**
      * Writes the RtfBorder settings
      * 
-     * @return A byte array with the RtfBorder settings
+    
+     * @return A byte array with the RtfBorder settings * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         if(this.borderStyle == BORDER_NONE || this.borderPosition == NO_BORDER || this.borderWidth == 0) {
@@ -498,8 +499,8 @@ public class RtfBorder extends RtfElement {
     /**
      * Writes the style of this RtfBorder
      * 
-     * @return A byte array containing the style of this RtfBorder
-     */
+    
+     * @return A byte array containing the style of this RtfBorder */
     private byte[] writeBorderStyle() {
         switch(this.borderStyle) {
             case BORDER_NONE                    : return new byte[0];
@@ -534,16 +535,16 @@ public class RtfBorder extends RtfElement {
     /**
      * Gets the colour of this RtfBorder
      * 
-     * @return Returns RtfColor of this RtfBorder
-     */
+    
+     * @return Returns RtfColor of this RtfBorder */
     protected RtfColor getBorderColor() {
         return borderColor;
     }
 
     /**
      * Gets the position of this RtfBorder
-     * @return Returns the position of this RtfBorder
-     */
+    
+     * @return Returns the position of this RtfBorder */
     protected int getBorderPosition() {
         return borderPosition;
     }
@@ -551,8 +552,8 @@ public class RtfBorder extends RtfElement {
     /**
      * Gets the style of this RtfBorder
      * 
-     * @return Returns the style of this RtfBorder
-     */
+    
+     * @return Returns the style of this RtfBorder */
     protected int getBorderStyle() {
         return borderStyle;
     }
@@ -560,8 +561,8 @@ public class RtfBorder extends RtfElement {
     /**
      * Gets the type of this RtfBorder
      * 
-     * @return Returns the type of this RtfBorder
-     */
+    
+     * @return Returns the type of this RtfBorder */
     protected int getBorderType() {
         return borderType;
     }
@@ -569,8 +570,8 @@ public class RtfBorder extends RtfElement {
     /**
      * Gets the width of this RtfBorder
      * 
-     * @return Returns the width of this RtfBorder
-     */
+    
+     * @return Returns the width of this RtfBorder */
     protected int getBorderWidth() {
         return borderWidth;
     }

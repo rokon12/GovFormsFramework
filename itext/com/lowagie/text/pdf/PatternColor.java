@@ -47,6 +47,8 @@
 package com.lowagie.text.pdf;
 
 /** Represents a pattern. Can be used in high-level constructs (Paragraph, Cell, etc.).
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class PatternColor extends ExtendedColor {
     /**
@@ -63,8 +65,8 @@ public class PatternColor extends ExtendedColor {
     }
     
     /** Gets the pattern.
-     * @return the pattern
-     */    
+    
+     * @return the pattern */    
     public PdfPatternPainter getPainter() {
         return this.painter;
     }

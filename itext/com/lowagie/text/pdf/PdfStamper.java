@@ -71,6 +71,7 @@ import java.util.Iterator;
  * It is also possible to change the field values and to
  * flatten them. New fields can be added but not flattened.
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PdfStamper {
     /**
@@ -85,9 +86,9 @@ public class PdfStamper {
      * document.
      * @param reader the original document. It cannot be reused
      * @param os the output stream
-     * @throws DocumentException on error
-     * @throws IOException on error
-     */
+    
+    
+     * @throws DocumentException on error * @throws IOException on error */
     public PdfStamper(PdfReader reader, OutputStream os) throws DocumentException, IOException {
         stamper = new PdfStamperImp(reader, os, '\0', false);
     }
@@ -99,9 +100,9 @@ public class PdfStamper {
      * @param os the output stream
      * @param pdfVersion the new pdf version or '\0' to keep the same version as the original
      * document
-     * @throws DocumentException on error
-     * @throws IOException on error
-     */
+    
+    
+     * @throws DocumentException on error * @throws IOException on error */
     public PdfStamper(PdfReader reader, OutputStream os, char pdfVersion) throws DocumentException, IOException {
         stamper = new PdfStamperImp(reader, os, pdfVersion, false);
     }
@@ -115,18 +116,18 @@ public class PdfStamper {
      * document
      * @param append if <CODE>true</CODE> appends the document changes as a new revision. This is
      * only useful for multiple signatures as nothing is gained in speed or memory
-     * @throws DocumentException on error
-     * @throws IOException on error
-     */
+    
+    
+     * @throws DocumentException on error * @throws IOException on error */
     public PdfStamper(PdfReader reader, OutputStream os, char pdfVersion, boolean append) throws DocumentException, IOException {
         stamper = new PdfStamperImp(reader, os, pdfVersion, append);
     }
 
     /** Gets the optional <CODE>String</CODE> map to add or change values in
      * the info dictionary.
-     * @return the map or <CODE>null</CODE>
+    
      *
-     */
+     * @return the map or <CODE>null</CODE> */
     public HashMap getMoreInfo() {
         return this.moreInfo;
     }
@@ -154,12 +155,16 @@ public class PdfStamper {
     
     /**
      * Gets the signing instance. The appearances and other parameters can the be set.
-     * @return the signing instance
-     */    
+    
+     * @return the signing instance */    
     public PdfSignatureAppearance getSignatureAppearance() {
         return sigApp;
     }
 
+    /**
+     * Method getNewSigName.
+     * @return String
+     */
     private String getNewSigName() {
         AcroFields af = getAcroFields();
         String name = "Signature";
@@ -189,9 +194,9 @@ public class PdfStamper {
      * <p>
      * If closing a signed document with an external signature the closing must be done
      * in the <CODE>PdfSignatureAppearance</CODE> instance.
-     * @throws DocumentException on error
-     * @throws IOException on error
-     */
+    
+    
+     * @throws DocumentException on error * @throws IOException on error */
     public void close() throws DocumentException, IOException {
         if (!hasSignature) {
             stamper.close(moreInfo);
@@ -223,6 +228,13 @@ public class PdfStamper {
         stamper.reader.close();
     }
 
+    /**
+     * Method indexArray.
+     * @param bout byte[]
+     * @param position int
+     * @param search String
+     * @return int
+     */
     private static int indexArray(byte bout[], int position, String search) {
         byte ss[] = PdfEncodings.convertToBytes(search, null);
         while (true) {
@@ -237,6 +249,14 @@ public class PdfStamper {
         }
     }
 
+    /**
+     * Method indexFile.
+     * @param raf RandomAccessFile
+     * @param position int
+     * @param search String
+     * @return int
+     * @throws IOException
+     */
     private static int indexFile(RandomAccessFile raf, int position, String search) throws IOException {
         byte ss[] = PdfEncodings.convertToBytes(search, null);
         while (true) {
@@ -258,9 +278,9 @@ public class PdfStamper {
     /** Gets a <CODE>PdfContentByte</CODE> to write under the page of
      * the original document.
      * @param pageNum the page number where the extra content is written
+    
      * @return a <CODE>PdfContentByte</CODE> to write under the page of
-     * the original document
-     */
+     * the original document */
     public PdfContentByte getUnderContent(int pageNum) {
         return stamper.getUnderContent(pageNum);
     }
@@ -268,17 +288,17 @@ public class PdfStamper {
     /** Gets a <CODE>PdfContentByte</CODE> to write over the page of
      * the original document.
      * @param pageNum the page number where the extra content is written
+    
      * @return a <CODE>PdfContentByte</CODE> to write over the page of
-     * the original document
-     */
+     * the original document */
     public PdfContentByte getOverContent(int pageNum) {
         return stamper.getOverContent(pageNum);
     }
 
     /** Checks if the content is automatically adjusted to compensate
      * the original page rotation.
-     * @return the auto-rotation status
-     */
+    
+     * @return the auto-rotation status */
     public boolean isRotateContents() {
         return stamper.isRotateContents();
     }
@@ -302,8 +322,8 @@ public class PdfStamper {
      * @param ownerPassword the owner password. Can be null or empty
      * @param permissions the user permissions
      * @param strength128Bits <code>true</code> for 128 bit key length, <code>false</code> for 40 bit key length
-     * @throws DocumentException if anything was already written to the output
-     */
+    
+     * @throws DocumentException if anything was already written to the output */
     public void setEncryption(byte userPassword[], byte ownerPassword[], int permissions, boolean strength128Bits) throws DocumentException {
         if (stamper.isAppend())
             throw new DocumentException("Append mode does not support changing the encryption status.");
@@ -323,8 +343,8 @@ public class PdfStamper {
      * @param userPassword the user password. Can be null or empty
      * @param ownerPassword the owner password. Can be null or empty
      * @param permissions the user permissions
-     * @throws DocumentException if anything was already written to the output
-     */
+    
+     * @throws DocumentException if anything was already written to the output */
     public void setEncryption(boolean strength, String userPassword, String ownerPassword, int permissions) throws DocumentException {
         setEncryption(DocWriter.getISOBytes(userPassword), DocWriter.getISOBytes(ownerPassword), permissions, strength);
     }
@@ -333,30 +353,30 @@ public class PdfStamper {
      * once with the same parameters will retrieve the same object.
      * @param reader the PDF document where the page is
      * @param pageNumber the page number. The first page is 1
-     * @return the template representing the imported page
-     */
+    
+     * @return the template representing the imported page */
     public PdfImportedPage getImportedPage(PdfReader reader, int pageNumber) {
         return stamper.getImportedPage(reader, pageNumber);
     }
 
     /** Gets the underlying PdfWriter.
-     * @return the underlying PdfWriter
-     */
+    
+     * @return the underlying PdfWriter */
     public PdfWriter getWriter() {
         return stamper;
     }
 
     /** Gets the underlying PdfReader.
-     * @return the underlying PdfReader
-     */
+    
+     * @return the underlying PdfReader */
     public PdfReader getReader() {
         return stamper.reader;
     }
 
     /** Gets the <CODE>AcroFields</CODE> object that allows to get and set field values
      * and to merge FDF forms.
-     * @return the <CODE>AcroFields</CODE> object
-     */
+    
+     * @return the <CODE>AcroFields</CODE> object */
     public AcroFields getAcroFields() {
         return stamper.getAcroFields();
     }
@@ -391,8 +411,8 @@ public class PdfStamper {
     /**
      * Adds the comments present in an FDF file.
      * @param fdf the FDF file
-     * @throws IOException on error
-     */    
+    
+     * @throws IOException on error */    
     public void addComments(FdfReader fdf) throws IOException {
         stamper.addComments(fdf);
     }
@@ -401,8 +421,8 @@ public class PdfStamper {
      * Sets the bookmarks. The list structure is defined in
      * {@link SimpleBookmark}.
      * @param outlines the bookmarks or <CODE>null</CODE> to remove any
-     * @throws IOException on error
-     */
+    
+     * @throws IOException on error */
     public void setOutlines(List outlines) throws IOException {
         stamper.setOutlines(outlines);
     }
@@ -411,9 +431,9 @@ public class PdfStamper {
      * Sets the thumbnail image for a page.
      * @param image the image
      * @param page the page
-     * @throws PdfException on error
-     * @throws DocumentException on error
-     */    
+    
+    
+     * @throws PdfException on error * @throws DocumentException on error */    
     public void setThumbnail(Image image, int page) throws PdfException, DocumentException {
         stamper.setThumbnail(image, page);
     }
@@ -426,8 +446,8 @@ public class PdfStamper {
      * Calling <CODE>setFormFlattening(true)</CODE> is needed to have any kind of
      * flattening.
      * @param name the field name
-     * @return <CODE>true</CODE> if the field exists, <CODE>false</CODE> otherwise
-     */
+    
+     * @return <CODE>true</CODE> if the field exists, <CODE>false</CODE> otherwise */
     public boolean partialFormFlattening(String name) {
         return stamper.partialFormFlattening(name);
     }
@@ -443,8 +463,8 @@ public class PdfStamper {
     /**
      * Sets the viewer preferences.
      * @param preferences the viewer preferences
-     * @see PdfWriter#setViewerPreferences(int)
-     */
+    
+     * @see PdfWriter#setViewerPreferences(int) */
     public void setViewerPreferences(int preferences) {
         stamper.setViewerPreferences(preferences);
     }
@@ -452,16 +472,16 @@ public class PdfStamper {
     /**
      * Sets the XMP metadata.
      * @param xmp
-     * @see PdfWriter#setXmpMetadata(byte[])
-     */
+    
+     * @see PdfWriter#setXmpMetadata(byte[]) */
     public void setXmpMetadata(byte[] xmp) {
         stamper.setXmpMetadata(xmp);
     }
 
     /**
      * Gets the 1.5 compression status.
-     * @return <code>true</code> if the 1.5 compression is on
-     */
+    
+     * @return <code>true</code> if the 1.5 compression is on */
     public boolean isFullCompression() {
         return stamper.isFullCompression();
     }
@@ -482,8 +502,8 @@ public class PdfStamper {
      * or <CODE>PdfWriter.PAGE_CLOSE</CODE>
      * @param action the action to perform
      * @param page the page where the action will be applied. The first page is 1
-     * @throws PdfException if the action type is invalid
-     */    
+    
+     * @throws PdfException if the action type is invalid */    
     public void setPageAction(PdfName actionType, PdfAction action, int page) throws PdfException {
         stamper.setPageAction(actionType, action, page);
     }
@@ -541,10 +561,10 @@ public class PdfStamper {
      *     no temporary file will be created and memory will be used
      * @param append if <CODE>true</CODE> the signature and all the other content will be added as a
      * new revision thus not invalidating existing signatures
-     * @return a <CODE>PdfStamper</CODE>
-     * @throws DocumentException on error
-     * @throws IOException on error
-     */
+    
+    
+    
+     * @return a <CODE>PdfStamper</CODE> * @throws DocumentException on error * @throws IOException on error */
     public static PdfStamper createSignature(PdfReader reader, OutputStream os, char pdfVersion, File tempFile, boolean append) throws DocumentException, IOException {
         PdfStamper stp;
         if (tempFile == null) {
@@ -596,10 +616,10 @@ public class PdfStamper {
      * @param os the output stream
      * @param pdfVersion the new pdf version or '\0' to keep the same version as the original
      * document
-     * @throws DocumentException on error
-     * @throws IOException on error
-     * @return a <CODE>PdfStamper</CODE>
-     */
+    
+    
+    
+     * @return a <CODE>PdfStamper</CODE> * @throws DocumentException on error * @throws IOException on error */
     public static PdfStamper createSignature(PdfReader reader, OutputStream os, char pdfVersion) throws DocumentException, IOException {
         return createSignature(reader, os, pdfVersion, null, false);
     }
@@ -635,10 +655,10 @@ public class PdfStamper {
      *     If it's a file it will be used directly. The file will be deleted on exit unless <CODE>os</CODE> is null.
      *     In that case the document can be retrieved directly from the temporary file. If it's <CODE>null</CODE>
      *     no temporary file will be created and memory will be used
-     * @return a <CODE>PdfStamper</CODE>
-     * @throws DocumentException on error
-     * @throws IOException on error
-     */
+    
+    
+    
+     * @return a <CODE>PdfStamper</CODE> * @throws DocumentException on error * @throws IOException on error */
     public static PdfStamper createSignature(PdfReader reader, OutputStream os, char pdfVersion, File tempFile) throws DocumentException, IOException 
     {
         return createSignature(reader, os, pdfVersion, tempFile, false);

@@ -56,6 +56,8 @@ import java.awt.Point;
 import java.awt.Color;
 import com.lowagie.text.pdf.*;
 
+/**
+ */
 public class MetaState {
     
     public static final int TA_NOUPDATECP = 0;
@@ -103,10 +105,18 @@ public class MetaState {
         currentFont = new MetaFont();
     }
 
+    /**
+     * Constructor for MetaState.
+     * @param state MetaState
+     */
     public MetaState(MetaState state) {
         setMetaState(state);
     }
     
+    /**
+     * Method setMetaState.
+     * @param state MetaState
+     */
     public void setMetaState(MetaState state) {
         savedStates = state.savedStates;
         MetaObjects = state.MetaObjects;
@@ -128,6 +138,10 @@ public class MetaState {
         scalingY = state.scalingY;
     }
 
+    /**
+     * Method addMetaObject.
+     * @param object MetaObject
+     */
     public void addMetaObject(MetaObject object) {
         for (int k = 0; k < MetaObjects.size(); ++k) {
             if (MetaObjects.get(k) == null) {
@@ -138,6 +152,11 @@ public class MetaState {
         MetaObjects.add(object);
     }
     
+    /**
+     * Method selectMetaObject.
+     * @param index int
+     * @param cb PdfContentByte
+     */
     public void selectMetaObject(int index, PdfContentByte cb) {
         MetaObject obj = (MetaObject)MetaObjects.get(index);
         if (obj == null)
@@ -192,16 +211,29 @@ public class MetaState {
         }
     }
     
+    /**
+     * Method deleteMetaObject.
+     * @param index int
+     */
     public void deleteMetaObject(int index) {
         MetaObjects.set(index, null);
     }
     
+    /**
+     * Method saveState.
+     * @param cb PdfContentByte
+     */
     public void saveState(PdfContentByte cb) {
         cb.saveState();
         MetaState state = new MetaState(this);
         savedStates.push(this);
     }
 
+    /**
+     * Method restoreState.
+     * @param index int
+     * @param cb PdfContentByte
+     */
     public void restoreState(int index, PdfContentByte cb) {
         int pops;
         if (index < 0)
@@ -218,66 +250,125 @@ public class MetaState {
         setMetaState(state);
     }
     
+    /**
+     * Method transformX.
+     * @param x int
+     * @return float
+     */
     public float transformX(int x) {
         return ((float)x - offsetWx) * scalingX / extentWx;
     }
 
+    /**
+     * Method transformY.
+     * @param y int
+     * @return float
+     */
     public float transformY(int y) {
         return (1f - ((float)y - offsetWy) / extentWy) * scalingY;
     }
     
+    /**
+     * Method setScalingX.
+     * @param scalingX float
+     */
     public void setScalingX(float scalingX) {
         this.scalingX = scalingX;
     }
     
+    /**
+     * Method setScalingY.
+     * @param scalingY float
+     */
     public void setScalingY(float scalingY) {
         this.scalingY = scalingY;
     }
     
+    /**
+     * Method setOffsetWx.
+     * @param offsetWx int
+     */
     public void setOffsetWx(int offsetWx) {
         this.offsetWx = offsetWx;
     }
     
+    /**
+     * Method setOffsetWy.
+     * @param offsetWy int
+     */
     public void setOffsetWy(int offsetWy) {
         this.offsetWy = offsetWy;
     }
     
+    /**
+     * Method setExtentWx.
+     * @param extentWx int
+     */
     public void setExtentWx(int extentWx) {
         this.extentWx = extentWx;
     }
     
+    /**
+     * Method setExtentWy.
+     * @param extentWy int
+     */
     public void setExtentWy(int extentWy) {
         this.extentWy = extentWy;
     }
     
+    /**
+     * Method transformAngle.
+     * @param angle float
+     * @return float
+     */
     public float transformAngle(float angle) {
         float ta = extentWy < 0 ? -angle : angle;
         return extentWx < 0 ? 180 - ta : ta;
     }
     
+    /**
+     * Method setCurrentPoint.
+     * @param p Point
+     */
     public void setCurrentPoint(Point p) {
         currentPoint = p;
     }
 
+    /**
+     * Method getCurrentPoint.
+     * @return Point
+     */
     public Point getCurrentPoint() {
         return currentPoint;
     }
     
+    /**
+     * Method getCurrentBrush.
+     * @return MetaBrush
+     */
     public MetaBrush getCurrentBrush() {
         return currentBrush;
     }
 
+    /**
+     * Method getCurrentPen.
+     * @return MetaPen
+     */
     public MetaPen getCurrentPen() {
         return currentPen;
     }
 
+    /**
+     * Method getCurrentFont.
+     * @return MetaFont
+     */
     public MetaFont getCurrentFont() {
         return currentFont;
     }
     
     /** Getter for property currentBackgroundColor.
-     * @return Value of property currentBackgroundColor.
-     */
+    
+     * @return Value of property currentBackgroundColor. */
     public Color getCurrentBackgroundColor() {
         return currentBackgroundColor;
     }
@@ -290,8 +381,8 @@ public class MetaState {
     }
     
     /** Getter for property currentTextColor.
-     * @return Value of property currentTextColor.
-     */
+    
+     * @return Value of property currentTextColor. */
     public Color getCurrentTextColor() {
         return currentTextColor;
     }
@@ -304,8 +395,8 @@ public class MetaState {
     }
     
     /** Getter for property backgroundMode.
-     * @return Value of property backgroundMode.
-     */
+    
+     * @return Value of property backgroundMode. */
     public int getBackgroundMode() {
         return backgroundMode;
     }
@@ -318,8 +409,8 @@ public class MetaState {
     }
     
     /** Getter for property textAlign.
-     * @return Value of property textAlign.
-     */
+    
+     * @return Value of property textAlign. */
     public int getTextAlign() {
         return textAlign;
     }
@@ -332,8 +423,8 @@ public class MetaState {
     }
     
     /** Getter for property polyFillMode.
-     * @return Value of property polyFillMode.
-     */
+    
+     * @return Value of property polyFillMode. */
     public int getPolyFillMode() {
         return polyFillMode;
     }
@@ -345,6 +436,10 @@ public class MetaState {
         this.polyFillMode = polyFillMode;
     }
     
+    /**
+     * Method setLineJoinRectangle.
+     * @param cb PdfContentByte
+     */
     public void setLineJoinRectangle(PdfContentByte cb) {
         if (lineJoin != 0) {
             lineJoin = 0;
@@ -352,6 +447,10 @@ public class MetaState {
         }
     }
     
+    /**
+     * Method setLineJoinPolygon.
+     * @param cb PdfContentByte
+     */
     public void setLineJoinPolygon(PdfContentByte cb) {
         if (lineJoin == 0) {
             lineJoin = 1;
@@ -359,6 +458,10 @@ public class MetaState {
         }
     }
     
+    /**
+     * Method getLineNeutral.
+     * @return boolean
+     */
     public boolean getLineNeutral() {
         return (lineJoin == 0);
     }

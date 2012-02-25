@@ -60,23 +60,44 @@ import java.util.HashMap;
  * This class captures an AcroForm on input. Basically, it extends Dictionary
  * by indexing the fields of an AcroForm
  * @author Mark Thompson
+ * @version $Revision: 1.0 $
  */
 
 public class PRAcroForm extends PdfDictionary {
     
     /**
      * This class holds the information for a single field
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     public static class FieldInformation {
         String name;
         PdfDictionary info;
         PRIndirectReference ref;
         
+        /**
+         * Constructor for FieldInformation.
+         * @param name String
+         * @param info PdfDictionary
+         * @param ref PRIndirectReference
+         */
         FieldInformation(String name, PdfDictionary info, PRIndirectReference ref) {
             this.name = name; this.info = info; this.ref = ref;
         }
+        /**
+         * Method getName.
+         * @return String
+         */
         public String getName() { return name; }
+        /**
+         * Method getInfo.
+         * @return PdfDictionary
+         */
         public PdfDictionary getInfo() { return info; }
+        /**
+         * Method getRef.
+         * @return PRIndirectReference
+         */
         public PRIndirectReference getRef() { return ref; }
     };
     ArrayList fields;
@@ -96,16 +117,25 @@ public class PRAcroForm extends PdfDictionary {
     }
     /**
      * Number of fields found
-     * @return size
-     */
+    
+     * @return size */
     public int size() {
         return fields.size();
     }
     
+    /**
+     * Method getFields.
+     * @return ArrayList
+     */
     public ArrayList getFields() {
         return fields;
     }
     
+    /**
+     * Method getField.
+     * @param name String
+     * @return FieldInformation
+     */
     public FieldInformation getField(String name) {
         return (FieldInformation)fieldByName.get(name);
     }
@@ -113,8 +143,8 @@ public class PRAcroForm extends PdfDictionary {
     /**
      * Given the title (/T) of a reference, return the associated reference
      * @param name a string containing the path
-     * @return a reference to the field, or null
-     */
+    
+     * @return a reference to the field, or null */
     public PRIndirectReference getRefByName(String name) {
         FieldInformation fi = (FieldInformation)fieldByName.get(name);
         if (fi == null) return null;
@@ -178,8 +208,8 @@ public class PRAcroForm extends PdfDictionary {
      * merge field attributes from two dictionaries
      * @param parent one dictionary
      * @param child the other dictionary
-     * @return a merged dictionary
-     */
+    
+     * @return a merged dictionary */
     protected PdfDictionary mergeAttrib(PdfDictionary parent, PdfDictionary child) {
         PdfDictionary targ = new PdfDictionary();
         if (parent != null) targ.putAll(parent);
@@ -198,6 +228,7 @@ public class PRAcroForm extends PdfDictionary {
     }
     /**
      * stack a level of dictionary. Merge in a dictionary from this level
+     * @param dict PdfDictionary
      */
     protected void pushAttrib(PdfDictionary dict) {
         PdfDictionary dic = null;

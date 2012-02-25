@@ -66,6 +66,8 @@ import com.lowagie.text.ExceptionConverter;
  *
  * @see		PdfPageElement
  * @see		PdfPage
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfPages {
@@ -80,12 +82,17 @@ public class PdfPages {
     
 /**
  * Constructs a <CODE>PdfPages</CODE>-object.
+ * @param writer PdfWriter
  */
     
     PdfPages(PdfWriter writer) {
         this.writer = writer;
     }
     
+    /**
+     * Method addPage.
+     * @param page PdfDictionary
+     */
     void addPage(PdfDictionary page) {
         try {
             if ((pages.size() % leafSize) == 0)
@@ -101,6 +108,11 @@ public class PdfPages {
         }
     }
     
+    /**
+     * Method addPageRef.
+     * @param pageRef PdfIndirectReference
+     * @return PdfIndirectReference
+     */
     PdfIndirectReference addPageRef(PdfIndirectReference pageRef) {
         try {
             if ((pages.size() % leafSize) == 0)
@@ -114,6 +126,11 @@ public class PdfPages {
     }
     
     // returns the top parent to include in the catalog
+    /**
+     * Method writePageTree.
+     * @return PdfIndirectReference
+     * @throws IOException
+     */
     PdfIndirectReference writePageTree() throws IOException {
         if (pages.size() == 0)
             throw new IOException("The document has no pages.");
@@ -161,10 +178,18 @@ public class PdfPages {
         }
     }
     
+    /**
+     * Method getTopParent.
+     * @return PdfIndirectReference
+     */
     PdfIndirectReference getTopParent() {
         return topParent;
     }
     
+    /**
+     * Method setLinearMode.
+     * @param topParent PdfIndirectReference
+     */
     void setLinearMode(PdfIndirectReference topParent) {
         if (parents.size() > 1)
             throw new RuntimeException("Linear page mode can only be called with a single parent.");
@@ -176,10 +201,20 @@ public class PdfPages {
         leafSize = 10000000;
     }
 
+    /**
+     * Method addPage.
+     * @param page PdfIndirectReference
+     */
     void addPage(PdfIndirectReference page) {
         pages.add(page);
     }
 
+    /**
+     * Method reorderPages.
+     * @param order int[]
+     * @return int
+     * @throws DocumentException
+     */
     int reorderPages(int order[]) throws DocumentException {
         if (order == null)
             return pages.size();

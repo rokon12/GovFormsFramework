@@ -55,6 +55,7 @@ import com.lowagie.text.pdf.hyphenation.Hyphenation;
  * is not provided and a TEX pattern for it exists, it can be easily adapted.
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class HyphenationAuto implements HyphenationEvent {
 
@@ -76,7 +77,8 @@ public class HyphenationAuto implements HyphenationEvent {
     }
 
     /** Gets the hyphen symbol.
-     * @return the hyphen symbol
+    
+     * @return the hyphen symbol * @see com.lowagie.text.pdf.HyphenationEvent#getHyphenSymbol()
      */    
     public String getHyphenSymbol() {
         return "-";
@@ -88,8 +90,9 @@ public class HyphenationAuto implements HyphenationEvent {
      * @param font the font used by this word
      * @param fontSize the font size used by this word
      * @param remainingWidth the width available to fit this word in
+    
      * @return the first part of the hyphenated word including
-     * the hyphen symbol, if any
+     * the hyphen symbol, if any * @see com.lowagie.text.pdf.HyphenationEvent#getHyphenatedWordPre(String, BaseFont, float, float)
      */    
     public String getHyphenatedWordPre(String word, BaseFont font, float fontSize, float remainingWidth) {
         post = word;
@@ -116,7 +119,8 @@ public class HyphenationAuto implements HyphenationEvent {
     
     /** Gets the second part of the hyphenated word. Must be called
      * after <CODE>getHyphenatedWordPre()</CODE>.
-     * @return the second part of the hyphenated word
+    
+     * @return the second part of the hyphenated word * @see com.lowagie.text.pdf.HyphenationEvent#getHyphenatedWordPost()
      */    
     public String getHyphenatedWordPost() {
         return post;

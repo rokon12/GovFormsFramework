@@ -57,6 +57,7 @@ import java.io.UnsupportedEncodingException;
  * where the characters used will be represented.
  *
  * @author  Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 class FontDetails {
     
@@ -123,22 +124,22 @@ class FontDetails {
     }
     
     /** Gets the indirect reference to this font.
-     * @return the indirect reference to this font
-     */    
+    
+     * @return the indirect reference to this font */    
     PdfIndirectReference getIndirectReference() {
         return indirectReference;
     }
     
     /** Gets the font name as it appears in the document body.
-     * @return the font name
-     */    
+    
+     * @return the font name */    
     PdfName getFontName() {
         return fontName;
     }
     
     /** Gets the <CODE>BaseFont</CODE> of this font.
-     * @return the <CODE>BaseFont</CODE> of this font
-     */    
+    
+     * @return the <CODE>BaseFont</CODE> of this font */    
     BaseFont getBaseFont() {
         return baseFont;
     }
@@ -147,8 +148,8 @@ class FontDetails {
      * The conversion is done according to the font and the encoding and the characters
      * used are stored.
      * @param text the text to convert
-     * @return the conversion
-     */    
+    
+     * @return the conversion */    
     byte[] convertToBytes(String text) {
         byte b[] = null;
         switch (fontType) {
@@ -266,8 +267,8 @@ class FontDetails {
     
     /** Indicates if all the glyphs and widths for that particular
      * encoding should be included in the document.
-     * @return <CODE>false</CODE> to include all the glyphs and widths.
-     */
+    
+     * @return <CODE>false</CODE> to include all the glyphs and widths. */
     public boolean isSubset() {
         return subset;
     }

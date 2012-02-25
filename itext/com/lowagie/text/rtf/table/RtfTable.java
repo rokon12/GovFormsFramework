@@ -159,7 +159,8 @@ public class RtfTable extends RtfElement {
     /**
      * Writes the content of this RtfTable
      * 
-     * @return A byte array with the content of this RtfTable
+    
+     * @return A byte array with the content of this RtfTable * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -182,8 +183,8 @@ public class RtfTable extends RtfElement {
     /**
      * Gets the alignment of this RtfTable
      * 
-     * @return The alignment of this RtfTable.
-     */
+    
+     * @return The alignment of this RtfTable. */
     protected int getAlignment() {
         return alignment;
     }
@@ -191,8 +192,8 @@ public class RtfTable extends RtfElement {
     /**
      * Gets the borders of this RtfTable
      * 
-     * @return The borders of this RtfTable.
-     */
+    
+     * @return The borders of this RtfTable. */
     protected RtfBorderGroup getBorders() {
         return this.borders;
     }
@@ -200,8 +201,8 @@ public class RtfTable extends RtfElement {
     /**
      * Gets the cell padding of this RtfTable
      * 
-     * @return The cell padding of this RtfTable.
-     */
+    
+     * @return The cell padding of this RtfTable. */
     protected float getCellPadding() {
         return cellPadding;
     }
@@ -209,8 +210,8 @@ public class RtfTable extends RtfElement {
     /**
      * Gets the cell spacing of this RtfTable
      * 
-     * @return The cell spacing of this RtfTable.
-     */
+    
+     * @return The cell spacing of this RtfTable. */
     protected float getCellSpacing() {
         return cellSpacing;
     }
@@ -218,8 +219,8 @@ public class RtfTable extends RtfElement {
     /**
      * Gets the proportional cell widths of this RtfTable
      * 
-     * @return The proportional widths of this RtfTable.
-     */
+    
+     * @return The proportional widths of this RtfTable. */
     protected float[] getProportionalWidths() {
         return (float[]) proportionalWidths.clone();
     }
@@ -227,8 +228,8 @@ public class RtfTable extends RtfElement {
     /**
      * Gets the percentage of the page width this RtfTable covers 
      * 
-     * @return The percentage of the page width.
-     */
+    
+     * @return The percentage of the page width. */
     protected float getTableWidthPercent() {
         return tableWidthPercent;
     }
@@ -236,8 +237,8 @@ public class RtfTable extends RtfElement {
     /**
      * Gets the rows of this RtfTable
      * 
-     * @return The rows of this RtfTable
-     */
+    
+     * @return The rows of this RtfTable */
     protected ArrayList getRows() {
         return this.rows;
     }
@@ -245,8 +246,8 @@ public class RtfTable extends RtfElement {
     /**
      * Gets the cellsFitToPage setting of this RtfTable.
      * 
-     * @return The cellsFitToPage setting of this RtfTable.
-     */
+    
+     * @return The cellsFitToPage setting of this RtfTable. */
     protected boolean getCellsFitToPage() {
         return this.cellsFitToPage;
     }
@@ -254,8 +255,8 @@ public class RtfTable extends RtfElement {
     /**
      * Gets the tableFitToPage setting of this RtfTable.
      * 
-     * @return The tableFitToPage setting of this RtfTable.
-     */
+    
+     * @return The tableFitToPage setting of this RtfTable. */
     protected boolean getTableFitToPage() {
         return this.tableFitToPage;
     }
@@ -263,8 +264,8 @@ public class RtfTable extends RtfElement {
     /**
      * Gets the number of header rows of this RtfTable
      * 
-     * @return The number of header rows
-     */
+    
+     * @return The number of header rows */
     protected int getHeaderRows() {
         return this.headerRows;
     }

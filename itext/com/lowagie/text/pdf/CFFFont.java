@@ -76,6 +76,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import com.lowagie.text.ExceptionConverter;
 
+/**
+ */
 public class CFFFont {
     
     static final String operatorNames[] = {
@@ -172,6 +174,11 @@ public class CFFFont {
     };
     
     //private String[] strings;
+    /**
+     * Method getString.
+     * @param sid char
+     * @return String
+     */
     public String getString(char sid) {
         if (sid < standardStrings.length) return standardStrings[sid];
         if (sid >= standardStrings.length+(stringOffsets.length-1)) return null;
@@ -187,6 +194,10 @@ public class CFFFont {
         return s.toString();
     }
     
+    /**
+     * Method getCard8.
+     * @return char
+     */
     char getCard8() {
         try {
             byte i = buf.readByte();
@@ -197,6 +208,10 @@ public class CFFFont {
         }
     }
     
+    /**
+     * Method getCard16.
+     * @return char
+     */
     char getCard16() {
         try {
             return buf.readChar();
@@ -206,6 +221,11 @@ public class CFFFont {
         }
     }
     
+    /**
+     * Method getOffset.
+     * @param offSize int
+     * @return int
+     */
     int getOffset(int offSize) {
         int offset = 0;
         for (int i=0; i<offSize; i++) {
@@ -215,6 +235,10 @@ public class CFFFont {
         return offset;
     }
     
+    /**
+     * Method seek.
+     * @param offset int
+     */
     void seek(int offset) {
         try {
             buf.seek(offset);
@@ -224,6 +248,10 @@ public class CFFFont {
         }
     }
     
+    /**
+     * Method getShort.
+     * @return short
+     */
     short getShort() {
         try {
             return buf.readShort();
@@ -233,6 +261,10 @@ public class CFFFont {
         }
     }
     
+    /**
+     * Method getInt.
+     * @return int
+     */
     int getInt() {
         try {
             return buf.readInt();
@@ -242,6 +274,10 @@ public class CFFFont {
         }
     }
     
+    /**
+     * Method getPosition.
+     * @return int
+     */
     int getPosition() {
         try {
             return buf.getFilePointer();
@@ -255,6 +291,11 @@ public class CFFFont {
     // data structure, convert to global
     // offsets, and return them.
     // Sets the nextIndexOffset.
+    /**
+     * Method getIndex.
+     * @param nextIndexOffset int
+     * @return int[]
+     */
     int[] getIndex(int nextIndexOffset) {
         int count, indexOffSize;
         
@@ -380,44 +421,67 @@ public class CFFFont {
     }
     
     /** List items for the linked list that builds the new CID font.
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     
     protected static abstract class Item {
         protected int myOffset = -1;
-        /** remember the current offset and increment by item's size in bytes. */
+        /** remember the current offset and increment by item's size in bytes. * @param currentOffset int[]
+         */
         public void increment(int[] currentOffset) {
             myOffset = currentOffset[0];
         }
-        /** Emit the byte stream for this item. */
+        /** Emit the byte stream for this item. * @param buffer byte[]
+         */
         public void emit(byte[] buffer) {}
         /** Fix up cross references to this item (applies only to markers). */
         public void xref() {}
     }
     
+    /**
+     */
     protected static abstract class OffsetItem extends Item {
         public int value;
         /** set the value of an offset item that was initially unknown.
          * It will be fixed up latex by a call to xref on some marker.
+         * @param offset int
          */
         public void set(int offset) { this.value = offset; }
     }
     
     
     /** A range item.
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     
     protected static final class RangeItem extends Item {
         public int offset, length;
         private RandomAccessFileOrArray buf;
+        /**
+         * Constructor for RangeItem.
+         * @param buf RandomAccessFileOrArray
+         * @param offset int
+         * @param length int
+         */
         public RangeItem(RandomAccessFileOrArray buf, int offset, int length) {
             this.offset = offset;
             this.length = length;
             this.buf = buf;
         }
+        /**
+         * Method increment.
+         * @param currentOffset int[]
+         */
         public void increment(int[] currentOffset) {
             super.increment(currentOffset);
             currentOffset[0] += length;
         }
+        /**
+         * Method emit.
+         * @param buffer byte[]
+         */
         public void emit(byte[] buffer) {
             //System.err.println("range emit offset "+offset+" size="+length);
             try {
@@ -437,16 +501,35 @@ public class CFFFont {
      * value means that we need a specific size in bytes (for offset arrays)
      * and a negative value means that this is a dict item that uses a
      * variable-size representation.
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     static protected final class IndexOffsetItem extends OffsetItem {
         public final int size;
+        /**
+         * Constructor for IndexOffsetItem.
+         * @param size int
+         * @param value int
+         */
         public IndexOffsetItem(int size, int value) {this.size=size; this.value=value;}
+        /**
+         * Constructor for IndexOffsetItem.
+         * @param size int
+         */
         public IndexOffsetItem(int size) {this.size=size; }
         
+        /**
+         * Method increment.
+         * @param currentOffset int[]
+         */
         public void increment(int[] currentOffset) {
             super.increment(currentOffset);
             currentOffset[0] += size;
         }
+        /**
+         * Method emit.
+         * @param buffer byte[]
+         */
         public void emit(byte[] buffer) {
             int i=0;
             switch (size) {
@@ -473,13 +556,22 @@ public class CFFFont {
         }
     }
     
+    /**
+     */
     static protected final class IndexBaseItem extends Item {
         public IndexBaseItem() {}
     }
     
+    /**
+     */
     static protected final class IndexMarkerItem extends Item {
         private OffsetItem offItem;
         private IndexBaseItem indexBase;
+        /**
+         * Constructor for IndexMarkerItem.
+         * @param offItem OffsetItem
+         * @param indexBase IndexBaseItem
+         */
         public IndexMarkerItem(OffsetItem offItem, IndexBaseItem indexBase) {
             this.offItem   = offItem;
             this.indexBase = indexBase;
@@ -495,10 +587,16 @@ public class CFFFont {
      *
      * TODO To change the template for this generated type comment go to
      * Window - Preferences - Java - Code Generation - Code and Comments
+     * @version $Revision: 1.0 $
      */
     static protected final class SubrMarkerItem extends Item {
         private OffsetItem offItem;
         private IndexBaseItem indexBase;
+        /**
+         * Constructor for SubrMarkerItem.
+         * @param offItem OffsetItem
+         * @param indexBase IndexBaseItem
+         */
         public SubrMarkerItem(OffsetItem offItem, IndexBaseItem indexBase) {
             this.offItem   = offItem;
             this.indexBase = indexBase;
@@ -512,16 +610,26 @@ public class CFFFont {
     
     /** an unknown offset in a dictionary for the list.
      * We will fix up the offset later; for now, assume it's large.
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     static protected final class DictOffsetItem extends OffsetItem {
         public final int size;
         public DictOffsetItem() {this.size=5; }
         
+        /**
+         * Method increment.
+         * @param currentOffset int[]
+         */
         public void increment(int[] currentOffset) {
             super.increment(currentOffset);
             currentOffset[0] += size;
         }
         // this is incomplete!
+        /**
+         * Method emit.
+         * @param buffer byte[]
+         */
         public void emit(byte[] buffer) {
             if (size==5) {
                 buffer[myOffset]   = 29;
@@ -534,17 +642,31 @@ public class CFFFont {
     }
     
 	/** Card24 item.
-     */
+     * @author Bazlur Rahman Rokon
+	 * @version $Revision: 1.0 $
+	 */
     
     static protected final class UInt24Item extends Item {
         public int value;
+        /**
+         * Constructor for UInt24Item.
+         * @param value int
+         */
         public UInt24Item(int value) {this.value=value;}
         
+        /**
+         * Method increment.
+         * @param currentOffset int[]
+         */
         public void increment(int[] currentOffset) {
             super.increment(currentOffset);
             currentOffset[0] += 3;
         }
         // this is incomplete!
+        /**
+         * Method emit.
+         * @param buffer byte[]
+         */
         public void emit(byte[] buffer) {
         	buffer[myOffset+0] = (byte) ((value >>> 16) & 0xff);
             buffer[myOffset+1] = (byte) ((value >>> 8) & 0xff);
@@ -553,17 +675,31 @@ public class CFFFont {
     }
     
     /** Card32 item.
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     
     static protected final class UInt32Item extends Item {
         public int value;
+        /**
+         * Constructor for UInt32Item.
+         * @param value int
+         */
         public UInt32Item(int value) {this.value=value;}
         
+        /**
+         * Method increment.
+         * @param currentOffset int[]
+         */
         public void increment(int[] currentOffset) {
             super.increment(currentOffset);
             currentOffset[0] += 4;
         }
         // this is incomplete!
+        /**
+         * Method emit.
+         * @param buffer byte[]
+         */
         public void emit(byte[] buffer) {
         	buffer[myOffset+0] = (byte) ((value >>> 24) & 0xff);
         	buffer[myOffset+1] = (byte) ((value >>> 16) & 0xff);
@@ -573,17 +709,31 @@ public class CFFFont {
     }
 
     /** A SID or Card16 item.
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     
     static protected final class UInt16Item extends Item {
         public char value;
+        /**
+         * Constructor for UInt16Item.
+         * @param value char
+         */
         public UInt16Item(char value) {this.value=value;}
         
+        /**
+         * Method increment.
+         * @param currentOffset int[]
+         */
         public void increment(int[] currentOffset) {
             super.increment(currentOffset);
             currentOffset[0] += 2;
         }
         // this is incomplete!
+        /**
+         * Method emit.
+         * @param buffer byte[]
+         */
         public void emit(byte[] buffer) {
             buffer[myOffset+0] = (byte) ((value >>> 8) & 0xff);
             buffer[myOffset+1] = (byte) ((value >>> 0) & 0xff);
@@ -591,30 +741,58 @@ public class CFFFont {
     }
     
     /** A Card8 item.
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     
     static protected final class UInt8Item extends Item {
         public char value;
+        /**
+         * Constructor for UInt8Item.
+         * @param value char
+         */
         public UInt8Item(char value) {this.value=value;}
         
+        /**
+         * Method increment.
+         * @param currentOffset int[]
+         */
         public void increment(int[] currentOffset) {
             super.increment(currentOffset);
             currentOffset[0] += 1;
         }
         // this is incomplete!
+        /**
+         * Method emit.
+         * @param buffer byte[]
+         */
         public void emit(byte[] buffer) {
             buffer[myOffset+0] = (byte) ((value >>> 0) & 0xff);
         }
     }
     
+    /**
+     */
     static protected final class StringItem extends Item {
         public String s;
+        /**
+         * Constructor for StringItem.
+         * @param s String
+         */
         public StringItem(String s) {this.s=s;}
         
+        /**
+         * Method increment.
+         * @param currentOffset int[]
+         */
         public void increment(int[] currentOffset) {
             super.increment(currentOffset);
             currentOffset[0] += s.length();
         }
+        /**
+         * Method emit.
+         * @param buffer byte[]
+         */
         public void emit(byte[] buffer) {
             for (int i=0; i<s.length(); i++)
                 buffer[myOffset+i] = (byte) (s.charAt(i) & 0xff);
@@ -625,17 +803,31 @@ public class CFFFont {
     /** A dictionary number on the list.
      * This implementation is inefficient: it doesn't use the variable-length
      * representation.
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     
     static protected final class DictNumberItem extends Item {
         public final int value;
         public int size = 5;
+        /**
+         * Constructor for DictNumberItem.
+         * @param value int
+         */
         public DictNumberItem(int value) {this.value=value;}
+        /**
+         * Method increment.
+         * @param currentOffset int[]
+         */
         public void increment(int[] currentOffset) {
             super.increment(currentOffset);
             currentOffset[0] += size;
         }
         // this is imcomplete!
+        /**
+         * Method emit.
+         * @param buffer byte[]
+         */
         public void emit(byte[] buffer) {
             if (size==5) {
                 buffer[myOffset]   = 29;
@@ -649,10 +841,16 @@ public class CFFFont {
     
     /** An offset-marker item for the list.
      * It is used to mark an offset and to set the offset list item.
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     
     static protected final class MarkerItem extends Item {
         OffsetItem p;
+        /**
+         * Constructor for MarkerItem.
+         * @param pointerToMarker OffsetItem
+         */
         public MarkerItem(OffsetItem pointerToMarker) {p=pointerToMarker;}
         public void xref() {
             p.set(this.myOffset);
@@ -662,8 +860,8 @@ public class CFFFont {
     /** a utility that creates a range item for an entire index
      *
      * @param indexOffset where the index is
-     * @return a range item representing the entire index
-     */
+    
+     * @return a range item representing the entire index */
     
     protected RangeItem getEntireIndexRange(int indexOffset) {
         seek(indexOffset);
@@ -688,6 +886,8 @@ public class CFFFont {
      * only a single font from the CFF package (this again is
      * a PDF restriction) and to subset the CharStrings glyph
      * description.
+     * @param fontName String
+     * @return byte[]
      */
     
     
@@ -951,6 +1151,11 @@ public class CFFFont {
     }
     
     
+    /**
+     * Method isCID.
+     * @param fontName String
+     * @return boolean
+     */
     public boolean isCID(String fontName) {
         int j;
         for (j=0; j<fonts.length; j++)
@@ -958,6 +1163,11 @@ public class CFFFont {
         return false;
     }
     
+    /**
+     * Method exists.
+     * @param fontName String
+     * @return boolean
+     */
     public boolean exists(String fontName) {
         int j;
         for (j=0; j<fonts.length; j++)
@@ -966,6 +1176,10 @@ public class CFFFont {
     }
     
     
+    /**
+     * Method getNames.
+     * @return String[]
+     */
     public String[] getNames() {
         String[] names = new String[ fonts.length ];
         for (int i=0; i<fonts.length; i++)
@@ -991,6 +1205,7 @@ public class CFFFont {
     /**
      * @author orly manor
      * TODO Changed from private to protected by Ygal&Oren
+     * @version $Revision: 1.0 $
      */
     protected final class Font {
         public String    name;
@@ -1028,6 +1243,10 @@ public class CFFFont {
     // Changed from private to protected by Ygal&Oren
     protected Font[] fonts;
     
+    /**
+     * Constructor for CFFFont.
+     * @param inputbuffer RandomAccessFileOrArray
+     */
     public CFFFont(RandomAccessFileOrArray inputbuffer) {
         
         //System.err.println("CFF: nStdString = "+standardStrings.length);
@@ -1176,6 +1395,10 @@ public class CFFFont {
     
     // ADDED BY Oren & Ygal
     
+    /**
+     * Method ReadEncoding.
+     * @param nextIndexOffset int
+     */
     void ReadEncoding(int nextIndexOffset){
     	int format;
     	seek(nextIndexOffset);

@@ -52,6 +52,8 @@ package com.lowagie.text.pdf;
 
 import java.util.HashMap;
 
+/**
+ */
 public class GlyphList
 {
     private static HashMap unicode2names = new HashMap();
@@ -2188,11 +2190,21 @@ public class GlyphList
         }
     }
     
+    /**
+     * Method nameToUnicode.
+     * @param name String
+     * @return int[]
+     */
     public static int[] nameToUnicode(String name)
     {
         return (int[])names2unicode.get(name);
     }
     
+    /**
+     * Method unicodeToName.
+     * @param num int
+     * @return String
+     */
     public static String unicodeToName(int num)
     {
         return (String)unicode2names.get(new Integer(num));

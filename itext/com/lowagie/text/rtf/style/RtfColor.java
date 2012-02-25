@@ -179,7 +179,8 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
     /**
      * Write the definition part of this RtfColor.
      * 
-     * @return A byte array with the definition of this colour
+    
+     * @return A byte array with the definition of this colour * @see com.lowagie.text.rtf.RtfExtendedElement#writeDefinition()
      */
     public byte[] writeDefinition() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -200,8 +201,8 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
     /**
      * Writes the beginning of this RtfColor
      * 
-     * @return A byte array with the colour start data
-     */
+    
+     * @return A byte array with the colour start data */
     public byte[] writeBegin() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
         try {
@@ -216,8 +217,8 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
     /**
      * Unused
      * 
-     * @return An empty (<code>byte[0]</code>) byte array
-     */
+    
+     * @return An empty (<code>byte[0]</code>) byte array */
     public byte[] writeEnd() {
         return new byte[0];
     }
@@ -226,9 +227,9 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
      * Tests if this RtfColor is equal to another RtfColor.
      * 
      * @param obj another RtfColor
+    
      * @return <code>True</code> if red, green and blue values of the two colours match,
-     *   <code>false</code> otherwise.
-     */
+     *   <code>false</code> otherwise. */
     public boolean equals(Object obj) {
         if(!(obj instanceof RtfColor)) {
             return false;
@@ -246,8 +247,8 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
      * an integer with the lowest three bytes containing the values
      * of red, green and blue.
      * 
-     * @return The hash code of this RtfColor
-     */
+    
+     * @return The hash code of this RtfColor */
     public int hashCode() {
         return (this.red << 16) | (this.green << 8) | this.blue;
     }
@@ -255,8 +256,8 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
     /**
      * Get the blue value of this RtfColor
      * 
-     * @return The blue value
-     */
+    
+     * @return The blue value */
     public int getBlue() {
         return blue;
     }
@@ -264,8 +265,8 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
     /**
      * Get the green value of this RtfColor
      * 
-     * @return The green value
-     */
+    
+     * @return The green value */
     public int getGreen() {
         return green;
     }
@@ -273,8 +274,8 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
     /**
      * Get the red value of this RtfColor
      * 
-     * @return The red value
-     */
+    
+     * @return The red value */
     public int getRed() {
         return red;
     }
@@ -282,8 +283,8 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
     /**
      * Gets the number of this RtfColor in the list of colours
      * 
-     * @return Returns the colorNumber.
-     */
+    
+     * @return Returns the colorNumber. */
     public int getColorNumber() {
         return colorNumber;
     }
@@ -292,6 +293,7 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
      * Sets the RtfDocument this RtfColor belongs to
      * 
      * @param doc The RtfDocument to use
+     * @see com.lowagie.text.rtf.RtfBasicElement#setRtfDocument(RtfDocument)
      */
     public void setRtfDocument(RtfDocument doc) {
         super.setRtfDocument(doc);

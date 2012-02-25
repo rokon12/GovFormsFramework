@@ -58,6 +58,8 @@ import java.io.*;
  * A <CODE>PdfAnnotation</CODE> is a note that is associated with a page.
  *
  * @see		PdfDictionary
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfAnnotation extends PdfDictionary {
@@ -135,6 +137,11 @@ public class PdfAnnotation extends PdfDictionary {
     private int placeInPage = -1;
     
     // constructors
+    /**
+     * Constructor for PdfAnnotation.
+     * @param writer PdfWriter
+     * @param rect Rectangle
+     */
     public PdfAnnotation(PdfWriter writer, Rectangle rect) {
         this.writer = writer;
         if (rect != null)
@@ -187,9 +194,9 @@ public class PdfAnnotation extends PdfDictionary {
      * @param fs
      * @param mimeType
      * @param playOnDisplay
-     * @return a screen PdfAnnotation
-     * @throws IOException
-     */
+    
+    
+     * @return a screen PdfAnnotation * @throws IOException */
     public static PdfAnnotation createScreen(PdfWriter writer, Rectangle rect, String clipTitle, PdfFileSpecification fs,
                                              String mimeType, boolean playOnDisplay) throws IOException {
         PdfAnnotation ann = new PdfAnnotation(writer, rect);
@@ -211,6 +218,10 @@ public class PdfAnnotation extends PdfDictionary {
         return ann;
     }
 
+    /**
+     * Method getIndirectReference.
+     * @return PdfIndirectReference
+     */
     PdfIndirectReference getIndirectReference() {
         if (reference == null) {
             reference = writer.getPdfIndirectReference();
@@ -225,8 +236,8 @@ public class PdfAnnotation extends PdfDictionary {
      * @param contents
      * @param open
      * @param icon
-     * @return a PdfAnnotation
-     */
+    
+     * @return a PdfAnnotation */
     public static PdfAnnotation createText(PdfWriter writer, Rectangle rect, String title, String contents, boolean open, String icon) {
         PdfAnnotation annot = new PdfAnnotation(writer, rect);
         annot.put(PdfName.SUBTYPE, PdfName.TEXT);
@@ -247,8 +258,8 @@ public class PdfAnnotation extends PdfDictionary {
      * @param writer
      * @param rect
      * @param highlight
-     * @return A PdfAnnotation
-     */
+    
+     * @return A PdfAnnotation */
     protected static PdfAnnotation createLink(PdfWriter writer, Rectangle rect, PdfName highlight) {
         PdfAnnotation annot = new PdfAnnotation(writer, rect);
         annot.put(PdfName.SUBTYPE, PdfName.LINK);
@@ -263,8 +274,8 @@ public class PdfAnnotation extends PdfDictionary {
      * @param rect
      * @param highlight
      * @param action
-     * @return A PdfAnnotation
-     */
+    
+     * @return A PdfAnnotation */
     public static PdfAnnotation createLink(PdfWriter writer, Rectangle rect, PdfName highlight, PdfAction action) {
         PdfAnnotation annot = createLink(writer, rect, highlight);
         annot.putEx(PdfName.A, action);
@@ -277,8 +288,8 @@ public class PdfAnnotation extends PdfDictionary {
      * @param rect
      * @param highlight
      * @param namedDestination
-     * @return A PdfAnnotation
-     */
+    
+     * @return A PdfAnnotation */
     public static PdfAnnotation createLink(PdfWriter writer, Rectangle rect, PdfName highlight, String namedDestination) {
         PdfAnnotation annot = createLink(writer, rect, highlight);
         annot.put(PdfName.DEST, new PdfString(namedDestination));
@@ -292,8 +303,8 @@ public class PdfAnnotation extends PdfDictionary {
      * @param highlight
      * @param page
      * @param dest
-     * @return A PdfAnnotation
-     */
+    
+     * @return A PdfAnnotation */
     public static PdfAnnotation createLink(PdfWriter writer, Rectangle rect, PdfName highlight, int page, PdfDestination dest) {
         PdfAnnotation annot = createLink(writer, rect, highlight);
         PdfIndirectReference ref = writer.getPageReference(page);
@@ -308,8 +319,8 @@ public class PdfAnnotation extends PdfDictionary {
      * @param rect
      * @param contents
      * @param defaultAppearance
-     * @return A PdfAnnotation
-     */
+    
+     * @return A PdfAnnotation */
     public static PdfAnnotation createFreeText(PdfWriter writer, Rectangle rect, String contents, PdfContentByte defaultAppearance) {
         PdfAnnotation annot = new PdfAnnotation(writer, rect);
         annot.put(PdfName.SUBTYPE, PdfName.FREETEXT);
@@ -327,8 +338,8 @@ public class PdfAnnotation extends PdfDictionary {
      * @param y1
      * @param x2
      * @param y2
-     * @return A PdfAnnotation
-     */
+    
+     * @return A PdfAnnotation */
     public static PdfAnnotation createLine(PdfWriter writer, Rectangle rect, String contents, float x1, float y1, float x2, float y2) {
         PdfAnnotation annot = new PdfAnnotation(writer, rect);
         annot.put(PdfName.SUBTYPE, PdfName.LINE);
@@ -347,8 +358,8 @@ public class PdfAnnotation extends PdfDictionary {
      * @param rect
      * @param contents The tooltip
      * @param square true if you want a square, false if you want a circle
-     * @return A PdfAnnotation
-     */
+    
+     * @return A PdfAnnotation */
     public static PdfAnnotation createSquareCircle(PdfWriter writer, Rectangle rect, String contents, boolean square) {
         PdfAnnotation annot = new PdfAnnotation(writer, rect);
         if (square)
@@ -359,6 +370,15 @@ public class PdfAnnotation extends PdfDictionary {
         return annot;
     }
 
+    /**
+     * Method createMarkup.
+     * @param writer PdfWriter
+     * @param rect Rectangle
+     * @param contents String
+     * @param type int
+     * @param quadPoints float[]
+     * @return PdfAnnotation
+     */
     public static PdfAnnotation createMarkup(PdfWriter writer, Rectangle rect, String contents, int type, float quadPoints[]) {
         PdfAnnotation annot = new PdfAnnotation(writer, rect);
         PdfName name = PdfName.HIGHLIGHT;
@@ -385,8 +405,8 @@ public class PdfAnnotation extends PdfDictionary {
      * @param rect
      * @param contents
      * @param name
-     * @return A PdfAnnotation
-     */
+    
+     * @return A PdfAnnotation */
     public static PdfAnnotation createStamp(PdfWriter writer, Rectangle rect, String contents, String name) {
         PdfAnnotation annot = new PdfAnnotation(writer, rect);
         annot.put(PdfName.SUBTYPE, PdfName.STAMP);
@@ -395,6 +415,14 @@ public class PdfAnnotation extends PdfDictionary {
         return annot;
     }
 
+    /**
+     * Method createInk.
+     * @param writer PdfWriter
+     * @param rect Rectangle
+     * @param contents String
+     * @param inkList float[][]
+     * @return PdfAnnotation
+     */
     public static PdfAnnotation createInk(PdfWriter writer, Rectangle rect, String contents, float inkList[][]) {
         PdfAnnotation annot = new PdfAnnotation(writer, rect);
         annot.put(PdfName.SUBTYPE, PdfName.INK);
@@ -420,9 +448,9 @@ public class PdfAnnotation extends PdfDictionary {
      * @param file the path to the file. It will only be used if
      * <CODE>fileStore</CODE> is not <CODE>null</CODE>
      * @param fileDisplay the actual file name stored in the pdf
-     * @throws IOException on error
-     * @return the annotation
-     */    
+    
+    
+     * @return the annotation * @throws IOException on error */    
     public static PdfAnnotation createFileAttachment(PdfWriter writer, Rectangle rect, String contents, byte fileStore[], String file, String fileDisplay) throws IOException {
         return createFileAttachment(writer, rect, contents, PdfFileSpecification.fileEmbedded(writer, file, fileDisplay, fileStore));
     }
@@ -432,9 +460,9 @@ public class PdfAnnotation extends PdfDictionary {
      * @param rect
      * @param contents
      * @param fs
-     * @return the annotation
-     * @throws IOException
-     */
+    
+    
+     * @return the annotation * @throws IOException */
     public static PdfAnnotation createFileAttachment(PdfWriter writer, Rectangle rect, String contents, PdfFileSpecification fs) throws IOException {
         PdfAnnotation annot = new PdfAnnotation(writer, rect);
         annot.put(PdfName.SUBTYPE, PdfName.FILEATTACHMENT);
@@ -449,8 +477,8 @@ public class PdfAnnotation extends PdfDictionary {
      * @param rect
      * @param contents
      * @param open
-     * @return A PdfAnnotation
-     */
+    
+     * @return A PdfAnnotation */
     public static PdfAnnotation createPopup(PdfWriter writer, Rectangle rect, String contents, boolean open) {
         PdfAnnotation annot = new PdfAnnotation(writer, rect);
         annot.put(PdfName.SUBTYPE, PdfName.POPUP);
@@ -461,6 +489,10 @@ public class PdfAnnotation extends PdfDictionary {
         return annot;
     }
 
+    /**
+     * Method setDefaultAppearanceString.
+     * @param cb PdfContentByte
+     */
     public void setDefaultAppearanceString(PdfContentByte cb) {
         byte b[] = cb.getInternalBuffer().toByteArray();
         int len = b.length;
@@ -471,6 +503,10 @@ public class PdfAnnotation extends PdfDictionary {
         put(PdfName.DA, new PdfString(b));
     }
     
+    /**
+     * Method setFlags.
+     * @param flags int
+     */
     public void setFlags(int flags) {
         if (flags == 0)
             remove(PdfName.F);
@@ -478,10 +514,18 @@ public class PdfAnnotation extends PdfDictionary {
             put(PdfName.F, new PdfNumber(flags));
     }
     
+    /**
+     * Method setBorder.
+     * @param border PdfBorderArray
+     */
     public void setBorder(PdfBorderArray border) {
         putDel(PdfName.BORDER, border);
     }
 
+    /**
+     * Method setBorderStyle.
+     * @param border PdfBorderDictionary
+     */
     public void setBorderStyle(PdfBorderDictionary border) {
         putDel(PdfName.BS, border);
     }
@@ -499,6 +543,11 @@ public class PdfAnnotation extends PdfDictionary {
             put(PdfName.H, highlight);
     }
     
+    /**
+     * Method setAppearance.
+     * @param ap PdfName
+     * @param template PdfTemplate
+     */
     public void setAppearance(PdfName ap, PdfTemplate template) {
         PdfDictionary dic = (PdfDictionary)get(PdfName.AP);
         if (dic == null)
@@ -512,6 +561,12 @@ public class PdfAnnotation extends PdfDictionary {
         templates.put(template, null);
     }
 
+    /**
+     * Method setAppearance.
+     * @param ap PdfName
+     * @param state String
+     * @param template PdfTemplate
+     */
     public void setAppearance(PdfName ap, String state, PdfTemplate template) {
         PdfDictionary dicAp = (PdfDictionary)get(PdfName.AP);
         if (dicAp == null)
@@ -533,6 +588,10 @@ public class PdfAnnotation extends PdfDictionary {
         templates.put(template, null);
     }
     
+    /**
+     * Method setAppearanceState.
+     * @param state String
+     */
     public void setAppearanceState(String state) {
         if (state == null) {
             remove(PdfName.AS);
@@ -541,10 +600,18 @@ public class PdfAnnotation extends PdfDictionary {
         put(PdfName.AS, new PdfName(state));
     }
     
+    /**
+     * Method setColor.
+     * @param color Color
+     */
     public void setColor(Color color) {
         putDel(PdfName.C, new PdfColor(color));
     }
     
+    /**
+     * Method setTitle.
+     * @param title String
+     */
     public void setTitle(String title) {
         if (title == null) {
             remove(PdfName.T);
@@ -553,15 +620,28 @@ public class PdfAnnotation extends PdfDictionary {
         put(PdfName.T, new PdfString(title, PdfObject.TEXT_UNICODE));
     }
     
+    /**
+     * Method setPopup.
+     * @param popup PdfAnnotation
+     */
     public void setPopup(PdfAnnotation popup) {
         put(PdfName.POPUP, popup.getIndirectReference());
         popup.put(PdfName.PARENT, getIndirectReference());
     }
     
+    /**
+     * Method setAction.
+     * @param action PdfAction
+     */
     public void setAction(PdfAction action) {
         putDel(PdfName.A, action);
     }
     
+    /**
+     * Method setAdditionalActions.
+     * @param key PdfName
+     * @param action PdfAction
+     */
     public void setAdditionalActions(PdfName key, PdfAction action) {
         PdfDictionary dic;
         PdfObject obj = get(PdfName.AA);
@@ -574,8 +654,8 @@ public class PdfAnnotation extends PdfDictionary {
     }
     
     /** Getter for property used.
-     * @return Value of property used.
-     */
+    
+     * @return Value of property used. */
     public boolean isUsed() {
         return used;
     }
@@ -586,24 +666,32 @@ public class PdfAnnotation extends PdfDictionary {
         used = true;
     }
     
+    /**
+     * Method getTemplates.
+     * @return HashMap
+     */
     HashMap getTemplates() {
         return templates;
     }
     
     /** Getter for property form.
-     * @return Value of property form.
-     */
+    
+     * @return Value of property form. */
     public boolean isForm() {
         return form;
     }
     
     /** Getter for property annotation.
-     * @return Value of property annotation.
-     */
+    
+     * @return Value of property annotation. */
     public boolean isAnnotation() {
         return annotation;
     }
     
+    /**
+     * Method setPage.
+     * @param page int
+     */
     public void setPage(int page) {
         put(PdfName.P, writer.getPageReference(page));
     }
@@ -613,8 +701,8 @@ public class PdfAnnotation extends PdfDictionary {
     }
     
     /** Getter for property placeInPage.
-     * @return Value of property placeInPage.
-     */
+    
+     * @return Value of property placeInPage. */
     public int getPlaceInPage() {
         return placeInPage;
     }
@@ -628,10 +716,18 @@ public class PdfAnnotation extends PdfDictionary {
         this.placeInPage = placeInPage;
     }
     
+    /**
+     * Method setRotate.
+     * @param v int
+     */
     public void setRotate(int v) {
         put(PdfName.ROTATE, new PdfNumber(v));
     }
     
+    /**
+     * Method getMK.
+     * @return PdfDictionary
+     */
     PdfDictionary getMK() {
         PdfDictionary mk = (PdfDictionary)get(PdfName.MK);
         if (mk == null) {
@@ -641,10 +737,19 @@ public class PdfAnnotation extends PdfDictionary {
         return mk;
     }
     
+    /**
+     * Method setMKRotation.
+     * @param rotation int
+     */
     public void setMKRotation(int rotation) {
         getMK().put(PdfName.R, new PdfNumber(rotation));
     }
     
+    /**
+     * Method getMKColor.
+     * @param color Color
+     * @return PdfArray
+     */
     public static PdfArray getMKColor(Color color) {
         PdfArray array = new PdfArray();
         int type = ExtendedColor.getType(color);
@@ -673,6 +778,10 @@ public class PdfAnnotation extends PdfDictionary {
         return array;
     }
     
+    /**
+     * Method setMKBorderColor.
+     * @param color Color
+     */
     public void setMKBorderColor(Color color) {
         if (color == null)
             getMK().remove(PdfName.BC);
@@ -680,6 +789,10 @@ public class PdfAnnotation extends PdfDictionary {
             getMK().put(PdfName.BC, getMKColor(color));
     }
     
+    /**
+     * Method setMKBackgroundColor.
+     * @param color Color
+     */
     public void setMKBackgroundColor(Color color) {
         if (color == null)
             getMK().remove(PdfName.BG);
@@ -687,30 +800,62 @@ public class PdfAnnotation extends PdfDictionary {
             getMK().put(PdfName.BG, getMKColor(color));
     }
     
+    /**
+     * Method setMKNormalCaption.
+     * @param caption String
+     */
     public void setMKNormalCaption(String caption) {
         getMK().put(PdfName.CA, new PdfString(caption, PdfObject.TEXT_UNICODE));
     }
     
+    /**
+     * Method setMKRolloverCaption.
+     * @param caption String
+     */
     public void setMKRolloverCaption(String caption) {
         getMK().put(PdfName.RC, new PdfString(caption, PdfObject.TEXT_UNICODE));
     }
     
+    /**
+     * Method setMKAlternateCaption.
+     * @param caption String
+     */
     public void setMKAlternateCaption(String caption) {
         getMK().put(PdfName.AC, new PdfString(caption, PdfObject.TEXT_UNICODE));
     }
     
+    /**
+     * Method setMKNormalIcon.
+     * @param template PdfTemplate
+     */
     public void setMKNormalIcon(PdfTemplate template) {
         getMK().put(PdfName.I, template.getIndirectReference());
     }
     
+    /**
+     * Method setMKRolloverIcon.
+     * @param template PdfTemplate
+     */
     public void setMKRolloverIcon(PdfTemplate template) {
         getMK().put(PdfName.RI, template.getIndirectReference());
     }
     
+    /**
+     * Method setMKAlternateIcon.
+     * @param template PdfTemplate
+     */
     public void setMKAlternateIcon(PdfTemplate template) {
         getMK().put(PdfName.IX, template.getIndirectReference());
     }
     
+    /**
+     * Method setMKIconFit.
+     * @param scale PdfName
+     * @param scalingType PdfName
+     * @param leftoverLeft float
+     * @param leftoverBottom float
+     * @param fitInBounds boolean
+     */
     public void setMKIconFit(PdfName scale, PdfName scalingType, float leftoverLeft, float leftoverBottom, boolean fitInBounds) {
         PdfDictionary dic = new PdfDictionary();
         if (!scale.equals(PdfName.A))
@@ -727,6 +872,10 @@ public class PdfAnnotation extends PdfDictionary {
         getMK().put(PdfName.IF, dic);
     }
     
+    /**
+     * Method setMKTextPosition.
+     * @param tp int
+     */
     public void setMKTextPosition(int tp) {
         getMK().put(PdfName.TP, new PdfNumber(tp));
     }

@@ -111,7 +111,8 @@ public class RtfTOCEntry extends RtfField {
     /**
      * Writes the content of the RtfTOCEntry
      * 
-     * @return A byte array with the contents of the RtfTOCEntry
+    
+     * @return A byte array with the contents of the RtfTOCEntry * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -144,18 +145,18 @@ public class RtfTOCEntry extends RtfField {
     
     /**
      * UNUSED
-     * @return null
-     * @throws IOException never thrown
-     */
+    
+    
+     * @return null * @throws IOException never thrown */
     protected byte[] writeFieldInstContent() throws IOException {
         return null;
     }
 
     /**
      * UNUSED
-     * @return null
-     * @throws IOException never thrown
-     */
+    
+    
+     * @return null * @throws IOException never thrown */
     protected byte[] writeFieldResultContent() throws IOException {
         return null;
     }

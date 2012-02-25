@@ -99,6 +99,8 @@ import java.util.Set;
 import java.util.Iterator;
 import java.awt.font.TextAttribute;
 
+/**
+ */
 public class PdfGraphics2D extends Graphics2D {
     
     private static final int FILL = 1;
@@ -168,6 +170,13 @@ public class PdfGraphics2D extends Graphics2D {
     /**
      * Constructor for PDFGraphics2D.
      *
+     * @param cb PdfContentByte
+     * @param width float
+     * @param height float
+     * @param fontMapper FontMapper
+     * @param onlyShapes boolean
+     * @param convertImagesToJPEG boolean
+     * @param quality float
      */
     PdfGraphics2D(PdfContentByte cb, float width, float height, FontMapper fontMapper, boolean onlyShapes, boolean convertImagesToJPEG, float quality) {
         super();
@@ -272,8 +281,8 @@ public class PdfGraphics2D extends Graphics2D {
      * Calculates position and/or stroke thickness depending on the font size
      * @param d value to be converted
      * @param i font size
-     * @return position and/or stroke thickness depending on the font size
-     */
+    
+     * @return position and/or stroke thickness depending on the font size */
     public static double asPoints(double d, int i) {
         return (d * (double)i) / (double)AFM_DIVISOR;
     }
@@ -473,6 +482,11 @@ public class PdfGraphics2D extends Graphics2D {
 //        setPaint(paint, false, 0, 0);
     }
 
+    /**
+     * Method transformStroke.
+     * @param stroke Stroke
+     * @return Stroke
+     */
     private Stroke transformStroke(Stroke stroke) {
         if (!(stroke instanceof BasicStroke))
             return stroke;
@@ -486,6 +500,11 @@ public class PdfGraphics2D extends Graphics2D {
         return new BasicStroke(st.getLineWidth() * scale, st.getEndCap(), st.getLineJoin(), st.getMiterLimit(), dash, st.getDashPhase() * scale);
     }
     
+    /**
+     * Method setStrokeDiff.
+     * @param newStroke Stroke
+     * @param oldStroke Stroke
+     */
     private void setStrokeDiff(Stroke newStroke, Stroke oldStroke) {
         if (newStroke == oldStroke)
             return;
@@ -583,8 +602,8 @@ public class PdfGraphics2D extends Graphics2D {
     
     /**
      * @param arg0 a key
-     * @return the rendering hint
-     */
+    
+     * @return the rendering hint */
     public Object getRenderingHint(Key arg0) {
         return rhints.get(arg0);
     }
@@ -760,6 +779,10 @@ public class PdfGraphics2D extends Graphics2D {
         return g2;
     }
     
+    /**
+     * Method getContent.
+     * @return PdfContentByte
+     */
     public PdfContentByte getContent() {
         return this.cb;
     }
@@ -820,6 +843,11 @@ public class PdfGraphics2D extends Graphics2D {
         baseFont = getCachedBaseFont(f);
     }
     
+    /**
+     * Method getCachedBaseFont.
+     * @param f Font
+     * @return BaseFont
+     */
     private BaseFont getCachedBaseFont(Font f) {
         synchronized (baseFonts) {
             BaseFont bf = (BaseFont)baseFonts.get(f.getFontName());
@@ -924,8 +952,12 @@ public class PdfGraphics2D extends Graphics2D {
     }
     
     /**
-     * @see Graphics#fillRect(int, int, int, int)
-     */
+    
+     * @param x int
+     * @param y int
+     * @param width int
+     * @param height int
+     * @see Graphics#fillRect(int, int, int, int) */
     public void drawRect(int x, int y, int width, int height) {
         draw(new Rectangle(x, y, width, height));
     }
@@ -1125,6 +1157,11 @@ public class PdfGraphics2D extends Graphics2D {
     //
     
     
+    /**
+     * Method followPath.
+     * @param s Shape
+     * @param drawType int
+     */
     private void followPath(Shape s, int drawType) {
         if (s==null) return;
         if (drawType==STROKE) {
@@ -1200,16 +1237,29 @@ public class PdfGraphics2D extends Graphics2D {
         }
     }
     
+    /**
+     * Method normalizeY.
+     * @param y float
+     * @return float
+     */
     private float normalizeY(float y) {
         return this.height - y;
     }
     
+    /**
+     * Method normalizeY.
+     * @param coords float[]
+     */
     private void normalizeY(float[] coords) {
         coords[1] = normalizeY(coords[1]);
         coords[3] = normalizeY(coords[3]);
         coords[5] = normalizeY(coords[5]);
     }
     
+    /**
+     * Method normalizeMatrix.
+     * @return AffineTransform
+     */
     private AffineTransform normalizeMatrix() {
         double[] mx = new double[6];
         AffineTransform result = AffineTransform.getTranslateInstance(0,0);
@@ -1221,6 +1271,15 @@ public class PdfGraphics2D extends Graphics2D {
         return result;
     }
     
+    /**
+     * Method drawImage.
+     * @param img Image
+     * @param mask Image
+     * @param xform AffineTransform
+     * @param bgColor Color
+     * @param obs ImageObserver
+     * @return boolean
+     */
     private boolean drawImage(Image img, Image mask, AffineTransform xform, Color bgColor, ImageObserver obs) {
         if (xform==null) return true;
         
@@ -1282,6 +1341,11 @@ public class PdfGraphics2D extends Graphics2D {
         return true;
     }
     
+    /**
+     * Method checkNewPaint.
+     * @param oldPaint Paint
+     * @return boolean
+     */
     private boolean checkNewPaint(Paint oldPaint) {
         if (paint == oldPaint)
             return false;
@@ -1302,6 +1366,13 @@ public class PdfGraphics2D extends Graphics2D {
         }
     }
     
+    /**
+     * Method setPaint.
+     * @param invert boolean
+     * @param xoffset double
+     * @param yoffset double
+     * @param fill boolean
+     */
     private void setPaint(boolean invert, double xoffset, double yoffset, boolean fill) {
         if (paint instanceof Color) {
             Color color = (Color)paint;
@@ -1412,6 +1483,10 @@ public class PdfGraphics2D extends Graphics2D {
         }
     }
     
+    /**
+     * Method waitForImage.
+     * @param image java.awt.Image
+     */
     private synchronized void waitForImage(java.awt.Image image) {
         if (mediaTracker == null)
             mediaTracker = new MediaTracker(new PdfGraphics2D.fakeComponent());
@@ -1425,6 +1500,8 @@ public class PdfGraphics2D extends Graphics2D {
         mediaTracker.removeImage(image);
     }
         
+    /**
+     */
     static private class fakeComponent extends Component {
     }
 }

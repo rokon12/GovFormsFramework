@@ -55,6 +55,7 @@ import com.lowagie.text.Chunk;
 /** Does all the line bidirectional processing with PdfChunk assembly.
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class BidiLine {
     
@@ -93,6 +94,10 @@ public class BidiLine {
     public BidiLine() {
     }
     
+    /**
+     * Constructor for BidiLine.
+     * @param org BidiLine
+     */
     public BidiLine(BidiLine org) {
         runDirection = org.runDirection;
         pieceSize = org.pieceSize;
@@ -124,6 +129,10 @@ public class BidiLine {
         arabicOptions = org.arabicOptions;
     }
     
+    /**
+     * Method isEmpty.
+     * @return boolean
+     */
     public boolean isEmpty() {
         return (currentChar >= totalTextLength && indexChunk >= chunks.size());
     }
@@ -134,6 +143,11 @@ public class BidiLine {
         currentChar = 0;
     }
 
+    /**
+     * Method getParagraph.
+     * @param runDirection int
+     * @return boolean
+     */
     public boolean getParagraph(int runDirection) {
         this.runDirection = runDirection;
         currentChar = 0;
@@ -197,14 +211,27 @@ public class BidiLine {
         return true;
     }
     
+    /**
+     * Method addChunk.
+     * @param chunk PdfChunk
+     */
     public void addChunk(PdfChunk chunk) {
         chunks.add(chunk);
     }
     
+    /**
+     * Method addChunks.
+     * @param chunks ArrayList
+     */
     public void addChunks(ArrayList chunks) {
         this.chunks.addAll(chunks);
     }
     
+    /**
+     * Method addPiece.
+     * @param c char
+     * @param chunk PdfChunk
+     */
     public void addPiece(char c, PdfChunk chunk) {
         if (totalTextLength >= pieceSize) {
             char tempText[] = text;
@@ -322,6 +349,14 @@ public class BidiLine {
         }
     }
        
+    /**
+     * Method processLine.
+     * @param width float
+     * @param alignment int
+     * @param runDirection int
+     * @param arabicOptions int
+     * @return PdfLine
+     */
     public PdfLine processLine(float width, int alignment, int runDirection, int arabicOptions) {
         this.arabicOptions = arabicOptions;
         save();
@@ -408,8 +443,8 @@ public class BidiLine {
     /** Gets the width of a range of characters.
      * @param startIdx the first index to calculate
      * @param lastIdx the last inclusive index to calculate
-     * @return the sum of all widths
-     */    
+    
+     * @return the sum of all widths */    
     public float getWidth(int startIdx, int lastIdx) {
         char c = 0;
         char uniC;
@@ -426,10 +461,23 @@ public class BidiLine {
         return width;
     }
     
+    /**
+     * Method createArrayOfPdfChunks.
+     * @param startIdx int
+     * @param endIdx int
+     * @return ArrayList
+     */
     public ArrayList createArrayOfPdfChunks(int startIdx, int endIdx) {
         return createArrayOfPdfChunks(startIdx, endIdx, null);
     }
     
+    /**
+     * Method createArrayOfPdfChunks.
+     * @param startIdx int
+     * @param endIdx int
+     * @param extraPdfChunk PdfChunk
+     * @return ArrayList
+     */
     public ArrayList createArrayOfPdfChunks(int startIdx, int endIdx, PdfChunk extraPdfChunk) {
         boolean bidi = (runDirection == PdfWriter.RUN_DIRECTION_LTR || runDirection == PdfWriter.RUN_DIRECTION_RTL);
         if (bidi)
@@ -474,6 +522,12 @@ public class BidiLine {
         return ar;
     }
     
+    /**
+     * Method getWord.
+     * @param startIdx int
+     * @param idx int
+     * @return int[]
+     */
     public int[] getWord(int startIdx, int idx) {
         int last = idx;
         int first = idx;
@@ -493,6 +547,12 @@ public class BidiLine {
         return new int[]{first, last};
     }
     
+    /**
+     * Method trimRight.
+     * @param startIdx int
+     * @param endIdx int
+     * @return int
+     */
     public int trimRight(int startIdx, int endIdx) {
         int idx = endIdx;
         char c;
@@ -504,6 +564,12 @@ public class BidiLine {
         return idx;
     }
     
+    /**
+     * Method trimLeft.
+     * @param startIdx int
+     * @param endIdx int
+     * @return int
+     */
     public int trimLeft(int startIdx, int endIdx) {
         int idx = startIdx;
         char c;
@@ -515,6 +581,12 @@ public class BidiLine {
         return idx;
     }
     
+    /**
+     * Method trimRightEx.
+     * @param startIdx int
+     * @param endIdx int
+     * @return int
+     */
     public int trimRightEx(int startIdx, int endIdx) {
         int idx = endIdx;
         char c = 0;
@@ -526,6 +598,12 @@ public class BidiLine {
         return idx;
     }
     
+    /**
+     * Method trimLeftEx.
+     * @param startIdx int
+     * @param endIdx int
+     * @return int
+     */
     public int trimLeftEx(int startIdx, int endIdx) {
         int idx = startIdx;
         char c = 0;
@@ -537,6 +615,11 @@ public class BidiLine {
         return idx;
     }
     
+    /**
+     * Method reorder.
+     * @param start int
+     * @param end int
+     */
     public void reorder(int start, int end) {
         byte maxLevel = orderLevels[start];
         byte minLevel = maxLevel;
@@ -578,6 +661,11 @@ public class BidiLine {
         }
     }
     
+    /**
+     * Method flip.
+     * @param start int
+     * @param end int
+     */
     public void flip(int start, int end) {
         int mid = (start + end) / 2;
         --end;
@@ -588,6 +676,11 @@ public class BidiLine {
         }
     }
     
+    /**
+     * Method isWS.
+     * @param c char
+     * @return boolean
+     */
     public static boolean isWS(char c) {
         return (c <= ' ');
     }

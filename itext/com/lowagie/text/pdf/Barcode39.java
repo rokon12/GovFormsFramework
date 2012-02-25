@@ -70,6 +70,7 @@ import java.awt.image.MemoryImageSource;
  * </pre>
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class Barcode39 extends Barcode{
 
@@ -162,8 +163,8 @@ public class Barcode39 extends Barcode{
     /** Creates the bars.
      * @param text the text to create the bars. This text does not include the start and
      * stop characters
-     * @return the bars
-     */    
+    
+     * @return the bars */    
     public static byte[] getBarsCode39(String text) {
         text = "*" + text + "*";
         byte bars[] = new byte[text.length() * 10 - 1];
@@ -179,8 +180,8 @@ public class Barcode39 extends Barcode{
     /** Converts the extended text into a normal, escaped text,
      * ready to generate bars.
      * @param text the extended text
-     * @return the escaped text
-     */    
+    
+     * @return the escaped text */    
     public static String getCode39Ex(String text) {
         String out = "";
         for (int k = 0; k < text.length(); ++k) {
@@ -198,8 +199,8 @@ public class Barcode39 extends Barcode{
     
     /** Calculates the checksum.
      * @param text the text
-     * @return the checksum
-     */    
+    
+     * @return the checksum */    
     static char getChecksum(String text) {
         int chk = 0;
         for (int k = 0; k < text.length(); ++k) {
@@ -213,8 +214,8 @@ public class Barcode39 extends Barcode{
     
     /** Gets the maximum area that the barcode and the text, if
      * any, will occupy. The lower left corner is always (0, 0).
-     * @return the size the barcode occupies.
-     */    
+    
+     * @return the size the barcode occupies. */    
     public Rectangle getBarcodeSize() {
         float fontX = 0;
         float fontY = 0;
@@ -276,8 +277,8 @@ public class Barcode39 extends Barcode{
      * @param cb the <CODE>PdfContentByte</CODE> where the barcode will be placed
      * @param barColor the color of the bars. It can be <CODE>null</CODE>
      * @param textColor the color of the text. It can be <CODE>null</CODE>
-     * @return the dimensions the barcode occupies
-     */    
+    
+     * @return the dimensions the barcode occupies */    
     public Rectangle placeBarcode(PdfContentByte cb, Color barColor, Color textColor) {
         String fullCode = code;
         float fontX = 0;
@@ -351,8 +352,8 @@ public class Barcode39 extends Barcode{
      * contains the bars without any text.
      * @param foreground the color of the bars
      * @param background the color of the background
-     * @return the image
-     */    
+    
+     * @return the image */    
     public java.awt.Image createAwtImage(Color foreground, Color background) {
         int f = foreground.getRGB();
         int g = background.getRGB();

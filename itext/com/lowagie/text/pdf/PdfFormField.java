@@ -53,6 +53,7 @@ import java.util.Iterator;
 /** Implements form fields.
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PdfFormField extends PdfAnnotation {
 
@@ -101,6 +102,12 @@ public class PdfFormField extends PdfAnnotation {
     
 /**
  * Constructs a new <CODE>PdfAnnotation</CODE> of subtype link (Action).
+ * @param writer PdfWriter
+ * @param llx float
+ * @param lly float
+ * @param urx float
+ * @param ury float
+ * @param action PdfAction
  */
     
     public PdfFormField(PdfWriter writer, float llx, float lly, float urx, float ury, PdfAction action) {
@@ -110,13 +117,19 @@ public class PdfFormField extends PdfAnnotation {
         annotation = true;
     }
 
-    /** Creates new PdfFormField */
+    /** Creates new PdfFormField * @param writer PdfWriter
+     */
     protected PdfFormField(PdfWriter writer) {
         super(writer, null);
         form = true;
         annotation = false;
     }
     
+    /**
+     * Method setWidget.
+     * @param rect Rectangle
+     * @param highlight PdfName
+     */
     public void setWidget(Rectangle rect, PdfName highlight) {
         put(PdfName.TYPE, PdfName.ANNOT);
         put(PdfName.SUBTYPE, PdfName.WIDGET);
@@ -126,35 +139,74 @@ public class PdfFormField extends PdfAnnotation {
             put(PdfName.H, highlight);
     }
     
+    /**
+     * Method createEmpty.
+     * @param writer PdfWriter
+     * @return PdfFormField
+     */
     public static PdfFormField createEmpty(PdfWriter writer) {
         PdfFormField field = new PdfFormField(writer);
         return field;
     }
     
+    /**
+     * Method setButton.
+     * @param flags int
+     */
     public void setButton(int flags) {
         put(PdfName.FT, PdfName.BTN);
         if (flags != 0)
             put(PdfName.FF, new PdfNumber(flags));
     }
     
+    /**
+     * Method createButton.
+     * @param writer PdfWriter
+     * @param flags int
+     * @return PdfFormField
+     */
     protected static PdfFormField createButton(PdfWriter writer, int flags) {
         PdfFormField field = new PdfFormField(writer);
         field.setButton(flags);
         return field;
     }
     
+    /**
+     * Method createPushButton.
+     * @param writer PdfWriter
+     * @return PdfFormField
+     */
     public static PdfFormField createPushButton(PdfWriter writer) {
         return createButton(writer, FF_PUSHBUTTON);
     }
 
+    /**
+     * Method createCheckBox.
+     * @param writer PdfWriter
+     * @return PdfFormField
+     */
     public static PdfFormField createCheckBox(PdfWriter writer) {
         return createButton(writer, 0);
     }
 
+    /**
+     * Method createRadioButton.
+     * @param writer PdfWriter
+     * @param noToggleToOff boolean
+     * @return PdfFormField
+     */
     public static PdfFormField createRadioButton(PdfWriter writer, boolean noToggleToOff) {
         return createButton(writer, FF_RADIO + (noToggleToOff ? FF_NO_TOGGLE_TO_OFF : 0));
     }
     
+    /**
+     * Method createTextField.
+     * @param writer PdfWriter
+     * @param multiline boolean
+     * @param password boolean
+     * @param maxLen int
+     * @return PdfFormField
+     */
     public static PdfFormField createTextField(PdfWriter writer, boolean multiline, boolean password, int maxLen) {
         PdfFormField field = new PdfFormField(writer);
         field.put(PdfName.FT, PdfName.TX);
@@ -166,6 +218,14 @@ public class PdfFormField extends PdfAnnotation {
         return field;
     }
     
+    /**
+     * Method createChoice.
+     * @param writer PdfWriter
+     * @param flags int
+     * @param options PdfArray
+     * @param topIndex int
+     * @return PdfFormField
+     */
     protected static PdfFormField createChoice(PdfWriter writer, int flags, PdfArray options, int topIndex) {
         PdfFormField field = new PdfFormField(writer);
         field.put(PdfName.FT, PdfName.CH);
@@ -176,22 +236,57 @@ public class PdfFormField extends PdfAnnotation {
         return field;
     }
     
+    /**
+     * Method createList.
+     * @param writer PdfWriter
+     * @param options String[]
+     * @param topIndex int
+     * @return PdfFormField
+     */
     public static PdfFormField createList(PdfWriter writer, String options[], int topIndex) {
         return createChoice(writer, 0, processOptions(options), topIndex);
     }
 
+    /**
+     * Method createList.
+     * @param writer PdfWriter
+     * @param options String[][]
+     * @param topIndex int
+     * @return PdfFormField
+     */
     public static PdfFormField createList(PdfWriter writer, String options[][], int topIndex) {
         return createChoice(writer, 0, processOptions(options), topIndex);
     }
 
+    /**
+     * Method createCombo.
+     * @param writer PdfWriter
+     * @param edit boolean
+     * @param options String[]
+     * @param topIndex int
+     * @return PdfFormField
+     */
     public static PdfFormField createCombo(PdfWriter writer, boolean edit, String options[], int topIndex) {
         return createChoice(writer, FF_COMBO + (edit ? FF_EDIT : 0), processOptions(options), topIndex);
     }
     
+    /**
+     * Method createCombo.
+     * @param writer PdfWriter
+     * @param edit boolean
+     * @param options String[][]
+     * @param topIndex int
+     * @return PdfFormField
+     */
     public static PdfFormField createCombo(PdfWriter writer, boolean edit, String options[][], int topIndex) {
         return createChoice(writer, FF_COMBO + (edit ? FF_EDIT : 0), processOptions(options), topIndex);
     }
     
+    /**
+     * Method processOptions.
+     * @param options String[]
+     * @return PdfArray
+     */
     protected static PdfArray processOptions(String options[]) {
         PdfArray array = new PdfArray();
         for (int k = 0; k < options.length; ++k) {
@@ -200,6 +295,11 @@ public class PdfFormField extends PdfAnnotation {
         return array;
     }
     
+    /**
+     * Method processOptions.
+     * @param options String[][]
+     * @return PdfArray
+     */
     protected static PdfArray processOptions(String options[][]) {
         PdfArray array = new PdfArray();
         for (int k = 0; k < options.length; ++k) {
@@ -211,6 +311,11 @@ public class PdfFormField extends PdfAnnotation {
         return array;
     }
     
+    /**
+     * Method createSignature.
+     * @param writer PdfWriter
+     * @return PdfFormField
+     */
     public static PdfFormField createSignature(PdfWriter writer) {
         PdfFormField field = new PdfFormField(writer);
         field.put(PdfName.FT, PdfName.SIG);
@@ -218,12 +323,16 @@ public class PdfFormField extends PdfAnnotation {
     }
     
     /** Getter for property parent.
-     * @return Value of property parent.
-     */
+    
+     * @return Value of property parent. */
     public PdfFormField getParent() {
         return parent;
     }
     
+    /**
+     * Method addKid.
+     * @param field PdfFormField
+     */
     public void addKid(PdfFormField field) {
         field.parent = this;
         if (kids == null)
@@ -231,10 +340,19 @@ public class PdfFormField extends PdfAnnotation {
         kids.add(field);
     }
     
+    /**
+     * Method getKids.
+     * @return ArrayList
+     */
     ArrayList getKids() {
         return kids;
     }
     
+    /**
+     * Method setFieldFlags.
+     * @param flags int
+     * @return int
+     */
     public int setFieldFlags(int flags) {
         PdfNumber obj = (PdfNumber)get(PdfName.FF);
         int old;
@@ -247,43 +365,85 @@ public class PdfFormField extends PdfAnnotation {
         return old;
     }
     
+    /**
+     * Method setValueAsString.
+     * @param s String
+     */
     public void setValueAsString(String s) {
         put(PdfName.V, new PdfString(s, PdfObject.TEXT_UNICODE));
     }
 
+    /**
+     * Method setValueAsName.
+     * @param s String
+     */
     public void setValueAsName(String s) {
         put(PdfName.V, new PdfName(s));
     }
 
+    /**
+     * Method setValue.
+     * @param sig PdfSignature
+     */
     public void setValue(PdfSignature sig) {
         put(PdfName.V, sig);
     }
 
+    /**
+     * Method setDefaultValueAsString.
+     * @param s String
+     */
     public void setDefaultValueAsString(String s) {
         put(PdfName.DV, new PdfString(s, PdfObject.TEXT_UNICODE));
     }
 
+    /**
+     * Method setDefaultValueAsName.
+     * @param s String
+     */
     public void setDefaultValueAsName(String s) {
         put(PdfName.DV, new PdfName(s));
     }
     
+    /**
+     * Method setFieldName.
+     * @param s String
+     */
     public void setFieldName(String s) {
         if (s != null)
             put(PdfName.T, new PdfString(s, PdfObject.TEXT_UNICODE));
     }
     
+    /**
+     * Method setUserName.
+     * @param s String
+     */
     public void setUserName(String s) {
         put(PdfName.TU, new PdfString(s, PdfObject.TEXT_UNICODE));
     }
     
+    /**
+     * Method setMappingName.
+     * @param s String
+     */
     public void setMappingName(String s) {
         put(PdfName.TM, new PdfString(s, PdfObject.TEXT_UNICODE));
     }
     
+    /**
+     * Method setQuadding.
+     * @param v int
+     */
     public void setQuadding(int v) {
         put(PdfName.Q, new PdfNumber(v));
     }
     
+    /**
+     * Method mergeResources.
+     * @param result PdfDictionary
+     * @param source PdfDictionary
+     * @param writer PdfStamperImp
+     */
     static void mergeResources(PdfDictionary result, PdfDictionary source, PdfStamperImp writer) {
         PdfDictionary dic = null;
         PdfDictionary res = null;
@@ -303,6 +463,11 @@ public class PdfFormField extends PdfAnnotation {
         }
     }
 
+    /**
+     * Method mergeResources.
+     * @param result PdfDictionary
+     * @param source PdfDictionary
+     */
     static void mergeResources(PdfDictionary result, PdfDictionary source) {
         mergeResources(result, source, null);
     }
@@ -327,6 +492,11 @@ public class PdfFormField extends PdfAnnotation {
         put(PdfName.DR, dic);
     }
 
+    /**
+     * Method shallowDuplicate.
+     * @param annot PdfAnnotation
+     * @return PdfAnnotation
+     */
     public static PdfAnnotation shallowDuplicate(PdfAnnotation annot) {
         PdfAnnotation dup;
         if (annot.isForm()) {

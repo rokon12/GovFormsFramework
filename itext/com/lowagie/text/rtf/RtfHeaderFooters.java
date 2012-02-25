@@ -140,8 +140,8 @@ public class RtfHeaderFooters extends HeaderFooter {
     /**
      * Returns a type of HeaderFooter object registered in this HeaderFooters object.
      * @param type type of the HeaderFooter object
-     * @return a HeaderFooter object
-     */
+    
+     * @return a HeaderFooter object */
     public HeaderFooter get( int type ) {
         switch (type) {
             case ALL_PAGES:

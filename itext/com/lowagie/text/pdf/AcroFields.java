@@ -63,6 +63,7 @@ import java.awt.Color;
 /** Query and change fields in existing documents either by method
  * calls or by FDF merging.
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class AcroFields {
 
@@ -118,6 +119,11 @@ public class AcroFields {
     private float extraMarginLeft;
     private float extraMarginTop;
     
+    /**
+     * Constructor for AcroFields.
+     * @param reader PdfReader
+     * @param writer PdfWriter
+     */
     AcroFields(PdfReader reader, PdfWriter writer) {
         this.reader = reader;
         this.writer = writer;
@@ -202,8 +208,8 @@ public class AcroFields {
      * also be included. The name 'Off' may also be valid
      * even if not returned in the list.
      * @param fieldName the fully qualified field name
-     * @return the list of names or <CODE>null</CODE> if the field does not exist
-     */    
+    
+     * @return the list of names or <CODE>null</CODE> if the field does not exist */    
     public String[] getAppearanceStates(String fieldName) {
         Item fd = (Item)fields.get(fieldName);
         if (fd == null)
@@ -251,8 +257,8 @@ public class AcroFields {
      * If the field does not exist or is invalid it returns
      * <CODE>FIELD_TYPE_NONE</CODE>.
      * @param fieldName the field name
-     * @return the field type
-     */    
+    
+     * @return the field type */    
     public int getFieldType(String fieldName) {
         Item fd = (Item)fields.get(fieldName);
         if (fd == null)
@@ -312,9 +318,9 @@ public class AcroFields {
      * if the original field is "ab.cd.ef" only the "ef" part can be renamed.
      * @param oldName the old field name
      * @param newName the new field name
+    
      * @return <CODE>true</CODE> if the renaming was successful, <CODE>false</CODE>
-     * otherwise
-     */    
+     * otherwise */    
     public boolean renameField(String oldName, String newName) {
         int idx1 = oldName.lastIndexOf('.') + 1;
         int idx2 = newName.lastIndexOf('.') + 1;
@@ -341,6 +347,11 @@ public class AcroFields {
         return true;
     }
     
+    /**
+     * Method splitDAelements.
+     * @param da String
+     * @return Object[]
+     */
     static private Object[] splitDAelements(String da) {
         try {
             PRTokeniser tk = new PRTokeniser(PdfEncodings.convertToBytes(da, null));
@@ -393,6 +404,15 @@ public class AcroFields {
         }
     }
     
+    /**
+     * Method getAppearance.
+     * @param merged PdfDictionary
+     * @param text String
+     * @param fieldName String
+     * @return PdfAppearance
+     * @throws IOException
+     * @throws DocumentException
+     */
     PdfAppearance getAppearance(PdfDictionary merged, String text, String fieldName) throws IOException, DocumentException {
         topFirst = 0;
         int flags = 0;
@@ -568,6 +588,11 @@ public class AcroFields {
         return app;
     }
     
+    /**
+     * Method getMKColor.
+     * @param ar PdfArray
+     * @return Color
+     */
     Color getMKColor(PdfArray ar) {
         if (ar == null)
             return null;
@@ -586,8 +611,8 @@ public class AcroFields {
     
     /** Gets the field value.
      * @param name the fully qualified field name
-     * @return the field value
-     */    
+    
+     * @return the field value */    
     public String getField(String name) {
         Item item = (Item)fields.get(name);
         if (item == null)
@@ -648,8 +673,8 @@ public class AcroFields {
      * @param value the property value
      * @param inst an array of <CODE>int</CODE> indexing into <CODE>AcroField.Item.merged</CODE> elements to process.
      * Set to <CODE>null</CODE> to process all
-     * @return <CODE>true</CODE> if the property exists, <CODE>false</CODE> otherwise
-     */    
+    
+     * @return <CODE>true</CODE> if the property exists, <CODE>false</CODE> otherwise */    
     public boolean setFieldProperty(String field, String name, Object value, int inst[]) {
         if (writer == null)
             throw new RuntimeException("This AcroFields instance is read-only.");
@@ -819,8 +844,8 @@ public class AcroFields {
      * @param value the property value
      * @param inst an array of <CODE>int</CODE> indexing into <CODE>AcroField.Item.merged</CODE> elements to process.
      * Set to <CODE>null</CODE> to process all
-     * @return <CODE>true</CODE> if the property exists, <CODE>false</CODE> otherwise
-     */    
+    
+     * @return <CODE>true</CODE> if the property exists, <CODE>false</CODE> otherwise */    
     public boolean setFieldProperty(String field, String name, int value, int inst[]) {
         if (writer == null)
             throw new RuntimeException("This AcroFields instance is read-only.");
@@ -911,9 +936,9 @@ public class AcroFields {
     
     /** Sets the fields by FDF merging.
      * @param fdf the FDF form
-     * @throws IOException on error
-     * @throws DocumentException on error
-     */    
+    
+    
+     * @throws IOException on error * @throws DocumentException on error */    
     public void setFields(FdfReader fdf) throws IOException, DocumentException {
         HashMap fd = fdf.getFields();
         for (Iterator i = fields.keySet().iterator(); i.hasNext();) {
@@ -926,9 +951,9 @@ public class AcroFields {
     
     /** Sets the fields by XFDF merging.
      * @param xfdf the XFDF form
-     * @throws IOException on error
-     * @throws DocumentException on error
-     */
+    
+    
+     * @throws IOException on error * @throws DocumentException on error */
     
     public void setFields(XfdfReader xfdf) throws IOException, DocumentException {
         HashMap fd = xfdf.getFields();
@@ -943,11 +968,11 @@ public class AcroFields {
     /** Sets the field value.
      * @param name the fully qualified field name
      * @param value the field value
-     * @throws IOException on error
-     * @throws DocumentException on error
+    
+    
+    
      * @return <CODE>true</CODE> if the field was found and changed,
-     * <CODE>false</CODE> otherwise
-     */    
+     * <CODE>false</CODE> otherwise * @throws IOException on error * @throws DocumentException on error */    
     public boolean setField(String name, String value) throws IOException, DocumentException {
         return setField(name, value, value);
     }
@@ -959,11 +984,11 @@ public class AcroFields {
      * @param name the fully qualified field name
      * @param value the field value
      * @param display the string that is used for the appearance
+    
+    
+    
      * @return <CODE>true</CODE> if the field was found and changed,
-     * <CODE>false</CODE> otherwise
-     * @throws IOException on error
-     * @throws DocumentException on error
-     */    
+     * <CODE>false</CODE> otherwise * @throws IOException on error * @throws DocumentException on error */    
     public boolean setField(String name, String value, String display) throws IOException, DocumentException {
         if (writer == null)
             throw new DocumentException("This AcroFields instance is read-only.");
@@ -1084,6 +1109,12 @@ public class AcroFields {
         return false;
     }
     
+    /**
+     * Method isInAP.
+     * @param dic PdfDictionary
+     * @param check PdfName
+     * @return boolean
+     */
     boolean isInAP(PdfDictionary dic, PdfName check) {
         PdfDictionary appDic = (PdfDictionary)PdfReader.getPdfObject(dic.get(PdfName.AP));
         if (appDic == null)
@@ -1094,8 +1125,8 @@ public class AcroFields {
     
     /** Gets all the fields. The fields are keyed by the fully qualified field name and
      * the value is an instance of <CODE>AcroFields.Item</CODE>.
-     * @return all the fields
-     */    
+    
+     * @return all the fields */    
     public HashMap getFields() {
         return fields;
     }
@@ -1103,9 +1134,9 @@ public class AcroFields {
     /**
      * Gets the field structure.
      * @param name the name of the field
+    
      * @return the field structure or <CODE>null</CODE> if the field
-     * does not exist
-     */    
+     * does not exist */    
     public Item getFieldItem(String name) {
         return (Item)fields.get(name);
     }
@@ -1115,8 +1146,8 @@ public class AcroFields {
      * multiple of 5. For each of this groups the values are: [page, llx, lly, urx,
      * ury].
      * @param name the field name
-     * @return the positions or <CODE>null</CODE> if field does not exist
-     */    
+    
+     * @return the positions or <CODE>null</CODE> if field does not exist */    
     public float[] getFieldPositions(String name) {
         Item item = (Item)fields.get(name);
         if (item == null)
@@ -1149,6 +1180,12 @@ public class AcroFields {
         return ret;
     }
     
+    /**
+     * Method removeRefFromArray.
+     * @param array PdfArray
+     * @param refo PdfObject
+     * @return int
+     */
     private int removeRefFromArray(PdfArray array, PdfObject refo) {
         ArrayList ar = array.getArrayList();
         if (refo == null || !refo.isIndirect())
@@ -1167,8 +1204,8 @@ public class AcroFields {
     /**
      * Removes all the fields from <CODE>page</CODE>.
      * @param page the page to remove the fields from
-     * @return <CODE>true</CODE> if any field was removed, <CODE>false otherwise</CODE>
-     */    
+    
+     * @return <CODE>true</CODE> if any field was removed, <CODE>false otherwise</CODE> */    
     public boolean removeFieldsFromPage(int page) {
         if (page < 1)
             return false;
@@ -1188,8 +1225,8 @@ public class AcroFields {
      * that particular page are removed.
      * @param name the field name
      * @param page the page to remove the field from or -1 to remove it from all the pages
-     * @return <CODE>true</CODE> if the field exists, <CODE>false otherwise</CODE>
-     */    
+    
+     * @return <CODE>true</CODE> if the field exists, <CODE>false otherwise</CODE> */    
     public boolean removeField(String name, int page) {
         Item item = (Item)fields.get(name);
         if (item == null)
@@ -1248,15 +1285,15 @@ public class AcroFields {
     /**
      * Removes a field from the document.
      * @param name the field name
-     * @return <CODE>true</CODE> if the field exists, <CODE>false otherwise</CODE>
-     */    
+    
+     * @return <CODE>true</CODE> if the field exists, <CODE>false otherwise</CODE> */    
     public boolean removeField(String name) {
         return removeField(name, -1);
     }
     
     /** Gets the property generateAppearances.
-     * @return the property generateAppearances
-     */
+    
+     * @return the property generateAppearances */
     public boolean isGenerateAppearances() {
         return this.generateAppearances;
     }
@@ -1276,7 +1313,9 @@ public class AcroFields {
             top.put(PdfName.NEEDAPPEARANCES, PdfBoolean.PDFTRUE);
     }
     
-    /** The field representations for retrieval and modification. */    
+    /** The field representations for retrieval and modification. * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
+     */    
     public static class Item {
         /** An array of <CODE>PdfDictionary</CODE> where the value tag /V
          * is present.
@@ -1301,8 +1340,14 @@ public class AcroFields {
         public ArrayList tabOrder = new ArrayList();
     }
     
+    /**
+     */
     private static class InstHit {
         IntHashtable hits;
+        /**
+         * Constructor for InstHit.
+         * @param inst int[]
+         */
         public InstHit(int inst[]) {
             if (inst == null)
                 return;
@@ -1311,6 +1356,11 @@ public class AcroFields {
                 hits.put(inst[k], 1);
         }
         
+        /**
+         * Method isHit.
+         * @param n int
+         * @return boolean
+         */
         public boolean isHit(int n) {
             if (hits == null)
                 return true;
@@ -1320,8 +1370,8 @@ public class AcroFields {
     
     /**
      * Gets the field names that have signatures and are signed.
-     * @return the field names that have signatures and are signed
-     */    
+    
+     * @return the field names that have signatures and are signed */    
     public ArrayList getSignatureNames() {
         if (sigNames != null)
             return new ArrayList(sigNames.keySet());
@@ -1368,8 +1418,8 @@ public class AcroFields {
     
     /**
      * Gets the field names that have blank signatures.
-     * @return the field names that have blank signatures
-     */    
+    
+     * @return the field names that have blank signatures */    
     public ArrayList getBlankSignatureNames() {
         getSignatureNames();
         ArrayList sigs = new ArrayList();
@@ -1389,9 +1439,9 @@ public class AcroFields {
     /**
      * Gets the signature dictionary, the one keyed by /V.
      * @param name the field name
+    
      * @return the signature dictionary keyed by /V or <CODE>null</CODE> if the field is not
-     * a signature
-     */    
+     * a signature */    
     public PdfDictionary getSignatureDictionary(String name) {
         getSignatureNames();
         if (!sigNames.containsKey(name))
@@ -1405,9 +1455,9 @@ public class AcroFields {
     /**
      * Checks is the signature covers the entire document or just part of it.
      * @param name the signature field name
+    
      * @return <CODE>true</CODE> if the signature covers the entire document,
-     * <CODE>false</CODE> otherwise
-     */    
+     * <CODE>false</CODE> otherwise */    
     public boolean signatureCoversWholeDocument(String name) {
         getSignatureNames();
         if (!sigNames.containsKey(name))
@@ -1440,8 +1490,8 @@ public class AcroFields {
      * }
      * </pre>
      * @param name the signature field name
-     * @return a <CODE>PdfPKCS7</CODE> class to continue the verification
-     */    
+    
+     * @return a <CODE>PdfPKCS7</CODE> class to continue the verification */    
     public PdfPKCS7 verifySignature(String name) {
         return verifySignature(name, null);
     }
@@ -1472,8 +1522,8 @@ public class AcroFields {
      * </pre>
      * @param name the signature field name
      * @param provider the provider or <code>null</code> for the default provider
-     * @return a <CODE>PdfPKCS7</CODE> class to continue the verification
-     */    
+    
+     * @return a <CODE>PdfPKCS7</CODE> class to continue the verification */    
     public PdfPKCS7 verifySignature(String name, String provider) {
         PdfDictionary v = getSignatureDictionary(name);
         if (v == null)
@@ -1508,6 +1558,11 @@ public class AcroFields {
         }
     }
     
+    /**
+     * Method updateByteRange.
+     * @param pkcs7 PdfPKCS7
+     * @param v PdfDictionary
+     */
     private void updateByteRange(PdfPKCS7 pkcs7, PdfDictionary v) {
         PdfArray b = (PdfArray)PdfReader.getPdfObject(v.get(PdfName.BYTERANGE));
         RandomAccessFileOrArray rf = reader.getSafeFile();
@@ -1536,6 +1591,10 @@ public class AcroFields {
         }
     }
 
+    /**
+     * Method markUsed.
+     * @param obj PdfObject
+     */
     private void markUsed(PdfObject obj) {
         if (!append)
             return;
@@ -1544,8 +1603,8 @@ public class AcroFields {
     
     /**
      * Gets the total number of revisions this document has.
-     * @return the total number of revisions
-     */
+    
+     * @return the total number of revisions */
     public int getTotalRevisions() {
         getSignatureNames();
         return this.totalRevisions;
@@ -1554,8 +1613,8 @@ public class AcroFields {
     /**
      * Gets this <CODE>field</CODE> revision.
      * @param field the signature field name
-     * @return the revision or zero if it's not a signature field
-     */    
+    
+     * @return the revision or zero if it's not a signature field */    
     public int getRevision(String field) {
         getSignatureNames();
         if (!sigNames.containsKey(field))
@@ -1566,10 +1625,10 @@ public class AcroFields {
     /**
      * Extracts a revision from the document.
      * @param field the signature field name
+    
+    
      * @return an <CODE>InputStream</CODE> covering the revision. Returns <CODE>null</CODE> if
-     * it's not a signature field
-     * @throws IOException on error
-     */    
+     * it's not a signature field * @throws IOException on error */    
     public InputStream extractRevision(String field) throws IOException {
         getSignatureNames();
         int length = ((int[])sigNames.get(field))[0];
@@ -1581,8 +1640,8 @@ public class AcroFields {
 
     /**
      * Gets the appearances cache.
-     * @return the appearances cache
-     */
+    
+     * @return the appearances cache */
     public HashMap getFieldCache() {
         return this.fieldCache;
     }
@@ -1661,6 +1720,8 @@ public class AcroFields {
         stdFieldFontNames.put("STSo", new String[]{"STSong-Light", "UniGB-UCS2-H"});
     }
 
+    /**
+     */
     private static class RevisionStream extends InputStream {
         private byte b[] = new byte[1];
         private RandomAccessFileOrArray raf;
@@ -1668,11 +1729,21 @@ public class AcroFields {
         private int rangePosition = 0;
         private boolean closed;
         
+        /**
+         * Constructor for RevisionStream.
+         * @param raf RandomAccessFileOrArray
+         * @param length int
+         */
         private RevisionStream(RandomAccessFileOrArray raf, int length) {
             this.raf = raf;
             this.length = length;
         }
         
+        /**
+         * Method read.
+         * @return int
+         * @throws IOException
+         */
         public int read() throws IOException {
             int n = read(b);
             if (n != 1)
@@ -1680,6 +1751,14 @@ public class AcroFields {
             return b[0] & 0xff;
         }
         
+        /**
+         * Method read.
+         * @param b byte[]
+         * @param off int
+         * @param len int
+         * @return int
+         * @throws IOException
+         */
         public int read(byte[] b, int off, int len) throws IOException {
             if (b == null) {
                 throw new NullPointerException();
@@ -1699,6 +1778,11 @@ public class AcroFields {
             return elen;
         }
         
+        /**
+         * Method close.
+         * @throws IOException
+         * @see java.io.Closeable#close()
+         */
         public void close() throws IOException {
             if (!closed) {
                 raf.close();
@@ -1707,7 +1791,15 @@ public class AcroFields {
         }
     }
     
+    /**
+     */
     private static class SorterComparator implements Comparator {        
+        /**
+         * Method compare.
+         * @param o1 Object
+         * @param o2 Object
+         * @return int
+         */
         public int compare(Object o1, Object o2) {
             int n1 = ((int[])((Object[])o1)[1])[0];
             int n2 = ((int[])((Object[])o2)[1])[0];

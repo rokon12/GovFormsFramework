@@ -22,6 +22,7 @@ import javax.xml.transform.stream.*;
  * This class can be used to build the iText website.
  * 
  * @author Bruno Lowagie (based on an example found in the Developer's Almanac)
+ * @version $Revision: 1.0 $
  */
 public class BuildTutorial {
 
@@ -73,8 +74,8 @@ public class BuildTutorial {
 	 * @param destination a destination directory (where the html and build.xml file will be generated, if necessary)
 	 * @param xsl_examples an xsl to transform the index.xml into a build.xml
 	 * @param xsl_site an xsl to transform the index.xml into am index.html
-	 * @throws IOException when something goes wrong while reading or creating a file or directory
-	 */
+	
+	 * @throws IOException when something goes wrong while reading or creating a file or directory */
 	public static void action(File source, File destination, File xsl_examples, File xsl_site) throws IOException {
 		if ("CVS".equals(source.getName())) return;
 		System.out.print(source.getName());

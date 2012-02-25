@@ -69,6 +69,8 @@ import com.lowagie.tools.arguments.ToolArgument;
 
 /**
  * Generates a PDF file that is useable as Handout.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class Handouts extends AbstractTool {
 

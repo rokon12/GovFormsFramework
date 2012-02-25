@@ -50,16 +50,23 @@ package com.lowagie.text.pdf;
 /** Implements the signature dictionary.
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PdfSignature extends PdfDictionary {
 
-    /** Creates new PdfSignature */
+    /** Creates new PdfSignature * @param filter PdfName
+     * @param subFilter PdfName
+     */
     public PdfSignature(PdfName filter, PdfName subFilter) {
         super(PdfName.SIG);
         put(PdfName.FILTER, filter);
         put(PdfName.SUBFILTER, subFilter);
     }
     
+    /**
+     * Method setByteRange.
+     * @param range int[]
+     */
     public void setByteRange(int range[]) {
         PdfArray array = new PdfArray();
         for (int k = 0; k < range.length; ++k)
@@ -67,30 +74,58 @@ public class PdfSignature extends PdfDictionary {
         put(PdfName.BYTERANGE, array);
     }
     
+    /**
+     * Method setContents.
+     * @param contents byte[]
+     */
     public void setContents(byte contents[]) {
         put(PdfName.CONTENTS, new PdfString(contents).setHexWriting(true));
     }
     
+    /**
+     * Method setCert.
+     * @param cert byte[]
+     */
     public void setCert(byte cert[]) {
         put(PdfName.CERT, new PdfString(cert));
     }
     
+    /**
+     * Method setName.
+     * @param name String
+     */
     public void setName(String name) {
         put(PdfName.NAME, new PdfString(name, PdfObject.TEXT_UNICODE));
     }
 
+    /**
+     * Method setDate.
+     * @param date PdfDate
+     */
     public void setDate(PdfDate date) {
         put(PdfName.M, date);
     }
 
+    /**
+     * Method setLocation.
+     * @param name String
+     */
     public void setLocation(String name) {
         put(PdfName.LOCATION, new PdfString(name, PdfObject.TEXT_UNICODE));
     }
 
+    /**
+     * Method setReason.
+     * @param name String
+     */
     public void setReason(String name) {
         put(PdfName.REASON, new PdfString(name, PdfObject.TEXT_UNICODE));
     }
     
+    /**
+     * Method setContact.
+     * @param name String
+     */
     public void setContact(String name) {
         put(PdfName.CONTACTINFO, new PdfString(name, PdfObject.TEXT_UNICODE));
     }

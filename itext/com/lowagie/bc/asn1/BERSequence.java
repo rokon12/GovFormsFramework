@@ -3,6 +3,8 @@ package com.lowagie.bc.asn1;
 import java.io.IOException;
 import java.util.Enumeration;
 
+/**
+ */
 public class BERSequence
     extends DERSequence
 {
@@ -15,6 +17,7 @@ public class BERSequence
 
     /**
      * create a sequence containing one object
+     * @param obj DEREncodable
      */
     public BERSequence(
         DEREncodable    obj)
@@ -24,6 +27,7 @@ public class BERSequence
 
     /**
      * create a sequence containing a vector of objects.
+     * @param v DEREncodableVector
      */
     public BERSequence(
         DEREncodableVector   v)
@@ -32,6 +36,11 @@ public class BERSequence
     }
 
     /*
+     */
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
      */
     void encode(
         DEROutputStream out)

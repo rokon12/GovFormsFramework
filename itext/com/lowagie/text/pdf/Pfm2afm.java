@@ -114,12 +114,17 @@ import java.io.*;
 
 /**
  * Converts a PFM file into an AFM file.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class Pfm2afm {
     private RandomAccessFileOrArray in;
     private PrintWriter out;
     
-    /** Creates a new instance of Pfm2afm */
+    /** Creates a new instance of Pfm2afm * @param in RandomAccessFileOrArray
+     * @param out OutputStream
+     * @throws IOException
+     */
     private Pfm2afm(RandomAccessFileOrArray in, OutputStream out) throws IOException {
         this.in = in;
         this.out = new PrintWriter(new OutputStreamWriter(out, "ISO-8859-1"));
@@ -129,8 +134,8 @@ public class Pfm2afm {
      * Converts a PFM file into an AFM file.
      * @param in the PFM file
      * @param out the AFM file
-     * @throws IOException on error
-     */    
+    
+     * @throws IOException on error */    
     public static void convert(RandomAccessFileOrArray in, OutputStream out) throws IOException {
         Pfm2afm p = new Pfm2afm(in, out);
         p.openpfm();
@@ -141,6 +146,10 @@ public class Pfm2afm {
         p.out.flush();
     }
     
+    /**
+     * Method main.
+     * @param args String[]
+     */
     public static void main(String[] args) {
         try {
             RandomAccessFileOrArray in = new RandomAccessFileOrArray(args[0]);
@@ -154,6 +163,12 @@ public class Pfm2afm {
         }
     }
     
+    /**
+     * Method readString.
+     * @param n int
+     * @return String
+     * @throws IOException
+     */
     private String readString(int n) throws IOException {
         byte b[] = new byte[n];
         in.readFully(b);
@@ -165,6 +180,11 @@ public class Pfm2afm {
         return new String(b, 0, k, "ISO-8859-1");
     }
     
+    /**
+     * Method readString.
+     * @return String
+     * @throws IOException
+     */
     private String readString() throws IOException {
         StringBuffer buf = new StringBuffer();
         while (true) {
@@ -176,6 +196,10 @@ public class Pfm2afm {
         return buf.toString();
     }
     
+    /**
+     * Method outval.
+     * @param n int
+     */
     private void outval(int n) {
         out.print(' ');
         out.print(n);
@@ -183,6 +207,12 @@ public class Pfm2afm {
     
     /*
      *  Output a character entry
+     */
+    /**
+     * Method outchar.
+     * @param code int
+     * @param width int
+     * @param name String
      */
     private void  outchar(int code, int width, String name) {
         out.print("C ");
@@ -196,6 +226,10 @@ public class Pfm2afm {
         out.print(" ;\n");
     }
     
+    /**
+     * Method openpfm.
+     * @throws IOException
+     */
     private void openpfm() throws IOException {
         in.seek(0);
         vers = in.readShortLE();
@@ -243,6 +277,10 @@ public class Pfm2afm {
         descender = in.readShortLE();
     }
     
+    /**
+     * Method putheader.
+     * @throws IOException
+     */
     private void putheader() throws IOException {
         out.print("StartFontMetrics 2.0\n");
         if (copyright.length() > 0)
@@ -328,6 +366,10 @@ public class Pfm2afm {
         out.print('\n');
     }
     
+    /**
+     * Method putchartab.
+     * @throws IOException
+     */
     private void putchartab() throws IOException {
         int count = lastchar - firstchar + 1;
         int ctabs[] = new int[count];
@@ -378,6 +420,10 @@ public class Pfm2afm {
         
     }
     
+    /**
+     * Method putkerntab.
+     * @throws IOException
+     */
     private void putkerntab() throws IOException {
         if (kernpairs == 0)
             return;

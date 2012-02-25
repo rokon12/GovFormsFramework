@@ -57,6 +57,8 @@ import java.util.Comparator;
  * This class was used in the 1.1-version of iText (by Volker Richert).
  * Paulo Soares suggested I should add it to the original library, so
  * that in the future it would be easier to port it to the JDK1.1.x.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class StringCompare implements Comparator {
@@ -66,9 +68,9 @@ public class StringCompare implements Comparator {
  *
  * @param   o1  a first object
  * @param   o2  a second object
- * @return  a value
- * @throws  ClassCastException  if the objects aren't Strings
- */
+
+
+ * @return  a value * @throws  ClassCastException  if the objects aren't Strings */
     
     public int compare(Object o1, Object o2) {
         return ((String)o1).compareTo((String)o2);

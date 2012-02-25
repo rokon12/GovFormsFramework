@@ -50,6 +50,7 @@ import java.io.IOException;
 /** Implements the shading pattern dictionary.
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PdfShadingPattern extends PdfDictionary {
 
@@ -63,55 +64,96 @@ public class PdfShadingPattern extends PdfDictionary {
 
     protected PdfIndirectReference patternReference;
 
-    /** Creates new PdfShadingPattern */
+    /** Creates new PdfShadingPattern * @param shading PdfShading
+     */
     public PdfShadingPattern(PdfShading shading) {
         writer = shading.getWriter();
         put(PdfName.PATTERNTYPE, new PdfNumber(2));
         this.shading = shading;
     }
         
+    /**
+     * Method getPatternName.
+     * @return PdfName
+     */
     PdfName getPatternName() {
         return patternName;
     }
 
+    /**
+     * Method getShadingName.
+     * @return PdfName
+     */
     PdfName getShadingName() {
         return shading.getShadingName();
     }
     
+    /**
+     * Method getPatternReference.
+     * @return PdfIndirectReference
+     */
     PdfIndirectReference getPatternReference() {
         if (patternReference == null)
             patternReference = writer.getPdfIndirectReference();
         return patternReference;
     }
     
+    /**
+     * Method getShadingReference.
+     * @return PdfIndirectReference
+     */
     PdfIndirectReference getShadingReference() {
         return shading.getShadingReference();
     }
     
+    /**
+     * Method setName.
+     * @param number int
+     */
     void setName(int number) {
         patternName = new PdfName("P" + number);
     }
     
+    /**
+     * Method addToBody.
+     * @throws IOException
+     */
     void addToBody() throws IOException {
         put(PdfName.SHADING, getShadingReference());
         put(PdfName.MATRIX, new PdfArray(matrix));
         writer.addToBody(this, getPatternReference());
     }
     
+    /**
+     * Method setMatrix.
+     * @param matrix float[]
+     */
     public void setMatrix(float matrix[]) {
         if (matrix.length != 6)
             throw new RuntimeException("The matrix size must be 6.");
         this.matrix = matrix;
     }
     
+    /**
+     * Method getMatrix.
+     * @return float[]
+     */
     public float[] getMatrix() {
         return matrix;
     }
     
+    /**
+     * Method getShading.
+     * @return PdfShading
+     */
     PdfShading getShading() {
         return shading;
     }
     
+    /**
+     * Method getColorDetails.
+     * @return ColorDetails
+     */
     ColorDetails getColorDetails() {
         return shading.getColorDetails();
     }

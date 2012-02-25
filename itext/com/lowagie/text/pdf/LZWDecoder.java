@@ -40,6 +40,8 @@ import com.lowagie.text.ExceptionConverter;
  * A class for performing LZW decoding.
  *
  *
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class LZWDecoder {
     
@@ -143,6 +145,7 @@ public class LZWDecoder {
     
     /**
      * Write out the string just uncompressed.
+     * @param string byte[]
      */
     public void writeString(byte string[]) {
         try {
@@ -155,6 +158,8 @@ public class LZWDecoder {
     
     /**
      * Add a new string to the string table.
+     * @param oldString byte[]
+     * @param newString byte
      */
     public void addStringToTable(byte oldString[], byte newString) {
         int length = oldString.length;
@@ -176,6 +181,7 @@ public class LZWDecoder {
     
     /**
      * Add a new string to the string table.
+     * @param string byte[]
      */
     public void addStringToTable(byte string[]) {
         
@@ -193,6 +199,9 @@ public class LZWDecoder {
     
     /**
      * Append <code>newString</code> to the end of <code>oldString</code>.
+     * @param oldString byte[]
+     * @param newString byte
+     * @return byte[]
      */
     public byte[] composeString(byte oldString[], byte newString) {
         int length = oldString.length;
@@ -204,6 +213,10 @@ public class LZWDecoder {
     }
     
     // Returns the next 9, 10, 11 or 12 bits
+    /**
+     * Method getNextCode.
+     * @return int
+     */
     public int getNextCode() {
         // Attempt to get the next code. The exception is caught to make
         // this robust to cases wherein the EndOfInformation code has been

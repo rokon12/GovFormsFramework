@@ -54,6 +54,7 @@ import java.util.ArrayList;
  * In iText they are referenced as layers.
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PdfLayer extends PdfDictionary implements PdfOCG {
     protected PdfIndirectReference ref;
@@ -71,6 +72,10 @@ public class PdfLayer extends PdfDictionary implements PdfOCG {
      */
     private boolean onPanel = true;
     
+    /**
+     * Constructor for PdfLayer.
+     * @param title String
+     */
     PdfLayer(String title) {
         this.title = title;
     }
@@ -80,8 +85,8 @@ public class PdfLayer extends PdfDictionary implements PdfOCG {
      * under the same title heading.
      * @param title the title text
      * @param writer the <CODE>PdfWriter</CODE>
-     * @return the title layer
-     */    
+    
+     * @return the title layer */    
     public static PdfLayer createTitle(String title, PdfWriter writer) {
         if (title == null)
             throw new NullPointerException("Title cannot be null.");
@@ -101,6 +106,10 @@ public class PdfLayer extends PdfDictionary implements PdfOCG {
         writer.registerLayer(this);
     }
     
+    /**
+     * Method getTitle.
+     * @return String
+     */
     String getTitle() {
         return title;
     }
@@ -121,23 +130,24 @@ public class PdfLayer extends PdfDictionary implements PdfOCG {
     
     /**
      * Gets the parent layer.
-     * @return the parent layer or <CODE>null</CODE> if the layer has no parent
-     */    
+    
+     * @return the parent layer or <CODE>null</CODE> if the layer has no parent */    
     public PdfLayer getParent() {
         return parent;
     }
     
     /**
      * Gets the children layers.
-     * @return the children layers or <CODE>null</CODE> if the layer has no children
-     */    
+    
+     * @return the children layers or <CODE>null</CODE> if the layer has no children */    
     public ArrayList getChildren() {
         return children;
     }
     
     /**
      * Gets the <CODE>PdfIndirectReference</CODE> that represents this layer.
-     * @return the <CODE>PdfIndirectReference</CODE> that represents this layer
+    
+     * @return the <CODE>PdfIndirectReference</CODE> that represents this layer * @see com.lowagie.text.pdf.PdfOCG#getRef()
      */    
     public PdfIndirectReference getRef() {
         return ref;
@@ -153,7 +163,8 @@ public class PdfLayer extends PdfDictionary implements PdfOCG {
     
     /**
      * Gets the dictionary representing the layer. It just returns <CODE>this</CODE>.
-     * @return the dictionary representing the layer
+    
+     * @return the dictionary representing the layer * @see com.lowagie.text.pdf.PdfOCG#getPdfObject()
      */    
     public PdfObject getPdfObject() {
         return this;
@@ -161,8 +172,8 @@ public class PdfLayer extends PdfDictionary implements PdfOCG {
     
     /**
      * Gets the initial visibility of the layer.
-     * @return the initial visibility of the layer
-     */
+    
+     * @return the initial visibility of the layer */
     public boolean isOn() {
         return this.on;
     }
@@ -175,6 +186,10 @@ public class PdfLayer extends PdfDictionary implements PdfOCG {
         this.on = on;
     }
     
+    /**
+     * Method getUsage.
+     * @return PdfDictionary
+     */
     private PdfDictionary getUsage() {
         PdfDictionary usage = (PdfDictionary)get(PdfName.USAGE);
         if (usage == null) {
@@ -283,8 +298,8 @@ public class PdfLayer extends PdfDictionary implements PdfOCG {
     
     /**
      * Gets the layer visibility in Acrobat's layer panel
-     * @return the layer visibility in Acrobat's layer panel
-     */
+    
+     * @return the layer visibility in Acrobat's layer panel */
     public boolean isOnPanel() {
         return this.onPanel;
     }

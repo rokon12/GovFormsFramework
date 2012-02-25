@@ -70,6 +70,7 @@ import java.awt.image.MemoryImageSource;
  * </pre>
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class BarcodeInter25 extends Barcode{
 
@@ -109,8 +110,8 @@ public class BarcodeInter25 extends Barcode{
     
     /** Deletes all the non numeric characters from <CODE>text</CODE>.
      * @param text the text
-     * @return a <CODE>String</CODE> with only numeric characters
-     */    
+    
+     * @return a <CODE>String</CODE> with only numeric characters */    
     public static String keepNumbers(String text) {
         StringBuffer sb = new StringBuffer();
         for (int k = 0; k < text.length(); ++k) {
@@ -123,8 +124,8 @@ public class BarcodeInter25 extends Barcode{
     
     /** Calculates the checksum.
      * @param text the numeric text
-     * @return the checksum
-     */    
+    
+     * @return the checksum */    
     public static char getChecksum(String text) {
         int mul = 3;
         int total = 0;
@@ -138,8 +139,8 @@ public class BarcodeInter25 extends Barcode{
 
     /** Creates the bars for the barcode.
      * @param text the text. It can contain non numeric characters
-     * @return the barcode
-     */    
+    
+     * @return the barcode */    
     public static byte[] getBarsInter25(String text) {
         text = keepNumbers(text);
         if ((text.length() & 1) != 0)
@@ -169,8 +170,8 @@ public class BarcodeInter25 extends Barcode{
 
     /** Gets the maximum area that the barcode and the text, if
      * any, will occupy. The lower left corner is always (0, 0).
-     * @return the size the barcode occupies.
-     */    
+    
+     * @return the size the barcode occupies. */    
     public Rectangle getBarcodeSize() {
         float fontX = 0;
         float fontY = 0;
@@ -228,8 +229,8 @@ public class BarcodeInter25 extends Barcode{
      * @param cb the <CODE>PdfContentByte</CODE> where the barcode will be placed
      * @param barColor the color of the bars. It can be <CODE>null</CODE>
      * @param textColor the color of the text. It can be <CODE>null</CODE>
-     * @return the dimensions the barcode occupies
-     */    
+    
+     * @return the dimensions the barcode occupies */    
     public Rectangle placeBarcode(PdfContentByte cb, Color barColor, Color textColor) {
         String fullCode = code;
         float fontX = 0;
@@ -299,8 +300,8 @@ public class BarcodeInter25 extends Barcode{
      * contains the bars without any text.
      * @param foreground the color of the bars
      * @param background the color of the background
-     * @return the image
-     */    
+    
+     * @return the image */    
     public java.awt.Image createAwtImage(Color foreground, Color background) {
         int f = foreground.getRGB();
         int g = background.getRGB();

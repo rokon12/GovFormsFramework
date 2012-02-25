@@ -58,6 +58,7 @@ import com.lowagie.text.ExceptionConverter;
 /** Reads a Truetype font
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 class TrueTypeFont extends BaseFont {
 
@@ -222,6 +223,8 @@ class TrueTypeFont extends BaseFont {
     protected boolean isFixedPitch = false;
     
     /** The components of table 'head'.
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     protected static class FontHeader {
         /** A variable. */
@@ -241,6 +244,8 @@ class TrueTypeFont extends BaseFont {
     }
     
     /** The components of table 'hhea'.
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     protected static class HorizontalHeader {
         /** A variable. */
@@ -266,6 +271,8 @@ class TrueTypeFont extends BaseFont {
     }
     
     /** The components of table 'OS/2'.
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     protected static class WindowsMetrics {
         /** A variable. */
@@ -331,6 +338,15 @@ class TrueTypeFont extends BaseFont {
     protected TrueTypeFont() {
     }
     
+    /**
+     * Constructor for TrueTypeFont.
+     * @param ttFile String
+     * @param enc String
+     * @param emb boolean
+     * @param ttfAfm byte[]
+     * @throws DocumentException
+     * @throws IOException
+     */
     TrueTypeFont(String ttFile, String enc, boolean emb, byte ttfAfm[]) throws DocumentException, IOException {
         this(ttFile, enc, emb, ttfAfm, false);
     }
@@ -341,9 +357,10 @@ class TrueTypeFont extends BaseFont {
      * @param enc the encoding to be applied to this font
      * @param emb true if the font is to be embedded in the PDF
      * @param ttfAfm the font as a <CODE>byte</CODE> array
-     * @throws DocumentException the font is invalid
-     * @throws IOException the font file could not be read
-     */
+    
+    
+     * @param justNames boolean
+     * @throws DocumentException the font is invalid * @throws IOException the font file could not be read */
     TrueTypeFont(String ttFile, String enc, boolean emb, byte ttfAfm[], boolean justNames) throws DocumentException, IOException {
         this.justNames = justNames;
         String nameBase = getBaseName(ttFile);
@@ -373,8 +390,8 @@ class TrueTypeFont extends BaseFont {
      * If I have for input "myfont.ttc,2" the return will
      * be "myfont.ttc".
      * @param name the full name
-     * @return the simple file name
-     */    
+    
+     * @return the simple file name */    
     protected static String getTTCName(String name) {
         int idx = name.toLowerCase().indexOf(".ttc,");
         if (idx < 0)
@@ -386,9 +403,9 @@ class TrueTypeFont extends BaseFont {
     
     /**
      * Reads the tables 'head', 'hhea', 'OS/2' and 'post' filling several variables.
-     * @throws DocumentException the font is invalid
-     * @throws IOException the font file could not be read
-     */
+    
+    
+     * @throws DocumentException the font is invalid * @throws IOException the font file could not be read */
     void fillTables() throws DocumentException, IOException {
         int table_location[];
         table_location = (int[])tables.get("head");
@@ -481,10 +498,10 @@ class TrueTypeFont extends BaseFont {
     
     /**
      * Gets the Postscript font name.
-     * @throws DocumentException the font is invalid
-     * @throws IOException the font file could not be read
-     * @return the Postscript font name
-     */
+    
+    
+    
+     * @return the Postscript font name * @throws DocumentException the font is invalid * @throws IOException the font file could not be read */
     String getBaseFont() throws DocumentException, IOException {
         int table_location[];
         table_location = (int[])tables.get("name");
@@ -514,9 +531,10 @@ class TrueTypeFont extends BaseFont {
     
     /** Extracts the names of the font in all the languages available.
      * @param id the name id to retrieve
-     * @throws DocumentException on error
-     * @throws IOException on error
-     */    
+    
+    
+     * @return String[][]
+     * @throws DocumentException on error * @throws IOException on error */    
     String[][] getNames(int id) throws DocumentException, IOException {
         int table_location[];
         table_location = (int[])tables.get("name");
@@ -554,6 +572,11 @@ class TrueTypeFont extends BaseFont {
         return thisName;
     }
     
+    /**
+     * Method checkCff.
+     * @throws DocumentException
+     * @throws IOException
+     */
     void checkCff() throws DocumentException, IOException {
         int table_location[];
         table_location = (int[])tables.get("CFF ");
@@ -566,9 +589,9 @@ class TrueTypeFont extends BaseFont {
 
     /** Reads the font data.
      * @param ttfAfm the font as a <CODE>byte</CODE> array, possibly <CODE>null</CODE>
-     * @throws DocumentException the font is invalid
-     * @throws IOException the font file could not be read
-     */
+    
+    
+     * @throws DocumentException the font is invalid * @throws IOException the font file could not be read */
     void process(byte ttfAfm[]) throws DocumentException, IOException {
         tables = new HashMap();
         
@@ -630,9 +653,9 @@ class TrueTypeFont extends BaseFont {
     /** Reads a <CODE>String</CODE> from the font file as bytes using the Cp1252
      *  encoding.
      * @param length the length of bytes to read
-     * @return the <CODE>String</CODE> read
-     * @throws IOException the font file could not be read
-     */
+    
+    
+     * @return the <CODE>String</CODE> read * @throws IOException the font file could not be read */
     protected String readStandardString(int length) throws IOException {
         byte buf[] = new byte[length];
         rf.readFully(buf);
@@ -648,9 +671,9 @@ class TrueTypeFont extends BaseFont {
      *  represented by two bytes.
      * @param length the length of bytes to read. The <CODE>String</CODE> will have <CODE>length</CODE>/2
      * characters
-     * @return the <CODE>String</CODE> read
-     * @throws IOException the font file could not be read
-     */
+    
+    
+     * @return the <CODE>String</CODE> read * @throws IOException the font file could not be read */
     protected String readUnicodeString(int length) throws IOException {
         StringBuffer buf = new StringBuffer();
         length /= 2;
@@ -662,9 +685,9 @@ class TrueTypeFont extends BaseFont {
     
     /** Reads the glyphs widths. The widths are extracted from the table 'hmtx'.
      *  The glyphs are normalized to 1000 units.
-     * @throws DocumentException the font is invalid
-     * @throws IOException the font file could not be read
-     */
+    
+    
+     * @throws DocumentException the font is invalid * @throws IOException the font file could not be read */
     protected void readGlyphWidths() throws DocumentException, IOException {
         int table_location[];
         table_location = (int[])tables.get("hmtx");
@@ -680,14 +703,19 @@ class TrueTypeFont extends BaseFont {
     
     /** Gets a glyph width.
      * @param glyph the glyph to get the width of
-     * @return the width of the glyph in normalized 1000 units
-     */
+    
+     * @return the width of the glyph in normalized 1000 units */
     protected int getGlyphWidth(int glyph) {
         if (glyph >= GlyphWidths.length)
             glyph = GlyphWidths.length - 1;
         return GlyphWidths[glyph];
     }
     
+    /**
+     * Method readBbox.
+     * @throws DocumentException
+     * @throws IOException
+     */
     private void readBbox() throws DocumentException, IOException {
         int tableLocation[];
         tableLocation = (int[])tables.get("head");
@@ -732,9 +760,9 @@ class TrueTypeFont extends BaseFont {
     
     /** Reads the several maps from the table 'cmap'. The maps of interest are 1.0 for symbolic
      *  fonts and 3.1 for all others. A symbolic font is defined as having the map 3.0.
-     * @throws DocumentException the font is invalid
-     * @throws IOException the font file could not be read
-     */
+    
+    
+     * @throws DocumentException the font is invalid * @throws IOException the font file could not be read */
     void readCMaps() throws DocumentException, IOException {
         int table_location[];
         table_location = (int[])tables.get("cmap");
@@ -795,9 +823,9 @@ class TrueTypeFont extends BaseFont {
     
     /** The information in the maps of the table 'cmap' is coded in several formats.
      *  Format 0 is the Apple standard character to glyph index mapping table.
-     * @return a <CODE>HashMap</CODE> representing this map
-     * @throws IOException the font file could not be read
-     */
+    
+    
+     * @return a <CODE>HashMap</CODE> representing this map * @throws IOException the font file could not be read */
     HashMap readFormat0() throws IOException {
         HashMap h = new HashMap();
         rf.skipBytes(4);
@@ -812,9 +840,9 @@ class TrueTypeFont extends BaseFont {
     
     /** The information in the maps of the table 'cmap' is coded in several formats.
      *  Format 4 is the Microsoft standard character to glyph index mapping table.
-     * @return a <CODE>HashMap</CODE> representing this map
-     * @throws IOException the font file could not be read
-     */
+    
+    
+     * @return a <CODE>HashMap</CODE> representing this map * @throws IOException the font file could not be read */
     HashMap readFormat4() throws IOException {
         HashMap h = new HashMap();
         int table_lenght = rf.readUnsignedShort();
@@ -866,9 +894,9 @@ class TrueTypeFont extends BaseFont {
     /** The information in the maps of the table 'cmap' is coded in several formats.
      *  Format 6 is a trimmed table mapping. It is similar to format 0 but can have
      *  less than 256 entries.
-     * @return a <CODE>HashMap</CODE> representing this map
-     * @throws IOException the font file could not be read
-     */
+    
+    
+     * @return a <CODE>HashMap</CODE> representing this map * @throws IOException the font file could not be read */
     HashMap readFormat6() throws IOException {
         HashMap h = new HashMap();
         rf.skipBytes(4);
@@ -884,8 +912,8 @@ class TrueTypeFont extends BaseFont {
     }
     
     /** Reads the kerning information from the 'kern' table.
-     * @throws IOException the font file could not be read
-     */
+    
+     * @throws IOException the font file could not be read */
     void readKerning() throws IOException {
         int table_location[];
         table_location = (int[])tables.get("kern");
@@ -916,8 +944,8 @@ class TrueTypeFont extends BaseFont {
     /** Gets the kerning between two Unicode chars.
      * @param char1 the first char
      * @param char2 the second char
-     * @return the kerning to be applied
-     */
+    
+     * @return the kerning to be applied */
     public int getKerning(char char1, char char2) {
         int metrics[] = getMetricsTT(char1);
         if (metrics == null)
@@ -934,8 +962,8 @@ class TrueTypeFont extends BaseFont {
      * If the <CODE>name</CODE> is null it's a symbolic font.
      * @param c the unicode char
      * @param name the glyph name
-     * @return the width of the char
-     */
+    
+     * @return the width of the char */
     int getRawWidth(int c, String name) {
         HashMap map = null;
         if (name == null || cmap31 == null)
@@ -951,11 +979,11 @@ class TrueTypeFont extends BaseFont {
     }
     
     /** Generates the font descriptor for this font.
-     * @return the PdfDictionary containing the font descriptor or <CODE>null</CODE>
+    
      * @param subsetPrefix the subset prefix
      * @param fontStream the indirect reference to a PdfStream containing the font or <CODE>null</CODE>
-     * @throws DocumentException if there is an error
-     */
+    
+     * @return the PdfDictionary containing the font descriptor or <CODE>null</CODE> * @throws DocumentException if there is an error */
     protected PdfDictionary getFontDescriptor(PdfIndirectReference fontStream, String subsetPrefix) throws DocumentException {
         PdfDictionary dic = new PdfDictionary(PdfName.FONTDESCRIPTOR);
         dic.put(PdfName.ASCENT, new PdfNumber((int)os_2.sTypoAscender * 1000 / head.unitsPerEm));
@@ -996,14 +1024,14 @@ class TrueTypeFont extends BaseFont {
     }
     
     /** Generates the font dictionary for this font.
-     * @return the PdfDictionary containing the font dictionary
+    
      * @param subsetPrefix the subset prefx
      * @param firstChar the first valid character
      * @param lastChar the last valid character
      * @param shortTag a 256 bytes long <CODE>byte</CODE> array where each unused byte is represented by 0
      * @param fontDescriptor the indirect reference to a PdfDictionary containing the font descriptor or <CODE>null</CODE>
-     * @throws DocumentException if there is an error
-     */
+    
+     * @return the PdfDictionary containing the font dictionary * @throws DocumentException if there is an error */
     protected PdfDictionary getFontBaseType(PdfIndirectReference fontDescriptor, String subsetPrefix, int firstChar, int lastChar, byte shortTag[]) throws DocumentException {
         PdfDictionary dic = new PdfDictionary(PdfName.FONT);
         if (cff) {
@@ -1058,6 +1086,11 @@ class TrueTypeFont extends BaseFont {
         return dic;
     }
     
+    /**
+     * Method getFullFont.
+     * @return byte[]
+     * @throws IOException
+     */
     private byte[] getFullFont() throws IOException {
         RandomAccessFileOrArray rf2 = new RandomAccessFileOrArray(rf);
         rf2.reOpen();
@@ -1071,9 +1104,9 @@ class TrueTypeFont extends BaseFont {
      * @param writer the writer for this document
      * @param ref the font indirect reference
      * @param params several parameters that depend on the font type
-     * @throws IOException on error
-     * @throws DocumentException error in generating the object
-     */
+    
+    
+     * @throws DocumentException error in generating the object * @throws IOException on error */
     void writeFont(PdfWriter writer, PdfIndirectReference ref, Object params[]) throws DocumentException, IOException {
         int firstChar = ((Integer)params[0]).intValue();
         int lastChar = ((Integer)params[1]).intValue();
@@ -1146,8 +1179,8 @@ class TrueTypeFont extends BaseFont {
      * and <CODE>ITALICANGLE</CODE>.
      * @param key the parameter to be extracted
      * @param fontSize the font size in points
-     * @return the parameter in points
-     */    
+    
+     * @return the parameter in points */    
     public float getFontDescriptor(int key, float fontSize) {
         switch (key) {
             case ASCENT:
@@ -1180,8 +1213,8 @@ class TrueTypeFont extends BaseFont {
     
     /** Gets the glyph index and metrics for a character.
      * @param c the character
-     * @return an <CODE>int</CODE> array with {glyph index, width}
-     */    
+    
+     * @return an <CODE>int</CODE> array with {glyph index, width} */    
     public int[] getMetricsTT(int c) {
         if (!fontSpecific && cmap31 != null) 
             return (int[])cmap31.get(new Integer(c));
@@ -1195,15 +1228,15 @@ class TrueTypeFont extends BaseFont {
     }
 
     /** Gets the postscript font name.
-     * @return the postscript font name
-     */
+    
+     * @return the postscript font name */
     public String getPostscriptFontName() {
         return fontName;
     }
 
     /** Gets the code pages supported by the font.
-     * @return the code pages supported by the font
-     */
+    
+     * @return the code pages supported by the font */
     public String[] getCodePagesSupported() {
         long cp = (((long)os_2.ulCodePageRange2) << 32) + ((long)os_2.ulCodePageRange1 & 0xffffffffL);
         int count = 0;
@@ -1230,8 +1263,8 @@ class TrueTypeFont extends BaseFont {
      * found in the Open Type specification, chapter 2, in the 'name' table.<br>
      * For the other fonts the array has a single element with {"", "", "",
      * font name}.
-     * @return the full name of the font
-     */
+    
+     * @return the full name of the font */
     public String[][] getFullFontName() {
         return fullName;
     }
@@ -1242,15 +1275,15 @@ class TrueTypeFont extends BaseFont {
      * found in the Open Type specification, chapter 2, in the 'name' table.<br>
      * For the other fonts the array has a single element with {"", "", "",
      * font name}.
-     * @return the family name of the font
-     */
+    
+     * @return the family name of the font */
     public String[][] getFamilyFontName() {
         return familyName;
     }
     
     /** Checks if the font has any kerning pairs.
-     * @return <CODE>true</CODE> if the font has any kerning pairs
-     */    
+    
+     * @return <CODE>true</CODE> if the font has any kerning pairs */    
     public boolean hasKernPairs() {
         return kerning.size() > 0;
     }    
@@ -1269,8 +1302,8 @@ class TrueTypeFont extends BaseFont {
      * @param char1 the first char
      * @param char2 the second char
      * @param kern the kerning to apply in normalized 1000 units
-     * @return <code>true</code> if the kerning was applied, <code>false</code> otherwise
-     */
+    
+     * @return <code>true</code> if the kerning was applied, <code>false</code> otherwise */
     public boolean setKerning(char char1, char char2, int kern) {
         int metrics[] = getMetricsTT(char1);
         if (metrics == null)
@@ -1284,6 +1317,12 @@ class TrueTypeFont extends BaseFont {
         return true;
     }
     
+    /**
+     * Method getRawCharBBox.
+     * @param c int
+     * @param name String
+     * @return int[]
+     */
     protected int[] getRawCharBBox(int c, String name) {
         HashMap map = null;
         if (name == null || cmap31 == null)

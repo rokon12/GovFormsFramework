@@ -52,6 +52,7 @@ import java.net.URL;
 /** Specifies a file or an URL. The file can be extern or embedded.
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PdfFileSpecification extends PdfDictionary {
     protected PdfWriter writer;
@@ -66,8 +67,8 @@ public class PdfFileSpecification extends PdfDictionary {
      * Creates a file specification of type URL.
      * @param writer the <CODE>PdfWriter</CODE>
      * @param url the URL
-     * @return the file specification
-     */    
+    
+     * @return the file specification */    
     public static PdfFileSpecification url(PdfWriter writer, String url) {
         PdfFileSpecification fs = new PdfFileSpecification();
         fs.writer = writer;
@@ -84,9 +85,9 @@ public class PdfFileSpecification extends PdfDictionary {
      * @param fileDisplay the file information that is presented to the user
      * @param fileStore the byte array with the file. If it is not <CODE>null</CODE>
      * it takes precedence over <CODE>filePath</CODE>
-     * @throws IOException on error
-     * @return the file specification
-     */    
+    
+    
+     * @return the file specification * @throws IOException on error */    
     public static PdfFileSpecification fileEmbedded(PdfWriter writer, String filePath, String fileDisplay, byte fileStore[]) throws IOException {
         return fileEmbedded(writer, filePath, fileDisplay, fileStore, true);
     }
@@ -102,9 +103,9 @@ public class PdfFileSpecification extends PdfDictionary {
      * it takes precedence over <CODE>filePath</CODE>
      * @param compress sets the compression on the data. Multimedia content will benefit little
      * from compression
-     * @throws IOException on error
-     * @return the file specification
-     */    
+    
+    
+     * @return the file specification * @throws IOException on error */    
     public static PdfFileSpecification fileEmbedded(PdfWriter writer, String filePath, String fileDisplay, byte fileStore[], boolean compress) throws IOException {
         PdfFileSpecification fs = new PdfFileSpecification();
         fs.writer = writer;
@@ -160,8 +161,8 @@ public class PdfFileSpecification extends PdfDictionary {
      * Creates a file specification for an external file.
      * @param writer the <CODE>PdfWriter</CODE>
      * @param filePath the file path
-     * @return the file specification
-     */
+    
+     * @return the file specification */
     public static PdfFileSpecification fileExtern(PdfWriter writer, String filePath) {
         PdfFileSpecification fs = new PdfFileSpecification();
         fs.writer = writer;
@@ -172,9 +173,9 @@ public class PdfFileSpecification extends PdfDictionary {
     /**
      * Gets the indirect reference to this file specification.
      * Multiple invocations will retrieve the same value.
-     * @throws IOException on error
-     * @return the indirect reference
-     */    
+    
+    
+     * @return the indirect reference * @throws IOException on error */    
     public PdfIndirectReference getReference() throws IOException {
         if (ref != null)
             return ref;

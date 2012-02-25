@@ -56,12 +56,14 @@ import com.lowagie.tools.plugins.*;
 
 /**
  * JFrame that shows the versions of all the plugins.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class Versions extends JFrame {
 	/**
 	 * Constructs a JFrame.
-	 * @throws HeadlessException
-	 */
+	
+	 * @throws HeadlessException */
 	public Versions() throws HeadlessException {
 		super("Plugins and their version");
 		try {
@@ -79,6 +81,10 @@ public class Versions extends JFrame {
 		Versions untitled1 = new Versions();
 	}
 
+	/**
+	 * Method jbInit.
+	 * @throws Exception
+	 */
 	private void jbInit() throws Exception {
 		this.getContentPane().setLayout(borderLayout1);
 		this.getContentPane().add(jLabel1, java.awt.BorderLayout.CENTER);

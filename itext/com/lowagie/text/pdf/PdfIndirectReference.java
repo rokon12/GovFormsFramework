@@ -62,6 +62,8 @@ package com.lowagie.text.pdf;
  *
  * @see		PdfObject
  * @see		PdfIndirectObject
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfIndirectReference extends PdfObject {
@@ -110,8 +112,8 @@ public class PdfIndirectReference extends PdfObject {
 /**
  * Returns the number of the object.
  *
- * @return		a number.
- */
+
+ * @return		a number. */
     
     public int getNumber() {
         return number;
@@ -120,8 +122,8 @@ public class PdfIndirectReference extends PdfObject {
 /**
  * Returns the generation of the object.
  *
- * @return		a number.
- */
+
+ * @return		a number. */
     
     public int getGeneration() {
         return generation;

@@ -67,6 +67,8 @@ import java.awt.Color;
  * Parts of this Class were contributed by Steffen Stundzig. Many thanks for the
  * improvements.
  * Code added by c
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class RtfRow {
     /** Table border solid */
@@ -206,8 +208,8 @@ public class RtfRow {
      * @param borderColor
      * @param borderWidth
      * @param y
-     * @return true if importing the row succeeded
-     */
+    
+     * @return true if importing the row succeeded */
     public boolean importRow(Row row, float[] propWidths, int tableWidth, int pageWidth, int cellpadding,
                              int cellspacing, int borders, java.awt.Color borderColor, float borderWidth,
                              int y) {
@@ -277,10 +279,10 @@ public class RtfRow {
      * should be written to.
      * @param rowNum The <code>index</code> of this row in the containing table.
      * @param table The <code>Table</code> which contains the original <code>Row</code>.
-     * @return true if writing the row succeeded
-     * @throws DocumentException
-     * @throws IOException
-     */
+    
+    
+    
+     * @return true if writing the row succeeded * @throws DocumentException * @throws IOException */
     public boolean writeRow(ByteArrayOutputStream os, int rowNum, Table table) throws DocumentException,
             IOException {
         os.write(RtfWriter.escape);
@@ -392,6 +394,12 @@ public class RtfRow {
     }
 
 
+    /**
+     * Method writeBorder.
+     * @param os ByteArrayOutputStream
+     * @param borderType byte[]
+     * @throws IOException
+     */
     private void writeBorder(ByteArrayOutputStream os, byte[] borderType) throws IOException {
         // horizontal and vertical, top, left, bottom, right
         os.write(RtfWriter.escape);
@@ -435,6 +443,12 @@ public class RtfRow {
      *
      * @param out The <code>OutputStream</code> to be written to.
      * @param i The int to be written.
+     */
+    /**
+     * Method writeInt.
+     * @param out ByteArrayOutputStream
+     * @param i int
+     * @throws IOException
      */
     private void writeInt(ByteArrayOutputStream out, int i) throws IOException {
         out.write(Integer.toString(i).getBytes());

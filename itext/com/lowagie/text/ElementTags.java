@@ -52,6 +52,8 @@ package com.lowagie.text;
 
 /**
  * A class that contains all the possible tagnames and their attributes.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class ElementTags {
@@ -431,8 +433,8 @@ public class ElementTags {
  * Translates the alignment value.
  *
  * @param   alignment   the alignment value
- * @return  the translated value
- */
+
+ * @return  the translated value */
     
     public static String getAlignment(int alignment) {
         switch(alignment) {

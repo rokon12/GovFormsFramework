@@ -86,6 +86,7 @@ import com.lowagie.text.Image;
  * <CODE>PdfWriter.RUN_DIRECTION_RTL</CODE> the meaning of the horizontal
  * alignments and margins is mirrored.
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 
 public class ColumnText {
@@ -256,8 +257,8 @@ public class ColumnText {
     
     /** Creates an independent duplicated of the instance <CODE>org</CODE>.
      * @param org the original <CODE>ColumnText</CODE>
-     * @return the duplicated
-     */    
+    
+     * @return the duplicated */    
     public static ColumnText duplicate(ColumnText org) {
         ColumnText ct = new ColumnText(null);
         ct.setACopy(org);
@@ -266,8 +267,8 @@ public class ColumnText {
     
     /** Makes this instance an independent copy of <CODE>org</CODE>.
      * @param org the original <CODE>ColumnText</CODE>
-     * @return itself
-     */    
+    
+     * @return itself */    
     public ColumnText setACopy(ColumnText org) {
         setSimpleVars(org);
         if (org.bidiLine != null)
@@ -275,6 +276,10 @@ public class ColumnText {
         return this;
     }
     
+    /**
+     * Method setSimpleVars.
+     * @param org ColumnText
+     */
     protected void setSimpleVars(ColumnText org) {
         maxY = org.maxY;
         minY = org.minY;
@@ -445,8 +450,8 @@ public class ColumnText {
      * Each array element will contain a <CODE>float[4]</CODE> representing
      * the line x = ax + b.
      * @param cLine the column array
-     * @return the converted array
-     */
+    
+     * @return the converted array */
     protected ArrayList convertColumn(float cLine[]) {
         if (cLine.length < 4)
             throw new RuntimeException("No valid column line found.");
@@ -479,8 +484,8 @@ public class ColumnText {
      * Finds the intersection between the <CODE>yLine</CODE> and the column. It will
      * set the <CODE>lineStatus</CODE> apropriatly.
      * @param wall the column to intersect
-     * @return the x coordinate of the intersection
-     */
+    
+     * @return the x coordinate of the intersection */
     protected float findLimitsPoint(ArrayList wall) {
         lineStatus = LINE_STATUS_OK;
         if (yLine < minY || yLine > maxY) {
@@ -500,8 +505,8 @@ public class ColumnText {
     /**
      * Finds the intersection between the <CODE>yLine</CODE> and the two
      * column bounds. It will set the <CODE>lineStatus</CODE> apropriatly.
-     * @return a <CODE>float[2]</CODE>with the x coordinates of the intersection
-     */
+    
+     * @return a <CODE>float[2]</CODE>with the x coordinates of the intersection */
     protected float[] findLimitsOneLine() {
         float x1 = findLimitsPoint(leftWall);
         if (lineStatus == LINE_STATUS_OFFLIMITS || lineStatus == LINE_STATUS_NOLINE)
@@ -516,8 +521,8 @@ public class ColumnText {
      * Finds the intersection between the <CODE>yLine</CODE>,
      * the <CODE>yLine-leading</CODE>and the two
      * column bounds. It will set the <CODE>lineStatus</CODE> apropriatly.
-     * @return a <CODE>float[4]</CODE>with the x coordinates of the intersection
-     */
+    
+     * @return a <CODE>float[4]</CODE>with the x coordinates of the intersection */
     protected float[] findLimitsTwoLines() {
         boolean repeat = false;
         for (;;) {
@@ -631,16 +636,16 @@ public class ColumnText {
     
     /**
      * Gets the fixed leading
-     * @return the leading
-     */
+    
+     * @return the leading */
     public float getLeading() {
         return fixedLeading;
     }
     
     /**
      * Gets the variable leading
-     * @return the leading
-     */
+    
+     * @return the leading */
     public float getMultipliedLeading() {
         return multipliedLeading;
     }
@@ -655,8 +660,8 @@ public class ColumnText {
     
     /**
      * Gets the yLine.
-     * @return the yLine
-     */
+    
+     * @return the yLine */
     public float getYLine() {
         return yLine;
     }
@@ -671,8 +676,8 @@ public class ColumnText {
     
     /**
      * Gets the alignment.
-     * @return the alignment
-     */
+    
+     * @return the alignment */
     public int getAlignment() {
         return alignment;
     }
@@ -688,8 +693,8 @@ public class ColumnText {
     
     /**
      * Gets the first paragraph line indent.
-     * @return the indent
-     */
+    
+     * @return the indent */
     public float getIndent() {
         return indent;
     }
@@ -705,8 +710,8 @@ public class ColumnText {
     
     /**
      * Gets the following paragraph lines indent.
-     * @return the indent
-     */
+    
+     * @return the indent */
     public float getFollowingIndent() {
         return followingIndent;
     }
@@ -722,18 +727,18 @@ public class ColumnText {
     
     /**
      * Gets the right paragraph lines indent.
-     * @return the indent
-     */
+    
+     * @return the indent */
     public float getRightIndent() {
         return rightIndent;
     }
     
     /**
      * Outputs the lines to the document. It is equivalent to <CODE>go(false)</CODE>.
+    
+    
      * @return returns the result of the operation. It can be <CODE>NO_MORE_TEXT</CODE>
-     * and/or <CODE>NO_MORE_COLUMN</CODE>
-     * @throws DocumentException on error
-     */
+     * and/or <CODE>NO_MORE_COLUMN</CODE> * @throws DocumentException on error */
     public int go() throws DocumentException {
         return go(false);
     }
@@ -741,10 +746,10 @@ public class ColumnText {
     /**
      * Outputs the lines to the document. The output can be simulated.
      * @param simulate <CODE>true</CODE> to simulate the writting to the document
+    
+    
      * @return returns the result of the operation. It can be <CODE>NO_MORE_TEXT</CODE>
-     * and/or <CODE>NO_MORE_COLUMN</CODE>
-     * @throws DocumentException on error
-     */
+     * and/or <CODE>NO_MORE_COLUMN</CODE> * @throws DocumentException on error */
     public int go(boolean simulate) throws DocumentException {
         if (composite)
             return goComposite(simulate);
@@ -885,8 +890,8 @@ public class ColumnText {
     
     /**
      * Sets the extra space between paragraphs.
-     * @return the extra space between paragraphs
-     */
+    
+     * @return the extra space between paragraphs */
     public float getExtraParagraphSpace() {
         return extraParagraphSpace;
     }
@@ -910,8 +915,8 @@ public class ColumnText {
     
     /** Gets the space/character extra spacing ratio for
      * fully justified text.
-     * @return the space/character extra spacing ratio
-     */    
+    
+     * @return the space/character extra spacing ratio */    
     public float getSpaceCharRatio() {
         return spaceCharRatio;
     }
@@ -937,22 +942,22 @@ public class ColumnText {
     }
     
     /** Gets the run direction.
-     * @return the run direction
-     */    
+    
+     * @return the run direction */    
     public int getRunDirection() {
         return runDirection;
     }
     
     /** Gets the number of lines written.
-     * @return the number of lines written
-     */
+    
+     * @return the number of lines written */
     public int getLinesWritten() {
         return this.linesWritten;
     }
     
     /** Gets the arabic shaping options.
-     * @return the arabic shaping options
-     */
+    
+     * @return the arabic shaping options */
     public int getArabicOptions() {
         return this.arabicOptions;
     }
@@ -966,8 +971,8 @@ public class ColumnText {
     }
     
     /** Gets the biggest descender value of the last line written.
-     * @return the biggest descender value of the last line written
-     */    
+    
+     * @return the biggest descender value of the last line written */    
     public float getDescender() {
         return descender;
     }
@@ -977,8 +982,8 @@ public class ColumnText {
      * @param phrase the <CODE>Phrase</CODE> containing the line
      * @param runDirection the run direction
      * @param arabicOptions the options for the arabic shaping
-     * @return the width of the line
-     */    
+    
+     * @return the width of the line */    
     public static float getWidth(Phrase phrase, int runDirection, int arabicOptions) {
         ColumnText ct = new ColumnText(null);
         ct.addText(phrase);
@@ -993,8 +998,8 @@ public class ColumnText {
     /** Gets the width that the line will occupy after writing.
      * Only the width of the first line is returned.
      * @param phrase the <CODE>Phrase</CODE> containing the line
-     * @return the width of the line
-     */    
+    
+     * @return the width of the line */    
     public static float getWidth(Phrase phrase) {
         return getWidth(phrase, PdfWriter.RUN_DIRECTION_NO_BIDI, 0);
     }
@@ -1065,6 +1070,12 @@ public class ColumnText {
         showTextAligned(canvas, alignment, phrase, x, y, rotation, PdfWriter.RUN_DIRECTION_NO_BIDI, 0);
     }
 
+    /**
+     * Method goComposite.
+     * @param simulate boolean
+     * @return int
+     * @throws DocumentException
+     */
     protected int goComposite(boolean simulate) throws DocumentException {
         if (!rectangularMode)
             throw new DocumentException("Irregular columns are not supported in composite mode.");
@@ -1389,8 +1400,8 @@ public class ColumnText {
     
     /**
      * Gets the canvas.
-     * @return a PdfContentByte.
-     */
+    
+     * @return a PdfContentByte. */
     public PdfContentByte getCanvas() {
         return canvas;
     }
@@ -1407,16 +1418,16 @@ public class ColumnText {
     
     /**
      * Checks if the element has a height of 0.
-     * @return true or false
-     */
+    
+     * @return true or false */
     public boolean zeroHeightElement() {
         return composite == true && compositeElements.size() > 0 && ((Element)compositeElements.getFirst()).type() == Element.GRAPHIC;
     }
 
     /**
      * Checks if UseAscender is enabled/disabled.
-     * @return true is the adjustment of the first line height is based on max ascender.
-     */
+    
+     * @return true is the adjustment of the first line height is based on max ascender. */
     public boolean isUseAscender() {
         return useAscender;
     }

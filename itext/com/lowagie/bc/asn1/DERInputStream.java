@@ -10,16 +10,27 @@ import java.io.InputStream;
  * Don't use this class. It will eventually disappear, use ASN1InputStream.
  * <br>
  * This class is scheduled for removal.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class DERInputStream
     extends FilterInputStream implements DERTags
 {
+    /**
+     * Constructor for DERInputStream.
+     * @param is InputStream
+     */
     public DERInputStream(
         InputStream is)
     {
         super(is);
     }
 
+    /**
+     * Method readLength.
+     * @return int
+     * @throws IOException
+     */
     protected int readLength()
         throws IOException
     {
@@ -55,6 +66,11 @@ public class DERInputStream
         return length;
     }
 
+    /**
+     * Method readFully.
+     * @param bytes byte[]
+     * @throws IOException
+     */
     protected void readFully(
         byte[]  bytes)
         throws IOException
@@ -82,6 +98,10 @@ public class DERInputStream
 	/**
 	 * build an object given its tag and a byte stream to construct it
 	 * from.
+	 * @param tag int
+	 * @param bytes byte[]
+	 * @return DERObject
+	 * @throws IOException
 	 */
     protected DERObject buildObject(
 		int	    tag,
@@ -239,6 +259,11 @@ public class DERInputStream
         }
 	}
 
+    /**
+     * Method readObject.
+     * @return DERObject
+     * @throws IOException
+     */
     public DERObject readObject()
         throws IOException
     {

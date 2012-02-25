@@ -69,6 +69,8 @@ import java.util.Iterator;
  * @see		PdfFont
  * @see		com.lowagie.text.Chunk
  * @see		com.lowagie.text.Font
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfChunk implements SplitCharacter{
@@ -269,12 +271,18 @@ public class PdfChunk implements SplitCharacter{
      * The (inexistent) CID <FF00> is translated as '\n'. 
      * It has only meaning with CJK fonts with Identity encoding.
      * @param c the CID code
-     * @return the Unicode equivalent
-     */    
+    
+     * @return the Unicode equivalent */    
     public char getUnicodeEquivalent(char c) {
         return baseFont.getUnicodeEquivalent(c);
     }
 
+    /**
+     * Method getWord.
+     * @param text String
+     * @param start int
+     * @return int
+     */
     protected int getWord(String text, int start) {
         int len = text.length();
         while (start < len) {
@@ -291,8 +299,8 @@ public class PdfChunk implements SplitCharacter{
  * Returns <VAR>null</VAR> if the <CODE>PdfChunk</CODE> wasn't truncated.
  *
  * @param		width		a given width
- * @return		the <CODE>PdfChunk</CODE> that doesn't fit into the width.
- */
+
+ * @return		the <CODE>PdfChunk</CODE> that doesn't fit into the width. */
     
     PdfChunk split(float width) {
         newlineSplit = false;
@@ -420,8 +428,8 @@ public class PdfChunk implements SplitCharacter{
  * Returns <VAR>null</VAR> if the <CODE>PdfChunk</CODE> wasn't truncated.
  *
  * @param		width		a given width
- * @return		the <CODE>PdfChunk</CODE> that doesn't fit into the width.
- */
+
+ * @return		the <CODE>PdfChunk</CODE> that doesn't fit into the width. */
     
     PdfChunk truncate(float width) {
         if (image != null) {
@@ -483,8 +491,8 @@ public class PdfChunk implements SplitCharacter{
 /**
  * Returns the font of this <CODE>Chunk</CODE>.
  *
- * @return	a <CODE>PdfFont</CODE>
- */
+
+ * @return	a <CODE>PdfFont</CODE> */
     
     PdfFont font() {
         return font;
@@ -493,8 +501,8 @@ public class PdfChunk implements SplitCharacter{
 /**
  * Returns the color of this <CODE>Chunk</CODE>.
  *
- * @return	a <CODE>Color</CODE>
- */
+
+ * @return	a <CODE>Color</CODE> */
     
     Color color() {
         return (Color)noStroke.get(Chunk.COLOR);
@@ -503,8 +511,8 @@ public class PdfChunk implements SplitCharacter{
 /**
  * Returns the width of this <CODE>PdfChunk</CODE>.
  *
- * @return	a width
- */
+
+ * @return	a width */
     
     float width() {
         return font.width(value);
@@ -512,8 +520,8 @@ public class PdfChunk implements SplitCharacter{
     
 /**
  * Checks if the <CODE>PdfChunk</CODE> split was caused by a newline.
- * @return <CODE>true</CODE> if the <CODE>PdfChunk</CODE> split was caused by a newline.
- */
+
+ * @return <CODE>true</CODE> if the <CODE>PdfChunk</CODE> split was caused by a newline. */
     
     public boolean isNewlineSplit()
     {
@@ -525,8 +533,8 @@ public class PdfChunk implements SplitCharacter{
  * extra character and word spacing.
  * @param charSpacing the extra character spacing
  * @param wordSpacing the extra word spacing
- * @return the calculated width
- */
+
+ * @return the calculated width */
     
     public float getWidthCorrected(float charSpacing, float wordSpacing)
     {
@@ -542,8 +550,8 @@ public class PdfChunk implements SplitCharacter{
     
     /**
      * Gets the text displacement relatiev to the baseline.
-     * @return a displacement in points
-     */
+    
+     * @return a displacement in points */
     public float getTextRise() {
     	Float f = (Float) getAttribute(Chunk.SUBSUPSCRIPT);
     	if (f != null) {
@@ -554,8 +562,8 @@ public class PdfChunk implements SplitCharacter{
     
 /**
  * Trims the last space.
- * @return the width of the space trimmed, otherwise 0
- */
+
+ * @return the width of the space trimmed, otherwise 0 */
     
     public float trimLastSpace()
     {
@@ -579,8 +587,8 @@ public class PdfChunk implements SplitCharacter{
  * Gets an attribute. The search is made in <CODE>attributes</CODE>
  * and <CODE>noStroke</CODE>.
  * @param name the attribute key
- * @return the attribute value or null if not found
- */
+
+ * @return the attribute value or null if not found */
     
     Object getAttribute(String name)
     {
@@ -592,8 +600,8 @@ public class PdfChunk implements SplitCharacter{
 /**
  *Checks if the attribute exists.
  * @param name the attribute key
- * @return <CODE>true</CODE> if the attribute exists
- */
+
+ * @return <CODE>true</CODE> if the attribute exists */
     
     boolean isAttribute(String name)
     {
@@ -604,8 +612,8 @@ public class PdfChunk implements SplitCharacter{
     
 /**
  * Checks if this <CODE>PdfChunk</CODE> needs some special metrics handling.
- * @return <CODE>true</CODE> if this <CODE>PdfChunk</CODE> needs some special metrics handling.
- */
+
+ * @return <CODE>true</CODE> if this <CODE>PdfChunk</CODE> needs some special metrics handling. */
     
     boolean isStroked()
     {
@@ -614,8 +622,8 @@ public class PdfChunk implements SplitCharacter{
     
 /**
  * Checks if there is an image in the <CODE>PdfChunk</CODE>.
- * @return <CODE>true</CODE> if an image is present
- */
+
+ * @return <CODE>true</CODE> if an image is present */
     
     boolean isImage()
     {
@@ -624,8 +632,8 @@ public class PdfChunk implements SplitCharacter{
     
 /**
  * Gets the image in the <CODE>PdfChunk</CODE>.
- * @return the image or <CODE>null</CODE>
- */
+
+ * @return the image or <CODE>null</CODE> */
     
     Image getImage()
     {
@@ -644,8 +652,8 @@ public class PdfChunk implements SplitCharacter{
     
 /**
  * Gets the image offset in the x direction
- * @return the image offset in the x direction
- */
+
+ * @return the image offset in the x direction */
     
     float getImageOffsetX()
     {
@@ -664,8 +672,8 @@ public class PdfChunk implements SplitCharacter{
     
 /**
  * Gets the image offset in the y direction
- * @return Gets the image offset in the y direction
- */
+
+ * @return Gets the image offset in the y direction */
     
     float getImageOffsetY()
     {
@@ -691,8 +699,8 @@ public class PdfChunk implements SplitCharacter{
 
     /**
      * Tells you if this string is in Chinese, Japanese, Korean or Identity-H.
-     * @return true if the Chunk has a special encoding
-     */
+    
+     * @return true if the Chunk has a special encoding */
     
     boolean isSpecialEncoding() {
         return encoding.equals(CJKFont.CJK_ENCODING) || encoding.equals(BaseFont.IDENTITY_H);
@@ -701,13 +709,17 @@ public class PdfChunk implements SplitCharacter{
     /**
      * Gets the encoding of this string.
      *
-     * @return		a <CODE>String</CODE>
-     */
+    
+     * @return		a <CODE>String</CODE> */
     
     String getEncoding() {
         return encoding;
     }
 
+    /**
+     * Method length.
+     * @return int
+     */
     int length() {
         return value.length();
     }
@@ -721,7 +733,8 @@ public class PdfChunk implements SplitCharacter{
  * @param end end position in the array
  * @param	cc		the character array that has to be checked
  * @param ck chunk array
- * @return	<CODE>true</CODE> if the character can be used to split a string, <CODE>false</CODE> otherwise
+
+ * @return	<CODE>true</CODE> if the character can be used to split a string, <CODE>false</CODE> otherwise * @see com.lowagie.text.SplitCharacter#isSplitCharacter(int, int, int, char[], PdfChunk[])
  */
     public boolean isSplitCharacter(int start, int current, int end, char[] cc, PdfChunk[] ck) {
         char c;
@@ -740,6 +753,15 @@ public class PdfChunk implements SplitCharacter{
         || (c >= 0xff61 && c < 0xffa0));
     }
     
+    /**
+     * Method isExtSplitCharacter.
+     * @param start int
+     * @param current int
+     * @param end int
+     * @param cc char[]
+     * @param ck PdfChunk[]
+     * @return boolean
+     */
     boolean isExtSplitCharacter(int start, int current, int end, char[] cc, PdfChunk[] ck) {
         return splitCharacter.isSplitCharacter(start, current, end, cc, ck);
     }
@@ -748,8 +770,8 @@ public class PdfChunk implements SplitCharacter{
  * Removes all the <VAR>' '</VAR> and <VAR>'-'</VAR>-characters on the right of a <CODE>String</CODE>.
  * <P>
  * @param	string		the <CODE>String<CODE> that has to be trimmed.
- * @return	the trimmed <CODE>String</CODE>
- */    
+
+ * @return	the trimmed <CODE>String</CODE> */    
     String trim(String string) {
         BaseFont ft = font.getFont();
         if (ft.getFontType() == BaseFont.FONT_TYPE_CJK && ft.getUnicodeEquivalent(' ') != ' ') {
@@ -765,16 +787,30 @@ public class PdfChunk implements SplitCharacter{
         return string;
     }
 
+    /**
+     * Method changeLeading.
+     * @return boolean
+     */
     public boolean changeLeading() {
         return changeLeading;
     }
     
+    /**
+     * Method getCharWidth.
+     * @param c char
+     * @return float
+     */
     float getCharWidth(char c) {
         if (noPrint(c))
             return 0;
         return font.width(c);
     }
     
+    /**
+     * Method noPrint.
+     * @param c char
+     * @return boolean
+     */
     public static boolean noPrint(char c) {
         return ((c >= 0x200b && c <= 0x200f) || (c >= 0x202a && c <= 0x202e));
     }

@@ -66,6 +66,8 @@ import com.lowagie.text.pdf.PdfString;
  * With this class you can create an Xmp Stream that can be used for adding
  * Metadata to a PDF Dictionary. Remark that this class doesn't cover the
  * complete XMP specification. 
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class XmpWriter {
 
@@ -98,8 +100,8 @@ public class XmpWriter {
 	 * @param os
 	 * @param utfEncoding
 	 * @param extraSpace
-	 * @throws IOException
-	 */
+	
+	 * @throws IOException */
 	public XmpWriter(OutputStream os, String utfEncoding, int extraSpace) throws IOException {
 		this.extraSpace = extraSpace;
 		writer = new OutputStreamWriter(os, utfEncoding);
@@ -112,8 +114,8 @@ public class XmpWriter {
 	/**
 	 * Creates an XmpWriter.
 	 * @param os
-	 * @throws IOException
-	 */
+	
+	 * @throws IOException */
 	public XmpWriter(OutputStream os) throws IOException {
 		this(os, UTF8, 20);
 	}
@@ -134,8 +136,8 @@ public class XmpWriter {
 	 * Adds an rdf:Description.
 	 * @param xmlns
 	 * @param content
-	 * @throws IOException
-	 */
+	
+	 * @throws IOException */
 	public void addRdfDescription(String xmlns, String content) throws IOException {
 		writer.write("<rdf:Description rdf:about='");
 		writer.write(about);
@@ -149,8 +151,8 @@ public class XmpWriter {
 	/**
 	 * Adds an rdf:Description.
 	 * @param s
-	 * @throws IOException
-	 */
+	
+	 * @throws IOException */
 	public void addRdfDescription(XmpSchema s) throws IOException {
 		writer.write("<rdf:Description rdf:about='");
 		writer.write(about);
@@ -163,8 +165,8 @@ public class XmpWriter {
 	
 	/**
 	 * Flushes and closes the XmpWriter.
-	 * @throws IOException
-	 */
+	
+	 * @throws IOException */
 	public void close() throws IOException {
 		writer.write("</rdf:RDF>");
 		writer.write("</x:xmpmeta>\n");
@@ -179,8 +181,8 @@ public class XmpWriter {
     /**
      * @param os
      * @param info
-     * @throws IOException
-     */
+    
+     * @throws IOException */
     public XmpWriter(OutputStream os, PdfDictionary info) throws IOException {
         this(os);
         if (info != null) {
@@ -228,8 +230,8 @@ public class XmpWriter {
     /**
      * @param os
      * @param info
-     * @throws IOException
-     */
+    
+     * @throws IOException */
     public XmpWriter(OutputStream os, HashMap info) throws IOException {
         this(os);
         if (info != null) {

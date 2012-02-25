@@ -52,6 +52,8 @@ package com.lowagie.text.pdf;
 
 /**
  * <CODE>PdfFormObject</CODE> is a type of XObject containing a template-object.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfFormXObject extends PdfStream {

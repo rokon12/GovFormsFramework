@@ -68,6 +68,8 @@ import com.lowagie.text.DocWriter;
  *
  * @see		PdfObject
  * @see		PdfIndirectReference
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfIndirectObject {
@@ -93,12 +95,19 @@ public class PdfIndirectObject {
  *
  * @param		number			the object number
  * @param		object			the direct object
+ * @param writer PdfWriter
  */
     
     PdfIndirectObject(int number, PdfObject object, PdfWriter writer) {
         this(number, 0, object, writer);
     }
     
+    /**
+     * Constructor for PdfIndirectObject.
+     * @param ref PdfIndirectReference
+     * @param object PdfObject
+     * @param writer PdfWriter
+     */
     PdfIndirectObject(PdfIndirectReference ref, PdfObject object, PdfWriter writer) {
         this(ref.getNumber(),ref.getGeneration(),object,writer);
     }
@@ -108,6 +117,7 @@ public class PdfIndirectObject {
  * @param		number			the object number
  * @param		generation		the generation number
  * @param		object			the direct object
+ * @param writer PdfWriter
  */
     
     PdfIndirectObject(int number, int generation, PdfObject object, PdfWriter writer) {
@@ -128,8 +138,8 @@ public class PdfIndirectObject {
 /**
  * Return the length of this <CODE>PdfIndirectObject</CODE>.
  *
- * @return		the length of the PDF-representation of this indirect object.
- */
+
+ * @return		the length of the PDF-representation of this indirect object. */
     
 //    public int length() {
 //        if (isStream)
@@ -153,8 +163,8 @@ public class PdfIndirectObject {
  * Writes eficiently to a stream
  *
  * @param os the stream to write to
- * @throws IOException on write error
- */
+
+ * @throws IOException on write error */
     void writeTo(OutputStream os) throws IOException
     {
         os.write(DocWriter.getISOBytes(String.valueOf(number)));

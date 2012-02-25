@@ -67,6 +67,7 @@ import com.lowagie.text.pdf.TextField;
  * Class for an index.
  * 
  * @author Michael Niedermair
+ * @version $Revision: 1.0 $
  */
 public class FieldPositioningEvents extends PdfPageEventHelper implements PdfPCellEvent {
 
@@ -90,20 +91,27 @@ public class FieldPositioningEvents extends PdfPageEventHelper implements PdfPCe
     
     /**
      * Add a PdfFormField that has to be tied to a generic Chunk.
+     * @param text String
+     * @param field PdfFormField
      */
     public void addField(String text, PdfFormField field) {
     	genericChunkFields.put(text, field);
     }
     
-    /** Creates a new event. This constructor will be used if you need to position fields with a Cell Event. */
+    /** Creates a new event. This constructor will be used if you need to position fields with a Cell Event. * @param writer PdfWriter
+     * @param field PdfFormField
+     */
     public FieldPositioningEvents(PdfWriter writer, PdfFormField field) {
     	this.cellField = field;
     	this.fieldWriter = writer;
     }  
     
     /** Creates a new event. This constructor will be used if you need to position fields with a Cell Event. 
-     * @throws DocumentException
-     * @throws IOException*/
+    
+    * @param writer PdfWriter
+     * @param text String
+     * @throws IOException
+     * @throws DocumentException * @throws IOExceptionn*/
     public FieldPositioningEvents(PdfWriter writer, String text) throws IOException, DocumentException {
     	this.fieldWriter = writer;
     	TextField tf = new TextField(writer, new Rectangle(0, 0), text);

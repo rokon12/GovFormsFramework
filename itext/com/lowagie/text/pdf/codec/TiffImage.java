@@ -55,13 +55,14 @@ import java.awt.color.ICC_Profile;
 
 /** Reads TIFF images
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class TiffImage {
     
     /** Gets the number of pages the TIFF document has.
      * @param s the file source
-     * @return the number of pages
-     */    
+    
+     * @return the number of pages */    
     public static int getNumberOfPages(RandomAccessFileOrArray s) {
         try {
             return TIFFDirectory.getNumDirectories(s);
@@ -71,6 +72,12 @@ public class TiffImage {
         }
     }
 
+    /**
+     * Method getDpi.
+     * @param fd TIFFField
+     * @param resolutionUnit int
+     * @return int
+     */
     static int getDpi(TIFFField fd, int resolutionUnit) {
         if (fd == null)
             return 0;
@@ -92,8 +99,8 @@ public class TiffImage {
     /** Reads a page from a TIFF image. Direct mode is not used.
      * @param s the file source
      * @param page the page to get. The first page is 1
-     * @return the <CODE>Image</CODE>
-     */    
+    
+     * @return the <CODE>Image</CODE> */    
     public static Image getTiffImage(RandomAccessFileOrArray s, int page) {
         return getTiffImage(s, page, false);
     }
@@ -104,8 +111,8 @@ public class TiffImage {
      * @param direct for single strip, CCITT images, generate the image
      * by direct byte copying. It's faster but may not work
      * every time
-     * @return the <CODE>Image</CODE>
-     */    
+    
+     * @return the <CODE>Image</CODE> */    
     public static Image getTiffImage(RandomAccessFileOrArray s, int page, boolean direct) {
         if (page < 1)
             throw new IllegalArgumentException("The page number must be >= 1.");
@@ -270,6 +277,12 @@ public class TiffImage {
         }
     }
     
+    /**
+     * Method getTiffImageColor.
+     * @param dir TIFFDirectory
+     * @param s RandomAccessFileOrArray
+     * @return Image
+     */
     protected static Image getTiffImageColor(TIFFDirectory dir, RandomAccessFileOrArray s) {
         try {
             int compression = (int)dir.getFieldAsLong(TIFFConstants.TIFFTAG_COMPRESSION);
@@ -459,6 +472,12 @@ public class TiffImage {
         }
     }
     
+    /**
+     * Method getArrayLongShort.
+     * @param dir TIFFDirectory
+     * @param tag int
+     * @return long[]
+     */
     static long[] getArrayLongShort(TIFFDirectory dir, int tag) {
         TIFFField field = dir.getField(tag);
         if (field == null)
@@ -476,6 +495,11 @@ public class TiffImage {
     }
     
     // Uncompress packbits compressed image data.
+    /**
+     * Method decodePackbits.
+     * @param data byte[]
+     * @param dst byte[]
+     */
     public static void decodePackbits(byte data[], byte[] dst) {
         int srcCount = 0, dstCount = 0;
         byte repeat, b;
@@ -501,6 +525,11 @@ public class TiffImage {
         }
     }
 
+    /**
+     * Method inflate.
+     * @param deflated byte[]
+     * @param inflated byte[]
+     */
     public static void inflate(byte[] deflated, byte[] inflated) {
         Inflater inflater = new Inflater();
         inflater.setInput(deflated);

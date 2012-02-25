@@ -51,6 +51,8 @@ import java.util.HashMap;
 
 /**
  * Implements the appearance stream to be used with form fields..
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfAppearance extends PdfTemplate {
@@ -93,6 +95,10 @@ public class PdfAppearance extends PdfTemplate {
         separator = ' ';
     }
     
+    /**
+     * Constructor for PdfAppearance.
+     * @param iref PdfIndirectReference
+     */
     PdfAppearance(PdfIndirectReference iref) {
         thisReference = iref;
     }
@@ -133,6 +139,10 @@ public class PdfAppearance extends PdfTemplate {
         content.append(psn.getBytes()).append(' ').append(size).append(" Tf").append_i(separator);
     }
 
+    /**
+     * Method getDuplicate.
+     * @return PdfContentByte
+     */
     public PdfContentByte getDuplicate() {
         PdfAppearance tpl = new PdfAppearance();
         tpl.writer = writer;

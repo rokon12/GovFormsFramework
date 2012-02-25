@@ -4,15 +4,26 @@ import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ */
 public class DEROutputStream
     extends FilterOutputStream implements DERTags
 {
+    /**
+     * Constructor for DEROutputStream.
+     * @param os OutputStream
+     */
     public DEROutputStream(
         OutputStream    os)
     {
         super(os);
     }
 
+    /**
+     * Method writeLength.
+     * @param length int
+     * @throws IOException
+     */
     private void writeLength(
         int length)
         throws IOException
@@ -40,6 +51,12 @@ public class DEROutputStream
         }
     }
 
+    /**
+     * Method writeEncoded.
+     * @param tag int
+     * @param bytes byte[]
+     * @throws IOException
+     */
     void writeEncoded(
         int     tag,
         byte[]  bytes)
@@ -50,6 +67,10 @@ public class DEROutputStream
         write(bytes);
     }
 
+    /**
+     * Method writeNull.
+     * @throws IOException
+     */
     protected void writeNull()
         throws IOException
     {
@@ -57,6 +78,11 @@ public class DEROutputStream
         write(0x00);
     }
 
+    /**
+     * Method writeObject.
+     * @param obj Object
+     * @throws IOException
+     */
     public void writeObject(
         Object    obj)
         throws IOException

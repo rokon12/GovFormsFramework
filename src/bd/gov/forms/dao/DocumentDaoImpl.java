@@ -23,7 +23,8 @@ import bd.gov.forms.utils.DateUtil;
 
 /**
  * @author A. N. M. Bazlur Rahman
- * */
+ * * @version $Revision: 1.0 $
+ */
 
 @Repository("documentDao")
 public class DocumentDaoImpl implements DocumentDao {
@@ -33,6 +34,12 @@ public class DocumentDaoImpl implements DocumentDao {
 	private JdbcTemplate jdbcTemplate;
 	String query = null;
 
+	/**
+	 * Method find.
+	 * @param id int
+	 * @return Document
+	 * @see bd.gov.forms.dao.DocumentDao#find(int)
+	 */
 	@Override
 	public Document find(int id) {
 
@@ -68,6 +75,11 @@ public class DocumentDaoImpl implements DocumentDao {
 		return null;
 	}
 
+	/**
+	 * Method listAll.
+	 * @return List<Document>
+	 * @see bd.gov.forms.dao.DocumentDao#listAll()
+	 */
 	@Override
 	public List<Document> listAll() {
 		query = "select * from documents";
@@ -84,6 +96,11 @@ public class DocumentDaoImpl implements DocumentDao {
 		return null;
 	}
 
+	/**
+	 * Method save.
+	 * @param document Document
+	 * @see bd.gov.forms.dao.DocumentDao#save(Document)
+	 */
 	@Override
 	public void save(final Document document) {
 		query = "insert into documents (name, description, filename, content, content_type, created) values (?, ?, ?, ?, ?, ?)";
@@ -123,6 +140,11 @@ public class DocumentDaoImpl implements DocumentDao {
 		}
 	}
 
+	/**
+	 * Method delete.
+	 * @param id int
+	 * @see bd.gov.forms.dao.DocumentDao#delete(int)
+	 */
 	@Override
 	public void delete(int id) {
 		query = "delete from documents WHERE id = ?";

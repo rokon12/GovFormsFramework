@@ -28,6 +28,7 @@ import com.lowagie.text.pdf.BaseFont;
  * You can use only the static methods or create an instance.
  *
  * @author Carlos Villegas <cav@uniscope.co.jp>
+ * @version $Revision: 1.0 $
  */
 public class Hyphenator {
     
@@ -59,8 +60,8 @@ public class Hyphenator {
     /**
      * @param lang
      * @param country
-     * @return the hyphenation tree
-     */
+    
+     * @return the hyphenation tree */
     public static HyphenationTree getHyphenationTree(String lang,
             String country) {
         String key = lang;
@@ -88,8 +89,8 @@ public class Hyphenator {
 
     /**
      * @param key
-     * @return a hyphenation tree
-     */
+    
+     * @return a hyphenation tree */
     public static HyphenationTree getResourceHyphenationTree(String key) {
         try {
             InputStream stream = BaseFont.getResourceStream(defaultHyphLocation + key + ".xml");
@@ -108,8 +109,8 @@ public class Hyphenator {
 
     /**
      * @param key
-     * @return a hyphenation tree
-     */
+    
+     * @return a hyphenation tree */
     public static HyphenationTree getFileHyphenationTree(String key) {
         try {
             if (hyphenDir == null)
@@ -140,8 +141,8 @@ public class Hyphenator {
      * @param word
      * @param leftMin
      * @param rightMin
-     * @return a hyphenation object
-     */
+    
+     * @return a hyphenation object */
     public static Hyphenation hyphenate(String lang, String country,
                                         String word, int leftMin,
                                         int rightMin) {
@@ -162,8 +163,8 @@ public class Hyphenator {
      * @param len
      * @param leftMin
      * @param rightMin
-     * @return a hyphenation object
-     */
+    
+     * @return a hyphenation object */
     public static Hyphenation hyphenate(String lang, String country,
                                         char[] word, int offset, int len,
                                         int leftMin, int rightMin) {
@@ -202,8 +203,8 @@ public class Hyphenator {
      * @param word
      * @param offset
      * @param len
-     * @return a hyphenation object
-     */
+    
+     * @return a hyphenation object */
     public Hyphenation hyphenate(char[] word, int offset, int len) {
         if (hyphenTree == null) {
             return null;
@@ -214,8 +215,8 @@ public class Hyphenator {
 
     /**
      * @param word
-     * @return a hyphenation object
-     */
+    
+     * @return a hyphenation object */
     public Hyphenation hyphenate(String word) {
         if (hyphenTree == null) {
             return null;
@@ -224,8 +225,8 @@ public class Hyphenator {
     }
 
     /** Getter for property hyphenDir.
-     * @return Value of property hyphenDir.
-     */
+    
+     * @return Value of property hyphenDir. */
     public static String getHyphenDir() {
         return hyphenDir;
     }

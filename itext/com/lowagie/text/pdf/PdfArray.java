@@ -66,6 +66,8 @@ import java.util.ListIterator;
  * section 4.6 (page 40).
  *
  * @see		PdfObject
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfArray extends PdfObject {
@@ -98,12 +100,20 @@ public class PdfArray extends PdfObject {
         arrayList.add(object);
     }
     
+    /**
+     * Constructor for PdfArray.
+     * @param values float[]
+     */
     public PdfArray(float values[]) {
         super(ARRAY);
         arrayList = new ArrayList();
         add(values);
     }
     
+    /**
+     * Constructor for PdfArray.
+     * @param values int[]
+     */
     public PdfArray(int values[]) {
         super(ARRAY);
         arrayList = new ArrayList();
@@ -126,7 +136,10 @@ public class PdfArray extends PdfObject {
 /**
  * Returns the PDF representation of this <CODE>PdfArray</CODE>.
  *
- * @return		an array of <CODE>byte</CODE>s
+
+ * @param writer PdfWriter
+ * @param os OutputStream
+ * @throws IOException
  */
     
     public void toPdf(PdfWriter writer, OutputStream os) throws IOException {
@@ -154,8 +167,8 @@ public class PdfArray extends PdfObject {
 /**
  * Returns an ArrayList containing <CODE>PdfObject</CODE>s.
  *
- * @return		an ArrayList
- */
+
+ * @return		an ArrayList */
     
     public ArrayList getArrayList() {
         return arrayList;
@@ -164,8 +177,8 @@ public class PdfArray extends PdfObject {
 /**
  * Returns the number of entries in the array.
  *
- * @return		the size of the ArrayList
- */
+
+ * @return		the size of the ArrayList */
     
     public int size() {
         return arrayList.size();
@@ -175,19 +188,29 @@ public class PdfArray extends PdfObject {
  * Adds a <CODE>PdfObject</CODE> to the <CODE>PdfArray</CODE>.
  *
  * @param		object			<CODE>PdfObject</CODE> to add
- * @return		<CODE>true</CODE>
- */
+
+ * @return		<CODE>true</CODE> */
     
     public boolean add(PdfObject object) {
         return arrayList.add(object);
     }
     
+    /**
+     * Method add.
+     * @param values float[]
+     * @return boolean
+     */
     public boolean add(float values[]) {
         for (int k = 0; k < values.length; ++k)
             arrayList.add(new PdfNumber(values[k]));
         return true;
     }
     
+    /**
+     * Method add.
+     * @param values int[]
+     * @return boolean
+     */
     public boolean add(int values[]) {
         for (int k = 0; k < values.length; ++k)
             arrayList.add(new PdfNumber(values[k]));
@@ -210,13 +233,17 @@ public class PdfArray extends PdfObject {
  * Checks if the <CODE>PdfArray</CODE> already contains a certain <CODE>PdfObject</CODE>.
  *
  * @param		object			<CODE>PdfObject</CODE> to check
- * @return		<CODE>true</CODE>
- */
+
+ * @return		<CODE>true</CODE> */
     
     public boolean contains(PdfObject object) {
         return arrayList.contains(object);
     }
     
+    /**
+     * Method listIterator.
+     * @return ListIterator
+     */
     public ListIterator listIterator() {
         return arrayList.listIterator();
     }

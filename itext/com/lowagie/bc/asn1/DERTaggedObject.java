@@ -7,6 +7,8 @@ import java.io.IOException;
  * DER TaggedObject - in ASN.1 nottation this is any object proceeded by
  * a [n] where n is some number - these are assume to follow the construction
  * rules (as with sequences).
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class DERTaggedObject
     extends ASN1TaggedObject
@@ -38,6 +40,7 @@ public class DERTaggedObject
     /**
      * create an implicitly tagged object that contains a zero
      * length sequence.
+     * @param tagNo int
      */
     public DERTaggedObject(
         int             tagNo)
@@ -45,6 +48,11 @@ public class DERTaggedObject
         super(false, tagNo, new DERSequence());
     }
 
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
+     */
     void encode(
         DEROutputStream  out)
         throws IOException

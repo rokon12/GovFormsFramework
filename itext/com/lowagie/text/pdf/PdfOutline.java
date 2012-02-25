@@ -68,6 +68,8 @@ import java.io.IOException;
  * section 6.7 (page 104-106)
  *
  * @see		PdfDictionary
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfOutline extends PdfDictionary {
@@ -345,8 +347,8 @@ public class PdfOutline extends PdfDictionary {
     /**
      * Gets the indirect reference of this <CODE>PdfOutline</CODE>.
      *
-     * @return		the <CODE>PdfIndirectReference</CODE> to this outline.
-     */
+    
+     * @return		the <CODE>PdfIndirectReference</CODE> to this outline. */
     
     public PdfIndirectReference indirectReference() {
         return reference;
@@ -355,8 +357,8 @@ public class PdfOutline extends PdfDictionary {
     /**
      * Gets the parent of this <CODE>PdfOutline</CODE>.
      *
-     * @return		the <CODE>PdfOutline</CODE> that is the parent of this outline.
-     */
+    
+     * @return		the <CODE>PdfOutline</CODE> that is the parent of this outline. */
     
     public PdfOutline parent() {
         return parent;
@@ -366,8 +368,8 @@ public class PdfOutline extends PdfDictionary {
      * Set the page of the <CODE>PdfDestination</CODE>-object.
      *
      * @param pageReference indirect reference to the page
-     * @return <CODE>true</CODE> if this page was set as the <CODE>PdfDestination</CODE>-page.
-     */
+    
+     * @return <CODE>true</CODE> if this page was set as the <CODE>PdfDestination</CODE>-page. */
     
     public boolean setDestinationPage(PdfIndirectReference pageReference) {
         if (destination == null) {
@@ -378,16 +380,24 @@ public class PdfOutline extends PdfDictionary {
     
     /**
      * Gets the destination for this outline.
-     * @return the destination
-     */
+    
+     * @return the destination */
     public PdfDestination getPdfDestination() {
         return destination;
     }
     
+    /**
+     * Method getCount.
+     * @return int
+     */
     int getCount() {
         return count;
     }
 
+    /**
+     * Method setCount.
+     * @param count int
+     */
     void setCount(int count) {
         this.count = count;
     }
@@ -395,8 +405,8 @@ public class PdfOutline extends PdfDictionary {
     /**
      * returns the level of this outline.
      *
-     * @return		a level
-     */
+    
+     * @return		a level */
     
     public int level() {
         if (parent == null) {
@@ -410,8 +420,8 @@ public class PdfOutline extends PdfDictionary {
      *
      * @param writer the encryption information
      * @param os
-     * @throws IOException
-     */
+    
+     * @throws IOException */
     
     public void toPdf(PdfWriter writer, OutputStream os) throws IOException {
         if (color != null && !color.equals(Color.black)) {
@@ -448,8 +458,8 @@ public class PdfOutline extends PdfDictionary {
     
     /**
      * Returns the kids of this outline
-     * @return an ArrayList with PdfOutlines
-     */
+    
+     * @return an ArrayList with PdfOutlines */
     public ArrayList getKids() {
         return kids;
     }
@@ -463,8 +473,8 @@ public class PdfOutline extends PdfDictionary {
     }
     
     /** Getter for property tag.
-     * @return Value of property tag.
-     */
+    
+     * @return Value of property tag. */
     public String getTag() {
         return tag;
     }
@@ -478,8 +488,8 @@ public class PdfOutline extends PdfDictionary {
     
     /**
      * Gets the title of this outline
-     * @return the title as a String
-     */
+    
+     * @return the title as a String */
     public String getTitle() {
         PdfString title = (PdfString)get(PdfName.TITLE);
         return title.toString();
@@ -494,8 +504,8 @@ public class PdfOutline extends PdfDictionary {
     }
     
     /** Getter for property open.
-     * @return Value of property open.
-     */
+    
+     * @return Value of property open. */
     public boolean isOpen() {
         return open;
     }
@@ -508,9 +518,9 @@ public class PdfOutline extends PdfDictionary {
     }
     
     /** Getter for property color.
-     * @return Value of property color.
+    
      *
-     */
+     * @return Value of property color. */
     public Color getColor() {
         return this.color;
     }
@@ -524,9 +534,9 @@ public class PdfOutline extends PdfDictionary {
     }
     
     /** Getter for property style.
-     * @return Value of property style.
+    
      *
-     */
+     * @return Value of property style. */
     public int getStyle() {
         return this.style;
     }

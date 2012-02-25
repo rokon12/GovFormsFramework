@@ -17,6 +17,8 @@ import java.io.*;
 import java.awt.*;
 import java.awt.geom.*;
 
+/**
+ */
 public class PAContext
     extends Object {
 
@@ -29,14 +31,27 @@ public class PAContext
 
   protected Object lastUnknownIdentifier;
 
+  /**
+   * Constructor for PAContext.
+   * @param component Component
+   */
   public PAContext(Component component) {
     this(new PAPencil(component));
   }
 
+  /**
+   * Constructor for PAContext.
+   * @param g Graphics2D
+   * @param size Dimension
+   */
   public PAContext(Graphics2D g, Dimension size) {
     this(new PAPencil(g, size));
   }
 
+  /**
+   * Constructor for PAContext.
+   * @param pencil PAPencil
+   */
   public PAContext(PAPencil pencil) {
     super();
     this.pencil = pencil;
@@ -50,6 +65,11 @@ public class PAContext
     this.lastUnknownIdentifier = null;
   }
 
+  /**
+   * Method draw.
+   * @param inputStream InputStream
+   * @throws PainterException
+   */
   public void draw(InputStream inputStream) throws PainterException {
     try {
 
@@ -64,10 +84,20 @@ public class PAContext
     }
   }
 
+  /**
+   * Method getLastUnknownIdentifier.
+   * @return Object
+   */
   public Object getLastUnknownIdentifier() {
     return this.lastUnknownIdentifier;
   }
 
+  /**
+   * Method popNumberOperands.
+   * @param n int
+   * @return double[]
+   * @throws PainterException
+   */
   public double[] popNumberOperands(int n) throws PainterException {
     double[] result = new double[n];
     Object objectValue;
@@ -91,6 +121,12 @@ public class PAContext
     return result;
   }
 
+  /**
+   * Method popOperands.
+   * @param n int
+   * @return Object[]
+   * @throws PainterException
+   */
   public Object[] popOperands(int n) throws PainterException {
     Object[] result = new Object[n];
     Object objectValue;
@@ -107,6 +143,11 @@ public class PAContext
     return result;
   }
 
+  /**
+   * Method peekOperand.
+   * @return Object
+   * @throws PainterException
+   */
   public Object peekOperand() throws PainterException {
     Object objectValue;
 
@@ -119,6 +160,11 @@ public class PAContext
     return objectValue;
   }
 
+  /**
+   * Method findIdentifier.
+   * @param identifier Object
+   * @return Object
+   */
   public Object findIdentifier(Object identifier) {
     Object result = null;
     int i, n;
@@ -136,6 +182,11 @@ public class PAContext
     return result;
   }
 
+  /**
+   * Method findDictionary.
+   * @param identifier Object
+   * @return Object
+   */
   public Object findDictionary(Object identifier) {
     Object result = null;
     HashMap dictionary = null;
@@ -156,6 +207,10 @@ public class PAContext
     }
   }
 
+  /**
+   * Method collectArray.
+   * @throws PainterException
+   */
   public void collectArray() throws PainterException {
     ArrayList result;
     Object objectValue;
@@ -196,12 +251,20 @@ public class PAContext
     this.operands.push(result);
   }
 
+  /**
+   * Method constructGlobalDict.
+   * @return HashMap
+   */
   protected HashMap constructGlobalDict() {
     HashMap globalDict = new HashMap();
 
     return globalDict;
   }
 
+  /**
+   * Method constructSystemDict.
+   * @return HashMap
+   */
   protected HashMap constructSystemDict() {
     HashMap systemDict = new HashMap();
 

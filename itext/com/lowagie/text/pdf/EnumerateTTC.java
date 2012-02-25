@@ -56,23 +56,41 @@ import com.lowagie.text.DocumentException;
 /** Enumerates all the fonts inside a True Type Collection.
  *
  * @author  Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 class EnumerateTTC extends TrueTypeFont{
 
     protected String[] names;
 
+    /**
+     * Constructor for EnumerateTTC.
+     * @param ttcFile String
+     * @throws DocumentException
+     * @throws IOException
+     */
     EnumerateTTC(String ttcFile) throws DocumentException, IOException {
         fileName = ttcFile;
         rf = new RandomAccessFileOrArray(ttcFile);
         findNames();
     }
 
+    /**
+     * Constructor for EnumerateTTC.
+     * @param ttcArray byte[]
+     * @throws DocumentException
+     * @throws IOException
+     */
     EnumerateTTC(byte ttcArray[]) throws DocumentException, IOException {
         fileName = "Byte array TTC";
         rf = new RandomAccessFileOrArray(ttcArray);
         findNames();
     }
     
+    /**
+     * Method findNames.
+     * @throws DocumentException
+     * @throws IOException
+     */
     void findNames() throws DocumentException, IOException {
         tables = new HashMap();
         
@@ -111,6 +129,10 @@ class EnumerateTTC extends TrueTypeFont{
         }
     }
     
+    /**
+     * Method getNames.
+     * @return String[]
+     */
     String[] getNames() {
         return names;
     }

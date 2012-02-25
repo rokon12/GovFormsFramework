@@ -55,6 +55,8 @@ import java.util.Iterator;
 
 /**
  * StringBuffer to construct an XMP array.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class XmpArray extends ArrayList {
 
@@ -78,8 +80,8 @@ public class XmpArray extends ArrayList {
 	
 	/**
 	 * Returns the String representation of the XmpArray.
-	 * @return a String representation
-	 */
+	
+	 * @return a String representation */
 	public String toString() {
 		StringBuffer buf = new StringBuffer("<");
 		buf.append(type);

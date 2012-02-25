@@ -58,6 +58,8 @@ import java.net.MalformedURLException;
  *
  * @see		Element
  * @see		Jpeg
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class Watermark extends Image implements Element {
@@ -78,8 +80,8 @@ public class Watermark extends Image implements Element {
  * @param		image		an <CODE>Image</CODE>-object
  * @param		offsetX		the offset in x-direction
  * @param		offsetY		the offset in y-direction
- * @throws MalformedURLException
- */
+
+ * @throws MalformedURLException */
     
     public Watermark(Image image, float offsetX, float offsetY) throws MalformedURLException {
         super(image);
@@ -92,7 +94,8 @@ public class Watermark extends Image implements Element {
 /**
  * Gets the type of the text element.
  *
- * @return	a type
+
+ * @return	a type * @see com.lowagie.text.Element#type()
  */
     
     public int type() {
@@ -104,8 +107,8 @@ public class Watermark extends Image implements Element {
 /**
  * Returns the offset in x direction.
  *
- * @return		an offset
- */
+
+ * @return		an offset */
     
     public float offsetX() {
         return offsetX;
@@ -114,8 +117,8 @@ public class Watermark extends Image implements Element {
 /**
  * Returns the offset in y direction.
  *
- * @return		an offset
- */
+
+ * @return		an offset */
     
     public float offsetY() {
         return offsetY;

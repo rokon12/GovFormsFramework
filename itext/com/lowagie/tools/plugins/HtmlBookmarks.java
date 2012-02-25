@@ -79,6 +79,8 @@ import com.lowagie.tools.arguments.ToolArgument;
 
 /**
  * Allows you to generate an index file in HTML containing Bookmarks to an existing PDF file.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class HtmlBookmarks extends AbstractTool {
 	
@@ -204,8 +206,8 @@ public class HtmlBookmarks extends AbstractTool {
 	 * @param pdf the link to the PDF file
 	 * @param section the section that gets the line
 	 * @param bookmark the bookmark that has the data for the line
-	 * @return a subsection of section
-	 */
+	
+	 * @return a subsection of section */
 	private static Section createBookmark(String pdf, Section section, HashMap bookmark) {
 		Section s;
 		Paragraph title = new Paragraph((String)bookmark.get("Title"));

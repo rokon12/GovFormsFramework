@@ -50,6 +50,8 @@ import com.lowagie.text.DocumentException;
 import com.lowagie.text.Image;
 /**
  * The content where Type3 glyphs are written to.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class Type3Glyph extends PdfContentByte {
 
@@ -60,6 +62,17 @@ public class Type3Glyph extends PdfContentByte {
         super(null);
     }
     
+    /**
+     * Constructor for Type3Glyph.
+     * @param writer PdfWriter
+     * @param pageResources PageResources
+     * @param wx float
+     * @param llx float
+     * @param lly float
+     * @param urx float
+     * @param ury float
+     * @param colorized boolean
+     */
     Type3Glyph(PdfWriter writer, PageResources pageResources, float wx, float llx, float lly, float urx, float ury, boolean colorized) {
         super(writer);
         this.pageResources = pageResources;
@@ -72,16 +85,36 @@ public class Type3Glyph extends PdfContentByte {
         }
     }
     
+    /**
+     * Method getPageResources.
+     * @return PageResources
+     */
     PageResources getPageResources() {
         return pageResources;
     }
 
+    /**
+     * Method addImage.
+     * @param image Image
+     * @param a float
+     * @param b float
+     * @param c float
+     * @param d float
+     * @param e float
+     * @param f float
+     * @param inlineImage boolean
+     * @throws DocumentException
+     */
     public void addImage(Image image, float a, float b, float c, float d, float e, float f, boolean inlineImage) throws DocumentException {
         if (!colorized && (!image.isMask() || !(image.bpc() == 1 || image.bpc() > 0xff)))
             throw new DocumentException("Not colorized Typed3 fonts only accept mask images.");
         super.addImage(image, a, b, c, d, e, f, inlineImage);
     }
     
+    /**
+     * Method getDuplicate.
+     * @return PdfContentByte
+     */
     public PdfContentByte getDuplicate() {
         Type3Glyph dup = new Type3Glyph();
         dup.writer = writer;

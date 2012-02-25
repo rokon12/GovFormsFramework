@@ -67,12 +67,16 @@ import com.lowagie.text.ExceptionConverter;
  * <CODE>PdfContentByte</CODE> is an object containing the user positioned
  * text and graphic contents of a page. It knows how to apply the proper
  * font encoding.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfContentByte {
     
     /**
      * This class keeps the graphic state of the current page
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     
     static class GraphicState {
@@ -195,8 +199,8 @@ public class PdfContentByte {
     /**
      * Returns the <CODE>String</CODE> representation of this <CODE>PdfContentByte</CODE>-object.
      *
-     * @return		a <CODE>String</CODE>
-     */
+    
+     * @return		a <CODE>String</CODE> */
     
     public String toString() {
         return content.toString();
@@ -204,8 +208,8 @@ public class PdfContentByte {
     
     /**
      * Gets the internal buffer.
-     * @return the internal buffer
-     */
+    
+     * @return the internal buffer */
     public ByteBuffer getInternalBuffer() {
         return content;
     }
@@ -213,8 +217,8 @@ public class PdfContentByte {
     /** Returns the PDF representation of this <CODE>PdfContentByte</CODE>-object.
      *
      * @param writer the <CODE>PdfWriter</CODE>
-     * @return a <CODE>byte</CODE> array with the representation
-     */
+    
+     * @return a <CODE>byte</CODE> array with the representation */
     
     public byte[] toPdf(PdfWriter writer) {
         return content.toByteArray();
@@ -237,8 +241,8 @@ public class PdfContentByte {
     /**
      * Gets the x position of the text line matrix.
      *
-     * @return the x position of the text line matrix
-     */
+    
+     * @return the x position of the text line matrix */
     public float getXTLM() {
         return state.xTLM;
     }
@@ -246,8 +250,8 @@ public class PdfContentByte {
     /**
      * Gets the y position of the text line matrix.
      *
-     * @return the y position of the text line matrix
-     */
+    
+     * @return the y position of the text line matrix */
     public float getYTLM() {
         return state.yTLM;
     }
@@ -255,8 +259,8 @@ public class PdfContentByte {
     /**
      * Gets the current text leading.
      *
-     * @return the current text leading
-     */
+    
+     * @return the current text leading */
     public float getLeading() {
         return state.leading;
     }
@@ -986,8 +990,8 @@ public class PdfContentByte {
      * Adds an <CODE>Image</CODE> to the page. The <CODE>Image</CODE> must have
      * absolute positioning.
      * @param image the <CODE>Image</CODE> object
-     * @throws DocumentException if the <CODE>Image</CODE> does not have absolute positioning
-     */
+    
+     * @throws DocumentException if the <CODE>Image</CODE> does not have absolute positioning */
     public void addImage(Image image) throws DocumentException {
         addImage(image, false);
     }
@@ -997,8 +1001,8 @@ public class PdfContentByte {
      * absolute positioning. The image can be placed inline.
      * @param image the <CODE>Image</CODE> object
      * @param inlineImage <CODE>true</CODE> to place this image inline, <CODE>false</CODE> otherwise
-     * @throws DocumentException if the <CODE>Image</CODE> does not have absolute positioning
-     */
+    
+     * @throws DocumentException if the <CODE>Image</CODE> does not have absolute positioning */
     public void addImage(Image image, boolean inlineImage) throws DocumentException {
         if (!image.hasAbsolutePosition())
             throw new DocumentException("The image must have absolute positioning.");
@@ -1019,8 +1023,8 @@ public class PdfContentByte {
      * @param d an element of the transformation matrix
      * @param e an element of the transformation matrix
      * @param f an element of the transformation matrix
-     * @throws DocumentException on error
-     */
+    
+     * @throws DocumentException on error */
     public void addImage(Image image, float a, float b, float c, float d, float e, float f) throws DocumentException {
         addImage(image, a, b, c, d, e, f, false);
     }
@@ -1037,8 +1041,8 @@ public class PdfContentByte {
      * @param e an element of the transformation matrix
      * @param f an element of the transformation matrix
      * @param inlineImage <CODE>true</CODE> to place this image inline, <CODE>false</CODE> otherwise
-     * @throws DocumentException on error
-     */
+    
+     * @throws DocumentException on error */
     public void addImage(Image image, float a, float b, float c, float d, float e, float f, boolean inlineImage) throws DocumentException {
         try {
             if (image.getLayer() != null)
@@ -1297,8 +1301,8 @@ public class PdfContentByte {
      * Constructs a kern array for a text in a certain font
      * @param text the text
      * @param font the font
-     * @return a PdfTextArray
-     */
+    
+     * @return a PdfTextArray */
     public static PdfTextArray getKernArray(String text, BaseFont font) {
         PdfTextArray pa = new PdfTextArray();
         StringBuffer acc = new StringBuffer();
@@ -1433,8 +1437,8 @@ public class PdfContentByte {
     /**
      * Gets the size of this content.
      *
-     * @return the size of the content
-     */
+    
+     * @return the size of the content */
     int size() {
         return content.size();
     }
@@ -1443,8 +1447,8 @@ public class PdfContentByte {
      * Escapes a <CODE>byte</CODE> array according to the PDF conventions.
      *
      * @param b the <CODE>byte</CODE> array to escape
-     * @return an escaped <CODE>byte</CODE> array
-     */
+    
+     * @return an escaped <CODE>byte</CODE> array */
     static byte[] escapeString(byte b[]) {
         ByteBuffer content = new ByteBuffer();
         escapeString(b, content);
@@ -1512,8 +1516,8 @@ public class PdfContentByte {
     /**
      * Gets the root outline.
      *
-     * @return the root outline
-     */
+    
+     * @return the root outline */
     public PdfOutline getRootOutline() {
         checkWriter();
         return pdf.getRootOutline();
@@ -1649,8 +1653,8 @@ public class PdfContentByte {
      * @param y2 a corner of the enclosing rectangle
      * @param startAng starting angle in degrees
      * @param extent angle extent in degrees
-     * @return a list of float[] with the bezier curves
-     */
+    
+     * @return a list of float[] with the bezier curves */
     public static ArrayList bezierArc(float x1, float y1, float x2, float y2, float startAng, float extent) {
         float tmp;
         if (x1 > x2) {
@@ -1757,8 +1761,8 @@ public class PdfContentByte {
      * May be either positive or negative, but not zero.
      * @param ystep the desired vertical spacing between pattern cells.
      * May be either positive or negative, but not zero.
-     * @return the <CODE>PdfPatternPainter</CODE> where the pattern will be created
-     */
+    
+     * @return the <CODE>PdfPatternPainter</CODE> where the pattern will be created */
     public PdfPatternPainter createPattern(float width, float height, float xstep, float ystep) {
         checkWriter();
         if ( xstep == 0.0f || ystep == 0.0f )
@@ -1777,8 +1781,8 @@ public class PdfContentByte {
      * of width and height.
      * @param width the width of the pattern
      * @param height the height of the pattern
-     * @return the <CODE>PdfPatternPainter</CODE> where the pattern will be created
-     */
+    
+     * @return the <CODE>PdfPatternPainter</CODE> where the pattern will be created */
     public PdfPatternPainter createPattern(float width, float height) {
         return createPattern(width, height, width, height);
     }
@@ -1793,8 +1797,8 @@ public class PdfContentByte {
      * @param ystep the desired vertical spacing between pattern cells.
      * May be either positive or negative, but not zero.
      * @param color the default color. Can be <CODE>null</CODE>
-     * @return the <CODE>PdfPatternPainter</CODE> where the pattern will be created
-     */
+    
+     * @return the <CODE>PdfPatternPainter</CODE> where the pattern will be created */
     public PdfPatternPainter createPattern(float width, float height, float xstep, float ystep, Color color) {
         checkWriter();
         if ( xstep == 0.0f || ystep == 0.0f )
@@ -1815,8 +1819,8 @@ public class PdfContentByte {
      * @param width the width of the pattern
      * @param height the height of the pattern
      * @param color the default color. Can be <CODE>null</CODE>
-     * @return the <CODE>PdfPatternPainter</CODE> where the pattern will be created
-     */
+    
+     * @return the <CODE>PdfPatternPainter</CODE> where the pattern will be created */
     public PdfPatternPainter createPattern(float width, float height, Color color) {
         return createPattern(width, height, width, height, color);
     }
@@ -1831,12 +1835,19 @@ public class PdfContentByte {
      *
      * @param width the bounding box width
      * @param height the bounding box height
-     * @return the templated created
-     */
+    
+     * @return the templated created */
     public PdfTemplate createTemplate(float width, float height) {
         return createTemplate(width, height, null);
     }
     
+    /**
+     * Method createTemplate.
+     * @param width float
+     * @param height float
+     * @param forcedName PdfName
+     * @return PdfTemplate
+     */
     PdfTemplate createTemplate(float width, float height, PdfName forcedName) {
         checkWriter();
         PdfTemplate template = new PdfTemplate(writer);
@@ -1851,12 +1862,19 @@ public class PdfContentByte {
      *
      * @param width the bounding box width
      * @param height the bounding box height
-     * @return the appearance created
-     */
+    
+     * @return the appearance created */
     public PdfAppearance createAppearance(float width, float height) {
         return createAppearance(width, height, null);
     }
     
+    /**
+     * Method createAppearance.
+     * @param width float
+     * @param height float
+     * @param forcedName PdfName
+     * @return PdfAppearance
+     */
     PdfAppearance createAppearance(float width, float height, PdfName forcedName) {
         checkWriter();
         PdfAppearance template = new PdfAppearance(writer);
@@ -2329,16 +2347,16 @@ public class PdfContentByte {
     
     /**
      * Gets the <CODE>PdfWriter</CODE> in use by this object.
-     * @return the <CODE>PdfWriter</CODE> in use by this object
-     */
+    
+     * @return the <CODE>PdfWriter</CODE> in use by this object */
     public PdfWriter getPdfWriter() {
         return writer;
     }
     
     /**
      * Gets the <CODE>PdfDocument</CODE> in use by this object.
-     * @return the <CODE>PdfDocument</CODE> in use by this object
-     */
+    
+     * @return the <CODE>PdfDocument</CODE> in use by this object */
     public PdfDocument getPdfDocument() {
         return pdf;
     }
@@ -2361,10 +2379,10 @@ public class PdfContentByte {
      * name will jump.
      * @param name the name of this local destination
      * @param destination the <CODE>PdfDestination</CODE> with the jump coordinates
+    
      * @return <CODE>true</CODE> if the local destination was added,
      * <CODE>false</CODE> if a local destination with the same name
-     * already exists
-     */
+     * already exists */
     public boolean localDestination(String name, PdfDestination destination) {
         return pdf.localDestination(name, destination);
     }
@@ -2373,8 +2391,8 @@ public class PdfContentByte {
      * Gets a duplicate of this <CODE>PdfContentByte</CODE>. All
      * the members are copied by reference but the buffer stays different.
      *
-     * @return a copy of this <CODE>PdfContentByte</CODE>
-     */
+    
+     * @return a copy of this <CODE>PdfContentByte</CODE> */
     public PdfContentByte getDuplicate() {
         return new PdfContentByte(writer);
     }
@@ -2616,8 +2634,8 @@ public class PdfContentByte {
      * are translated to PDF commands as shapes. No PDF fonts will appear.
      * @param width the width of the panel
      * @param height the height of the panel
-     * @return a <CODE>Graphics2D</CODE>
-     */
+    
+     * @return a <CODE>Graphics2D</CODE> */
     public java.awt.Graphics2D createGraphicsShapes(float width, float height) {
         return new PdfGraphics2D(this, width, height, null, true, false, 0);
     }
@@ -2627,8 +2645,8 @@ public class PdfContentByte {
      * @param width the width of the panel
      * @param height the height of the panel
      * @param printerJob a printer job
-     * @return a <CODE>Graphics2D</CODE>
-     */
+    
+     * @return a <CODE>Graphics2D</CODE> */
     public java.awt.Graphics2D createPrinterGraphicsShapes(float width, float height, PrinterJob printerJob) {
         return new PdfPrinterGraphics2D(this, width, height, null, true, false, 0, printerJob);
     }
@@ -2637,8 +2655,8 @@ public class PdfContentByte {
      * are translated to PDF commands.
      * @param width the width of the panel
      * @param height the height of the panel
-     * @return a <CODE>Graphics2D</CODE>
-     */
+    
+     * @return a <CODE>Graphics2D</CODE> */
     public java.awt.Graphics2D createGraphics(float width, float height) {
         return new PdfGraphics2D(this, width, height, null, false, false, 0);
     }
@@ -2648,8 +2666,8 @@ public class PdfContentByte {
      * @param width the width of the panel
      * @param height the height of the panel
      * @param printerJob
-     * @return a <CODE>Graphics2D</CODE>
-     */
+    
+     * @return a <CODE>Graphics2D</CODE> */
     public java.awt.Graphics2D createPrinterGraphics(float width, float height, PrinterJob printerJob) {
         return new PdfPrinterGraphics2D(this, width, height, null, false, false, 0, printerJob);
     }
@@ -2660,8 +2678,8 @@ public class PdfContentByte {
      * @param height the height of the panel
      * @param convertImagesToJPEG
      * @param quality
-     * @return a <CODE>Graphics2D</CODE>
-     */
+    
+     * @return a <CODE>Graphics2D</CODE> */
     public java.awt.Graphics2D createGraphics(float width, float height, boolean convertImagesToJPEG, float quality) {
         return new PdfGraphics2D(this, width, height, null, false, convertImagesToJPEG, quality);
     }
@@ -2673,8 +2691,8 @@ public class PdfContentByte {
      * @param convertImagesToJPEG
      * @param quality
      * @param printerJob
-     * @return a <CODE>Graphics2D</CODE>
-     */
+    
+     * @return a <CODE>Graphics2D</CODE> */
     public java.awt.Graphics2D createPrinterGraphics(float width, float height, boolean convertImagesToJPEG, float quality, PrinterJob printerJob) {
         return new PdfPrinterGraphics2D(this, width, height, null, false, convertImagesToJPEG, quality, printerJob);
     }
@@ -2685,8 +2703,8 @@ public class PdfContentByte {
      * @param height
      * @param convertImagesToJPEG
      * @param quality
-     * @return A Graphics2D object
-     */
+    
+     * @return A Graphics2D object */
     public java.awt.Graphics2D createGraphicsShapes(float width, float height, boolean convertImagesToJPEG, float quality) {
         return new PdfGraphics2D(this, width, height, null, true, convertImagesToJPEG, quality);
     }
@@ -2698,8 +2716,8 @@ public class PdfContentByte {
      * @param convertImagesToJPEG
      * @param quality
      * @param printerJob
-     * @return a Graphics2D object
-     */
+    
+     * @return a Graphics2D object */
     public java.awt.Graphics2D createPrinterGraphicsShapes(float width, float height, boolean convertImagesToJPEG, float quality, PrinterJob printerJob) {
         return new PdfPrinterGraphics2D(this, width, height, null, true, convertImagesToJPEG, quality, printerJob);
     }
@@ -2709,8 +2727,8 @@ public class PdfContentByte {
      * @param width the width of the panel
      * @param height the height of the panel
      * @param fontMapper the mapping from awt fonts to <CODE>BaseFont</CODE>
-     * @return a <CODE>Graphics2D</CODE>
-     */
+    
+     * @return a <CODE>Graphics2D</CODE> */
     public java.awt.Graphics2D createGraphics(float width, float height, FontMapper fontMapper) {
         return new PdfGraphics2D(this, width, height, fontMapper, false, false, 0);
     }
@@ -2721,8 +2739,8 @@ public class PdfContentByte {
      * @param height the height of the panel
      * @param fontMapper the mapping from awt fonts to <CODE>BaseFont</CODE>
      * @param printerJob a printer job
-     * @return a <CODE>Graphics2D</CODE>
-     */
+    
+     * @return a <CODE>Graphics2D</CODE> */
     public java.awt.Graphics2D createPrinterGraphics(float width, float height, FontMapper fontMapper, PrinterJob printerJob) {
         return new PdfPrinterGraphics2D(this, width, height, fontMapper, false, false, 0, printerJob);
     }
@@ -2734,8 +2752,8 @@ public class PdfContentByte {
      * @param fontMapper the mapping from awt fonts to <CODE>BaseFont</CODE>
      * @param convertImagesToJPEG converts awt images to jpeg before inserting in pdf
      * @param quality the quality of the jpeg
-     * @return a <CODE>Graphics2D</CODE>
-     */
+    
+     * @return a <CODE>Graphics2D</CODE> */
     public java.awt.Graphics2D createGraphics(float width, float height, FontMapper fontMapper, boolean convertImagesToJPEG, float quality) {
         return new PdfGraphics2D(this, width, height, fontMapper, false, convertImagesToJPEG, quality);
     }
@@ -2748,12 +2766,16 @@ public class PdfContentByte {
      * @param convertImagesToJPEG converts awt images to jpeg before inserting in pdf
      * @param quality the quality of the jpeg
      * @param printerJob a printer job
-     * @return a <CODE>Graphics2D</CODE>
-     */
+    
+     * @return a <CODE>Graphics2D</CODE> */
     public java.awt.Graphics2D createPrinterGraphics(float width, float height, FontMapper fontMapper, boolean convertImagesToJPEG, float quality, PrinterJob printerJob) {
         return new PdfPrinterGraphics2D(this, width, height, fontMapper, false, convertImagesToJPEG, quality, printerJob);
     }
 
+    /**
+     * Method getPageResources.
+     * @return PageResources
+     */
     PageResources getPageResources() {
         return pdf.getPageResources();
     }
@@ -2798,6 +2820,10 @@ public class PdfContentByte {
         layerDepth.add(new Integer(n));
     }
     
+    /**
+     * Method beginLayer2.
+     * @param layer PdfOCG
+     */
     private void beginLayer2(PdfOCG layer) {
         PdfName name = (PdfName)writer.addSimpleProperty(layer, layer.getRef())[0];
         PageResources prs = getPageResources();
@@ -2829,6 +2855,10 @@ public class PdfContentByte {
         content.append(arr[3]).append(' ').append(arr[4]).append(' ').append(arr[5]).append(" cm").append_i(separator);
     }
     
+    /**
+     * Method addAnnotation.
+     * @param annot PdfAnnotation
+     */
     void addAnnotation(PdfAnnotation annot) {
         writer.addAnnotation(annot);
     }

@@ -53,12 +53,18 @@ import com.lowagie.text.ExceptionConverter;
  * A <CODE>PdfICCBased</CODE> defines a ColorSpace
  *
  * @see		PdfStream
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 class PdfICCBased extends PdfStream {
     
     protected int NumberOfComponents;
     
+    /**
+     * Constructor for PdfICCBased.
+     * @param profile ICC_Profile
+     */
     PdfICCBased(ICC_Profile profile) {
         super();
         try {

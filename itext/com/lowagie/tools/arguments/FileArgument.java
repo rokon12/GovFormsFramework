@@ -59,6 +59,8 @@ import com.lowagie.tools.plugins.AbstractTool;
 
 /**
  * ToolArgument class if the argument is a java.io.File.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class FileArgument extends ToolArgument {
 	/** a filter to put on the FileChooser. */
@@ -94,9 +96,9 @@ public class FileArgument extends ToolArgument {
 	
 	/**
 	 * Gets the argument as an object.
-	 * @return an object
-	 * @throws InstantiationException
-	 */
+	
+	
+	 * @return an object * @throws InstantiationException */
 	public Object getArgument() throws InstantiationException {
 		if (value == null) return null;
 		try {
@@ -131,8 +133,8 @@ public class FileArgument extends ToolArgument {
 	}
 
 	/**
-	 * @return Returns the filter.
-	 */
+	
+	 * @return Returns the filter. */
 	public FileFilter getFilter() {
 		return filter;
 	}
@@ -143,8 +145,8 @@ public class FileArgument extends ToolArgument {
 		this.filter = filter;
 	}
 	/**
-	 * @return Returns the label.
-	 */
+	
+	 * @return Returns the label. */
 	public LabelAccessory getLabel() {
 		return label;
 	}

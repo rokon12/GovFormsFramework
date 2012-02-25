@@ -64,12 +64,18 @@ import com.lowagie.text.pdf.*;
  *
  * @see		Element
  * @see		Image
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class ImgWMF extends Image implements Element {
     
     // Constructors
     
+    /**
+     * Constructor for ImgWMF.
+     * @param image Image
+     */
     ImgWMF(Image image) {
         super(image);
     }
@@ -78,9 +84,9 @@ public class ImgWMF extends Image implements Element {
      * Constructs an <CODE>ImgWMF</CODE>-object, using an <VAR>url</VAR>.
      *
      * @param url the <CODE>URL</CODE> where the image can be found
-     * @throws BadElementException on error
-     * @throws IOException on error
-     */
+    
+    
+     * @throws BadElementException on error * @throws IOException on error */
     
     public ImgWMF(URL url) throws BadElementException, IOException {
         super(url);
@@ -91,10 +97,10 @@ public class ImgWMF extends Image implements Element {
      * Constructs an <CODE>ImgWMF</CODE>-object, using a <VAR>filename</VAR>.
      *
      * @param filename a <CODE>String</CODE>-representation of the file that contains the image.
-     * @throws BadElementException on error
-     * @throws MalformedURLException on error
-     * @throws IOException on error
-     */
+    
+    
+    
+     * @throws BadElementException on error * @throws MalformedURLException on error * @throws IOException on error */
     
     public ImgWMF(String filename) throws BadElementException, MalformedURLException, IOException {
         this(Image.toURL(filename));
@@ -104,9 +110,9 @@ public class ImgWMF extends Image implements Element {
      * Constructs an <CODE>ImgWMF</CODE>-object from memory.
      *
      * @param img the memory image
-     * @throws BadElementException on error
-     * @throws IOException on error
-     */
+    
+    
+     * @throws BadElementException on error * @throws IOException on error */
     
     public ImgWMF(byte[] img) throws BadElementException, IOException {
         super((URL)null);
@@ -117,9 +123,9 @@ public class ImgWMF extends Image implements Element {
     
 /**
  * This method checks if the image is a valid WMF and processes some parameters.
- * @throws BadElementException
- * @throws IOException
- */
+
+
+ * @throws BadElementException * @throws IOException */
     
     private void processParameters() throws BadElementException, IOException {
         type = IMGTEMPLATE;
@@ -163,9 +169,9 @@ public class ImgWMF extends Image implements Element {
     
     /** Reads the WMF into a template.
      * @param template the template to read to
-     * @throws IOException on error
-     * @throws DocumentException on error
-     */    
+    
+    
+     * @throws IOException on error * @throws DocumentException on error */    
     public void readWMF(PdfTemplate template) throws IOException, DocumentException {
         setTemplateData(template);
         template.setWidth(width());

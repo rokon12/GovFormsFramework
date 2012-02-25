@@ -52,6 +52,8 @@ import com.lowagie.text.pdf.ByteBuffer;
 
 /**
  * Encodes data in the CCITT G4 FAX format.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class CCITTG4Encoder {
     private int rowbytes;
@@ -98,8 +100,8 @@ public class CCITTG4Encoder {
      * @param data the data to encode
      * @param width the image width
      * @param height the image height
-     * @return the encoded image
-     */    
+    
+     * @return the encoded image */    
     public static byte[] compress(byte[] data, int width, int height) {
         CCITTG4Encoder g4 = new CCITTG4Encoder(width);
         g4.fax4Encode(data, 0, g4.rowbytes * height);
@@ -115,10 +117,19 @@ public class CCITTG4Encoder {
         fax4Encode(data, 0, rowbytes * height);
     }
 
+    /**
+     * Method putcode.
+     * @param table int[]
+     */
     private void putcode(int[] table) {
         putBits(table[CODE], table[LENGTH]);
     }
     
+    /**
+     * Method putspan.
+     * @param span int
+     * @param tab int[][]
+     */
     private void putspan(int span, int[][] tab) {
         int code, length;
         
@@ -141,6 +152,11 @@ public class CCITTG4Encoder {
         putBits(code, length);
     }
     
+    /**
+     * Method putBits.
+     * @param bits int
+     * @param length int
+     */
     private void putBits(int bits, int length) {
         while (length > bit) {
             data |= bits >> (length - bit);
@@ -207,19 +223,34 @@ public class CCITTG4Encoder {
     
     /**
      * Closes the encoder and returns the encoded data.
-     * @return the encoded data
-     */    
+    
+     * @return the encoded data */    
     public byte[] close() {
         Fax4PostEncode();
         return outBuf.toByteArray();
     }
     
+    /**
+     * Method pixel.
+     * @param data byte[]
+     * @param offset int
+     * @param bit int
+     * @return int
+     */
     private int pixel(byte[] data, int offset, int bit) {
         if (bit >= rowpixels)
             return 0;
         return ((data[offset + (bit >> 3)] & 0xff) >> (7-((bit)&7))) & 1;
     }
     
+    /**
+     * Method find1span.
+     * @param bp byte[]
+     * @param offset int
+     * @param bs int
+     * @param be int
+     * @return int
+     */
     private static int find1span(byte[] bp, int offset, int bs, int be) {
         int bits = be - bs;
         int n, span;
@@ -260,6 +291,14 @@ public class CCITTG4Encoder {
         return (span);
     }
     
+    /**
+     * Method find0span.
+     * @param bp byte[]
+     * @param offset int
+     * @param bs int
+     * @param be int
+     * @return int
+     */
     private static int find0span(byte[] bp, int offset, int bs, int be) {
         int bits = be - bs;
         int n, span;
@@ -300,10 +339,28 @@ public class CCITTG4Encoder {
         return (span);
     }
     
+    /**
+     * Method finddiff.
+     * @param bp byte[]
+     * @param offset int
+     * @param bs int
+     * @param be int
+     * @param color int
+     * @return int
+     */
     private static int finddiff(byte[] bp, int offset, int bs, int be, int color) {
         return bs + (color != 0 ? find1span(bp, offset, bs, be) : find0span(bp, offset, bs, be));
     }
     
+    /**
+     * Method finddiff2.
+     * @param bp byte[]
+     * @param offset int
+     * @param bs int
+     * @param be int
+     * @param color int
+     * @return int
+     */
     private static int finddiff2(byte[] bp, int offset, int bs, int be, int color) {
         return bs < be ? finddiff(bp, offset, bs, be, color) : be;
     }

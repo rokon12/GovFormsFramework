@@ -32,6 +32,8 @@
  */
 package com.lowagie.text.pdf.codec;
 
+/**
+ */
 public class TIFFFaxDecoder {
     
     private int bitPointer, bytePointer;
@@ -579,6 +581,13 @@ public class TIFFFaxDecoder {
     
     // One-dimensional decoding methods
     
+    /**
+     * Method decode1D.
+     * @param buffer byte[]
+     * @param compData byte[]
+     * @param startX int
+     * @param height int
+     */
     public void decode1D(byte[] buffer, byte[] compData,
     int startX, int height) {
         this.data = compData;
@@ -595,6 +604,12 @@ public class TIFFFaxDecoder {
         }
     }
     
+    /**
+     * Method decodeNextScanline.
+     * @param buffer byte[]
+     * @param lineOffset int
+     * @param bitOffset int
+     */
     public void decodeNextScanline(byte[] buffer,
     int lineOffset, int bitOffset) {
         int bits = 0, code = 0, isT = 0;
@@ -735,6 +750,14 @@ public class TIFFFaxDecoder {
     
     // Two-dimensional decoding methods
     
+    /**
+     * Method decode2D.
+     * @param buffer byte[]
+     * @param compData byte[]
+     * @param startX int
+     * @param height int
+     * @param tiffT4Options long
+     */
     public void decode2D(byte[] buffer,
     byte compData[],
     int startX,
@@ -886,6 +909,14 @@ public class TIFFFaxDecoder {
         }
     }
     
+    /**
+     * Method decodeT6.
+     * @param buffer byte[]
+     * @param compData byte[]
+     * @param startX int
+     * @param height int
+     * @param tiffT6Options long
+     */
     public synchronized void decodeT6(byte[] buffer,
     byte[] compData,
     int startX,
@@ -1101,6 +1132,13 @@ public class TIFFFaxDecoder {
         }
     }
     
+    /**
+     * Method setToBlack.
+     * @param buffer byte[]
+     * @param lineOffset int
+     * @param bitOffset int
+     * @param numBits int
+     */
     private void setToBlack(byte[] buffer,
     int lineOffset, int bitOffset,
     int numBits) {
@@ -1138,6 +1176,10 @@ public class TIFFFaxDecoder {
     }
     
     // Returns run length
+    /**
+     * Method decodeWhiteCodeWord.
+     * @return int
+     */
     private int decodeWhiteCodeWord() {
         int current, entry, bits, isT, twoBits, code = -1;
         int runLength = 0;
@@ -1180,6 +1222,10 @@ public class TIFFFaxDecoder {
     }
     
     // Returns run length
+    /**
+     * Method decodeBlackCodeWord.
+     * @return int
+     */
     private int decodeBlackCodeWord() {
         int current, entry, bits, isT, twoBits, code = -1;
         int runLength = 0;
@@ -1243,6 +1289,11 @@ public class TIFFFaxDecoder {
         return runLength;
     }
     
+    /**
+     * Method readEOL.
+     * @param isFirstEOL boolean
+     * @return int
+     */
     private int readEOL(boolean isFirstEOL) {
         if (fillBits == 0) {
             int next12Bits = nextNBits(12);
@@ -1309,6 +1360,12 @@ public class TIFFFaxDecoder {
         }
     }
     
+    /**
+     * Method getNextChangingElement.
+     * @param a0 int
+     * @param isWhite boolean
+     * @param ret int[]
+     */
     private void getNextChangingElement(int a0, boolean isWhite, int[] ret) {
         // Local copies of instance variables
         int[] pce = this.prevChangingElems;
@@ -1339,6 +1396,11 @@ public class TIFFFaxDecoder {
         }
     }
     
+    /**
+     * Method nextNBits.
+     * @param bitsToGet int
+     * @return int
+     */
     private int nextNBits(int bitsToGet) {
         byte b, next, next2next;
         int l = data.length - 1;
@@ -1408,6 +1470,11 @@ public class TIFFFaxDecoder {
         return i;
     }
     
+    /**
+     * Method nextLesserThan8Bits.
+     * @param bitsToGet int
+     * @return int
+     */
     private int nextLesserThan8Bits(int bitsToGet) {
         byte b, next;
         int l = data.length - 1;
@@ -1456,6 +1523,10 @@ public class TIFFFaxDecoder {
     }
     
     // Move pointer backwards by given amount of bits
+    /**
+     * Method updatePointer.
+     * @param bitsToMoveBack int
+     */
     private void updatePointer(int bitsToMoveBack) {
         int i = bitPointer - bitsToMoveBack;
         
@@ -1468,6 +1539,10 @@ public class TIFFFaxDecoder {
     }
     
     // Move to the next byte boundary
+    /**
+     * Method advancePointer.
+     * @return boolean
+     */
     private boolean advancePointer() {
         if (bitPointer != 0) {
             bytePointer++;

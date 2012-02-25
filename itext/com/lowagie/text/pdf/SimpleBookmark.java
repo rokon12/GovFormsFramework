@@ -99,6 +99,7 @@ import java.util.Stack;
  * <li>"File" - "the_file_to_open_or_execute"
  * </ul>
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class SimpleBookmark implements SimpleXMLDocHandler {
     
@@ -109,6 +110,13 @@ public class SimpleBookmark implements SimpleXMLDocHandler {
     private SimpleBookmark() {
     }
     
+    /**
+     * Method bookmarkDepth.
+     * @param reader PdfReader
+     * @param outline PdfDictionary
+     * @param pages IntHashtable
+     * @return List
+     */
     private static List bookmarkDepth(PdfReader reader, PdfDictionary outline, IntHashtable pages) {
         ArrayList list = new ArrayList();
         while (outline != null) {
@@ -220,6 +228,12 @@ public class SimpleBookmark implements SimpleXMLDocHandler {
         return list;
     }
     
+	/**
+	 * Method mapGotoBookmark.
+	 * @param map HashMap
+	 * @param dest PdfObject
+	 * @param pages IntHashtable
+	 */
 	private static void mapGotoBookmark(HashMap map, PdfObject dest, IntHashtable pages) 
 	{
 		if (dest.isString())
@@ -231,6 +245,12 @@ public class SimpleBookmark implements SimpleXMLDocHandler {
 		map.put("Action", "GoTo");
 	}
 
+	/**
+	 * Method makeBookmarkParam.
+	 * @param dest PdfArray
+	 * @param pages IntHashtable
+	 * @return String
+	 */
 	private static String makeBookmarkParam(PdfArray dest, IntHashtable pages)
 	{
 		ArrayList arr = ((PdfArray)dest).getArrayList();
@@ -247,6 +267,7 @@ public class SimpleBookmark implements SimpleXMLDocHandler {
 	 * (Contributed by Kazuya Ujihara)
 	 * @param indirect 
 	 * 2004-06-13
+	 * @return int
 	 */
 	private static int getNumber(PdfIndirectReference indirect)
 	{
@@ -263,9 +284,9 @@ public class SimpleBookmark implements SimpleXMLDocHandler {
      * Gets a <CODE>List</CODE> with the bookmarks. It returns <CODE>null</CODE> if
      * the document doesn't have any bookmarks.
      * @param reader the document
+    
      * @return a <CODE>List</CODE> with the bookmarks or <CODE>null</CODE> if the
-     * document doesn't have any
-     */    
+     * document doesn't have any */    
     public static List getBookmark(PdfReader reader) {
         PdfDictionary catalog = reader.getCatalog();
         PdfObject obj = PdfReader.getPdfObjectRelease(catalog.get(PdfName.OUTLINES));
@@ -385,6 +406,14 @@ public class SimpleBookmark implements SimpleXMLDocHandler {
         }
     }
     
+    /**
+     * Method createOutlineAction.
+     * @param outline PdfDictionary
+     * @param map HashMap
+     * @param writer PdfWriter
+     * @param namedAsNames boolean
+     * @throws IOException
+     */
     static void createOutlineAction(PdfDictionary outline, HashMap map, PdfWriter writer, boolean namedAsNames) throws IOException {
         try {
             String action = (String)map.get("Action");
@@ -489,6 +518,15 @@ public class SimpleBookmark implements SimpleXMLDocHandler {
         }
     }
 
+    /**
+     * Method iterateOutlines.
+     * @param writer PdfWriter
+     * @param parent PdfIndirectReference
+     * @param kids List
+     * @param namedAsNames boolean
+     * @return Object[]
+     * @throws IOException
+     */
     public static Object[] iterateOutlines(PdfWriter writer, PdfIndirectReference parent, List kids, boolean namedAsNames) throws IOException {
         PdfIndirectReference refs[] = new PdfIndirectReference[kids.size()];
         for (int k = 0; k < refs.length; ++k)
@@ -561,8 +599,8 @@ public class SimpleBookmark implements SimpleXMLDocHandler {
      * @param indent the indentation level. Pretty printing significant only
      * @param onlyASCII codes above 127 will always be escaped with &amp;#nn; if <CODE>true</CODE>,
      * whatever the encoding
-     * @throws IOException on error
-     */
+    
+     * @throws IOException on error */
     public static void exportToXMLNode(List list, Writer out, int indent, boolean onlyASCII) throws IOException {
         String dep = "";
         for (int k = 0; k < indent; ++k)
@@ -631,8 +669,8 @@ public class SimpleBookmark implements SimpleXMLDocHandler {
      * @param encoding the encoding according to IANA conventions
      * @param onlyASCII codes above 127 will always be escaped with &amp;#nn; if <CODE>true</CODE>,
      * whatever the encoding
-     * @throws IOException on error
-     */    
+    
+     * @throws IOException on error */    
     public static void exportToXML(List list, OutputStream out, String encoding, boolean onlyASCII) throws IOException {
         String jenc = SimpleXMLParser.getJavaEncoding(encoding);
         Writer wrt = new BufferedWriter(new OutputStreamWriter(out, jenc));
@@ -646,8 +684,8 @@ public class SimpleBookmark implements SimpleXMLDocHandler {
      * @param encoding the encoding according to IANA conventions
      * @param onlyASCII codes above 127 will always be escaped with &amp;#nn; if <CODE>true</CODE>,
      * whatever the encoding
-     * @throws IOException on error
-     */
+    
+     * @throws IOException on error */
     public static void exportToXML(List list, Writer wrt, String encoding, boolean onlyASCII) throws IOException {
         wrt.write("<?xml version=\"1.0\" encoding=\"");
         wrt.write(SimpleXMLParser.escapeXML(encoding, onlyASCII));
@@ -660,9 +698,9 @@ public class SimpleBookmark implements SimpleXMLDocHandler {
     /**
      * Import the bookmarks from XML.
      * @param in the XML source. The stream is not closed
-     * @throws IOException on error
-     * @return the bookmarks
-     */    
+    
+    
+     * @return the bookmarks * @throws IOException on error */    
     public static List importFromXML(InputStream in) throws IOException {
         SimpleBookmark book = new SimpleBookmark();
         SimpleXMLParser.parse(book, in);
@@ -672,18 +710,27 @@ public class SimpleBookmark implements SimpleXMLDocHandler {
     /**
      * Import the bookmarks from XML.
      * @param in the XML source. The reader is not closed
-     * @throws IOException on error
-     * @return the bookmarks
-     */
+    
+    
+     * @return the bookmarks * @throws IOException on error */
     public static List importFromXML(Reader in) throws IOException {
         SimpleBookmark book = new SimpleBookmark();
         SimpleXMLParser.parse(book, in);
         return book.topList;
     }
     
+    /**
+     * Method endDocument.
+     * @see com.lowagie.text.pdf.SimpleXMLDocHandler#endDocument()
+     */
     public void endDocument() {
     }
     
+    /**
+     * Method endElement.
+     * @param tag String
+     * @see com.lowagie.text.pdf.SimpleXMLDocHandler#endElement(String)
+     */
     public void endElement(String tag) {
         if (tag.equals("Bookmark")) {
             if (attr.isEmpty())
@@ -715,9 +762,19 @@ public class SimpleBookmark implements SimpleXMLDocHandler {
         }
     }
     
+    /**
+     * Method startDocument.
+     * @see com.lowagie.text.pdf.SimpleXMLDocHandler#startDocument()
+     */
     public void startDocument() {
     }
     
+    /**
+     * Method startElement.
+     * @param tag String
+     * @param h HashMap
+     * @see com.lowagie.text.pdf.SimpleXMLDocHandler#startElement(String, HashMap)
+     */
     public void startElement(String tag, HashMap h) {
         if (topList == null) {
             if (tag.equals("Bookmark")) {
@@ -735,6 +792,11 @@ public class SimpleBookmark implements SimpleXMLDocHandler {
         attr.push(attributes);
     }
     
+    /**
+     * Method text.
+     * @param str String
+     * @see com.lowagie.text.pdf.SimpleXMLDocHandler#text(String)
+     */
     public void text(String str) {
         if (attr.isEmpty())
             return;

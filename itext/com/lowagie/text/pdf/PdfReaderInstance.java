@@ -57,6 +57,7 @@ import java.io.*;
  * Instance of PdfReader in each output document.
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 class PdfReaderInstance {
     static final PdfLiteral IDENTITYMATRIX = new PdfLiteral("[1 0 0 1 0 0]");
@@ -69,6 +70,11 @@ class PdfReaderInstance {
     HashMap visited = new HashMap();
     ArrayList nextRound = new ArrayList();
     
+    /**
+     * Constructor for PdfReaderInstance.
+     * @param reader PdfReader
+     * @param writer PdfWriter
+     */
     PdfReaderInstance(PdfReader reader, PdfWriter writer) {
         this.reader = reader;
         this.writer = writer;
@@ -76,10 +82,19 @@ class PdfReaderInstance {
         myXref = new int[reader.getXrefSize()];
     }
     
+    /**
+     * Method getReader.
+     * @return PdfReader
+     */
     PdfReader getReader() {
         return reader;
     }
     
+    /**
+     * Method getImportedPage.
+     * @param pageNumber int
+     * @return PdfImportedPage
+     */
     PdfImportedPage getImportedPage(int pageNumber) {
         if (pageNumber < 1 || pageNumber > reader.getNumberOfPages())
             throw new IllegalArgumentException("Invalid page number");
@@ -92,6 +107,12 @@ class PdfReaderInstance {
         return pageT;
     }
     
+    /**
+     * Method getNewObjectNumber.
+     * @param number int
+     * @param generation int
+     * @return int
+     */
     int getNewObjectNumber(int number, int generation) {
         if (myXref[number] == 0) {
             myXref[number] = writer.getIndirectReferenceNumber();
@@ -100,16 +121,31 @@ class PdfReaderInstance {
         return myXref[number];
     }
     
+    /**
+     * Method getReaderFile.
+     * @return RandomAccessFileOrArray
+     */
     RandomAccessFileOrArray getReaderFile() {
         return file;
     }
     
+    /**
+     * Method getResources.
+     * @param pageNumber int
+     * @return PdfObject
+     */
     PdfObject getResources(int pageNumber) {
         PdfObject obj = PdfReader.getPdfObjectRelease(reader.getPageNRelease(pageNumber).get(PdfName.RESOURCES));
         return obj;
     }
     
     
+    /**
+     * Method getFormXObject.
+     * @param pageNumber int
+     * @return PdfStream
+     * @throws IOException
+     */
     PdfStream getFormXObject(int pageNumber) throws IOException {
         PdfDictionary page = reader.getPageNRelease(pageNumber);
         PdfObject contents = PdfReader.getPdfObjectRelease(page.get(PdfName.CONTENTS));
@@ -146,6 +182,10 @@ class PdfReaderInstance {
         return stream;
     }
     
+    /**
+     * Method writeAllVisited.
+     * @throws IOException
+     */
     void writeAllVisited() throws IOException {
         while (nextRound.size() > 0) {
             ArrayList vec = nextRound;
@@ -161,6 +201,10 @@ class PdfReaderInstance {
         }
     }
     
+    /**
+     * Method writeAllPages.
+     * @throws IOException
+     */
     void writeAllPages() throws IOException {
         try {
             file.reOpen();

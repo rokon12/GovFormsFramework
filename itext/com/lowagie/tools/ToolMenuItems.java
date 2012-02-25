@@ -51,6 +51,8 @@ package com.lowagie.tools;
 
 /**
  * Keeps all the possible menuitems.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public interface ToolMenuItems {
 	

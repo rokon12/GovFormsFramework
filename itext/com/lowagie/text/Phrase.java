@@ -84,6 +84,8 @@ import com.lowagie.text.markup.MarkupParser;
  * @see		Chunk
  * @see		Paragraph
  * @see		Anchor
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class Phrase extends ArrayList implements TextElementArray, MarkupAttributes {
@@ -203,8 +205,8 @@ public class Phrase extends ArrayList implements TextElementArray, MarkupAttribu
     /**
      * Gets a special kind of Phrase that changes some characters into corresponding symbols.
      * @param string
-     * @return a newly constructed Phrase
-     */
+    
+     * @return a newly constructed Phrase */
     public static final Phrase getInstance(String string) {
     	return getInstance(16, string, new Font());
     }
@@ -213,8 +215,8 @@ public class Phrase extends ArrayList implements TextElementArray, MarkupAttribu
      * Gets a special kind of Phrase that changes some characters into corresponding symbols.
      * @param leading
      * @param string
-     * @return a newly constructed Phrase
-     */
+    
+     * @return a newly constructed Phrase */
     public static final Phrase getInstance(int leading, String string) {
     	return getInstance(leading, string, new Font());
     }
@@ -224,8 +226,8 @@ public class Phrase extends ArrayList implements TextElementArray, MarkupAttribu
      * @param leading
      * @param string
      * @param font
-     * @return a newly constructed Phrase
-     */
+    
+     * @return a newly constructed Phrase */
     public static final Phrase getInstance(int leading, String string, Font font) {
     	Phrase p = new Phrase(true);
     	p.setLeading(leading);
@@ -292,7 +294,8 @@ public class Phrase extends ArrayList implements TextElementArray, MarkupAttribu
  * <CODE>ElementListener</CODE>.
  *
  * @param	listener	an <CODE>ElementListener</CODE>
- * @return	<CODE>true</CODE> if the element was processed successfully
+
+ * @return	<CODE>true</CODE> if the element was processed successfully * @see com.lowagie.text.Element#process(ElementListener)
  */
     
     public boolean process(ElementListener listener) {
@@ -310,7 +313,8 @@ public class Phrase extends ArrayList implements TextElementArray, MarkupAttribu
 /**
  * Gets the type of the text element.
  *
- * @return	a type
+
+ * @return	a type * @see com.lowagie.text.Element#type()
  */
     
     public int type() {
@@ -320,7 +324,8 @@ public class Phrase extends ArrayList implements TextElementArray, MarkupAttribu
 /**
  * Gets all the chunks in this element.
  *
- * @return	an <CODE>ArrayList</CODE>
+
+ * @return	an <CODE>ArrayList</CODE> * @see com.lowagie.text.Element#getChunks()
  */
     
     public ArrayList getChunks() {
@@ -339,8 +344,8 @@ public class Phrase extends ArrayList implements TextElementArray, MarkupAttribu
  *
  * @param	index	index at which the specified element is to be inserted
  * @param	o   	an object of type <CODE>Chunk</CODE>, <CODE>Anchor</CODE> or <CODE>Phrase</CODE>
- * @throws	ClassCastException	when you try to add something that isn't a <CODE>Chunk</CODE>, <CODE>Anchor</CODE> or <CODE>Phrase</CODE>
- */
+
+ * @throws	ClassCastException	when you try to add something that isn't a <CODE>Chunk</CODE>, <CODE>Anchor</CODE> or <CODE>Phrase</CODE> */
     
     public void add(int index, Object o) {
     	if (o == null) return;
@@ -374,8 +379,9 @@ public class Phrase extends ArrayList implements TextElementArray, MarkupAttribu
  * to this <CODE>Phrase</CODE>.
  *
  * @param	o	an object of type <CODE>Chunk</CODE>, <CODE>Anchor</CODE> or <CODE>Phrase</CODE>
- * @return	a boolean
- * @throws	ClassCastException	when you try to add something that isn't a <CODE>Chunk</CODE>, <CODE>Anchor</CODE> or <CODE>Phrase</CODE>
+
+
+ * @return	a boolean * @throws	ClassCastException	when you try to add something that isn't a <CODE>Chunk</CODE>, <CODE>Anchor</CODE> or <CODE>Phrase</CODE> * @see com.lowagie.text.TextElementArray#add(Object)
  */
     
     public boolean add(Object o) {
@@ -431,8 +437,8 @@ public class Phrase extends ArrayList implements TextElementArray, MarkupAttribu
  * This method is a hack to solve a problem I had with phrases that were split between chunks
  * in the wrong place.
  * @param chunk a Chunk to add to the Phrase
- * @return true if adding the Chunk succeeded
- */
+
+ * @return true if adding the Chunk succeeded */
     
     private synchronized boolean addChunk(Chunk chunk) {
         if (!font.isStandardFont()) {
@@ -457,8 +463,9 @@ public class Phrase extends ArrayList implements TextElementArray, MarkupAttribu
  * to this <CODE>Phrase</CODE>.
  *
  * @param	collection	a collection of <CODE>Chunk</CODE>s, <CODE>Anchor</CODE>s and <CODE>Phrase</CODE>s.
- * @return	<CODE>true</CODE> if the action succeeded, <CODE>false</CODE> if not.
- * @throws	ClassCastException	when you try to add something that isn't a <CODE>Chunk</CODE>, <CODE>Anchor</CODE> or <CODE>Phrase</CODE>
+
+
+ * @return	<CODE>true</CODE> if the action succeeded, <CODE>false</CODE> if not. * @throws	ClassCastException	when you try to add something that isn't a <CODE>Chunk</CODE>, <CODE>Anchor</CODE> or <CODE>Phrase</CODE> * @see java.util.List#addAll(Collection)
  */
     
     public boolean addAll(Collection collection) {
@@ -495,8 +502,9 @@ public class Phrase extends ArrayList implements TextElementArray, MarkupAttribu
 /**
  * Checks is this <CODE>Phrase</CODE> contains no or 1 empty <CODE>Chunk</CODE>.
  *
+
  * @return	<CODE>false</CODE> if the <CODE>Phrase</CODE>
- * contains more than one or more non-empty<CODE>Chunk</CODE>s.
+ * contains more than one or more non-empty<CODE>Chunk</CODE>s. * @see java.util.List#isEmpty()
  */
     
     public boolean isEmpty() {
@@ -517,8 +525,8 @@ public class Phrase extends ArrayList implements TextElementArray, MarkupAttribu
 /**
  * Checks you if the leading of this phrase is defined.
  *
- * @return	true if the leading is defined
- */
+
+ * @return	true if the leading is defined */
     
     public boolean leadingDefined() {
         if (Float.isNaN(leading)) {
@@ -530,8 +538,8 @@ public class Phrase extends ArrayList implements TextElementArray, MarkupAttribu
 /**
  * Gets the leading of this phrase.
  *
- * @return	the linespacing
- */
+
+ * @return	the linespacing */
     
     public float leading() {
         if (Float.isNaN(leading)) {
@@ -543,8 +551,8 @@ public class Phrase extends ArrayList implements TextElementArray, MarkupAttribu
 /**
  * Gets the font of the first <CODE>Chunk</CODE> that appears in this <CODE>Phrase</CODE>.
  *
- * @return	a <CODE>Font</CODE>
- */
+
+ * @return	a <CODE>Font</CODE> */
     
     public Font font() {
         return font;
@@ -554,8 +562,8 @@ public class Phrase extends ArrayList implements TextElementArray, MarkupAttribu
  * Checks if a given tag corresponds with this object.
  *
  * @param   tag     the given tag
- * @return  true if the tag corresponds
- */
+
+ * @return  true if the tag corresponds */
     
     public static boolean isTag(String tag) {
         return ElementTags.PHRASE.equals(tag);

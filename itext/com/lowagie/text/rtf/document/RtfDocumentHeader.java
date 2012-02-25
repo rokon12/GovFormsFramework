@@ -141,7 +141,8 @@ public class RtfDocumentHeader extends RtfElement {
     /**
      * Write the contents of the document header area.
      * 
-     * @return A byte array with the contents of the document header area
+    
+     * @return A byte array with the contents of the document header area * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -162,8 +163,8 @@ public class RtfDocumentHeader extends RtfElement {
     /**
      * Writes the section definition data
      * 
-     * @return A byte array with the section definition data
-     */
+    
+     * @return A byte array with the section definition data */
     public byte[] writeSectionDefinition() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
         try {
@@ -190,8 +191,8 @@ public class RtfDocumentHeader extends RtfElement {
      * Gets the number of the specified RtfFont
      *
      * @param font The RtfFont for which to get the number
-     * @return The number of the font
-     */
+    
+     * @return The number of the font */
     public int getFontNumber(RtfFont font) {
         return this.fontList.getFontNumber(font);
     }
@@ -200,8 +201,8 @@ public class RtfDocumentHeader extends RtfElement {
      * Gets the number of the specified RtfColor
      * 
      * @param color The RtfColor for which to get the number
-     * @return The number of the color
-     */
+    
+     * @return The number of the color */
     public int getColorNumber(RtfColor color) {
         return this.colorList.getColorNumber(color);
     }
@@ -210,8 +211,8 @@ public class RtfDocumentHeader extends RtfElement {
      * Gets the number of the specified RtfList
      * 
      * @param list The RtfList for which to get the number
-     * @return The number of the list
-     */
+    
+     * @return The number of the list */
     public int getListNumber(RtfList list) {
         return this.listTable.getListNumber(list);
     }
@@ -228,8 +229,8 @@ public class RtfDocumentHeader extends RtfElement {
     /**
      * Gets the RtfPageSetting object of this RtfDocument
      * 
-     * @return The RtfPageSetting object
-     */
+    
+     * @return The RtfPageSetting object */
     public RtfPageSetting getPageSetting() {
         return this.pageSetting;
     }

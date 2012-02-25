@@ -22,6 +22,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.SessionFactory;
+import org.hibernate.cache.OptimisticTreeCache.CircumventChecksDataVersion;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +35,15 @@ import org.springframework.jdbc.core.support.AbstractLobCreatingPreparedStatemen
 import org.springframework.jdbc.support.lob.DefaultLobHandler;
 import org.springframework.jdbc.support.lob.LobCreator;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 
  * @author asif
+ * @version $Revision: 1.0 $
  */
 @Repository("userDao")
+@Transactional
 @SuppressWarnings("unchecked")
 public class UserDaoImpl implements UserDao {
 
@@ -48,6 +55,14 @@ public class UserDaoImpl implements UserDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	@Autowired
+	private SessionFactory sessionFactory;
+
+	/**
+	 * Method getUserRowMapper.
+	 * 
+	 * @return RowMapper
+	 */
 	private RowMapper getUserRowMapper() {
 		return new RowMapper<Object>() {
 
@@ -72,10 +87,30 @@ public class UserDaoImpl implements UserDao {
 		};
 	}
 
+	/**
+	 * Method getUser.
+	 * 
+	 * @param sysId
+	 *            String
+	 * @return User
+	 * @see bd.gov.forms.dao.UserDao#getUser(String)
+	 */
 	public User getUser(String sysId) {
-		return (User) jdbcTemplate.queryForObject(
-				"SELECT * FROM user WHERE sys_id = ?", new Object[] { sysId },
-				getUserRowMapper());
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				User.class);
+		criteria.add(Restrictions.eq("sysId", sysId));
+
+		List<User> list = criteria.list();
+
+		if (list != null && list.size() > 0) {
+			return list.get(0);
+		}
+
+		// return (User) jdbcTemplate.queryForObject(
+		// "SELECT * FROM user WHERE sys_id = ?", new Object[] { sysId },
+		// getUserRowMapper());
+
+		return null;
 		// new RowMapper() {
 		//
 		// public Object mapRow(ResultSet rs, int rowNum)
@@ -99,11 +134,35 @@ public class UserDaoImpl implements UserDao {
 		// });
 	}
 
+	/**
+	 * Method getUser.
+	 * 
+	 * @param userName
+	 *            String
+	 * @param password
+	 *            String
+	 * @return User
+	 * @see bd.gov.forms.dao.UserDao#getUser(String, String)
+	 */
 	public User getUser(String userName, String password) {
+		// Criteria criteria =
+		// sessionFactory.getCurrentSession().createCriteria(
+		// User.class);
+		// criteria.add(Restrictions.eq("userName", userName));
+		// criteria.add(Restrictions.eq("password", password));
+		//
+		// List<User> list = criteria.list();
+		//
+		// if (list != null && list.size() > 0) {
+		// return list.get(0);
+		// }
+		// return null;
+
 		try {
 			return (User) jdbcTemplate.queryForObject(
-					"SELECT * FROM user WHERE user = ? and password=?",
+					"SELECT * FROM user WHERE user_name = ? and password=?",
 					new Object[] { userName, password }, getUserRowMapper());
+
 			// new RowMapper() {
 			//
 			// public Object mapRow(ResultSet rs, int rowNum)
@@ -131,6 +190,16 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
+	/**
+	 * Method getUserWithEmail.
+	 * 
+	 * @param userName
+	 *            String
+	 * @param email
+	 *            String
+	 * @return User
+	 * @see bd.gov.forms.dao.UserDao#getUserWithEmail(String, String)
+	 */
 	public User getUserWithEmail(String userName, String email) {
 		try {
 			return (User) jdbcTemplate.queryForObject(
@@ -162,6 +231,12 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
+	/**
+	 * Method getUserList.
+	 * 
+	 * @return List
+	 * @see bd.gov.forms.dao.UserDao#getUserList()
+	 */
 	public List getUserList() {
 		return jdbcTemplate.query("SELECT * FROM user ", new Object[] {},
 				getUserRowMapper());
@@ -183,6 +258,13 @@ public class UserDaoImpl implements UserDao {
 		// });
 	}
 
+	/**
+	 * Method saveUser.
+	 * 
+	 * @param user
+	 *            User
+	 * @see bd.gov.forms.dao.UserDao#saveUser(User)
+	 */
 	public void saveUser(final User user) {
 		String sql = "INSERT INTO user";
 		sql += " (sys_id, name, title, user, password, mobile, email, admin, active, ministry";
@@ -214,6 +296,13 @@ public class UserDaoImpl implements UserDao {
 				});
 	}
 
+	/**
+	 * Method updateUser.
+	 * 
+	 * @param user
+	 *            User
+	 * @see bd.gov.forms.dao.UserDao#updateUser(User)
+	 */
 	public void updateUser(final User user) {
 		String sql = "UPDATE user";
 		sql += " set name = ?, title = ?, mobile = ?, email = ?, admin = ?, active = ?";
@@ -240,17 +329,47 @@ public class UserDaoImpl implements UserDao {
 				});
 	}
 
+	/**
+	 * Method changePassword.
+	 * 
+	 * @param userName
+	 *            String
+	 * @param password
+	 *            String
+	 * @return int
+	 * @see bd.gov.forms.dao.UserDao#changePassword(String, String)
+	 */
 	public int changePassword(String userName, String password) {
 		return jdbcTemplate.update(
 				"UPDATE user SET password = ? WHERE user = ?", password,
 				userName);
 	}
 
+	/**
+	 * Method getCountWithUserName.
+	 * 
+	 * @param userName
+	 *            String
+	 * @return int
+	 * @see bd.gov.forms.dao.UserDao#getCountWithUserName(String)
+	 */
 	public int getCountWithUserName(String userName) {
 		return jdbcTemplate.queryForInt(
 				"select count(*) from user where user = ?", userName);
 	}
 
+	/**
+	 * Method getUser.
+	 * 
+	 * @param userName
+	 *            String
+	 * @param password
+	 *            String
+	 * @param ministryId
+	 *            int
+	 * @return User
+	 * @see bd.gov.forms.dao.UserDao#getUser(String, String, int)
+	 */
 	@Override
 	public User getUser(String userName, String password, int ministryId) {
 

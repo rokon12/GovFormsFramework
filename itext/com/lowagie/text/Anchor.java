@@ -74,6 +74,8 @@ import com.lowagie.text.markup.MarkupParser;
  *
  * @see		Element
  * @see		Phrase
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class Anchor extends Phrase implements TextElementArray, MarkupAttributes {
@@ -217,7 +219,8 @@ public class Anchor extends Phrase implements TextElementArray, MarkupAttributes
  * <CODE>ElementListener</CODE>.
  *
  * @param	listener	an <CODE>ElementListener</CODE>
- * @return	<CODE>true</CODE> if the element was processed successfully
+
+ * @return	<CODE>true</CODE> if the element was processed successfully * @see com.lowagie.text.Element#process(ElementListener)
  */
     
     public boolean process(ElementListener listener) {
@@ -247,7 +250,8 @@ public class Anchor extends Phrase implements TextElementArray, MarkupAttributes
 /**
  * Gets all the chunks in this element.
  *
- * @return	an <CODE>ArrayList</CODE>
+
+ * @return	an <CODE>ArrayList</CODE> * @see com.lowagie.text.Element#getChunks()
  */
     
     public ArrayList getChunks() {
@@ -275,7 +279,8 @@ public class Anchor extends Phrase implements TextElementArray, MarkupAttributes
 /**
  * Gets the type of the text element.
  *
- * @return	a type
+
+ * @return	a type * @see com.lowagie.text.Element#type()
  */
     
     public int type() {
@@ -287,8 +292,8 @@ public class Anchor extends Phrase implements TextElementArray, MarkupAttributes
 /**
  * Gets an iterator of <CODE>Element</CODE>s.
  *
- * @return	an <CODE>Iterator</CODE>
- */
+
+ * @return	an <CODE>Iterator</CODE> */
     
     // suggestion by by Curt Thompson
     public Iterator getElements() {
@@ -320,8 +325,8 @@ public class Anchor extends Phrase implements TextElementArray, MarkupAttributes
 /**
  * Returns the name of this <CODE>Anchor</CODE>.
  *
- * @return	a name
- */
+
+ * @return	a name */
     
     public String name() {
         return name;
@@ -330,8 +335,8 @@ public class Anchor extends Phrase implements TextElementArray, MarkupAttributes
 /**
  * Gets the reference of this <CODE>Anchor</CODE>.
  *
- * @return	a reference
- */
+
+ * @return	a reference */
     
     public String reference() {
         return reference;
@@ -340,8 +345,8 @@ public class Anchor extends Phrase implements TextElementArray, MarkupAttributes
 /**
  * Gets the reference of this <CODE>Anchor</CODE>.
  *
- * @return	an <CODE>URL</CODE>
- */
+
+ * @return	an <CODE>URL</CODE> */
     
     public URL url() {
         try {
@@ -356,8 +361,8 @@ public class Anchor extends Phrase implements TextElementArray, MarkupAttributes
  * Checks if a given tag corresponds with this object.
  *
  * @param   tag     the given tag
- * @return  true if the tag corresponds
- */
+
+ * @return  true if the tag corresponds */
     
     public static boolean isTag(String tag) {
         return ElementTags.ANCHOR.equals(tag);

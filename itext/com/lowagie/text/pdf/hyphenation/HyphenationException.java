@@ -18,9 +18,14 @@ package com.lowagie.text.pdf.hyphenation;
 
 /**
  * @author Carlos Villegas <cav@uniscope.co.jp>
+ * @version $Revision: 1.0 $
  */
 public class HyphenationException extends Exception {
 
+    /**
+     * Constructor for HyphenationException.
+     * @param msg String
+     */
     public HyphenationException(String msg) {
         super(msg);
     }

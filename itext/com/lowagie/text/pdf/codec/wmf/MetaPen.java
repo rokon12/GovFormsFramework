@@ -52,6 +52,8 @@ package com.lowagie.text.pdf.codec.wmf;
 import java.io.IOException;
 import java.awt.Color;
 
+/**
+ */
 public class MetaPen extends MetaObject {
 
     public static final int PS_SOLID = 0;
@@ -70,6 +72,11 @@ public class MetaPen extends MetaObject {
         type = META_PEN;
     }
 
+    /**
+     * Method init.
+     * @param in InputMeta
+     * @throws IOException
+     */
     public void init(InputMeta in) throws IOException {
         style = in.readWord();
         penWidth = in.readShort();
@@ -77,14 +84,26 @@ public class MetaPen extends MetaObject {
         color = in.readColor();
     }
     
+    /**
+     * Method getStyle.
+     * @return int
+     */
     public int getStyle() {
         return style;
     }
     
+    /**
+     * Method getPenWidth.
+     * @return int
+     */
     public int getPenWidth() {
         return penWidth;
     }
     
+    /**
+     * Method getColor.
+     * @return Color
+     */
     public Color getColor() {
         return color;
     }

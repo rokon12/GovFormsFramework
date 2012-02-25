@@ -68,6 +68,8 @@ import java.util.Set;
  * @see   Element
  * @see   Cell
  * @see   Table
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class Row implements Element, MarkupAttributes {
@@ -126,7 +128,8 @@ public class Row implements Element, MarkupAttributes {
  * <CODE>ElementListener</CODE>.
  *
  * @param listener  an <CODE>ElementListener</CODE>
- * @return  <CODE>true</CODE> if the element was processed successfully
+
+ * @return  <CODE>true</CODE> if the element was processed successfully * @see com.lowagie.text.Element#process(ElementListener)
  */
     
     public boolean process(ElementListener listener) {
@@ -141,7 +144,8 @@ public class Row implements Element, MarkupAttributes {
 /**
  * Gets the type of the text element.
  *
- * @return  a type
+
+ * @return  a type * @see com.lowagie.text.Element#type()
  */
     
     public int type() {
@@ -151,7 +155,8 @@ public class Row implements Element, MarkupAttributes {
 /**
  * Gets all the chunks in this element.
  *
- * @return  an <CODE>ArrayList</CODE>
+
+ * @return  an <CODE>ArrayList</CODE> * @see com.lowagie.text.Element#getChunks()
  */
     
     public ArrayList getChunks() {
@@ -198,9 +203,9 @@ public class Row implements Element, MarkupAttributes {
  * Adds a <CODE>Cell</CODE> to the <CODE>Row</CODE>.
  *
  * @param       element the element to add (currently only Cells and Tables supported)
+
  * @return      the column position the <CODE>Cell</CODE> was added,
- *                      or <CODE>-1</CODE> if the <CODE>element</CODE> couldn't be added.
- */
+ *                      or <CODE>-1</CODE> if the <CODE>element</CODE> couldn't be added. */
     
     int addElement(Object element) {
         return addElement(element, currentColumn);
@@ -211,9 +216,9 @@ public class Row implements Element, MarkupAttributes {
  *
  * @param       element the element to add. (currently only Cells and Tables supported
  * @param       column  the position where to add the cell.
+
  * @return      the column position the <CODE>Cell</CODE> was added,
- *                      or <CODE>-1</CODE> if the <CODE>Cell</CODE> couldn't be added.
- */
+ *                      or <CODE>-1</CODE> if the <CODE>Cell</CODE> couldn't be added. */
     
     int addElement(Object element, int column) {
         if (element == null) throw new NullPointerException("addCell - null argument");
@@ -252,8 +257,8 @@ public class Row implements Element, MarkupAttributes {
  * Reserves a <CODE>Cell</CODE> in the <CODE>Row</CODE>.
  *
  * @param   column  the column that has to be reserved.
- * @return  <CODE>true</CODE> if the column was reserved, <CODE>false</CODE> if not.
- */
+
+ * @return  <CODE>true</CODE> if the column was reserved, <CODE>false</CODE> if not. */
     
     boolean reserve(int column) {
         return reserve(column, 1);
@@ -265,8 +270,8 @@ public class Row implements Element, MarkupAttributes {
  *
  * @param   column  the column that has to be reserved.
  * @param   size    the number of columns
- * @return  <CODE>true</CODE> if the column was reserved, <CODE>false</CODE> if not.
- */
+
+ * @return  <CODE>true</CODE> if the column was reserved, <CODE>false</CODE> if not. */
     
     boolean reserve(int column, int size) {
         if ((column < 0) || ((column + size) > columns)) throw new IndexOutOfBoundsException("reserve - incorrect column/size");
@@ -311,8 +316,8 @@ public class Row implements Element, MarkupAttributes {
  * Returns true/false when this position in the <CODE>Row</CODE> has been reserved, either filled or through a colspan of an Element.
  *
  * @param       column  the column.
- * @return      <CODE>true</CODE> if the column was reserved, <CODE>false</CODE> if not.
- */
+
+ * @return      <CODE>true</CODE> if the column was reserved, <CODE>false</CODE> if not. */
     
     boolean isReserved(int column) {
         return reserved[column];
@@ -322,8 +327,8 @@ public class Row implements Element, MarkupAttributes {
  * Returns the type-id of the element in a Row.
  *
  * @param       column  the column of which you'd like to know the type
- * @return the type-id of the element in the row
- */
+
+ * @return the type-id of the element in the row */
     
     int getElementID(int column) {
         if (cells[column] == null) return NULL;
@@ -338,8 +343,8 @@ public class Row implements Element, MarkupAttributes {
  * Returns the type-id of an Object.
  *
  * @param       element the object of which you'd like to know the type-id, -1 if invalid
- * @return the type-id of an object
- */
+
+ * @return the type-id of an object */
     
     int getObjectID(Object element) {
         if (element == null) return NULL;
@@ -354,9 +359,9 @@ public class Row implements Element, MarkupAttributes {
  * Gets a <CODE>Cell</CODE> or <CODE>Table</CODE> from a certain column.
  *
  * @param   column  the column the <CODE>Cell/Table</CODE> is in.
+
  * @return  the <CODE>Cell</CODE>,<CODE>Table</CODE> or <VAR>Object</VAR> if the column was
- *                  reserved or null if empty.
- */
+ *                  reserved or null if empty. */
     
     public Object getCell(int column) {
         if ((column < 0) || (column > columns)) {
@@ -368,8 +373,8 @@ public class Row implements Element, MarkupAttributes {
 /**
  * Checks if the row is empty.
  *
- * @return  <CODE>true</CODE> if none of the columns is reserved.
- */
+
+ * @return  <CODE>true</CODE> if none of the columns is reserved. */
     
     public boolean isEmpty() {
         for (int i = 0; i < columns; i++) {
@@ -383,8 +388,8 @@ public class Row implements Element, MarkupAttributes {
 /**
  * Gets the index of the current, valid position
  *
- * @return  a value
- */
+
+ * @return  a value */
     
     int validPosition() {
         return currentColumn;
@@ -393,8 +398,8 @@ public class Row implements Element, MarkupAttributes {
 /**
  * Gets the number of columns.
  *
- * @return  a value
- */
+
+ * @return  a value */
     
     public int columns() {
         return columns;
@@ -403,8 +408,8 @@ public class Row implements Element, MarkupAttributes {
 /**
  * Gets the horizontal alignment.
  *
- * @return  a value
- */
+
+ * @return  a value */
     
     public int horizontalAlignment() {
         return horizontalAlignment;
@@ -413,8 +418,8 @@ public class Row implements Element, MarkupAttributes {
 /**
  * Gets the vertical alignment.
  *
- * @return  a value
- */
+
+ * @return  a value */
     
     public int verticalAlignment() {
         return verticalAlignment;
@@ -424,8 +429,8 @@ public class Row implements Element, MarkupAttributes {
  * Checks if a given tag corresponds with this object.
  *
  * @param   tag     the given tag
- * @return  true if the tag corresponds
- */
+
+ * @return  true if the tag corresponds */
     
     public static boolean isTag(String tag) {
         return ElementTags.ROW.equals(tag);

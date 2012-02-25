@@ -70,6 +70,7 @@ import java.util.ArrayList;
  * Version: $Id: RtfDocument.java,v 1.15 2005/09/11 20:16:57 hallm Exp $
  * @author Mark Hall (mhall@edu.uni-klu.ac.at)
  * @author Todd Bush (Todd.Bush@canopysystems.com) [Tab support]
+ * @version $Revision: 1.0 $
  */
 public class RtfDocument extends RtfElement {
     /**
@@ -126,8 +127,8 @@ public class RtfDocument extends RtfElement {
     /**
      * Writes the document
      *
-     * @return A byte array containing the complete rtf document
-     */
+    
+     * @return A byte array containing the complete rtf document */
     public byte[] writeDocument() {
         ByteArrayOutputStream docStream = new ByteArrayOutputStream();
         try {
@@ -167,8 +168,8 @@ public class RtfDocument extends RtfElement {
     /**
      * Gets the RtfMapper object of this RtfDocument
      * 
-     * @return The RtfMapper
-     */
+    
+     * @return The RtfMapper */
     public RtfMapper getMapper() {
         return mapper;
     }
@@ -176,8 +177,8 @@ public class RtfDocument extends RtfElement {
     /**
      * Generates a random integer that is unique with respect to the document.
      * 
-     * @return A random int
-     */
+    
+     * @return A random int */
     public int getRandomInt() {
         Integer newInt = null;
         do {
@@ -190,8 +191,8 @@ public class RtfDocument extends RtfElement {
     /**
      * Gets the RtfDocumentHeader of this RtfDocument
      * 
-     * @return The RtfDocumentHeader of this RtfDocument
-     */
+    
+     * @return The RtfDocumentHeader of this RtfDocument */
     public RtfDocumentHeader getDocumentHeader() {
         return this.documentHeader;
     }
@@ -202,8 +203,8 @@ public class RtfDocument extends RtfElement {
      * @param useHex indicated if the hexadecimal value has to be used
      * @param softLineBreaks whether to use soft line breaks instead of default hard ones.
      *
-     * @return The converted String
-     */
+    
+     * @return The converted String */
     public String filterSpecialChar(String str, boolean useHex, boolean softLineBreaks) {
         int length = str.length();
         int z = (int) 'z';
@@ -256,8 +257,8 @@ public class RtfDocument extends RtfElement {
     /**
      * Get whether to autmatically generate table of contents entries
      * 
-     * @return Wheter to automatically generate TOC entries
-     */
+    
+     * @return Wheter to automatically generate TOC entries */
     public boolean getAutogenerateTOCEntries() {
         return this.autogenerateTOCEntries;
     }
@@ -267,9 +268,9 @@ public class RtfDocument extends RtfElement {
      * RtfDataCache class.
      *  
      * @param dataCacheStyle The style to use.
-     * @throws DocumentException If data has already been written into the data cache.
-     * @throws IOException If the disk cache could not be initialised.
-     */
+    
+    
+     * @throws DocumentException If data has already been written into the data cache. * @throws IOException If the disk cache could not be initialised. */
     public void setDataCacheStyle(int dataCacheStyle) throws DocumentException, IOException {
         if(dataWritten) {
             throw new DocumentException("Data has already been written into the data cache. You can not change the cache style anymore.");
@@ -284,8 +285,8 @@ public class RtfDocument extends RtfElement {
     /**
      * Gets the RtfDocumentSettings that specify how the rtf document is generated.
      * 
-     * @return The current RtfDocumentSettings.
-     */
+    
+     * @return The current RtfDocumentSettings. */
     public RtfDocumentSettings getDocumentSettings() {
         return this.documentSettings;
     }
@@ -293,8 +294,8 @@ public class RtfDocument extends RtfElement {
     /**
      * Gets the last RtfBasicElement that was directly added to the RtfDocument.
      *  
-     * @return The last RtfBasicElement that was directly added to the RtfDocument.
-     */
+    
+     * @return The last RtfBasicElement that was directly added to the RtfDocument. */
     public RtfBasicElement getLastElementWritten() {
         return this.lastElementWritten;
     }

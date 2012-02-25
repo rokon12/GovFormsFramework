@@ -208,6 +208,7 @@ public class RtfHeaderFooter extends HeaderFooter implements RtfBasicElement {
      * Sets the RtfDocument this RtfElement belongs to
      * 
      * @param doc The RtfDocument to use
+     * @see com.lowagie.text.rtf.RtfBasicElement#setRtfDocument(RtfDocument)
      */
     public void setRtfDocument(RtfDocument doc) {
         this.document = doc;
@@ -229,7 +230,8 @@ public class RtfHeaderFooter extends HeaderFooter implements RtfBasicElement {
     /**
      * Writes the content of this RtfHeaderFooter
      * 
-     * @return A byte array with the content of this RtfHeaderFooter
+    
+     * @return A byte array with the content of this RtfHeaderFooter * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -289,8 +291,8 @@ public class RtfHeaderFooter extends HeaderFooter implements RtfBasicElement {
     /**
      * Gets the content of this RtfHeaderFooter
      * 
-     * @return The content of this RtfHeaderFooter
-     */
+    
+     * @return The content of this RtfHeaderFooter */
     private Object getContent() {
         return this.content;
     }
@@ -298,6 +300,7 @@ public class RtfHeaderFooter extends HeaderFooter implements RtfBasicElement {
     /**
      * Unused
      * @param inTable
+     * @see com.lowagie.text.rtf.RtfBasicElement#setInTable(boolean)
      */
     public void setInTable(boolean inTable) {
     }
@@ -305,6 +308,7 @@ public class RtfHeaderFooter extends HeaderFooter implements RtfBasicElement {
     /**
      * Unused
      * @param inHeader
+     * @see com.lowagie.text.rtf.RtfBasicElement#setInHeader(boolean)
      */
     public void setInHeader(boolean inHeader) {
     }
@@ -312,6 +316,7 @@ public class RtfHeaderFooter extends HeaderFooter implements RtfBasicElement {
     /**
      * Set the alignment of this RtfHeaderFooter. Passes the setting
      * on to the contained element.
+     * @param alignment int
      */
     public void setAlignment(int alignment) {
         super.setAlignment(alignment);

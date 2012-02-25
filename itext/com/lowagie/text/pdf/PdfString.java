@@ -67,6 +67,8 @@ import java.io.IOException;
  *
  * @see		PdfObject
  * @see		BadPdfFormatException
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfString extends PdfObject {
@@ -134,7 +136,10 @@ public class PdfString extends PdfObject {
     /**
      * Returns the PDF representation of this <CODE>PdfString</CODE>.
      *
-     * @return		an array of <CODE>byte</CODE>s
+    
+     * @param writer PdfWriter
+     * @param os OutputStream
+     * @throws IOException
      */
     
     public void toPdf(PdfWriter writer, OutputStream os) throws IOException {
@@ -163,8 +168,8 @@ public class PdfString extends PdfObject {
     /**
      * Returns the <CODE>String</CODE> value of the <CODE>PdfString</CODE>-object.
      *
-     * @return		a <CODE>String</CODE>
-     */
+    
+     * @return		a <CODE>String</CODE> */
     
     public String toString() {
         return value;
@@ -175,13 +180,17 @@ public class PdfString extends PdfObject {
     /**
      * Gets the encoding of this string.
      *
-     * @return		a <CODE>String</CODE>
-     */
+    
+     * @return		a <CODE>String</CODE> */
     
     public String getEncoding() {
         return encoding;
     }
     
+    /**
+     * Method toUnicodeString.
+     * @return String
+     */
     public String toUnicodeString() {
         if (encoding != null && encoding.length() != 0)
             return value;
@@ -192,11 +201,20 @@ public class PdfString extends PdfObject {
             return PdfEncodings.convertToString(bytes, PdfObject.TEXT_PDFDOCENCODING);
     }
     
+    /**
+     * Method setObjNum.
+     * @param objNum int
+     * @param objGen int
+     */
     void setObjNum(int objNum, int objGen) {
         this.objNum = objNum;
         this.objGen = objGen;
     }
     
+    /**
+     * Method decrypt.
+     * @param reader PdfReader
+     */
     void decrypt(PdfReader reader) {
         PdfEncryption decrypt = reader.getDecrypt();
         if (decrypt != null) {
@@ -209,6 +227,10 @@ public class PdfString extends PdfObject {
         }
     }
    
+    /**
+     * Method getBytes.
+     * @return byte[]
+     */
     public byte[] getBytes() {
         if (bytes == null) {
             if (encoding != null && encoding.equals(TEXT_UNICODE) && PdfEncodings.isPdfDocEncoding(value))
@@ -219,17 +241,30 @@ public class PdfString extends PdfObject {
         return bytes;
     }
     
+    /**
+     * Method getOriginalBytes.
+     * @return byte[]
+     */
     public byte[] getOriginalBytes() {
         if (originalValue == null)
             return getBytes();
         return PdfEncodings.convertToBytes(originalValue, null);
     }
     
+    /**
+     * Method setHexWriting.
+     * @param hexWriting boolean
+     * @return PdfString
+     */
     public PdfString setHexWriting(boolean hexWriting) {
         this.hexWriting = hexWriting;
         return this;
     }
     
+    /**
+     * Method isHexWriting.
+     * @return boolean
+     */
     public boolean isHexWriting() {
         return hexWriting;
     }

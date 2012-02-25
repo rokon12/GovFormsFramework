@@ -58,6 +58,7 @@ import java.util.Properties;
  * languages such as HTML and XML.
  *
  * @author <a href="mailto:orangeherbert@users.sourceforge.net">Matt Benson</a>
+ * @version $Revision: 1.0 $
  */
 public interface MarkupAttributes extends com.lowagie.text.Element {
     
@@ -80,23 +81,23 @@ public interface MarkupAttributes extends com.lowagie.text.Element {
  * Returns the value of the specified attribute.
  *
  * @param name   <CODE>String</CODE> attribute name.
- * @return <CODE>String</CODE>.
- */
+
+ * @return <CODE>String</CODE>. */
     public String getMarkupAttribute(String name);
     
 /**
  * Returns a <CODE>Set</CODE> of <CODE>String</CODE> attribute names for the
  * <CODE>MarkupAttributes</CODE> implementor.
  *
- * @return <CODE>Set</CODE>.
- */
+
+ * @return <CODE>Set</CODE>. */
     public Set getMarkupAttributeNames();
     
 /**
  * Return a <CODE>Properties</CODE>-object containing all the markupAttributes.
  *
- * @return <CODE>Properties</CODE>
- */
+
+ * @return <CODE>Properties</CODE> */
     public Properties getMarkupAttributes();
     
 }

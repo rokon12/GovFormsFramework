@@ -66,6 +66,8 @@ import java.io.*;
  * Parts of this Class were contributed by Steffen Stundzig. Many thanks for the
  * improvements.
  * Updates Benoit WIART <b.wiart@proxiad.com>
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class RtfTable {
     /** Stores the different rows. */
@@ -92,8 +94,8 @@ public class RtfTable {
      * <P>
      * @param table A <code>Table</code> specifying the <code>Table</code> to be imported
      * @param pageWidth An <code>int</code> specifying the page width
-     * @return true if importing the table succeeded
-     */
+    
+     * @return true if importing the table succeeded */
     public boolean importTable(Table table, int pageWidth) {
         origTable = table;
         // All Cells are pregenerated first, so that cell and rowspanning work
@@ -129,10 +131,10 @@ public class RtfTable {
      * Output the content of the <CODE>RtfTable</CODE> to an OutputStream.
      *
      * @param os The <code>OutputStream</code> that the content of the <code>RtfTable</code> is to be written to
-     * @return true if writing the table succeeded
-     * @throws DocumentException
-     * @throws IOException
-     */
+    
+    
+    
+     * @return true if writing the table succeeded * @throws DocumentException * @throws IOException */
     public boolean writeTable(ByteArrayOutputStream os) throws DocumentException, IOException {
     	
         if(!this.writer.writingHeaderFooter()) {
@@ -192,8 +194,8 @@ public class RtfTable {
     /**
      * This method allows access to the original Table that led to this RtfTable.
      *
-     * @return The Table object that is the basis of this RtfTable.
-     */
+    
+     * @return The Table object that is the basis of this RtfTable. */
     protected Table getOriginalTable() {
         return origTable;
     }

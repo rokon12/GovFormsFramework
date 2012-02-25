@@ -58,6 +58,7 @@ import java.io.FileInputStream;
 /** Parses the xml hyphenation pattern.
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class SimplePatternParser implements SimpleXMLDocHandler, PatternConsumer {
     int currElement;
@@ -78,6 +79,11 @@ public class SimplePatternParser implements SimpleXMLDocHandler, PatternConsumer
         hyphenChar = '-';    // default
     }
     
+    /**
+     * Method parse.
+     * @param stream InputStream
+     * @param consumer PatternConsumer
+     */
     public void parse(InputStream stream, PatternConsumer consumer) {
         this.consumer = consumer;
         try {
@@ -91,6 +97,11 @@ public class SimplePatternParser implements SimpleXMLDocHandler, PatternConsumer
         }
     }
     
+    /**
+     * Method getPattern.
+     * @param word String
+     * @return String
+     */
     protected static String getPattern(String word) {
         StringBuffer pat = new StringBuffer();
         int len = word.length();
@@ -102,6 +113,11 @@ public class SimplePatternParser implements SimpleXMLDocHandler, PatternConsumer
         return pat.toString();
     }
 
+    /**
+     * Method normalizeException.
+     * @param ex ArrayList
+     * @return ArrayList
+     */
     protected ArrayList normalizeException(ArrayList ex) {
         ArrayList res = new ArrayList();
         for (int i = 0; i < ex.size(); i++) {
@@ -133,6 +149,11 @@ public class SimplePatternParser implements SimpleXMLDocHandler, PatternConsumer
         return res;
     }
 
+    /**
+     * Method getExceptionWord.
+     * @param ex ArrayList
+     * @return String
+     */
     protected String getExceptionWord(ArrayList ex) {
         StringBuffer res = new StringBuffer();
         for (int i = 0; i < ex.size(); i++) {
@@ -148,6 +169,11 @@ public class SimplePatternParser implements SimpleXMLDocHandler, PatternConsumer
         return res.toString();
     }
 
+    /**
+     * Method getInterletterValues.
+     * @param pat String
+     * @return String
+     */
     protected static String getInterletterValues(String pat) {
         StringBuffer il = new StringBuffer();
         String word = pat + "a";    // add dummy letter to serve as sentinel
@@ -164,9 +190,18 @@ public class SimplePatternParser implements SimpleXMLDocHandler, PatternConsumer
         return il.toString();
     }
 
+    /**
+     * Method endDocument.
+     * @see com.lowagie.text.pdf.SimpleXMLDocHandler#endDocument()
+     */
     public void endDocument() {
     }
     
+    /**
+     * Method endElement.
+     * @param tag String
+     * @see com.lowagie.text.pdf.SimpleXMLDocHandler#endElement(String)
+     */
     public void endElement(String tag) {
         if (token.length() > 0) {
             String word = token.toString();
@@ -199,9 +234,19 @@ public class SimplePatternParser implements SimpleXMLDocHandler, PatternConsumer
         }
     }
     
+    /**
+     * Method startDocument.
+     * @see com.lowagie.text.pdf.SimpleXMLDocHandler#startDocument()
+     */
     public void startDocument() {
     }
     
+    /**
+     * Method startElement.
+     * @param tag String
+     * @param h java.util.HashMap
+     * @see com.lowagie.text.pdf.SimpleXMLDocHandler#startElement(String, java.util.HashMap)
+     */
     public void startElement(String tag, java.util.HashMap h) {
         if (tag.equals("hyphen-char")) {
             String hh = (String)h.get("value");
@@ -227,6 +272,11 @@ public class SimplePatternParser implements SimpleXMLDocHandler, PatternConsumer
         token.setLength(0);
     }
     
+    /**
+     * Method text.
+     * @param str String
+     * @see com.lowagie.text.pdf.SimpleXMLDocHandler#text(String)
+     */
     public void text(String str) {
         StringTokenizer tk = new StringTokenizer(str);
         while (tk.hasMoreTokens()) {
@@ -252,18 +302,40 @@ public class SimplePatternParser implements SimpleXMLDocHandler, PatternConsumer
     }
     
     // PatternConsumer implementation for testing purposes
+    /**
+     * Method addClass.
+     * @param c String
+     * @see com.lowagie.text.pdf.hyphenation.PatternConsumer#addClass(String)
+     */
     public void addClass(String c) {
         System.out.println("class: " + c);
     }
 
+    /**
+     * Method addException.
+     * @param w String
+     * @param e ArrayList
+     * @see com.lowagie.text.pdf.hyphenation.PatternConsumer#addException(String, ArrayList)
+     */
     public void addException(String w, ArrayList e) {
         System.out.println("exception: " + w + " : " + e.toString());
     }
 
+    /**
+     * Method addPattern.
+     * @param p String
+     * @param v String
+     * @see com.lowagie.text.pdf.hyphenation.PatternConsumer#addPattern(String, String)
+     */
     public void addPattern(String p, String v) {
         System.out.println("pattern: " + p + " : " + v);
     }
 
+    /**
+     * Method main.
+     * @param args String[]
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         try {
             if (args.length > 0) {

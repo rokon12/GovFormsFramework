@@ -55,11 +55,12 @@ package com.lowagie.text.rtf;
  * write data into the definition part of the rtf document
  * Version: $Id: RtfExtendedElement.java,v 1.4 2004/11/06 16:52:46 blowagie Exp $
  * @author Mark Hall (mhall@edu.uni-klu.ac.at)
+ * @version $Revision: 1.0 $
  */
 public interface RtfExtendedElement extends RtfBasicElement {
     /**
      * Return the definition part of the element in a byte array
-     * @return A byte array containing the definition data of the Element
-     */
+    
+     * @return A byte array containing the definition data of the Element */
     public byte[] writeDefinition();
 }

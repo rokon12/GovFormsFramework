@@ -51,6 +51,7 @@ import java.util.HashMap;
 /**
  * The handler for the events fired by <CODE>SimpleXMLParser</CODE>.
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public interface SimpleXMLDocHandler {
     /**

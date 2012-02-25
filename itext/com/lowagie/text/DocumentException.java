@@ -58,6 +58,8 @@ package com.lowagie.text;
  * @see		Document
  * @see		DocWriter
  * @see		DocListener
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class DocumentException extends Exception {
@@ -93,8 +95,8 @@ public class DocumentException extends Exception {
 
     /**
      * We print the message of the checked exception 
-     * @return the error message
-     */
+    
+     * @return the error message */
     public String getMessage() {
         if (ex == null)
             return super.getMessage();
@@ -104,8 +106,8 @@ public class DocumentException extends Exception {
 
     /**
      * and make sure we also produce a localized version 
-     * @return a localized message
-     */
+    
+     * @return a localized message */
     public String getLocalizedMessage() {
         if (ex == null)
             return super.getLocalizedMessage();
@@ -115,8 +117,8 @@ public class DocumentException extends Exception {
 
     /**
      * The toString() is changed to be prefixed with ExceptionConverter 
-     * @return the String version of the exception
-     */
+    
+     * @return the String version of the exception */
     public String toString() {
         if (ex == null)
             return super.toString();
@@ -163,8 +165,8 @@ public class DocumentException extends Exception {
     /**
      * Removes everything in a String that comes before a '.'
      * @param s the original string
-     * @return the part that comes after the dot
-     */
+    
+     * @return the part that comes after the dot */
     private static String split(String s) {
         int i = s.lastIndexOf('.');
         if (i < 0)

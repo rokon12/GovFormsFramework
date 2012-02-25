@@ -58,6 +58,7 @@ import com.lowagie.text.rtf.document.RtfDocument;
  *
  * Version: $Id: RtfBasicElement.java,v 1.4 2004/11/06 16:52:46 blowagie Exp $
  * @author Mark Hall (mhall@edu.uni-klu.ac.at)
+ * @version $Revision: 1.0 $
  */
 public interface RtfBasicElement {
     /**
@@ -83,8 +84,8 @@ public interface RtfBasicElement {
 
     /**
      * Return the content of the Element in a byte array
-     * @return The byte array containing the data
-     */
+    
+     * @return The byte array containing the data */
     public byte[] write();
     
     /**

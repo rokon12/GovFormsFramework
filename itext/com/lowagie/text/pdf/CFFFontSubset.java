@@ -64,6 +64,7 @@ import java.io.*;
  * A font which was not of CID type is transformed into CID as a part of the subset process. 
  * The CID synthetic creation was written by Sivan Toledo <sivan@math.tau.ac.il> 
  * @author Oren Manor <manorore@post.tau.ac.il> & Ygal Blum <blumygal@post.tau.ac.il>
+ * @version $Revision: 1.0 $
  */
 public class CFFFontSubset extends CFFFont {
 	
@@ -204,8 +205,8 @@ public class CFFFontSubset extends CFFFont {
      * Calculates the length of the charset according to its format
      * @param Offset The Charset Offset
      * @param NumofGlyphs Number of glyphs in the font
-     * @return the length of the Charset
-     */
+    
+     * @return the length of the Charset */
     int CountCharset(int Offset,int NumofGlyphs){
     	int format;
     	int Length=0;
@@ -233,8 +234,8 @@ public class CFFFontSubset extends CFFFont {
      * Function calculates the number of ranges in the Charset
      * @param NumofGlyphs The number of glyphs in the font
      * @param Type The format of the Charset
-     * @return The number of ranges in the Charset data structure
-     */
+    
+     * @return The number of ranges in the Charset data structure */
     int CountRange(int NumofGlyphs,int Type){
     	int num=0;
     	char Sid;
@@ -255,7 +256,7 @@ public class CFFFontSubset extends CFFFont {
 	/**
 	 * Read the FDSelect of the font and compute the array and its length
 	 * @param Font The index of the font being processed
-	 * @return The Processed FDSelect of the font
+	
 	 */
 	protected void readFDSelect(int Font)
 	{
@@ -352,9 +353,9 @@ public class CFFFontSubset extends CFFFont {
 	 * The Process function extracts one font out of the CFF file and returns a
 	 * subset version of the original.
 	 * @param fontName - The name of the font to be taken out of the CFF
-	 * @return The new font stream
-	 * @throws IOException
-	 */
+	
+	
+	 * @return The new font stream * @throws IOException */
 	public byte[] Process(String fontName)throws IOException{
 		try
 		{	
@@ -393,8 +394,8 @@ public class CFFFontSubset extends CFFFont {
 	 * of the subrs
 	 * @param Offset The offset to the relevent subrs index
 	 * @param Font the font
-	 * @return The calculated Bias
-	 */
+	
+	 * @return The calculated Bias */
 	protected int CalcBias(int Offset,int Font)
 	{
 		seek(Offset);
@@ -414,8 +415,8 @@ public class CFFFontSubset extends CFFFont {
 	/**
 	 *Function uses BuildNewIndex to create the new index of the subset charstrings
 	 * @param FontIndex the font
-	 * @throws IOException
-	 */
+	
+	 * @throws IOException */
 	protected void BuildNewCharString(int FontIndex) throws IOException 
 	{
 		NewCharStringsIndex = BuildNewIndex(fonts[FontIndex].charstringsOffsets,GlyphsUsed);
@@ -425,8 +426,8 @@ public class CFFFontSubset extends CFFFont {
 	 * Function builds the new local & global subsrs indices. IF CID then All of 
 	 * the FD Array lsubrs will be subsetted. 
 	 * @param Font the font
-	 * @throws IOException
-	 */
+	
+	 * @throws IOException */
 	protected void BuildNewLGSubrs(int Font)throws IOException
 	{
 		// If the font is CID then the lsubrs are divided into FontDicts.
@@ -630,6 +631,7 @@ public class CFFFontSubset extends CFFFont {
 	 * @param LBias the bias of the Local Subrs
 	 * @param hSubr the HashMap for the lSubrs
 	 * @param lSubr the ArrayList for the lSubrs
+	 * @param LSubrsOffsets int[]
 	 */
 	protected void ReadASubr(int begin,int end,int GBias,int LBias,HashMap hSubr,ArrayList lSubr,int[] LSubrsOffsets)
 	{
@@ -733,8 +735,8 @@ public class CFFFontSubset extends CFFFont {
 	
 	/**
 	 * Function checks the key and return the change to the stack after the operator
-	 * @return The change in the stack. 2-> flush the stack
-	 */
+	
+	 * @return The change in the stack. 2-> flush the stack */
 	protected int StackOpp()
 	{
 		if (key == "ifelse")
@@ -863,8 +865,8 @@ public class CFFFontSubset extends CFFFont {
 	 * @param LBias the bias of the Local Subrs
 	 * @param GBias the bias of the Global Subrs
 	 * @param LSubrsOffsets The Offsets array of the subroutines
-	 * @return The number of hints in the subroutine read.
-	 */
+	
+	 * @return The number of hints in the subroutine read. */
 	protected int CalcHints(int begin,int end,int LBias,int GBias,int[] LSubrsOffsets)
 	{
 		// Goto begining of the subr
@@ -925,9 +927,9 @@ public class CFFFontSubset extends CFFFont {
 	 * used for creating the glyph and subrs subsetted index 
 	 * @param Offsets the offset array of the original index  
 	 * @param Used the hashmap of the used objects
-	 * @return the new index subset version 
-	 * @throws IOException
-	 */
+	
+	
+	 * @return the new index subset version  * @throws IOException */
 	protected byte[] BuildNewIndex(int[] Offsets,HashMap Used) throws IOException 
 	{
 		int Offset=0;
@@ -969,8 +971,8 @@ public class CFFFontSubset extends CFFFont {
 	 * and object array.
 	 * @param NewOffsets the subsetted offset array
 	 * @param NewObjects the subsetted object array
-	 * @return the new index created
-	 */
+	
+	 * @return the new index created */
 	protected byte[] AssembleIndex(int[] NewOffsets,byte[] NewObjects)
 	{
 		// Calc the index' count field
@@ -1022,9 +1024,9 @@ public class CFFFontSubset extends CFFFont {
 	/**
 	 * The function builds the new output stream according to the subset process
 	 * @param Font the font
-	 * @return the subseted font stream
-	 * @throws IOException
-	 */
+	
+	
+	 * @return the subseted font stream * @throws IOException */
 	protected byte[] BuildNewFile(int Font)throws IOException
     {
 		// Prepare linked list for new font components
@@ -1384,8 +1386,8 @@ public class CFFFontSubset extends CFFFont {
 	/**
 	 * Function reconstructs the FDArray, PrivateDict and LSubr for CID fonts
 	 * @param Font the font
-	 * @throws IOException
-	 */
+	
+	 * @throws IOException */
 	void Reconstruct(int Font)throws IOException
 	{
 		// Init for later use
@@ -1402,8 +1404,8 @@ public class CFFFontSubset extends CFFFont {
 	 * Function subsets the FDArray and builds the new one with new offsets
 	 * @param Font The font
 	 * @param fdPrivate OffsetItem Array (one for each FDArray)
-	 * @throws IOException
-	 */
+	
+	 * @throws IOException */
 	void ReconstructFDArray(int Font,OffsetItem[] fdPrivate)throws IOException
 	{
 		// Build the header of the index
@@ -1468,8 +1470,8 @@ public class CFFFontSubset extends CFFFont {
 	 * @param fdPrivate OffsetItem array one element for each private
 	 * @param fdPrivateBase IndexBaseItem array one element for each private
 	 * @param fdSubrs OffsetItem array one element for each private
-	 * @throws IOException
-	 */
+	
+	 * @throws IOException */
 	void ReconstructPrivateDict(int Font,OffsetItem[] fdPrivate,IndexBaseItem[] fdPrivateBase,
 			OffsetItem[] fdSubrs)throws IOException
 	{
@@ -1512,8 +1514,8 @@ public class CFFFontSubset extends CFFFont {
 	 * @param Font  The index of the font
 	 * @param fdPrivateBase The IndexBaseItem array for the linked list
 	 * @param fdSubrs OffsetItem array for the linked list
-	 * @throws IOException
-	 */
+	
+	 * @throws IOException */
 	
 	void ReconstructPrivateSubrs(int Font,IndexBaseItem[] fdPrivateBase,
 			OffsetItem[] fdSubrs)throws IOException
@@ -1536,8 +1538,8 @@ public class CFFFontSubset extends CFFFont {
 	 * private dict.
 	 * @param Offset The Offset for the private dict
 	 * @param Size The size of the private dict
-	 * @return The size of the offset of the subrs in the private dict
-	 */
+	
+	 * @return The size of the offset of the subrs in the private dict */
 	int CalcSubrOffsetSize(int Offset,int Size)
 	{
 		// Set the size to 0
@@ -1564,8 +1566,8 @@ public class CFFFontSubset extends CFFFont {
 	/**
 	 * Function computes the size of an index
 	 * @param indexOffset The offset for the computed index
-	 * @return The size of the index
-	 */
+	
+	 * @return The size of the index */
 	protected int countEntireIndexRange(int indexOffset) 
 	{
 		// Go to the beginning of the index 
@@ -1621,8 +1623,8 @@ public class CFFFontSubset extends CFFFont {
 	 * @param Font the font
 	 * @param PrivateBase IndexBaseItem for the private that's referencing to the subrs
 	 * @param Subrs OffsetItem for the subrs
-	 * @throws IOException
-	 */
+	
+	 * @throws IOException */
 	void CreateNonCIDSubrs(int Font,IndexBaseItem PrivateBase,OffsetItem Subrs)throws IOException
 	{
 		// Mark the beginning of the Subrs index

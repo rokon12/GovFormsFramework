@@ -55,6 +55,8 @@ import javax.swing.filechooser.FileFilter;
 
 /**
  * Filters PDF files in a JFileChooser.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class PdfFilter extends FileFilter {
 

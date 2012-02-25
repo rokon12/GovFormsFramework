@@ -60,6 +60,8 @@ package com.lowagie.text.pdf;
  * @see		PdfName
  * @see		PdfDictionary
  * @see		PdfFont
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class BadPdfFormatException extends PdfException {

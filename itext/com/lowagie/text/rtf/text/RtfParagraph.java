@@ -180,7 +180,8 @@ public class RtfParagraph extends RtfPhrase {
      * Writes the content of this RtfParagraph. First paragraph specific data is written
      * and then the RtfChunks of this RtfParagraph are added.
      * 
-     * @return The content of this RtfParagraph
+    
+     * @return The content of this RtfParagraph * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -241,8 +242,8 @@ public class RtfParagraph extends RtfPhrase {
     /**
      * Gets the left indentation of this RtfParagraph.
      * 
-     * @return The left indentation.
-     */
+    
+     * @return The left indentation. */
     public int getIndentLeft() {
         return this.indentLeft;
     }
@@ -259,8 +260,8 @@ public class RtfParagraph extends RtfPhrase {
     /**
      * Gets the right indentation of this RtfParagraph.
      * 
-     * @return The right indentation.
-     */
+    
+     * @return The right indentation. */
     public int getIndentRight()  {
         return this.indentRight;
     }

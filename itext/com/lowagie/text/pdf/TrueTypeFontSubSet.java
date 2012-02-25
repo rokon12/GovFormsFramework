@@ -61,6 +61,7 @@ import com.lowagie.text.ExceptionConverter;
  * the font.
  *
  * @author  Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 class TrueTypeFontSubSet {
     static final String tableNamesSimple[] = {"cvt ", "fpgm", "glyf", "head",
@@ -112,6 +113,7 @@ class TrueTypeFontSubSet {
      * @param fileName the file name of the font
      * @param glyphsUsed the glyphs used
      * @param includeCmap <CODE>true</CODE> if the table cmap is to be included in the generated font
+     * @param rf RandomAccessFileOrArray
      */
     TrueTypeFontSubSet(String fileName, RandomAccessFileOrArray rf, HashMap glyphsUsed, int directoryOffset, boolean includeCmap) {
         this.fileName = fileName;
@@ -123,10 +125,10 @@ class TrueTypeFontSubSet {
     }
     
     /** Does the actual work of subsetting the font.
-     * @throws IOException on error
-     * @throws DocumentException on error
-     * @return the subset font
-     */    
+    
+    
+    
+     * @return the subset font * @throws IOException on error * @throws DocumentException on error */    
     byte[] process() throws IOException, DocumentException {
         try {
             rf.reOpen();
@@ -148,6 +150,11 @@ class TrueTypeFontSubSet {
         }
     }
     
+    /**
+     * Method assembleFont.
+     * @throws IOException
+     * @throws DocumentException
+     */
     protected void assembleFont() throws IOException, DocumentException {
         int tableLocation[];
         int fullFontSize = 0;
@@ -225,6 +232,11 @@ class TrueTypeFontSubSet {
         }
     }
     
+    /**
+     * Method createTableDirectory.
+     * @throws IOException
+     * @throws DocumentException
+     */
     protected void createTableDirectory() throws IOException, DocumentException {
         tableDirectory = new HashMap();
         rf.seek(directoryOffset);
@@ -243,6 +255,11 @@ class TrueTypeFontSubSet {
         }
     }
     
+    /**
+     * Method readLoca.
+     * @throws IOException
+     * @throws DocumentException
+     */
     protected void readLoca() throws IOException, DocumentException {
         int tableLocation[];
         tableLocation = (int[])tableDirectory.get("head");
@@ -268,6 +285,10 @@ class TrueTypeFontSubSet {
         }
     }
     
+    /**
+     * Method createNewGlyphTables.
+     * @throws IOException
+     */
     protected void createNewGlyphTables() throws IOException {
         newLocaTable = new int[locaTable.length];
         int activeGlyphs[] = new int[glyphsInList.size()];
@@ -317,6 +338,11 @@ class TrueTypeFontSubSet {
         
     }
     
+    /**
+     * Method flatGlyphs.
+     * @throws IOException
+     * @throws DocumentException
+     */
     protected void flatGlyphs() throws IOException, DocumentException {
         int tableLocation[];
         tableLocation = (int[])tableDirectory.get("glyf");
@@ -334,6 +360,11 @@ class TrueTypeFontSubSet {
         }
     }
 
+    /**
+     * Method checkGlyphComposite.
+     * @param glyph int
+     * @throws IOException
+     */
     protected void checkGlyphComposite(int glyph) throws IOException {
         int start = locaTable[glyph];
         if (start == locaTable[glyph + 1]) // no contour
@@ -370,9 +401,9 @@ class TrueTypeFontSubSet {
     /** Reads a <CODE>String</CODE> from the font file as bytes using the Cp1252
      *  encoding.
      * @param length the length of bytes to read
-     * @return the <CODE>String</CODE> read
-     * @throws IOException the font file could not be read
-     */
+    
+    
+     * @return the <CODE>String</CODE> read * @throws IOException the font file could not be read */
     protected String readStandardString(int length) throws IOException {
         byte buf[] = new byte[length];
         rf.readFully(buf);
@@ -384,11 +415,19 @@ class TrueTypeFontSubSet {
         }
     }
     
+    /**
+     * Method writeFontShort.
+     * @param n int
+     */
     protected void writeFontShort(int n) {
         outFont[fontPtr++] = (byte)(n >> 8);
         outFont[fontPtr++] = (byte)(n);
     }
 
+    /**
+     * Method writeFontInt.
+     * @param n int
+     */
     protected void writeFontInt(int n) {
         outFont[fontPtr++] = (byte)(n >> 24);
         outFont[fontPtr++] = (byte)(n >> 16);
@@ -396,12 +435,21 @@ class TrueTypeFontSubSet {
         outFont[fontPtr++] = (byte)(n);
     }
 
+    /**
+     * Method writeFontString.
+     * @param s String
+     */
     protected void writeFontString(String s) {
         byte b[] = PdfEncodings.convertToBytes(s, BaseFont.WINANSI);
         System.arraycopy(b, 0, outFont, fontPtr, b.length);
         fontPtr += b.length;
     }
     
+    /**
+     * Method calculateChecksum.
+     * @param b byte[]
+     * @return int
+     */
     protected int calculateChecksum(byte b[]) {
         int len = b.length / 4;
         int v0 = 0;

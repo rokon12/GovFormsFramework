@@ -124,7 +124,8 @@ public class RtfListTable extends RtfElement implements RtfExtendedElement {
     /**
      * Writes the list and list override tables.
      * 
-     * @return A byte array with the list and list override tables.
+    
+     * @return A byte array with the list and list override tables. * @see com.lowagie.text.rtf.RtfExtendedElement#writeDefinition()
      */
     public byte[] writeDefinition() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -177,8 +178,8 @@ public class RtfListTable extends RtfElement implements RtfExtendedElement {
      * list of RtfLists, then it is added.
      * 
      * @param list The RtfList for which to get the id.
-     * @return The id of the RtfList.
-     */
+    
+     * @return The id of the RtfList. */
     public int getListNumber(RtfList list) {
         if(lists.contains(list)) {
             return lists.indexOf(list);

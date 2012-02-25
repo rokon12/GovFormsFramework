@@ -7,6 +7,8 @@ import java.util.SimpleTimeZone;
 
 /**
  * UTC time object.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class DERUTCTime
     extends DERObject
@@ -16,8 +18,10 @@ public class DERUTCTime
     /**
      * return an UTC Time from the passed in object.
      *
-     * @exception IllegalArgumentException if the object cannot be converted.
-     */
+    
+     * @param obj Object
+     * @return DERUTCTime
+     * @exception IllegalArgumentException if the object cannot be converted. */
     public static DERUTCTime getInstance(
         Object  obj)
     {
@@ -40,9 +44,10 @@ public class DERUTCTime
      * @param obj the tagged object holding the object we want
      * @param explicit true if the object is meant to be explicitly
      *              tagged false otherwise.
+    
+     * @return DERUTCTime
      * @exception IllegalArgumentException if the tagged object cannot
-     *               be converted.
-     */
+     *               be converted. */
     public static DERUTCTime getInstance(
         ASN1TaggedObject obj,
         boolean          explicit)
@@ -68,6 +73,7 @@ public class DERUTCTime
 
     /**
      * base constructer from a java.util.date object
+     * @param time Date
      */
     public DERUTCTime(
         Date time)
@@ -79,6 +85,10 @@ public class DERUTCTime
         this.time = dateF.format(time);
     }
 
+    /**
+     * Constructor for DERUTCTime.
+     * @param bytes byte[]
+     */
     DERUTCTime(
         byte[]  bytes)
     {
@@ -110,6 +120,7 @@ public class DERUTCTime
      * <b>Note:</b> In some cases, due to the local date processing, this
      * may lead to unexpected results. If you want to stick the normal
      * convention of 1950 to 2049 use the getAdjustedTime() method.
+     * @return String
      */
     public String getTime()
     {
@@ -135,6 +146,7 @@ public class DERUTCTime
     /**
      * return the time as an adjusted date with a 4 digit year. This goes
      * in the range of 1950 - 2049.
+     * @return String
      */
     public String getAdjustedTime()
     {
@@ -150,6 +162,10 @@ public class DERUTCTime
         }
     }
 
+    /**
+     * Method getOctets.
+     * @return byte[]
+     */
     private byte[] getOctets()
     {
         char[]  cs = time.toCharArray();
@@ -163,6 +179,11 @@ public class DERUTCTime
         return bs;
     }
 
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
+     */
     void encode(
         DEROutputStream  out)
         throws IOException
@@ -170,6 +191,11 @@ public class DERUTCTime
         out.writeEncoded(UTC_TIME, this.getOctets());
     }
     
+    /**
+     * Method equals.
+     * @param o Object
+     * @return boolean
+     */
     public boolean equals(
         Object  o)
     {

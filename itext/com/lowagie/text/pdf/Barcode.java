@@ -54,6 +54,7 @@ import java.awt.Color;
  * barcode types.
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public abstract class Barcode {
     /** A type of barcode */
@@ -146,8 +147,8 @@ public abstract class Barcode {
     protected float inkSpreading = 0;
     
     /** Gets the minimum bar width.
-     * @return the minimum bar width
-     */
+    
+     * @return the minimum bar width */
     public float getX() {
         return x;
     }
@@ -160,8 +161,8 @@ public abstract class Barcode {
     }
     
     /** Gets the bar multiplier for wide bars.
-     * @return the bar multiplier for wide bars
-     */
+    
+     * @return the bar multiplier for wide bars */
     public float getN() {
         return n;
     }
@@ -174,8 +175,8 @@ public abstract class Barcode {
     }
     
     /** Gets the text font. <CODE>null</CODE> if no text.
-     * @return the text font. <CODE>null</CODE> if no text
-     */
+    
+     * @return the text font. <CODE>null</CODE> if no text */
     public BaseFont getFont() {
         return font;
     }
@@ -188,8 +189,8 @@ public abstract class Barcode {
     }
     
     /** Gets the size of the text.
-     * @return the size of the text
-     */
+    
+     * @return the size of the text */
     public float getSize() {
         return size;
     }
@@ -204,8 +205,8 @@ public abstract class Barcode {
     /** Gets the text baseline.
      * If positive, the text distance under the bars. If zero or negative,
      * the text distance above the bars.
-     * @return the baseline.
-     */
+    
+     * @return the baseline. */
     public float getBaseline() {
         return baseline;
     }
@@ -220,8 +221,8 @@ public abstract class Barcode {
     }
     
     /** Gets the height of the bars.
-     * @return the height of the bars
-     */
+    
+     * @return the height of the bars */
     public float getBarHeight() {
         return barHeight;
     }
@@ -235,8 +236,8 @@ public abstract class Barcode {
     
     /** Gets the text alignment. Can be <CODE>Element.ALIGN_LEFT</CODE>,
      * <CODE>Element.ALIGN_CENTER</CODE> or <CODE>Element.ALIGN_RIGHT</CODE>.
-     * @return the text alignment
-     */
+    
+     * @return the text alignment */
     public int getTextAlignment() {
         return textAlignment;
     }
@@ -250,8 +251,8 @@ public abstract class Barcode {
     }
     
     /** Gets the optional checksum generation.
-     * @return the optional checksum generation
-     */
+    
+     * @return the optional checksum generation */
     public boolean isGenerateChecksum() {
         return generateChecksum;
     }
@@ -264,8 +265,8 @@ public abstract class Barcode {
     }
     
     /** Gets the property to show the generated checksum in the the text.
-     * @return value of property checksumText
-     */
+    
+     * @return value of property checksumText */
     public boolean isChecksumText() {
         return checksumText;
     }
@@ -279,8 +280,8 @@ public abstract class Barcode {
     
     /** Sets the property to show the start and stop character '*' in the text for
      * the barcode 39.
-     * @return value of property startStopText
-     */
+    
+     * @return value of property startStopText */
     public boolean isStartStopText() {
         return startStopText;
     }
@@ -294,8 +295,8 @@ public abstract class Barcode {
     }
     
     /** Gets the property to generate extended barcode 39.
-     * @return value of property extended.
-     */
+    
+     * @return value of property extended. */
     public boolean isExtended() {
         return extended;
     }
@@ -308,8 +309,8 @@ public abstract class Barcode {
     }
     
     /** Gets the code to generate.
-     * @return the code to generate
-     */
+    
+     * @return the code to generate */
     public String getCode() {
         return code;
     }
@@ -322,8 +323,8 @@ public abstract class Barcode {
     }
     
     /** Gets the property to show the guard bars for barcode EAN.
-     * @return value of property guardBars
-     */
+    
+     * @return value of property guardBars */
     public boolean isGuardBars() {
         return guardBars;
     }
@@ -336,8 +337,8 @@ public abstract class Barcode {
     }
     
     /** Gets the code type.
-     * @return the code type
-     */
+    
+     * @return the code type */
     public int getCodeType() {
         return codeType;
     }
@@ -351,8 +352,8 @@ public abstract class Barcode {
     
     /** Gets the maximum area that the barcode and the text, if
      * any, will occupy. The lower left corner is always (0, 0).
-     * @return the size the barcode occupies.
-     */    
+    
+     * @return the size the barcode occupies. */    
     public abstract Rectangle getBarcodeSize();
     
     /** Places the barcode in a <CODE>PdfContentByte</CODE>. The
@@ -389,8 +390,8 @@ public abstract class Barcode {
      * @param cb the <CODE>PdfContentByte</CODE> where the barcode will be placed
      * @param barColor the color of the bars. It can be <CODE>null</CODE>
      * @param textColor the color of the text. It can be <CODE>null</CODE>
-     * @return the dimensions the barcode occupies
-     */    
+    
+     * @return the dimensions the barcode occupies */    
     public abstract Rectangle placeBarcode(PdfContentByte cb, Color barColor, Color textColor);
     
     /** Creates a template with the barcode.
@@ -398,9 +399,9 @@ public abstract class Barcode {
      * serves no other use
      * @param barColor the color of the bars. It can be <CODE>null</CODE>
      * @param textColor the color of the text. It can be <CODE>null</CODE>
-     * @return the template
-     * @see #placeBarcode(PdfContentByte cb, Color barColor, Color textColor)
-     */    
+    
+    
+     * @return the template * @see #placeBarcode(PdfContentByte cb, Color barColor, Color textColor) */    
     public PdfTemplate createTemplateWithBarcode(PdfContentByte cb, Color barColor, Color textColor) {
         PdfTemplate tp = cb.createTemplate(0, 0);
         Rectangle rect = placeBarcode(tp, barColor, textColor);
@@ -413,9 +414,9 @@ public abstract class Barcode {
      * serves no other use
      * @param barColor the color of the bars. It can be <CODE>null</CODE>
      * @param textColor the color of the text. It can be <CODE>null</CODE>
-     * @return the <CODE>Image</CODE>
-     * @see #placeBarcode(PdfContentByte cb, Color barColor, Color textColor)
-     */    
+    
+    
+     * @return the <CODE>Image</CODE> * @see #placeBarcode(PdfContentByte cb, Color barColor, Color textColor) */    
     public Image createImageWithBarcode(PdfContentByte cb, Color barColor, Color textColor) {
         try {
             return Image.getInstance(createTemplateWithBarcode(cb, barColor, textColor));
@@ -429,14 +430,14 @@ public abstract class Barcode {
      * contains the bars without any text.
      * @param foreground the color of the bars
      * @param background the color of the background
-     * @return the image
-     */    
+    
+     * @return the image */    
     public abstract java.awt.Image createAwtImage(Color foreground, Color background);
     
     /** Gets the amount of ink spreading.
-     * @return the ink spreading
+    
      *
-     */
+     * @return the ink spreading */
     public float getInkSpreading() {
         return this.inkSpreading;
     }

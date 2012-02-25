@@ -56,6 +56,8 @@ import java.util.StringTokenizer;
 import java.io.IOException;
 import java.io.Reader;
 
+/**
+ */
 public class HTMLWorker implements SimpleXMLDocHandler, DocListener {
     
     public ArrayList objectList;
@@ -72,19 +74,36 @@ public class HTMLWorker implements SimpleXMLDocHandler, DocListener {
     public Stack tableState = new Stack();
     public boolean skipText = false;
     
-    /** Creates a new instance of HTMLWorker */
+    /** Creates a new instance of HTMLWorker * @param document DocListener
+     */
     public HTMLWorker(DocListener document) {
         this.document = document;
     }
     
+    /**
+     * Method setStyleSheet.
+     * @param style StyleSheet
+     */
     public void setStyleSheet(StyleSheet style) {
         this.style = style;
     }
     
+    /**
+     * Method parse.
+     * @param reader Reader
+     * @throws IOException
+     */
     public void parse(Reader reader) throws IOException {
         SimpleXMLParser.parse(this, null, reader, true);
     }
     
+    /**
+     * Method parseToList.
+     * @param reader Reader
+     * @param style StyleSheet
+     * @return ArrayList
+     * @throws IOException
+     */
     public static ArrayList parseToList(Reader reader, StyleSheet style) throws IOException {
         HTMLWorker worker = new HTMLWorker(null);
         if (style != null)
@@ -95,6 +114,10 @@ public class HTMLWorker implements SimpleXMLDocHandler, DocListener {
         return worker.objectList;
     }
     
+    /**
+     * Method endDocument.
+     * @see com.lowagie.text.pdf.SimpleXMLDocHandler#endDocument()
+     */
     public void endDocument() {
         try {
             for (int k = 0; k < stack.size(); ++k)
@@ -108,12 +131,22 @@ public class HTMLWorker implements SimpleXMLDocHandler, DocListener {
         }
     }
     
+    /**
+     * Method startDocument.
+     * @see com.lowagie.text.pdf.SimpleXMLDocHandler#startDocument()
+     */
     public void startDocument() {
         HashMap h = new HashMap();
         style.applyStyle("body", h);
         cprops.addToChain("body", h);
     }
     
+    /**
+     * Method startElement.
+     * @param tag String
+     * @param h HashMap
+     * @see com.lowagie.text.pdf.SimpleXMLDocHandler#startElement(String, HashMap)
+     */
     public void startElement(String tag, HashMap h) {
         if (!tagsSupported.containsKey(tag))
             return;
@@ -223,6 +256,11 @@ public class HTMLWorker implements SimpleXMLDocHandler, DocListener {
         }
     }
     
+    /**
+     * Method endElement.
+     * @param tag String
+     * @see com.lowagie.text.pdf.SimpleXMLDocHandler#endElement(String)
+     */
     public void endElement(String tag) {
         if (!tagsSupported.containsKey(tag))
             return;
@@ -387,6 +425,11 @@ public class HTMLWorker implements SimpleXMLDocHandler, DocListener {
         }
     }
     
+    /**
+     * Method text.
+     * @param str String
+     * @see com.lowagie.text.pdf.SimpleXMLDocHandler#text(String)
+     */
     public void text(String str) {
         if (skipText)
             return;
@@ -432,57 +475,141 @@ public class HTMLWorker implements SimpleXMLDocHandler, DocListener {
         currentParagraph.add(FactoryProperties.createChunk(buf.toString(), cprops));
     }
     
+    /**
+     * Method add.
+     * @param element Element
+     * @return boolean
+     * @throws DocumentException
+     * @see com.lowagie.text.ElementListener#add(Element)
+     */
     public boolean add(Element element) throws DocumentException {
         objectList.add(element);
         return true;
     }
     
+    /**
+     * Method add.
+     * @param watermark Watermark
+     * @return boolean
+     * @see com.lowagie.text.DocListener#add(Watermark)
+     */
     public boolean add(Watermark watermark) {
         return true;
     }
     
+    /**
+     * Method clearTextWrap.
+     * @throws DocumentException
+     * @see com.lowagie.text.DocListener#clearTextWrap()
+     */
     public void clearTextWrap() throws DocumentException {
     }
     
+    /**
+     * Method close.
+     * @see com.lowagie.text.DocListener#close()
+     */
     public void close() {
     }
     
+    /**
+     * Method newPage.
+     * @return boolean
+     * @throws DocumentException
+     * @see com.lowagie.text.DocListener#newPage()
+     */
     public boolean newPage() throws DocumentException {
         return true;
     }
     
+    /**
+     * Method open.
+     * @see com.lowagie.text.DocListener#open()
+     */
     public void open() {
     }
     
+    /**
+     * Method removeWatermark.
+     * @see com.lowagie.text.DocListener#removeWatermark()
+     */
     public void removeWatermark() {
     }
     
+    /**
+     * Method resetFooter.
+     * @see com.lowagie.text.DocListener#resetFooter()
+     */
     public void resetFooter() {
     }
     
+    /**
+     * Method resetHeader.
+     * @see com.lowagie.text.DocListener#resetHeader()
+     */
     public void resetHeader() {
     }
     
+    /**
+     * Method resetPageCount.
+     * @see com.lowagie.text.DocListener#resetPageCount()
+     */
     public void resetPageCount() {
     }
     
+    /**
+     * Method setFooter.
+     * @param footer HeaderFooter
+     * @see com.lowagie.text.DocListener#setFooter(HeaderFooter)
+     */
     public void setFooter(HeaderFooter footer) {
     }
     
+    /**
+     * Method setHeader.
+     * @param header HeaderFooter
+     * @see com.lowagie.text.DocListener#setHeader(HeaderFooter)
+     */
     public void setHeader(HeaderFooter header) {
     }
     
+    /**
+     * Method setMarginMirroring.
+     * @param marginMirroring boolean
+     * @return boolean
+     * @see com.lowagie.text.DocListener#setMarginMirroring(boolean)
+     */
     public boolean setMarginMirroring(boolean marginMirroring) {
         return true;
     }
     
+    /**
+     * Method setMargins.
+     * @param marginLeft float
+     * @param marginRight float
+     * @param marginTop float
+     * @param marginBottom float
+     * @return boolean
+     * @see com.lowagie.text.DocListener#setMargins(float, float, float, float)
+     */
     public boolean setMargins(float marginLeft, float marginRight, float marginTop, float marginBottom) {
         return true;
     }
     
+    /**
+     * Method setPageCount.
+     * @param pageN int
+     * @see com.lowagie.text.DocListener#setPageCount(int)
+     */
     public void setPageCount(int pageN) {
     }
     
+    /**
+     * Method setPageSize.
+     * @param pageSize Rectangle
+     * @return boolean
+     * @see com.lowagie.text.DocListener#setPageSize(Rectangle)
+     */
     public boolean setPageSize(Rectangle pageSize) {
         return true;
     }

@@ -54,16 +54,30 @@ import java.io.FilterOutputStream;
 import java.io.OutputStream;
 import java.io.IOException;
 
+/**
+ */
 public class PdfEncryptionStream extends FilterOutputStream {
     
     protected PdfEncryption enc;
     private byte buf[] = new byte[1];
     
+    /**
+     * Constructor for PdfEncryptionStream.
+     * @param out OutputStream
+     * @param enc PdfEncryption
+     */
     public PdfEncryptionStream(OutputStream out, PdfEncryption enc) {
         super(out);
         this.enc = enc;
     }
     
+    /**
+     * Method write.
+     * @param b byte[]
+     * @param off int
+     * @param len int
+     * @throws IOException
+     */
     public void write(byte[] b, int off, int len) throws IOException {
         if ((off | len | (b.length - (len + off)) | (off + len)) < 0)
             throw new IndexOutOfBoundsException();
@@ -71,14 +85,29 @@ public class PdfEncryptionStream extends FilterOutputStream {
         out.write(b, off, len);
     }
     
+    /**
+     * Method close.
+     * @throws IOException
+     * @see java.io.Closeable#close()
+     */
     public void close() throws IOException {
     }
     
+    /**
+     * Method write.
+     * @param b int
+     * @throws IOException
+     */
     public void write(int b) throws IOException {
         buf[0] = (byte)b;
         write(buf);
     }
     
+    /**
+     * Method flush.
+     * @throws IOException
+     * @see java.io.Flushable#flush()
+     */
     public void flush() throws IOException {
     }
     

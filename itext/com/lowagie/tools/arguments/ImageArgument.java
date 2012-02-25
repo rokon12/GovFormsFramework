@@ -59,6 +59,8 @@ import com.lowagie.tools.plugins.AbstractTool;
 
 /**
  * ToolArgument class if the argument is a com.lowagie.text.Image.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class ImageArgument extends ToolArgument {
 	/** a filter to put on the FileChooser. */
@@ -88,9 +90,9 @@ public class ImageArgument extends ToolArgument {
 	
 	/**
 	 * Gets the argument as an object.
-	 * @return an object
-	 * @throws InstantiationException
-	 */
+	
+	
+	 * @return an object * @throws InstantiationException */
 	public Object getArgument() throws InstantiationException {
 		if (value == null) return null;
 		try {

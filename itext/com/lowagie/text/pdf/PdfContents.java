@@ -59,6 +59,8 @@ import java.util.zip.DeflaterOutputStream;
 
 /**
  * <CODE>PdfContents</CODE> is a <CODE>PdfStream</CODE> containing the contents (text + graphics) of a <CODE>PdfPage</CODE>.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 class PdfContents extends PdfStream {
@@ -78,8 +80,9 @@ class PdfContents extends PdfStream {
  * @param content the graphics in a page
  * @param text the text in a page
  * @param secondContent the direct content that is over all others
- * @throws BadPdfFormatException on error
- */
+
+ * @param page Rectangle
+ * @throws BadPdfFormatException on error */
     
     PdfContents(PdfContentByte under, PdfContentByte content, PdfContentByte text, PdfContentByte secondContent, Rectangle page) throws BadPdfFormatException {
         super();

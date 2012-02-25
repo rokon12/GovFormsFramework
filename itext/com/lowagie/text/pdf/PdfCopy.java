@@ -64,22 +64,37 @@ import com.lowagie.text.DocumentException;
  * Make copies of PDF documents. Documents can be edited after reading and
  * before writing them out.
  * @author Mark Thompson
+ * @version $Revision: 1.0 $
  */
 
 public class PdfCopy extends PdfWriter {
     /**
      * This class holds information about indirect references, since they are
      * renumbered by iText.
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     static class IndirectReferences {
         PdfIndirectReference theRef;
         boolean hasCopied;
+        /**
+         * Constructor for IndirectReferences.
+         * @param ref PdfIndirectReference
+         */
         IndirectReferences(PdfIndirectReference ref) {
             theRef = ref;
             hasCopied = false;
         }
         void setCopied() { hasCopied = true; }
+        /**
+         * Method getCopied.
+         * @return boolean
+         */
         boolean getCopied() { return hasCopied; }
+        /**
+         * Method getRef.
+         * @return PdfIndirectReference
+         */
         PdfIndirectReference getRef() { return theRef; }
     };
     protected HashMap indirects;
@@ -93,29 +108,57 @@ public class PdfCopy extends PdfWriter {
     
     /**
      * A key to allow us to hash indirect references
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     protected static class RefKey {
         int num;
         int gen;
+        /**
+         * Constructor for RefKey.
+         * @param num int
+         * @param gen int
+         */
         RefKey(int num, int gen) {
             this.num = num;
             this.gen = gen;
         }
+        /**
+         * Constructor for RefKey.
+         * @param ref PdfIndirectReference
+         */
         RefKey(PdfIndirectReference ref) {
             num = ref.getNumber();
             gen = ref.getGeneration();
         }
+        /**
+         * Constructor for RefKey.
+         * @param ref PRIndirectReference
+         */
         RefKey(PRIndirectReference ref) {
             num = ref.getNumber();
             gen = ref.getGeneration();
         }
+        /**
+         * Method hashCode.
+         * @return int
+         */
         public int hashCode() {
             return (gen<<16)+num;
         }
+        /**
+         * Method equals.
+         * @param o Object
+         * @return boolean
+         */
         public boolean equals(Object o) {
             RefKey other = (RefKey)o;
             return this.gen == other.gen && this.num == other.num;
         }
+        /**
+         * Method toString.
+         * @return String
+         */
         public String toString() {
             return "" + num + " " + gen;
         }
@@ -125,6 +168,7 @@ public class PdfCopy extends PdfWriter {
      * Constructor
      * @param document
      * @param os outputstream
+     * @throws DocumentException
      */
     public PdfCopy(Document document, OutputStream os) throws DocumentException {
         super(new PdfDocument(), os);
@@ -132,6 +176,10 @@ public class PdfCopy extends PdfWriter {
         pdf.addWriter(this);
         indirectMap = new HashMap();
     }
+    /**
+     * Method open.
+     * @see com.lowagie.text.DocListener#open()
+     */
     public void open() {
         super.open();
         topPageParent = getPdfIndirectReference();
@@ -142,8 +190,8 @@ public class PdfCopy extends PdfWriter {
      * Grabs a page from the input document
      * @param reader the reader of the document
      * @param pageNumber which page to get
-     * @return the page
-     */
+    
+     * @return the page */
     public PdfImportedPage getImportedPage(PdfReader reader, int pageNumber) {
         if (currentPdfReaderInstance != null) {
             if (currentPdfReaderInstance.getReader() != reader) {
@@ -172,6 +220,10 @@ public class PdfCopy extends PdfWriter {
      * file they came from, because each file has its own namespace. The translation
      * we do from their namespace to ours is *at best* heuristic, and guaranteed to
      * fail under some circumstances.
+     * @param in PRIndirectReference
+     * @return PdfIndirectReference
+     * @throws IOException
+     * @throws BadPdfFormatException
      */
     protected PdfIndirectReference copyIndirect(PRIndirectReference in) throws IOException, BadPdfFormatException {
         PdfIndirectReference theRef;
@@ -199,6 +251,10 @@ public class PdfCopy extends PdfWriter {
     /**
      * Translate a PRDictionary to a PdfDictionary. Also translate all of the
      * objects contained in it.
+     * @param in PdfDictionary
+     * @return PdfDictionary
+     * @throws IOException
+     * @throws BadPdfFormatException
      */
     protected PdfDictionary copyDictionary(PdfDictionary in)
     throws IOException, BadPdfFormatException {
@@ -223,6 +279,10 @@ public class PdfCopy extends PdfWriter {
     
     /**
      * Translate a PRStream to a PdfStream. The data part copies itself.
+     * @param in PRStream
+     * @return PdfStream
+     * @throws IOException
+     * @throws BadPdfFormatException
      */
     protected PdfStream copyStream(PRStream in) throws IOException, BadPdfFormatException {
         PRStream out = new PRStream(in, null);
@@ -240,6 +300,10 @@ public class PdfCopy extends PdfWriter {
     /**
      * Translate a PRArray to a PdfArray. Also translate all of the objects contained
      * in it
+     * @param in PdfArray
+     * @return PdfArray
+     * @throws IOException
+     * @throws BadPdfFormatException
      */
     protected PdfArray copyArray(PdfArray in) throws IOException, BadPdfFormatException {
         PdfArray out = new PdfArray();
@@ -253,6 +317,10 @@ public class PdfCopy extends PdfWriter {
     
     /**
      * Translate a PR-object to a Pdf-object
+     * @param in PdfObject
+     * @return PdfObject
+     * @throws IOException
+     * @throws BadPdfFormatException
      */
     protected PdfObject copyObject(PdfObject in) throws IOException,BadPdfFormatException {
         switch (in.type) {
@@ -287,6 +355,8 @@ public class PdfCopy extends PdfWriter {
     
     /**
      * convenience method. Given an importedpage, set our "globals"
+     * @param iPage PdfImportedPage
+     * @return int
      */
     protected int setFromIPage(PdfImportedPage iPage) {
         int pageNum = iPage.getPageNumber();
@@ -298,6 +368,7 @@ public class PdfCopy extends PdfWriter {
     
     /**
      * convenience method. Given a reader, set our "globals"
+     * @param reader PdfReader
      */
     protected void setFromReader(PdfReader reader) {
         this.reader = reader;
@@ -320,8 +391,10 @@ public class PdfCopy extends PdfWriter {
     /**
      * Add an imported page to our output
      * @param iPage an imported page
-     * @throws IOException, BadPdfFormatException
-     */
+    
+     * @throws IOException
+     * @throws BadPdfFormatException
+     * @throws IOException, BadPdfFormatException */
     public void addPage(PdfImportedPage iPage) throws IOException, BadPdfFormatException {
         int pageNum = setFromIPage(iPage);
         
@@ -352,6 +425,11 @@ public class PdfCopy extends PdfWriter {
         pageNumbersToRefs.add(pageRef);
     }
     
+    /**
+     * Method getPageReference.
+     * @param page int
+     * @return PdfIndirectReference
+     */
     public PdfIndirectReference getPageReference(int page) {
         if (page < 0 || page > pageNumbersToRefs.size())
             throw new IllegalArgumentException("Invalid page number " + page);
@@ -362,8 +440,10 @@ public class PdfCopy extends PdfWriter {
      * Copy the acroform for an input document. Note that you can only have one,
      * we make no effort to merge them.
      * @param reader The reader of the input file that is being copied
-     * @throws IOException, BadPdfFormatException
-     */
+    
+     * @throws IOException
+     * @throws BadPdfFormatException
+     * @throws IOException, BadPdfFormatException */
     public void copyAcroForm(PdfReader reader) throws IOException, BadPdfFormatException {
         setFromReader(reader);
         
@@ -393,6 +473,11 @@ public class PdfCopy extends PdfWriter {
     /*
      * the getCatalog method is part of PdfWriter.
      * we wrap this so that we can extend it
+     */
+    /**
+     * Method getCatalog.
+     * @param rootObj PdfIndirectReference
+     * @return PdfDictionary
      */
     protected PdfDictionary getCatalog(PdfIndirectReference rootObj) {
         try {
@@ -432,6 +517,7 @@ public class PdfCopy extends PdfWriter {
      * A Catalog is constructed, as well as an Info-object,
      * the referencetable is composed and everything is written
      * to the outputstream embedded in a Trailer.
+     * @see com.lowagie.text.DocListener#close()
      */
     
     public synchronized void close() {
@@ -450,8 +536,30 @@ public class PdfCopy extends PdfWriter {
             }
         }
     }
+    /**
+     * Method add.
+     * @param pdfImage PdfImage
+     * @return PdfIndirectReference
+     * @throws PdfException
+     */
     PdfIndirectReference add(PdfImage pdfImage) throws PdfException  { return null; }
+    /**
+     * Method add.
+     * @param outline PdfOutline
+     * @return PdfIndirectReference
+     */
     public PdfIndirectReference add(PdfOutline outline) { return null; }
+    /**
+     * Method addAnnotation.
+     * @param annot PdfAnnotation
+     */
     public void addAnnotation(PdfAnnotation annot) {  }
+    /**
+     * Method add.
+     * @param page PdfPage
+     * @param contents PdfContents
+     * @return PdfIndirectReference
+     * @throws PdfException
+     */
     PdfIndirectReference add(PdfPage page, PdfContents contents) throws PdfException { return null; }
 }

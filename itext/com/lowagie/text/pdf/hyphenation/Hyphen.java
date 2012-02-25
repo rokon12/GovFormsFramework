@@ -29,6 +29,7 @@ import java.io.Serializable;
  * hyphenates 'bak-ken'. BTW, this comes from TeX.
  *
  * @author Carlos Villegas <cav@uniscope.co.jp>
+ * @version $Revision: 1.0 $
  */
 
 public class Hyphen implements Serializable {
@@ -36,18 +37,32 @@ public class Hyphen implements Serializable {
     public String noBreak;
     public String postBreak;
 
+    /**
+     * Constructor for Hyphen.
+     * @param pre String
+     * @param no String
+     * @param post String
+     */
     Hyphen(String pre, String no, String post) {
         preBreak = pre;
         noBreak = no;
         postBreak = post;
     }
 
+    /**
+     * Constructor for Hyphen.
+     * @param pre String
+     */
     Hyphen(String pre) {
         preBreak = pre;
         noBreak = null;
         postBreak = null;
     }
 
+    /**
+     * Method toString.
+     * @return String
+     */
     public String toString() {
         if (noBreak == null 
                 && postBreak == null 

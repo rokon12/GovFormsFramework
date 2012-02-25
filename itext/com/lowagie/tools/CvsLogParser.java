@@ -29,6 +29,7 @@ import java.util.Enumeration;
  * With this class, you can parse out the important entries.
  *
  * @author blowagie
+ * @version $Revision: 1.0 $
  */
 public class CvsLogParser implements Enumeration {
 
@@ -43,8 +44,8 @@ public class CvsLogParser implements Enumeration {
 	
 	/**
 	 * @param file
-	 * @throws FileNotFoundException
-	 */
+	
+	 * @throws FileNotFoundException */
 	public CvsLogParser(String file) throws FileNotFoundException {
 		BufferedReader r = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 		st = new StreamTokenizer(r);
@@ -110,8 +111,8 @@ public class CvsLogParser implements Enumeration {
 
 	/**
 	 * Indicates if the current token is one that contains changes.
-	 * @return true if the token is relevant
-	 */
+	
+	 * @return true if the token is relevant */
 	private boolean hasChanged() {
 		return changes;
 	}

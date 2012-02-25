@@ -53,13 +53,16 @@ import java.util.ArrayList;
 /**
  *
  * @author  psoares
+ * @version $Revision: 1.0 $
  */
 public class IncCell implements TextElementArray {
     
     public ArrayList chunks = new ArrayList();
     public PdfPCell cell;
     
-    /** Creates a new instance of IncCell */
+    /** Creates a new instance of IncCell * @param tag String
+     * @param props ChainedProperties
+     */
     public IncCell(String tag, ChainedProperties props) {
         cell = new PdfPCell((Phrase)null);
         String value = props.getProperty("colspan");
@@ -99,6 +102,12 @@ public class IncCell implements TextElementArray {
         cell.setBackgroundColor(FactoryProperties.decodeColor(value));
     }
     
+    /**
+     * Method add.
+     * @param o Object
+     * @return boolean
+     * @see com.lowagie.text.TextElementArray#add(Object)
+     */
     public boolean add(Object o) {
         if (!(o instanceof Element))
             return false;
@@ -106,18 +115,38 @@ public class IncCell implements TextElementArray {
         return true;
     }
     
+    /**
+     * Method getChunks.
+     * @return ArrayList
+     * @see com.lowagie.text.Element#getChunks()
+     */
     public ArrayList getChunks() {
         return chunks;
     }
     
+    /**
+     * Method process.
+     * @param listener ElementListener
+     * @return boolean
+     * @see com.lowagie.text.Element#process(ElementListener)
+     */
     public boolean process(ElementListener listener) {
         return true;
     }
     
+    /**
+     * Method type.
+     * @return int
+     * @see com.lowagie.text.Element#type()
+     */
     public int type() {
         return 0;
     }
     
+    /**
+     * Method getCell.
+     * @return PdfPCell
+     */
     public PdfPCell getCell() {
         return cell;
     }    

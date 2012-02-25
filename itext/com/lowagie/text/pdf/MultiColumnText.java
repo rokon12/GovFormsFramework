@@ -61,6 +61,7 @@ import java.util.ArrayList;
  * adding content. Column continuation is supported. A MultiColumnText object may be added to
  * a document using <CODE>Document.add</CODE>.
  * @author Steve Appling
+ * @version $Revision: 1.0 $
  */
 public class MultiColumnText implements Element {
 
@@ -147,8 +148,8 @@ public class MultiColumnText implements Element {
      * added to the document.  It will always be false if
      * the height is AUTOMATIC.
      *
-     * @return true if there is still space left in the column
-     */
+    
+     * @return true if there is still space left in the column */
     public boolean isOverflow() {
         return overflow;
     }
@@ -217,8 +218,8 @@ public class MultiColumnText implements Element {
      * {@link com.lowagie.text.pdf.ColumnText}
      *
      * @param element element to add
-     * @throws DocumentException if element can't be added
-     */
+    
+     * @throws DocumentException if element can't be added */
     public void addElement(Element element) throws DocumentException {
         if (simple) {
             columnText.addElement(element);
@@ -238,9 +239,9 @@ public class MultiColumnText implements Element {
      * @param canvas PdfContentByte to write with
      * @param document document to write to (only used to get page limit info)
      * @param documentY starting y position to begin writing at
-     * @return the current height (y position) after writing the columns
-     * @throws DocumentException on error
-     */
+    
+    
+     * @return the current height (y position) after writing the columns * @throws DocumentException on error */
     public float write(PdfContentByte canvas, PdfDocument document, float documentY) throws DocumentException {
         this.document = document;
         columnText.setCanvas(canvas);
@@ -313,6 +314,10 @@ public class MultiColumnText implements Element {
         return currentHeight;
     }
 
+    /**
+     * Method newPage.
+     * @throws DocumentException
+     */
     private void newPage() throws DocumentException {
         resetCurrentColumn();
         top = nextY = AUTOMATIC;
@@ -326,8 +331,8 @@ public class MultiColumnText implements Element {
      *
      * @param left  left border
      * @param right right border
-     * @return height
-     */
+    
+     * @return height */
     private float getHeight(float[] left, float[] right) {
         float max = Float.MIN_VALUE;
         float min = Float.MAX_VALUE;
@@ -348,7 +353,8 @@ public class MultiColumnText implements Element {
      * <CODE>ElementListener</CODE>.
      *
      * @param	listener	an <CODE>ElementListener</CODE>
-     * @return	<CODE>true</CODE> if the element was processed successfully
+    
+     * @return	<CODE>true</CODE> if the element was processed successfully * @see com.lowagie.text.Element#process(ElementListener)
      */
     public boolean process(ElementListener listener) {
         try {
@@ -361,7 +367,8 @@ public class MultiColumnText implements Element {
     /**
      * Gets the type of the text element.
      *
-     * @return	a type
+    
+     * @return	a type * @see com.lowagie.text.Element#type()
      */
 
     public int type() {
@@ -371,7 +378,8 @@ public class MultiColumnText implements Element {
     /**
      * Returns null - not used
      *
-     * @return	null
+    
+     * @return	null * @see com.lowagie.text.Element#getChunks()
      */
 
     public ArrayList getChunks() {
@@ -382,8 +390,8 @@ public class MultiColumnText implements Element {
      * Calculates the appropriate y position for the bottom
      * of the columns on this page.
      *
-     * @return the y position of the bottom of the columns
-     */
+    
+     * @return the y position of the bottom of the columns */
     private float getColumnBottom() {
         if (desiredHeight == AUTOMATIC) {
             return pageBottom;
@@ -395,8 +403,8 @@ public class MultiColumnText implements Element {
     /**
      * Moves the text insertion point to the beginning of the next column, issuing a page break if
      * needed.
-     * @throws DocumentException on error
-     */    
+    
+     * @throws DocumentException on error */    
     public void nextColumn() throws DocumentException {
         currentColumn = (currentColumn + 1) % columnDefs.size();
         top = nextY;
@@ -407,8 +415,8 @@ public class MultiColumnText implements Element {
 
     /**
      * Gets the current column.
-     * @return the current column
-     */
+    
+     * @return the current column */
     public int getCurrentColumn() {
     	if (columnsRightToLeft) {
     		return (columnDefs.size() - currentColumn - 1);
@@ -425,8 +433,8 @@ public class MultiColumnText implements Element {
     
     /**
      * Shifts the current column.
-     * @return true if the currentcolumn has changed
-     */
+    
+     * @return true if the currentcolumn has changed */
     public boolean shiftCurrentColumn() {
     	if (currentColumn + 1 < columnDefs.size()) {
             currentColumn++;
@@ -478,16 +486,28 @@ public class MultiColumnText implements Element {
     
     /**
      * Inner class used to define a column
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */
     private class ColumnDef {
         private float[] left;
         private float[] right;
 
+        /**
+         * Constructor for ColumnDef.
+         * @param newLeft float[]
+         * @param newRight float[]
+         */
         ColumnDef(float[] newLeft, float[] newRight) {
             left = newLeft;
             right = newRight;
         }
 
+        /**
+         * Constructor for ColumnDef.
+         * @param leftPosition float
+         * @param rightPosition float
+         */
         ColumnDef(float leftPosition, float rightPosition) {
             left = new float[4];
             left[0] = leftPosition; // x1
@@ -516,8 +536,8 @@ public class MultiColumnText implements Element {
          *
          * @param side either <CODE>Rectangle.LEFT</CODE>
          *             or <CODE>Rectangle.RIGHT</CODE>
-         * @return the array of floats for the side
-         */
+        
+         * @return the array of floats for the side */
         float[] resolvePositions(int side) {
             if (side == Rectangle.LEFT) {
                 return resolvePositions(left);
@@ -526,6 +546,11 @@ public class MultiColumnText implements Element {
             }
         }
 
+        /**
+         * Method resolvePositions.
+         * @param positions float[]
+         * @return float[]
+         */
         private float[] resolvePositions(float[] positions) {
             if (!isSimple()) {
                 return positions;
@@ -542,8 +567,8 @@ public class MultiColumnText implements Element {
 
         /**
          * Checks if column definition is a simple rectangle
-         * @return true if it is a simple column 
-         */
+        
+         * @return true if it is a simple column  */
         private boolean isSimple() {
             return (left.length == 4 && right.length == 4) && (left[0] == left[2] && right[0] == right[2]);
         }

@@ -59,10 +59,15 @@ import java.net.URL;
  * @see		Image
  *
  * @author  Paulo Soares
+ * @version $Revision: 1.0 $
  */
 
 public class ImgRaw extends Image implements Element {
 
+    /**
+     * Constructor for ImgRaw.
+     * @param image Image
+     */
     ImgRaw(Image image) {
         super(image);
     }
@@ -74,8 +79,8 @@ public class ImgRaw extends Image implements Element {
  * @param components 1,3 or 4 for GrayScale, RGB and CMYK
  * @param bpc bits per component. Must be 1,2,4 or 8
  * @param data the image data
- * @throws BadElementException on error
- */
+
+ * @throws BadElementException on error */
     
     public ImgRaw(int width, int height, int components, int bpc, byte[] data) throws BadElementException{
         super((URL)null);

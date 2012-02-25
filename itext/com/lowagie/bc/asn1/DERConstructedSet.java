@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Enumeration;
 
+/**
+ */
 public class DERConstructedSet
     extends ASN1Set
 {
@@ -32,12 +34,20 @@ public class DERConstructedSet
         }
     }
 
+    /**
+     * Method addObject.
+     * @param obj DEREncodable
+     */
     public void addObject(
         DEREncodable    obj)
     {
         super.addObject(obj);
     }
 
+    /**
+     * Method getSize.
+     * @return int
+     */
     public int getSize()
     {
         return size();
@@ -50,6 +60,11 @@ public class DERConstructedSet
      * be used for structured types, this varies slightly from the
      * ASN.1 descriptions given. Rather than just outputing SET,
      * we also have to specify CONSTRUCTED, and the objects length.
+     */
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
      */
     void encode(
         DEROutputStream out)

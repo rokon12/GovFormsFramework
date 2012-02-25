@@ -4,6 +4,8 @@ import java.io.IOException;
 
 /**
  * DER PrintableString object.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class DERPrintableString
     extends DERObject
@@ -14,8 +16,10 @@ public class DERPrintableString
     /**
      * return a printable string from the passed in object.
      * 
-     * @exception IllegalArgumentException if the object cannot be converted.
-     */
+    
+     * @param obj Object
+     * @return DERPrintableString
+     * @exception IllegalArgumentException if the object cannot be converted. */
     public static DERPrintableString getInstance(
         Object  obj)
     {
@@ -43,9 +47,10 @@ public class DERPrintableString
      * @param obj the tagged object holding the object we want
      * @param explicit true if the object is meant to be explicitly
      *              tagged false otherwise.
+    
+     * @return DERPrintableString
      * @exception IllegalArgumentException if the tagged object cannot
-     *               be converted.
-     */
+     *               be converted. */
     public static DERPrintableString getInstance(
         ASN1TaggedObject obj,
         boolean          explicit)
@@ -55,6 +60,7 @@ public class DERPrintableString
 
     /**
      * basic constructor - byte encoded string.
+     * @param string byte[]
      */
     public DERPrintableString(
         byte[]   string)
@@ -71,6 +77,7 @@ public class DERPrintableString
 
     /**
      * basic constructor
+     * @param string String
      */
     public DERPrintableString(
         String   string)
@@ -78,11 +85,20 @@ public class DERPrintableString
         this.string = string;
     }
 
+    /**
+     * Method getString.
+     * @return String
+     * @see com.lowagie.bc.asn1.DERString#getString()
+     */
     public String getString()
     {
         return string;
     }
 
+    /**
+     * Method getOctets.
+     * @return byte[]
+     */
     public byte[] getOctets()
     {
         char[]  cs = string.toCharArray();
@@ -96,6 +112,11 @@ public class DERPrintableString
         return bs; 
     }
 
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
+     */
     void encode(
         DEROutputStream  out)
         throws IOException
@@ -103,11 +124,20 @@ public class DERPrintableString
         out.writeEncoded(PRINTABLE_STRING, this.getOctets());
     }
 
+    /**
+     * Method hashCode.
+     * @return int
+     */
     public int hashCode()
     {
         return this.getString().hashCode();
     }
 
+    /**
+     * Method equals.
+     * @param o Object
+     * @return boolean
+     */
     public boolean equals(
         Object  o)
     {

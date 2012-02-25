@@ -55,6 +55,8 @@ package com.lowagie.text.pdf;
  *
  * @see		PdfPage
  * @see		PdfPages
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 interface PdfPageElement {
@@ -70,9 +72,9 @@ interface PdfPageElement {
 /**
  * Checks if this page element is a tree of pages.
  *
+
  * @return	<CODE>true</CODE> if it's a tree of pages;
- *			<CODE>false</CODE> if it's a single page
- */
+ *			<CODE>false</CODE> if it's a single page */
     
     public boolean isParent();
 }

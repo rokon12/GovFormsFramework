@@ -51,6 +51,8 @@ package com.lowagie.text.pdf;
 import java.util.HashMap;
 import java.util.Iterator;
 
+/**
+ */
 class PageResources {
     
     protected PdfDictionary fontDictionary = new PdfDictionary();
@@ -68,6 +70,11 @@ class PageResources {
     PageResources() {
     }
     
+    /**
+     * Method setOriginalResources.
+     * @param resources PdfDictionary
+     * @param newNamePtr int[]
+     */
     void setOriginalResources(PdfDictionary resources, int newNamePtr[]) {
         if (newNamePtr != null)
             namePtr = newNamePtr;
@@ -87,6 +94,11 @@ class PageResources {
         }
     }
     
+    /**
+     * Method translateName.
+     * @param name PdfName
+     * @return PdfName
+     */
     PdfName translateName(PdfName name) {
         PdfName translated = name;
         if (forbiddenNames != null) {
@@ -103,24 +115,47 @@ class PageResources {
         return translated;
     }
     
+    /**
+     * Method addFont.
+     * @param name PdfName
+     * @param reference PdfIndirectReference
+     * @return PdfName
+     */
     PdfName addFont(PdfName name, PdfIndirectReference reference) {
         name = translateName(name);
         fontDictionary.put(name, reference);
         return name;
     }
 
+    /**
+     * Method addXObject.
+     * @param name PdfName
+     * @param reference PdfIndirectReference
+     * @return PdfName
+     */
     PdfName addXObject(PdfName name, PdfIndirectReference reference) {
         name = translateName(name);
         xObjectDictionary.put(name, reference);
         return name;
     }
 
+    /**
+     * Method addColor.
+     * @param name PdfName
+     * @param reference PdfIndirectReference
+     * @return PdfName
+     */
     PdfName addColor(PdfName name, PdfIndirectReference reference) {
         name = translateName(name);
         colorDictionary.put(name, reference);
         return name;
     }
 
+    /**
+     * Method addDefaultColor.
+     * @param name PdfName
+     * @param obj PdfObject
+     */
     void addDefaultColor(PdfName name, PdfObject obj) {
         if (obj == null || obj.isNull())
             colorDictionary.remove(name);
@@ -128,38 +163,74 @@ class PageResources {
             colorDictionary.put(name, obj);
     }
 
+    /**
+     * Method addDefaultColor.
+     * @param dic PdfDictionary
+     */
     void addDefaultColor(PdfDictionary dic) {
         colorDictionary.merge(dic);
     }
 
+    /**
+     * Method addDefaultColorDiff.
+     * @param dic PdfDictionary
+     */
     void addDefaultColorDiff(PdfDictionary dic) {
         colorDictionary.mergeDifferent(dic);
     }
 
+    /**
+     * Method addShading.
+     * @param name PdfName
+     * @param reference PdfIndirectReference
+     * @return PdfName
+     */
     PdfName addShading(PdfName name, PdfIndirectReference reference) {
         name = translateName(name);
         shadingDictionary.put(name, reference);
         return name;
     }
     
+    /**
+     * Method addPattern.
+     * @param name PdfName
+     * @param reference PdfIndirectReference
+     * @return PdfName
+     */
     PdfName addPattern(PdfName name, PdfIndirectReference reference) {
         name = translateName(name);
         patternDictionary.put(name, reference);
         return name;
     }
 
+    /**
+     * Method addExtGState.
+     * @param name PdfName
+     * @param reference PdfIndirectReference
+     * @return PdfName
+     */
     PdfName addExtGState(PdfName name, PdfIndirectReference reference) {
         name = translateName(name);
         extGStateDictionary.put(name, reference);
         return name;
     }
 
+    /**
+     * Method addProperty.
+     * @param name PdfName
+     * @param reference PdfIndirectReference
+     * @return PdfName
+     */
     PdfName addProperty(PdfName name, PdfIndirectReference reference) {
         name = translateName(name);
         propertyDictionary.put(name, reference);
         return name;
     }
 
+    /**
+     * Method getResources.
+     * @return PdfDictionary
+     */
     PdfDictionary getResources() {
        PdfResources resources = new PdfResources();
         if (originalResources != null)
@@ -175,6 +246,10 @@ class PageResources {
         return resources;
     }
     
+    /**
+     * Method hasResources.
+     * @return boolean
+     */
     boolean hasResources() {
         return (fontDictionary.size() > 0
             || xObjectDictionary.size() > 0

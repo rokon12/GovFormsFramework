@@ -52,6 +52,8 @@ package com.lowagie.text.markup;
 
 /**
  * A class that contains all the possible tagnames and their attributes.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class MarkupTags {

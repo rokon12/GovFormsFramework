@@ -56,17 +56,35 @@ import java.awt.print.PrinterJob;
 /**
  * This is an extension class for the sole purpose of implementing the
  * {@link java.awt.print.PrinterGraphics PrinterGraphics} interface.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class PdfPrinterGraphics2D extends PdfGraphics2D implements PrinterGraphics
 {
 	private PrinterJob printerJob;
 	
+	/**
+	 * Constructor for PdfPrinterGraphics2D.
+	 * @param cb PdfContentByte
+	 * @param width float
+	 * @param height float
+	 * @param fontMapper FontMapper
+	 * @param onlyShapes boolean
+	 * @param convertImagesToJPEG boolean
+	 * @param quality float
+	 * @param printerJob PrinterJob
+	 */
 	public PdfPrinterGraphics2D(PdfContentByte cb, float width, float height, FontMapper fontMapper,
 			boolean onlyShapes, boolean convertImagesToJPEG, float quality, PrinterJob printerJob)	{
 		super(cb, width, height, fontMapper, onlyShapes, convertImagesToJPEG, quality);
 		this.printerJob = printerJob;
 	}
 
+	/**
+	 * Method getPrinterJob.
+	 * @return PrinterJob
+	 * @see java.awt.print.PrinterGraphics#getPrinterJob()
+	 */
 	public PrinterJob getPrinterJob()	{
 		return printerJob;
 	}

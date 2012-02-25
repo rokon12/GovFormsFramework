@@ -54,6 +54,7 @@ import java.io.IOException;
 /** Each spotcolor in the document will have an instance of this class
  *
  * @author Phillip Pan (phillip@formstar.com)
+ * @version $Revision: 1.0 $
  */
 class ColorDetails {
 
@@ -79,21 +80,23 @@ class ColorDetails {
     }
 
     /** Gets the indirect reference to this color.
-     * @return the indirect reference to this color
-     */
+    
+     * @return the indirect reference to this color */
     PdfIndirectReference getIndirectReference() {
         return indirectReference;
     }
 
     /** Gets the color name as it appears in the document body.
-     * @return the color name
-     */
+    
+     * @return the color name */
     PdfName getColorName() {
         return colorName;
     }
 
     /** Gets the <CODE>SpotColor</CODE> object.
-     * @return the <CODE>PdfSpotColor</CODE>
+    
+     * @param writer PdfWriter
+     * @return the <CODE>PdfSpotColor</CODE> * @throws IOException
      */
     PdfObject getSpotColor(PdfWriter writer) throws IOException {
         return spotcolor.getSpotObject(writer);

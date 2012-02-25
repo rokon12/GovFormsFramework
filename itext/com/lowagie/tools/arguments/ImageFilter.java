@@ -55,6 +55,8 @@ import javax.swing.filechooser.FileFilter;
 
 /**
  * Filters images in a FileChooser.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class ImageFilter extends FileFilter {
 

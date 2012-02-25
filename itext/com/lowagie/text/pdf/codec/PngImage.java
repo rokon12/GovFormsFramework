@@ -109,6 +109,7 @@ import com.lowagie.text.pdf.PdfString;
  * It is based in part in the JAI codec.
  *
  * @author  Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PngImage {
 /** Some PNG specific values. */
@@ -186,16 +187,17 @@ public class PngImage {
 
     
     
-    /** Creates a new instance of PngImage */
+    /** Creates a new instance of PngImage * @param is InputStream
+     */
     PngImage(InputStream is) {
         this.is = is;
     }
     
     /** Reads a PNG from an url.
      * @param url the url
-     * @throws IOException on error
-     * @return the image
-     */    
+    
+    
+     * @return the image * @throws IOException on error */    
     public static Image getImage(URL url) throws IOException {
         InputStream is = null;
         try {
@@ -213,9 +215,9 @@ public class PngImage {
     
     /** Reads a PNG from a stream.
      * @param is the stream
-     * @throws IOException on error
-     * @return the image
-     */    
+    
+    
+     * @return the image * @throws IOException on error */    
     public static Image getImage(InputStream is) throws IOException {
         PngImage png = new PngImage(is);
         return png.getImage();
@@ -223,18 +225,18 @@ public class PngImage {
     
     /** Reads a PNG from a file.
      * @param file the file
-     * @throws IOException on error
-     * @return the image
-     */    
+    
+    
+     * @return the image * @throws IOException on error */    
     public static Image getImage(String file) throws IOException {
         return getImage(Image.toURL(file));
     }
     
     /** Reads a PNG from a byte array.
      * @param data the byte array
-     * @throws IOException on error
-     * @return the image
-     */    
+    
+    
+     * @return the image * @throws IOException on error */    
     public static Image getImage(byte data[]) throws IOException {
         InputStream is = null;
         try {
@@ -250,6 +252,11 @@ public class PngImage {
         }
     }
     
+    /**
+     * Method checkMarker.
+     * @param s String
+     * @return boolean
+     */
     boolean checkMarker(String s) {
         if (s.length() != 4)
             return false;
@@ -261,6 +268,10 @@ public class PngImage {
         return true;
     }
     
+    /**
+     * Method readPng.
+     * @throws IOException
+     */
     void readPng() throws IOException {
         for (int i = 0; i < PNGID.length; i++) {
             if (PNGID[i] != is.read())	{
@@ -437,6 +448,10 @@ public class PngImage {
         }
     }
     
+    /**
+     * Method getColorspace.
+     * @return PdfObject
+     */
     PdfObject getColorspace() {
         if (icc_profile != null) {
             if ((colorType & 2) == 0)
@@ -510,6 +525,11 @@ public class PngImage {
         }
     }
     
+    /**
+     * Method getImage.
+     * @return Image
+     * @throws IOException
+     */
     Image getImage() throws IOException {
         readPng();
         try {
@@ -655,6 +675,15 @@ public class PngImage {
         
     }
     
+    /**
+     * Method decodePass.
+     * @param xOffset int
+     * @param yOffset int
+     * @param xStep int
+     * @param yStep int
+     * @param passWidth int
+     * @param passHeight int
+     */
     void decodePass( int xOffset, int yOffset,
     int xStep, int yStep,
     int passWidth, int passHeight) {
@@ -709,6 +738,14 @@ public class PngImage {
         }
     }
     
+    /**
+     * Method processPixels.
+     * @param curr byte[]
+     * @param xOffset int
+     * @param step int
+     * @param y int
+     * @param width int
+     */
     void processPixels(byte curr[], int xOffset, int step, int y, int width) {
         int srcX, dstX;
 
@@ -805,6 +842,15 @@ public class PngImage {
         }
     }
     
+    /**
+     * Method getPixel.
+     * @param image byte[]
+     * @param x int
+     * @param y int
+     * @param bitDepth int
+     * @param bytesPerRow int
+     * @return int
+     */
     static int getPixel(byte image[], int x, int y, int bitDepth, int bytesPerRow) {
         if (bitDepth == 8) {
             int pos = bytesPerRow * y + x;
@@ -817,6 +863,17 @@ public class PngImage {
         }
     }
     
+    /**
+     * Method setPixel.
+     * @param image byte[]
+     * @param data int[]
+     * @param offset int
+     * @param size int
+     * @param x int
+     * @param y int
+     * @param bitDepth int
+     * @param bytesPerRow int
+     */
     static void setPixel(byte image[], int data[], int offset, int size, int x, int y, int bitDepth, int bytesPerRow) {
         if (bitDepth == 8) {
             int pos = bytesPerRow * y + size * x;
@@ -835,6 +892,11 @@ public class PngImage {
         }
     }
     
+    /**
+     * Method getPixel.
+     * @param curr byte[]
+     * @return int[]
+     */
     int[] getPixel(byte curr[]) {
         switch (bitDepth) {
             case 8: {
@@ -864,6 +926,12 @@ public class PngImage {
         }
     }
     
+    /**
+     * Method decodeSubFilter.
+     * @param curr byte[]
+     * @param count int
+     * @param bpp int
+     */
     private static void decodeSubFilter(byte[] curr, int count, int bpp) {
         for (int i = bpp; i < count; i++) {
             int val;
@@ -875,6 +943,12 @@ public class PngImage {
         }
     }
     
+    /**
+     * Method decodeUpFilter.
+     * @param curr byte[]
+     * @param prev byte[]
+     * @param count int
+     */
     private static void decodeUpFilter(byte[] curr, byte[] prev,
     int count) {
         for (int i = 0; i < count; i++) {
@@ -885,6 +959,13 @@ public class PngImage {
         }
     }
     
+    /**
+     * Method decodeAverageFilter.
+     * @param curr byte[]
+     * @param prev byte[]
+     * @param count int
+     * @param bpp int
+     */
     private static void decodeAverageFilter(byte[] curr, byte[] prev,
     int count, int bpp) {
         int raw, priorPixel, priorRow;
@@ -905,6 +986,13 @@ public class PngImage {
         }
     }
     
+    /**
+     * Method paethPredictor.
+     * @param a int
+     * @param b int
+     * @param c int
+     * @return int
+     */
     private static int paethPredictor(int a, int b, int c) {
         int p = a + b - c;
         int pa = Math.abs(p - a);
@@ -920,6 +1008,13 @@ public class PngImage {
         }
     }
     
+    /**
+     * Method decodePaethFilter.
+     * @param curr byte[]
+     * @param prev byte[]
+     * @param count int
+     * @param bpp int
+     */
     private static void decodePaethFilter(byte[] curr, byte[] prev,
     int count, int bpp) {
         int raw, priorPixel, priorRow, priorRowPixel;
@@ -943,7 +1038,13 @@ public class PngImage {
         }
     }
     
+    /**
+     */
     static class NewByteArrayOutputStream extends ByteArrayOutputStream {
+        /**
+         * Method getBuf.
+         * @return byte[]
+         */
         public byte[] getBuf() {
             return buf;
         }
@@ -953,7 +1054,8 @@ public class PngImage {
  * Gets an <CODE>int</CODE> from an <CODE>InputStream</CODE>.
  *
  * @param		is      an <CODE>InputStream</CODE>
- * @return		the value of an <CODE>int</CODE>
+
+ * @return		the value of an <CODE>int</CODE> * @throws IOException
  */
     
     public static final int getInt(InputStream is) throws IOException {
@@ -964,7 +1066,8 @@ public class PngImage {
  * Gets a <CODE>word</CODE> from an <CODE>InputStream</CODE>.
  *
  * @param		is      an <CODE>InputStream</CODE>
- * @return		the value of an <CODE>int</CODE>
+
+ * @return		the value of an <CODE>int</CODE> * @throws IOException
  */
     
     public static final int getWord(InputStream is) throws IOException {
@@ -975,7 +1078,8 @@ public class PngImage {
  * Gets a <CODE>String</CODE> from an <CODE>InputStream</CODE>.
  *
  * @param		is      an <CODE>InputStream</CODE>
- * @return		the value of an <CODE>int</CODE>
+
+ * @return		the value of an <CODE>int</CODE> * @throws IOException
  */
     
     public static final String getString(InputStream is) throws IOException {

@@ -58,6 +58,7 @@ import java.util.Collection;
  * represented by this class.
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PdfLayerMembership extends PdfDictionary implements PdfOCG {
     
@@ -94,7 +95,8 @@ public class PdfLayerMembership extends PdfDictionary implements PdfOCG {
     
     /**
      * Gets the <CODE>PdfIndirectReference</CODE> that represents this membership layer.
-     * @return the <CODE>PdfIndirectReference</CODE> that represents this layer
+    
+     * @return the <CODE>PdfIndirectReference</CODE> that represents this layer * @see com.lowagie.text.pdf.PdfOCG#getRef()
      */    
     public PdfIndirectReference getRef() {
         return ref;
@@ -113,8 +115,8 @@ public class PdfLayerMembership extends PdfDictionary implements PdfOCG {
     
     /**
      * Gets the member layers.
-     * @return the member layers
-     */    
+    
+     * @return the member layers */    
     public Collection getLayers() {
         return layers;
     }
@@ -131,7 +133,8 @@ public class PdfLayerMembership extends PdfDictionary implements PdfOCG {
     
     /**
      * Gets the dictionary representing the membership layer. It just returns <CODE>this</CODE>.
-     * @return the dictionary representing the layer
+    
+     * @return the dictionary representing the layer * @see com.lowagie.text.pdf.PdfOCG#getPdfObject()
      */    
     public PdfObject getPdfObject() {
         return this;

@@ -60,6 +60,8 @@ import java.util.HashMap;
  *
  * @see		PdfPageElement
  * @see		PdfPages
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfPage extends PdfDictionary {
@@ -91,6 +93,7 @@ public class PdfPage extends PdfDictionary {
  * @param		mediaBox		a value for the <B>MediaBox</B> key
  * @param		resources		an indirect reference to a <CODE>PdfResources</CODE>-object
  * @param		rotate			a value for the <B>Rotate</B> key
+ * @param boxSize HashMap
  */
     
 //    PdfPage(PdfRectangle mediaBox, Rectangle cropBox, PdfIndirectReference resources, PdfNumber rotate) {
@@ -133,6 +136,7 @@ public class PdfPage extends PdfDictionary {
  *
  * @param		mediaBox		a value for the <B>MediaBox</B> key
  * @param		resources		an indirect reference to a <CODE>PdfResources</CODE>-object
+ * @param boxSize HashMap
  */
     
 //    PdfPage(PdfRectangle mediaBox, Rectangle cropBox, PdfIndirectReference resources) {
@@ -155,8 +159,8 @@ public class PdfPage extends PdfDictionary {
  * <P>
  * This method allways returns <CODE>false</CODE>.
  *
- * @return	<CODE>false</CODE> because this is a single page
- */
+
+ * @return	<CODE>false</CODE> because this is a single page */
     
     public boolean isParent() {
         return false;
@@ -177,8 +181,8 @@ public class PdfPage extends PdfDictionary {
 /**
  * Rotates the mediabox, but not the text in it.
  *
- * @return		a <CODE>PdfRectangle</CODE>
- */
+
+ * @return		a <CODE>PdfRectangle</CODE> */
     
     PdfRectangle rotateMediaBox() {
         this.mediaBox =  mediaBox.rotate();
@@ -189,8 +193,8 @@ public class PdfPage extends PdfDictionary {
 /**
  * Returns the MediaBox of this Page.
  *
- * @return		a <CODE>PdfRectangle</CODE>
- */
+
+ * @return		a <CODE>PdfRectangle</CODE> */
     
     PdfRectangle getMediaBox() {
         return mediaBox;

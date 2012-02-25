@@ -52,11 +52,14 @@ import java.util.HashMap;
 import java.io.File;
 /** Default class to map awt fonts to BaseFont.
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 
 public class DefaultFontMapper implements FontMapper {
     
     /** A representation of BaseFont parameters.
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */    
     public static class BaseFontParameters {
         /** The font name.
@@ -99,7 +102,8 @@ public class DefaultFontMapper implements FontMapper {
      * Returns a BaseFont which can be used to represent the given AWT Font
      *
      * @param	font		the font to be converted
-     * @return	a BaseFont which has similar properties to the provided Font
+    
+     * @return	a BaseFont which has similar properties to the provided Font * @see com.lowagie.text.pdf.FontMapper#awtToPdf(Font)
      */
     
     public BaseFont awtToPdf(Font font) {
@@ -178,7 +182,8 @@ public class DefaultFontMapper implements FontMapper {
      *
      * @param	font		the font to be converted
      * @param	size		the desired point size of the resulting font
-     * @return	a Font which has similar properties to the provided BaseFont
+    
+     * @return	a Font which has similar properties to the provided BaseFont * @see com.lowagie.text.pdf.FontMapper#pdfToAwt(BaseFont, int)
      */
     
     public Font pdfToAwt(BaseFont font, int size) {
@@ -222,8 +227,8 @@ public class DefaultFontMapper implements FontMapper {
     
     /** Looks for a BaseFont parameter associated with a name.
      * @param name the name
-     * @return the BaseFont parameter or <CODE>null</CODE> if not found.
-     */    
+    
+     * @return the BaseFont parameter or <CODE>null</CODE> if not found. */    
     public BaseFontParameters getBaseFontParameters(String name) {
         String alias = (String)aliases.get(name);
         if (alias == null)
@@ -265,8 +270,8 @@ public class DefaultFontMapper implements FontMapper {
      * will be <CODE>BaseFont.CP1252</CODE> but can be
      * changed later.
      * @param dir the directory to scan
-     * @return the number of files processed
-     */    
+    
+     * @return the number of files processed */    
     public int insertDirectory(String dir) {
         File file = new File(dir);
         if (!file.exists() || !file.isDirectory())
@@ -298,10 +303,18 @@ public class DefaultFontMapper implements FontMapper {
         return count;
     }
     
+    /**
+     * Method getMapper.
+     * @return HashMap
+     */
     public HashMap getMapper() {
         return mapper;
     }
     
+    /**
+     * Method getAliases.
+     * @return HashMap
+     */
     public HashMap getAliases() {
         return aliases;
     }

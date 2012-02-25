@@ -54,6 +54,8 @@ import java.io.IOException;
 
 /**
  * An implementation of an XmpSchema.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class XmpMMSchema extends XmpSchema {
 
@@ -89,8 +91,8 @@ public class XmpMMSchema extends XmpSchema {
 	public static final String VERSIONS = "xmpMM:Versions";
 	
 	/**
-	 * @throws IOException
-	 */
+	
+	 * @throws IOException */
 	public XmpMMSchema() throws IOException {
 		super("xmlns:" + DEFAULT_XPATH_ID + "=\"" + DEFAULT_XPATH_URI + "\"");
 	}

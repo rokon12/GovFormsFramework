@@ -91,6 +91,7 @@ import java.net.URL;
  * It is based in the JAI codec.
  *
  * @author  Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class BmpImage {
     
@@ -144,6 +145,13 @@ public class BmpImage {
     int width;
     int height;
     
+    /**
+     * Constructor for BmpImage.
+     * @param is InputStream
+     * @param noHeader boolean
+     * @param size int
+     * @throws IOException
+     */
     BmpImage(InputStream is, boolean noHeader, int size) throws IOException {
         bitmapFileSize = size;
         bitmapOffset = 0;
@@ -152,9 +160,9 @@ public class BmpImage {
     
     /** Reads a BMP from an url.
      * @param url the url
-     * @throws IOException on error
-     * @return the image
-     */    
+    
+    
+     * @return the image * @throws IOException on error */    
     public static Image getImage(URL url) throws IOException {
         InputStream is = null;
         try {
@@ -172,9 +180,9 @@ public class BmpImage {
     
     /** Reads a BMP from a stream. The stream is not closed.
      * @param is the stream
-     * @throws IOException on error
-     * @return the image
-     */    
+    
+    
+     * @return the image * @throws IOException on error */    
     public static Image getImage(InputStream is) throws IOException {
         return getImage(is, false, 0);
     }
@@ -184,9 +192,9 @@ public class BmpImage {
      * @param is the stream
      * @param noHeader true to process a plain DIB
      * @param size the size of the DIB. Not used for a BMP
-     * @throws IOException on error
-     * @return the image
-     */    
+    
+    
+     * @return the image * @throws IOException on error */    
     public static Image getImage(InputStream is, boolean noHeader, int size) throws IOException {
         BmpImage bmp = new BmpImage(is, noHeader, size);
         try {
@@ -202,18 +210,18 @@ public class BmpImage {
     
     /** Reads a BMP from a file.
      * @param file the file
-     * @throws IOException on error
-     * @return the image
-     */    
+    
+    
+     * @return the image * @throws IOException on error */    
     public static Image getImage(String file) throws IOException {
         return getImage(Image.toURL(file));
     }
     
     /** Reads a BMP from a byte array.
      * @param data the byte array
-     * @throws IOException on error
-     * @return the image
-     */    
+    
+    
+     * @return the image * @throws IOException on error */    
     public static Image getImage(byte data[]) throws IOException {
         InputStream is = null;
         try {
@@ -230,6 +238,12 @@ public class BmpImage {
     }
 
     
+    /**
+     * Method process.
+     * @param stream InputStream
+     * @param noHeader boolean
+     * @throws IOException
+     */
     protected void process(InputStream stream, boolean noHeader) throws IOException {
         if (noHeader || stream instanceof BufferedInputStream) {
             inputStream = stream;
@@ -634,6 +648,11 @@ public class BmpImage {
         }
     }
     
+    /**
+     * Method getPalette.
+     * @param group int
+     * @return byte[]
+     */
     private byte[] getPalette(int group) {
         if (palette == null)
             return null;
@@ -649,6 +668,12 @@ public class BmpImage {
         return np;
     }
     
+    /**
+     * Method getImage.
+     * @return Image
+     * @throws IOException
+     * @throws BadElementException
+     */
     private Image getImage() throws IOException, BadElementException {
         byte bdata[] = null; // buffer for byte data
         short sdata[] = null; // buffer for short data
@@ -769,6 +794,14 @@ public class BmpImage {
         return null;
     }
     
+    /**
+     * Method indexedModel.
+     * @param bdata byte[]
+     * @param bpc int
+     * @param paletteEntries int
+     * @return Image
+     * @throws BadElementException
+     */
     private Image indexedModel(byte bdata[], int bpc, int paletteEntries) throws BadElementException {
         Image img = new ImgRaw(width, height, 1, bpc, bdata);
         PdfArray colorspace = new PdfArray();
@@ -785,6 +818,13 @@ public class BmpImage {
     }
     
     // Deal with 1 Bit images using IndexColorModels
+    /**
+     * Method read1Bit.
+     * @param paletteEntries int
+     * @return Image
+     * @throws IOException
+     * @throws BadElementException
+     */
     private Image read1Bit(int paletteEntries) throws IOException, BadElementException {
         byte bdata[] = new byte[((width + 7) / 8) * height];
         int padding = 0;
@@ -830,6 +870,13 @@ public class BmpImage {
     }
     
     // Method to read a 4 bit BMP image data
+    /**
+     * Method read4Bit.
+     * @param paletteEntries int
+     * @return Image
+     * @throws IOException
+     * @throws BadElementException
+     */
     private Image read4Bit(int paletteEntries) throws IOException, BadElementException {
         byte bdata[] = new byte[((width + 1) / 2) * height];
         
@@ -876,6 +923,13 @@ public class BmpImage {
     }
     
     // Method to read 8 bit BMP image data
+    /**
+     * Method read8Bit.
+     * @param paletteEntries int
+     * @return Image
+     * @throws IOException
+     * @throws BadElementException
+     */
     private Image read8Bit(int paletteEntries) throws IOException, BadElementException {
         byte bdata[] = new byte[width * height];
         // Padding bytes at the end of each scanline
@@ -921,6 +975,10 @@ public class BmpImage {
     }
     
     // Method to read 24 bit BMP image data
+    /**
+     * Method read24Bit.
+     * @param bdata byte[]
+     */
     private void read24Bit(byte[] bdata) {
         // Padding bytes at the end of each scanline
         int padding = 0;
@@ -979,6 +1037,11 @@ public class BmpImage {
         }
     }
     
+    /**
+     * Method findMask.
+     * @param mask int
+     * @return int
+     */
     private int findMask(int mask) {
         int k = 0;
         for (; k < 32; ++k) {
@@ -989,6 +1052,11 @@ public class BmpImage {
         return mask;
     }
     
+    /**
+     * Method findShift.
+     * @param mask int
+     * @return int
+     */
     private int findShift(int mask) {
         int k = 0;
         for (; k < 32; ++k) {
@@ -999,6 +1067,13 @@ public class BmpImage {
         return k;
     }
     
+    /**
+     * Method read1632Bit.
+     * @param is32 boolean
+     * @return Image
+     * @throws IOException
+     * @throws BadElementException
+     */
     private Image read1632Bit(boolean is32) throws IOException, BadElementException {
         
         int red_mask = findMask(redMask);
@@ -1067,6 +1142,12 @@ public class BmpImage {
         return new ImgRaw(width, height, 3, 8, bdata);
     }
     
+    /**
+     * Method readRLE8.
+     * @return Image
+     * @throws IOException
+     * @throws BadElementException
+     */
     private Image readRLE8() throws IOException, BadElementException {
         
         // If imageSize field is not provided, calculate it.
@@ -1115,6 +1196,12 @@ public class BmpImage {
         return indexedModel(val, 8, 4);
     }
     
+    /**
+     * Method readRLE4.
+     * @return Image
+     * @throws IOException
+     * @throws BadElementException
+     */
     private Image readRLE4() throws IOException, BadElementException {
         
         // If imageSize field is not specified, calculate it.
@@ -1174,6 +1261,12 @@ public class BmpImage {
         return indexedModel(bdata, 4, 4);
     }
     
+    /**
+     * Method decodeRLE.
+     * @param is8 boolean
+     * @param values byte[]
+     * @return byte[]
+     */
     private byte[] decodeRLE(boolean is8, byte values[]) {
         byte val[] = new byte[width * height];
         try {
@@ -1253,11 +1346,23 @@ public class BmpImage {
     // Windows defined data type reading methods - everything is little endian
     
     // Unsigned 8 bits
+    /**
+     * Method readUnsignedByte.
+     * @param stream InputStream
+     * @return int
+     * @throws IOException
+     */
     private int readUnsignedByte(InputStream stream) throws IOException {
         return (stream.read() & 0xff);
     }
     
     // Unsigned 2 bytes
+    /**
+     * Method readUnsignedShort.
+     * @param stream InputStream
+     * @return int
+     * @throws IOException
+     */
     private int readUnsignedShort(InputStream stream) throws IOException {
         int b1 = readUnsignedByte(stream);
         int b2 = readUnsignedByte(stream);
@@ -1265,6 +1370,12 @@ public class BmpImage {
     }
     
     // Signed 16 bits
+    /**
+     * Method readShort.
+     * @param stream InputStream
+     * @return int
+     * @throws IOException
+     */
     private int readShort(InputStream stream) throws IOException {
         int b1 = readUnsignedByte(stream);
         int b2 = readUnsignedByte(stream);
@@ -1272,11 +1383,23 @@ public class BmpImage {
     }
     
     // Unsigned 16 bits
+    /**
+     * Method readWord.
+     * @param stream InputStream
+     * @return int
+     * @throws IOException
+     */
     private int readWord(InputStream stream) throws IOException {
         return readUnsignedShort(stream);
     }
     
     // Unsigned 4 bytes
+    /**
+     * Method readUnsignedInt.
+     * @param stream InputStream
+     * @return long
+     * @throws IOException
+     */
     private long readUnsignedInt(InputStream stream) throws IOException {
         int b1 = readUnsignedByte(stream);
         int b2 = readUnsignedByte(stream);
@@ -1287,6 +1410,12 @@ public class BmpImage {
     }
     
     // Signed 4 bytes
+    /**
+     * Method readInt.
+     * @param stream InputStream
+     * @return int
+     * @throws IOException
+     */
     private int readInt(InputStream stream) throws IOException {
         int b1 = readUnsignedByte(stream);
         int b2 = readUnsignedByte(stream);
@@ -1296,11 +1425,23 @@ public class BmpImage {
     }
     
     // Unsigned 4 bytes
+    /**
+     * Method readDWord.
+     * @param stream InputStream
+     * @return long
+     * @throws IOException
+     */
     private long readDWord(InputStream stream) throws IOException {
         return readUnsignedInt(stream);
     }
     
     // 32 bit signed value
+    /**
+     * Method readLong.
+     * @param stream InputStream
+     * @return int
+     * @throws IOException
+     */
     private int readLong(InputStream stream) throws IOException {
         return readInt(stream);
     }

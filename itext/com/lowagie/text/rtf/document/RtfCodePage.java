@@ -62,6 +62,7 @@ import java.io.ByteArrayOutputStream;
  *
  * Version: $Id: RtfCodePage.java,v 1.4 2004/11/06 16:52:47 blowagie Exp $
  * @author Mark Hall (mhall@edu.uni-klu.ac.at)
+ * @version $Revision: 1.0 $
  */
 public class RtfCodePage extends RtfElement implements RtfExtendedElement {
     /**
@@ -85,7 +86,8 @@ public class RtfCodePage extends RtfElement implements RtfExtendedElement {
     /**
      * Writes the selected codepage to a byte array
      *
-     * @return Byte array with the current codepage
+    
+     * @return Byte array with the current codepage * @see com.lowagie.text.rtf.RtfExtendedElement#writeDefinition()
      */
     public byte[] writeDefinition() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();

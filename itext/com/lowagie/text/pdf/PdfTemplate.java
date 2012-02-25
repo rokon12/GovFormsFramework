@@ -55,6 +55,8 @@ import com.lowagie.text.Rectangle;
 
 /**
  * Implements the form XObject.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfTemplate extends PdfContentByte {
@@ -126,8 +128,8 @@ public class PdfTemplate extends PdfContentByte {
     /**
      * Gets the bounding width of this template.
      *
-     * @return width the bounding width
-     */
+    
+     * @return width the bounding width */
     public float getWidth() {
         return bBox.width();
     }
@@ -135,17 +137,25 @@ public class PdfTemplate extends PdfContentByte {
     /**
      * Gets the bounding heigth of this template.
      *
-     * @return heigth the bounding height
-     */
+    
+     * @return heigth the bounding height */
     
     public float getHeight() {
         return bBox.height();
     }
     
+    /**
+     * Method getBoundingBox.
+     * @return Rectangle
+     */
     public Rectangle getBoundingBox() {
         return bBox;
     }
     
+    /**
+     * Method setBoundingBox.
+     * @param bBox Rectangle
+     */
     public void setBoundingBox(Rectangle bBox) {
         this.bBox = bBox;
     }
@@ -160,12 +170,21 @@ public class PdfTemplate extends PdfContentByte {
     
     /**
      * Gets the layer this template belongs to.
-     * @return the layer this template belongs to or <code>null</code> for no layer defined
-     */
+    
+     * @return the layer this template belongs to or <code>null</code> for no layer defined */
     public PdfOCG getLayer() {
         return layer;
     }
 
+    /**
+     * Method setMatrix.
+     * @param a float
+     * @param b float
+     * @param c float
+     * @param d float
+     * @param e float
+     * @param f float
+     */
     public void setMatrix(float a, float b, float c, float d, float e, float f) {
 		matrix = new PdfArray();
 		matrix.add(new PdfNumber(a));
@@ -176,6 +195,10 @@ public class PdfTemplate extends PdfContentByte {
 		matrix.add(new PdfNumber(f));
 	}
 
+	/**
+	 * Method getMatrix.
+	 * @return PdfArray
+	 */
 	PdfArray getMatrix() {
 		return matrix;
 	}
@@ -183,8 +206,8 @@ public class PdfTemplate extends PdfContentByte {
     /**
      * Gets the indirect reference to this template.
      *
-     * @return the indirect reference to this template
-     */
+    
+     * @return the indirect reference to this template */
     
     PdfIndirectReference getIndirectReference() {
         return thisReference;
@@ -201,8 +224,8 @@ public class PdfTemplate extends PdfContentByte {
     /**
      * Constructs the resources used by this template.
      *
-     * @return the resources used by this template
-     */
+    
+     * @return the resources used by this template */
     
     PdfObject getResources() {
         return getPageResources().getResources();
@@ -211,7 +234,8 @@ public class PdfTemplate extends PdfContentByte {
     /**
      * Gets the stream representing this template.
      *
-     * @return the stream representing this template
+    
+     * @return the stream representing this template * @throws IOException
      */
     
     PdfStream getFormXObject() throws IOException {
@@ -221,8 +245,8 @@ public class PdfTemplate extends PdfContentByte {
     /**
      * Gets a duplicate of this <CODE>PdfTemplate</CODE>. All
      * the members are copied by reference but the buffer stays different.
-     * @return a copy of this <CODE>PdfTemplate</CODE>
-     */
+    
+     * @return a copy of this <CODE>PdfTemplate</CODE> */
     
     public PdfContentByte getDuplicate() {
         PdfTemplate tpl = new PdfTemplate();
@@ -240,18 +264,26 @@ public class PdfTemplate extends PdfContentByte {
         return tpl;
     }
     
+    /**
+     * Method getType.
+     * @return int
+     */
     public int getType() {
         return type;
     }
     
+    /**
+     * Method getPageResources.
+     * @return PageResources
+     */
     PageResources getPageResources() {
         return pageResources;
     }
     
     /** Getter for property group.
-     * @return Value of property group.
+    
      *
-     */
+     * @return Value of property group. */
     public PdfTransparencyGroup getGroup() {
         return this.group;
     }

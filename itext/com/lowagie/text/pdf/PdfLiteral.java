@@ -52,6 +52,8 @@ package com.lowagie.text.pdf;
 
 /**
  * a Literal
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfLiteral extends PdfObject {
@@ -61,28 +63,56 @@ public class PdfLiteral extends PdfObject {
      */
     private int position;
         
+    /**
+     * Constructor for PdfLiteral.
+     * @param text String
+     */
     public PdfLiteral(String text) {
         super(0, text);
     }
     
+    /**
+     * Constructor for PdfLiteral.
+     * @param b byte[]
+     */
     public PdfLiteral(byte b[]) {
         super(0, b);
     }
 
+    /**
+     * Constructor for PdfLiteral.
+     * @param size int
+     */
     public PdfLiteral(int size) {
         super(0, (byte[])null);
         bytes = new byte[size];
         java.util.Arrays.fill(bytes, (byte)32);
     }
 
+    /**
+     * Constructor for PdfLiteral.
+     * @param type int
+     * @param text String
+     */
     public PdfLiteral(int type, String text) {
         super(type, text);
     }
     
+    /**
+     * Constructor for PdfLiteral.
+     * @param type int
+     * @param b byte[]
+     */
     public PdfLiteral(int type, byte b[]) {
         super(type, b);
     }
     
+    /**
+     * Method toPdf.
+     * @param writer PdfWriter
+     * @param os java.io.OutputStream
+     * @throws java.io.IOException
+     */
     public void toPdf(PdfWriter writer, java.io.OutputStream os) throws java.io.IOException {
         if (os instanceof OutputStreamCounter)
             position = ((OutputStreamCounter)os).getCounter();
@@ -91,16 +121,16 @@ public class PdfLiteral extends PdfObject {
     
     /**
      * Getter for property position.
-     * @return Value of property position.
-     */
+    
+     * @return Value of property position. */
     public int getPosition() {
         return this.position;
     }
     
     /**
      * Getter for property posLength.
-     * @return Value of property posLength.
-     */
+    
+     * @return Value of property posLength. */
     public int getPosLength() {
         if (bytes != null)
             return bytes.length;

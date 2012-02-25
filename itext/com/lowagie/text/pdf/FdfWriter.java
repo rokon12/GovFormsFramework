@@ -59,6 +59,7 @@ import com.lowagie.text.DocumentException;
 
 /** Writes an FDF form.
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class FdfWriter {
     static byte[] HEADER_FDF = DocWriter.getISOBytes("%FDF-1.2\n%\u00e2\u00e3\u00cf\u00d3\n");
@@ -73,14 +74,20 @@ public class FdfWriter {
 
     /** Writes the content to a stream.
      * @param os the stream
-     * @throws DocumentException on error
-     * @throws IOException on error
-     */    
+    
+    
+     * @throws DocumentException on error * @throws IOException on error */    
     public void writeTo(OutputStream os) throws DocumentException, IOException {
         Wrt wrt = new Wrt(os, this);
         wrt.writeTo();
     }
     
+    /**
+     * Method setField.
+     * @param field String
+     * @param value PdfObject
+     * @return boolean
+     */
     boolean setField(String field, PdfObject value) {
         HashMap map = fields;
         StringTokenizer tk = new StringTokenizer(field, ".");
@@ -112,6 +119,12 @@ public class FdfWriter {
         }
     }
     
+    /**
+     * Method iterateFields.
+     * @param values HashMap
+     * @param map HashMap
+     * @param name String
+     */
     void iterateFields(HashMap values, HashMap map, String name) {
         for (Iterator it = map.keySet().iterator(); it.hasNext();) {
             String s = (String)it.next();
@@ -125,9 +138,9 @@ public class FdfWriter {
     
     /** Removes the field value.
      * @param field the field name
+    
      * @return <CODE>true</CODE> if the field was found and removed,
-     * <CODE>false</CODE> otherwise
-     */    
+     * <CODE>false</CODE> otherwise */    
     public boolean removeField(String field) {
         HashMap map = fields;
         StringTokenizer tk = new StringTokenizer(field, ".");
@@ -166,8 +179,8 @@ public class FdfWriter {
     
     /** Gets all the fields. The map is keyed by the fully qualified
      * field name and the values are <CODE>PdfObject</CODE>.
-     * @return a map with all the fields
-     */    
+    
+     * @return a map with all the fields */    
     public HashMap getFields() {
         HashMap values = new HashMap();
         iterateFields(values, fields, "");
@@ -176,8 +189,8 @@ public class FdfWriter {
     
     /** Gets the field value.
      * @param field the field name
-     * @return the field value or <CODE>null</CODE> if not found
-     */    
+    
+     * @return the field value or <CODE>null</CODE> if not found */    
     public String getField(String field) {
         HashMap map = fields;
         StringTokenizer tk = new StringTokenizer(field, ".");
@@ -210,10 +223,10 @@ public class FdfWriter {
     /** Sets the field value as a name.
      * @param field the fully qualified field name
      * @param value the value
+    
      * @return <CODE>true</CODE> if the value was inserted,
      * <CODE>false</CODE> if the name is incompatible with
-     * an existing field
-     */    
+     * an existing field */    
     public boolean setFieldAsName(String field, String value) {
         return setField(field, new PdfName(value));
     }
@@ -221,10 +234,10 @@ public class FdfWriter {
     /** Sets the field value as a string.
      * @param field the fully qualified field name
      * @param value the value
+    
      * @return <CODE>true</CODE> if the value was inserted,
      * <CODE>false</CODE> if the name is incompatible with
-     * an existing field
-     */    
+     * an existing field */    
     public boolean setFieldAsString(String field, String value) {
         return setField(field, new PdfString(value, PdfObject.TEXT_UNICODE));
     }
@@ -271,8 +284,8 @@ public class FdfWriter {
     }
     
     /** Gets the PDF file name associated with the FDF.
-     * @return the PDF file name associated with the FDF
-     */
+    
+     * @return the PDF file name associated with the FDF */
     public String getFile() {
         return this.file;
     }
@@ -285,9 +298,18 @@ public class FdfWriter {
         this.file = file;
     }
     
+    /**
+     */
     static class Wrt extends PdfWriter {
         private FdfWriter fdf;
        
+        /**
+         * Constructor for Wrt.
+         * @param os OutputStream
+         * @param fdf FdfWriter
+         * @throws DocumentException
+         * @throws IOException
+         */
         Wrt(OutputStream os, FdfWriter fdf) throws DocumentException, IOException {
             super(new PdfDocument(), os);
             this.fdf = fdf;
@@ -295,6 +317,11 @@ public class FdfWriter {
             body = new PdfBody(this);
         }
         
+        /**
+         * Method writeTo.
+         * @throws DocumentException
+         * @throws IOException
+         */
         void writeTo() throws DocumentException, IOException {
             PdfDictionary dic = new PdfDictionary();
             dic.put(PdfName.FIELDS, calculate(fdf.fields));
@@ -312,6 +339,12 @@ public class FdfWriter {
         }
         
         
+        /**
+         * Method calculate.
+         * @param map HashMap
+         * @return PdfArray
+         * @throws IOException
+         */
         PdfArray calculate(HashMap map) throws IOException {
             PdfArray ar = new PdfArray();
             for (Iterator it = map.keySet().iterator(); it.hasNext();) {

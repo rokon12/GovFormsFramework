@@ -3,6 +3,8 @@ package bd.gov.forms.utils;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ */
 public class ContentType {
 	private static Map<String, String> d = new HashMap<String, String>();
 	private static ContentType contentType;
@@ -48,6 +50,10 @@ public class ContentType {
 		d.put(".qt", "video/quicktime");
 	}
 
+	/**
+	 * Method getInstance.
+	 * @return ContentType
+	 */
 	public static ContentType getInstance() {
 		if (contentType == null) {
 			return new ContentType();
@@ -55,6 +61,11 @@ public class ContentType {
 		return contentType;
 	}
 
+	/**
+	 * Method getContentType.
+	 * @param key String
+	 * @return String
+	 */
 	public String getContentType(String key) {
 		return d.get(key.toLowerCase());
 	}

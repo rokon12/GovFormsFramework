@@ -54,6 +54,8 @@ import java.io.ByteArrayOutputStream;
 
 /**
  * A signature dictionary representation for the standard filters.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public abstract class PdfSigGenericPKCS extends PdfSignature {
     /**
@@ -134,16 +136,16 @@ public abstract class PdfSigGenericPKCS extends PdfSignature {
 
     /**
      * Gets the subject name in the signing certificate (the element "CN")
-     * @return the subject name in the signing certificate (the element "CN")
-     */    
+    
+     * @return the subject name in the signing certificate (the element "CN") */    
     public String getName() {
         return name;
     }
 
     /**
      * Gets the class instance that does the actual signing.
-     * @return the class instance that does the actual signing
-     */    
+    
+     * @return the class instance that does the actual signing */    
     public PdfPKCS7 getSigner() {
         return pkcs;
     }
@@ -151,8 +153,8 @@ public abstract class PdfSigGenericPKCS extends PdfSignature {
     /**
      * Gets the signature content. This can be a PKCS#1 or a PKCS#7. It corresponds to
      * the /Contents key.
-     * @return the signature content
-     */    
+    
+     * @return the signature content */    
     public byte[] getSignerContents() {
         if (PdfName.ADBE_X509_RSA_SHA1.equals(get(PdfName.SUBFILTER)))
             return pkcs.getEncodedPKCS1();
@@ -162,6 +164,8 @@ public abstract class PdfSigGenericPKCS extends PdfSignature {
 
     /**
      * Creates a standard filter of the type VeriSign.
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */    
     public static class VeriSign extends PdfSigGenericPKCS {
         /**
@@ -185,6 +189,8 @@ public abstract class PdfSigGenericPKCS extends PdfSignature {
 
     /**
      * Creates a standard filter of the type self signed.
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */    
     public static class PPKLite extends PdfSigGenericPKCS {
         /**
@@ -208,6 +214,8 @@ public abstract class PdfSigGenericPKCS extends PdfSignature {
 
     /**
      * Creates a standard filter of the type Windows Certificate.
+     * @author Bazlur Rahman Rokon
+     * @version $Revision: 1.0 $
      */    
     public static class PPKMS extends PdfSigGenericPKCS {
         /**

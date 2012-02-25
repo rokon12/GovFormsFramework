@@ -61,6 +61,7 @@ import com.lowagie.text.DocumentException;
  * Identity-V. This is the only way to represent some character sets such
  * as Thai.
  * @author  Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 class TrueTypeFontUnicode extends TrueTypeFont implements Comparator{
     
@@ -75,9 +76,9 @@ class TrueTypeFontUnicode extends TrueTypeFont implements Comparator{
      * @param enc the encoding to be applied to this font
      * @param emb true if the font is to be embedded in the PDF
      * @param ttfAfm the font as a <CODE>byte</CODE> array
-     * @throws DocumentException the font is invalid
-     * @throws IOException the font file could not be read
-     */
+    
+    
+     * @throws DocumentException the font is invalid * @throws IOException the font file could not be read */
     TrueTypeFontUnicode(String ttFile, String enc, boolean emb, byte ttfAfm[]) throws DocumentException, IOException {
         String nameBase = getBaseName(ttFile);
         String ttcName = getTTCName(nameBase);
@@ -116,8 +117,8 @@ class TrueTypeFontUnicode extends TrueTypeFont implements Comparator{
 /**
  * Gets the width of a <CODE>String</CODE> in normalized 1000 units.
  * @param text the <CODE>String</CODE> to get the witdth of
- * @return the width in normalized 1000 units
- */
+
+ * @return the width in normalized 1000 units */
     public int getWidth(String text)
     {
         if (vertical)
@@ -144,9 +145,9 @@ class TrueTypeFontUnicode extends TrueTypeFont implements Comparator{
     /** Creates a ToUnicode CMap to allow copy and paste from Acrobat.
      * @param metrics metrics[0] contains the glyph index and metrics[2]
      * contains the Unicode code
-     * @throws DocumentException on error
-     * @return the stream representing this CMap or <CODE>null</CODE>
-     */    
+    
+    
+     * @return the stream representing this CMap or <CODE>null</CODE> * @throws DocumentException on error */    
     private PdfStream getToUnicode(Object metrics[]) throws DocumentException {
         if (metrics.length == 0)
             return null;
@@ -191,8 +192,8 @@ class TrueTypeFontUnicode extends TrueTypeFont implements Comparator{
     
     /** Gets an hex string in the format "&lt;HHHH&gt;".
      * @param n the number
-     * @return the hex string
-     */    
+    
+     * @return the hex string */    
     static String toHex(int n) {
         String s = Integer.toHexString(n);
         return "<0000".substring(0, 5 - s.length()) + s + ">";
@@ -202,8 +203,8 @@ class TrueTypeFontUnicode extends TrueTypeFont implements Comparator{
      * @param fontDescriptor the indirect reference to the font descriptor
      * @param subsetPrefix the subset prefix
      * @param metrics the horizontal width metrics
-     * @return a stream
-     */    
+    
+     * @return a stream */    
     private PdfDictionary getCIDFontType2(PdfIndirectReference fontDescriptor, String subsetPrefix, Object metrics[]) {
         PdfDictionary dic = new PdfDictionary(PdfName.FONT);
         // sivan; cff
@@ -257,8 +258,8 @@ class TrueTypeFontUnicode extends TrueTypeFont implements Comparator{
      * @param descendant the descendant dictionary
      * @param subsetPrefix the subset prefix
      * @param toUnicode the ToUnicode stream
-     * @return the stream
-     */    
+    
+     * @return the stream */    
     private PdfDictionary getFontBaseType(PdfIndirectReference descendant, String subsetPrefix, PdfIndirectReference toUnicode) {
         PdfDictionary dic = new PdfDictionary(PdfName.FONT);
 
@@ -280,8 +281,8 @@ class TrueTypeFontUnicode extends TrueTypeFont implements Comparator{
     /** The method used to sort the metrics array.
      * @param o1 the first element
      * @param o2 the second element
-     * @return the comparisation
-     */    
+    
+     * @return the comparisation */    
     public int compare(Object o1, Object o2) {
         int m1 = ((int[])o1)[0];
         int m2 = ((int[])o2)[0];
@@ -296,9 +297,9 @@ class TrueTypeFontUnicode extends TrueTypeFont implements Comparator{
      * @param writer the writer for this document
      * @param ref the font indirect reference
      * @param params several parameters that depend on the font type
-     * @throws IOException on error
-     * @throws DocumentException error in generating the object
-     */
+    
+    
+     * @throws DocumentException error in generating the object * @throws IOException on error */
     void writeFont(PdfWriter writer, PdfIndirectReference ref, Object params[]) throws DocumentException, IOException {
         HashMap longTag = (HashMap)params[0];
         Object metrics[] = longTag.values().toArray();
@@ -392,8 +393,8 @@ class TrueTypeFontUnicode extends TrueTypeFont implements Comparator{
 
     /** A forbidden operation. Will throw a null pointer exception.
      * @param text the text
-     * @return always <CODE>null</CODE>
-     */    
+    
+     * @return always <CODE>null</CODE> */    
     byte[] convertToBytes(String text)
     {
         return null;
@@ -402,9 +403,9 @@ class TrueTypeFontUnicode extends TrueTypeFont implements Comparator{
     /**
      * Checks if a character exists in this font.
      * @param c the character to check
+    
      * @return <CODE>true</CODE> if the character has a glyph,
-     * <CODE>false</CODE> otherwise
-     */
+     * <CODE>false</CODE> otherwise */
     public boolean charExists(char c) {
         HashMap map = null;
         if (fontSpecific)
@@ -427,9 +428,9 @@ class TrueTypeFontUnicode extends TrueTypeFont implements Comparator{
      * Sets the character advance.
      * @param c the character
      * @param advance the character advance normalized to 1000 units
+    
      * @return <CODE>true</CODE> if the advance was set,
-     * <CODE>false</CODE> otherwise
-     */
+     * <CODE>false</CODE> otherwise */
     public boolean setCharAdvance(char c, int advance) {
         HashMap map = null;
         if (fontSpecific)
@@ -454,6 +455,11 @@ class TrueTypeFontUnicode extends TrueTypeFont implements Comparator{
         return true;
     }
     
+    /**
+     * Method getCharBBox.
+     * @param c char
+     * @return int[]
+     */
     public int[] getCharBBox(char c) {
         if (bboxes == null)
             return null;

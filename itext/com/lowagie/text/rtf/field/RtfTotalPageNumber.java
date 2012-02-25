@@ -109,9 +109,9 @@ public class RtfTotalPageNumber extends RtfField {
     /**
      * Writes the field NUMPAGES instruction with Arabic format
      * 
-     * @return A byte array containing "NUMPAGES \\\\* Arabic".
-     * @throws IOException
-     */
+    
+    
+     * @return A byte array containing "NUMPAGES \\\\* Arabic". * @throws IOException */
     protected byte[] writeFieldInstContent() throws IOException {
         return ARABIC_TOTAL_PAGES;
     }
@@ -119,9 +119,9 @@ public class RtfTotalPageNumber extends RtfField {
     /**
      * Writes the field result content
      * 
-     * @return An byte array containing "1".
-     * @throws IOException
-     */
+    
+    
+     * @return An byte array containing "1". * @throws IOException */
     protected byte[] writeFieldResultContent() throws IOException {
         return "1".getBytes();
     }

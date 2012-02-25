@@ -131,7 +131,8 @@ public class RtfPhrase extends RtfElement {
      * then if the RtfPhrase is in a RtfCell a marker for this is written and finally
      * the RtfChunks of this RtfPhrase are written.
      * 
-     * @return The content of this RtfPhrase
+    
+     * @return The content of this RtfPhrase * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -158,6 +159,7 @@ public class RtfPhrase extends RtfElement {
      * child elements.
      * 
      * @param inTable <code>True</code> if this RtfPhrase is in a table, <code>false</code> otherwise
+     * @see com.lowagie.text.rtf.RtfBasicElement#setInTable(boolean)
      */
     public void setInTable(boolean inTable) {
         super.setInTable(inTable);
@@ -171,6 +173,7 @@ public class RtfPhrase extends RtfElement {
      * child elements.
      * 
      * @param inHeader <code>True</code> if this RtfPhrase is in a header, <code>false</code> otherwise
+     * @see com.lowagie.text.rtf.RtfBasicElement#setInHeader(boolean)
      */
     public void setInHeader(boolean inHeader) {
         super.setInHeader(inHeader);
@@ -184,6 +187,7 @@ public class RtfPhrase extends RtfElement {
      * elements.
      * 
      * @param doc The RtfDocument to use
+     * @see com.lowagie.text.rtf.RtfBasicElement#setRtfDocument(RtfDocument)
      */
     public void setRtfDocument(RtfDocument doc) {
         super.setRtfDocument(doc);

@@ -59,6 +59,8 @@ import com.lowagie.text.pdf.PdfPTableEvent;
 /**
  * Rectangle that can be used for Cells.
  * This Rectangle is padded and knows how to draw itself in a PdfPTable or PdfPcellEvent.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class SimpleTable extends Rectangle implements PdfPTableEvent, Element, TextElementArray {
 
@@ -88,8 +90,8 @@ public class SimpleTable extends Rectangle implements PdfPTableEvent, Element, T
 	/**
 	 * Adds content to this object.
 	 * @param element
-	 * @throws BadElementException
-	 */
+	
+	 * @throws BadElementException */
 	public void addElement(SimpleCell element) throws BadElementException {
 		if(!element.isCellgroup()) {
 			throw new BadElementException("You can't add cells to a table directly, add them to a row first.");
@@ -99,9 +101,9 @@ public class SimpleTable extends Rectangle implements PdfPTableEvent, Element, T
 	
 	/**
 	 * Creates a Table object based on this TableAttributes object.
-	 * @return a com.lowagie.text.Table object
-	 * @throws BadElementException
-	 */
+	
+	
+	 * @return a com.lowagie.text.Table object * @throws BadElementException */
 	public Table createTable() throws BadElementException {
 		if (content.size() == 0) throw new BadElementException("Trying to create a table without rows.");
 		SimpleCell row = (SimpleCell)content.get(0);
@@ -167,9 +169,9 @@ public class SimpleTable extends Rectangle implements PdfPTableEvent, Element, T
 	
 	/**
 	 * Creates a PdfPTable object based on this TableAttributes object.
-	 * @return a com.lowagie.text.pdf.PdfPTable object
-	 * @throws DocumentException
-	 */
+	
+	
+	 * @return a com.lowagie.text.pdf.PdfPTable object * @throws DocumentException */
 	public PdfPTable createPdfPTable() throws DocumentException {
 		if (content.size() == 0) throw new BadElementException("Trying to create a table without rows.");
 		SimpleCell row = (SimpleCell)content.get(0);
@@ -247,8 +249,8 @@ public class SimpleTable extends Rectangle implements PdfPTableEvent, Element, T
 	/**
 	 * @param rectangle
 	 * @param spacing
-	 * @return a rectangle
-	 */
+	
+	 * @return a rectangle */
 	public static SimpleTable getDimensionlessInstance(Rectangle rectangle, float spacing) {
 		SimpleTable event = new SimpleTable();
 		event.cloneNonPositionParameters(rectangle);
@@ -269,8 +271,8 @@ public class SimpleTable extends Rectangle implements PdfPTableEvent, Element, T
 	}
 	
 	/**
-	 * @return Returns the cellpadding.
-	 */
+	
+	 * @return Returns the cellpadding. */
 	public float getCellpadding() {
 		return cellpadding;
 	}
@@ -281,8 +283,8 @@ public class SimpleTable extends Rectangle implements PdfPTableEvent, Element, T
 		this.cellpadding = cellpadding;
 	}
 	/**
-	 * @return Returns the cellspacing.
-	 */
+	
+	 * @return Returns the cellspacing. */
 	public float getCellspacing() {
 		return cellspacing;
 	}
@@ -294,8 +296,8 @@ public class SimpleTable extends Rectangle implements PdfPTableEvent, Element, T
 	}
 	
 	/**
-	 * @return Returns the alignment.
-	 */
+	
+	 * @return Returns the alignment. */
 	public int getAlignment() {
 		return alignment;
 	}
@@ -306,8 +308,8 @@ public class SimpleTable extends Rectangle implements PdfPTableEvent, Element, T
 		this.alignment = alignment;
 	}
 	/**
-	 * @return Returns the width.
-	 */
+	
+	 * @return Returns the width. */
 	public float getWidth() {
 		return width;
 	}
@@ -318,8 +320,8 @@ public class SimpleTable extends Rectangle implements PdfPTableEvent, Element, T
 		this.width = width;
 	}
 	/**
-	 * @return Returns the widthpercentage.
-	 */
+	
+	 * @return Returns the widthpercentage. */
 	public float getWidthpercentage() {
 		return widthpercentage;
 	}

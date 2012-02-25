@@ -15,6 +15,8 @@ package com.lowagie.text.pdf.codec.postscript;
 import java.util.*;
 
 
+/**
+ */
 public class PAEngine extends Object {
 
     static public final int MODE_STACK = 0;
@@ -26,23 +28,39 @@ public class PAEngine extends Object {
     protected Stack procedure;
     protected int innerProcedures;
 
+    /**
+     * Constructor for PAEngine.
+     * @param context PAContext
+     */
     public PAEngine(PAContext context){
         super();
         this.context = context;
         this.mode = PAEngine.MODE_STACK;
     }
 
+    /**
+     * Method startProcedure.
+     * @throws PainterException
+     */
     public void startProcedure() throws PainterException {
         this.procedure = new Stack();
         this.mode = PAEngine.MODE_PROCEDURE;
         this.innerProcedures = 0;
     }
 
+    /**
+     * Method endProcedure.
+     * @throws PainterException
+     */
     public void endProcedure() throws PainterException {
         this.context.operands.push(new PAToken(this.procedure, PAToken.PROCEDURE));
         this.mode = PAEngine.MODE_STACK;
     }
 
+    /**
+     * Method bindProcedure.
+     * @param patoken PAToken
+     */
     public void bindProcedure(PAToken patoken){
         Stack oldStack = (Stack) patoken.value;
         Stack newStack = new Stack();
@@ -64,6 +82,11 @@ public class PAEngine extends Object {
         patoken.value = newStack;
     }
 
+    /**
+     * Method process.
+     * @param token Object
+     * @throws PainterException
+     */
     public void process(Object token) throws PainterException {
         if(token == null){
             throw new IllegalStateException("Null token encountered; last unknown identifier was " + this.context.getLastUnknownIdentifier());

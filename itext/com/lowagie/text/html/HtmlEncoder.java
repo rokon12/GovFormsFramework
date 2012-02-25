@@ -80,6 +80,7 @@ import com.lowagie.text.Element;
  * for more info: see O'Reilly; "HTML: The Definitive Guide" (page 164)
  *
  * @author  mario.maccarini@rug.ac.be
+ * @version $Revision: 1.0 $
  */
 
 public class HtmlEncoder {
@@ -132,8 +133,8 @@ public class HtmlEncoder {
  * Converts a <CODE>String</CODE> to the HTML-format of this <CODE>String</CODE>.
  *
  * @param	string	The <CODE>String</CODE> to convert
- * @return	a <CODE>String</CODE>
- */
+
+ * @return	a <CODE>String</CODE> */
     
     public static String encode(String string) {
         int n = string.length();
@@ -158,8 +159,8 @@ public class HtmlEncoder {
  * Converts a <CODE>Color</CODE> into a HTML representation of this <CODE>Color</CODE>.
  *
  * @param	color	the <CODE>Color</CODE> that has to be converted.
- * @return	the HTML representation of this <COLOR>Color</COLOR>
- */
+
+ * @return	the HTML representation of this <COLOR>Color</COLOR> */
     
     public static String encode(Color color) {
         StringBuffer buffer = new StringBuffer("#");
@@ -182,8 +183,8 @@ public class HtmlEncoder {
  * Translates the alignment value.
  *
  * @param   alignment   the alignment value
- * @return  the translated value
- */
+
+ * @return  the translated value */
     
     public static String getAlignment(int alignment) {
         switch(alignment) {

@@ -55,6 +55,8 @@ import java.io.IOException;
 
 /**
  * An implementation of an XmpSchema.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class PdfSchema extends XmpSchema {
 
@@ -72,8 +74,8 @@ public class PdfSchema extends XmpSchema {
 
 
 	/**
-	 * @throws IOException
-	 */
+	
+	 * @throws IOException */
 	public PdfSchema() throws IOException {
 		super("xmlns:" + DEFAULT_XPATH_ID + "=\"" + DEFAULT_XPATH_URI + "\"");
 		addProducer(Document.getVersion());

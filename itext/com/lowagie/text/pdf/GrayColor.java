@@ -53,20 +53,33 @@ package com.lowagie.text.pdf;
 /**
  *
  * @author  Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class GrayColor extends ExtendedColor {
 
     float gray;
 
+    /**
+     * Constructor for GrayColor.
+     * @param intGray int
+     */
     public GrayColor(int intGray) {
         this((float)intGray / 255f);
     }
 
+    /**
+     * Constructor for GrayColor.
+     * @param floatGray float
+     */
     public GrayColor(float floatGray) {
         super(TYPE_GRAY, floatGray, floatGray, floatGray);
         gray = normalize(floatGray);
     }
     
+    /**
+     * Method getGray.
+     * @return float
+     */
     public float getGray() {
         return gray;
     }

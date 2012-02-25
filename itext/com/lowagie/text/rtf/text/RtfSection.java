@@ -131,7 +131,8 @@ public class RtfSection extends RtfElement {
     /**
      * Write this RtfSection and its contents
      * 
-     * @return A byte array with the RtfSection and its contents
+    
+     * @return A byte array with the RtfSection and its contents * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -154,6 +155,7 @@ public class RtfSection extends RtfElement {
      * child elements.
      * 
      * @param inTable <code>True</code> if this RtfSection is in a table, <code>false</code> otherwise
+     * @see com.lowagie.text.rtf.RtfBasicElement#setInTable(boolean)
      */
     public void setInTable(boolean inTable) {
         super.setInTable(inTable);
@@ -167,6 +169,7 @@ public class RtfSection extends RtfElement {
      * child elements.
      * 
      * @param inHeader <code>True</code> if this RtfSection is in a header, <code>false</code> otherwise
+     * @see com.lowagie.text.rtf.RtfBasicElement#setInHeader(boolean)
      */
     public void setInHeader(boolean inHeader) {
         super.setInHeader(inHeader);

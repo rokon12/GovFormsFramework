@@ -21,6 +21,8 @@ import java.util.Iterator;
 // <P>
 // @see java.util.Hashtable
 
+/**
+ */
 public class IntHashtable implements Cloneable {
     /// The hash table data.
     private IntHashtableEntry table[];
@@ -44,6 +46,11 @@ public class IntHashtable implements Cloneable {
     // is less than or equal to zero.
     // @exception IllegalArgumentException If the load factor is
     // less than or equal to zero.
+    /**
+     * Constructor for IntHashtable.
+     * @param initialCapacity int
+     * @param loadFactor float
+     */
     public IntHashtable( int initialCapacity, float loadFactor ) {
         if ( initialCapacity <= 0 || loadFactor <= 0.0 )
             throw new IllegalArgumentException();
@@ -55,6 +62,10 @@ public class IntHashtable implements Cloneable {
     /// Constructs a new, empty hashtable with the specified initial
     // capacity.
     // @param initialCapacity the initial number of buckets
+    /**
+     * Constructor for IntHashtable.
+     * @param initialCapacity int
+     */
     public IntHashtable( int initialCapacity ) {
         this( initialCapacity, 0.75f );
     }
@@ -67,11 +78,19 @@ public class IntHashtable implements Cloneable {
     }
     
     /// Returns the number of elements contained in the hashtable.
+    /**
+     * Method size.
+     * @return int
+     */
     public int size() {
         return count;
     }
     
     /// Returns true if the hashtable contains no elements.
+    /**
+     * Method isEmpty.
+     * @return boolean
+     */
     public boolean isEmpty() {
         return count == 0;
     }
@@ -82,6 +101,11 @@ public class IntHashtable implements Cloneable {
     // @exception NullPointerException If the value being searched
     // for is equal to null.
     // @see IntHashtable#containsKey
+    /**
+     * Method contains.
+     * @param value int
+     * @return boolean
+     */
     public boolean contains( int value ) {
         IntHashtableEntry tab[] = table;
         for ( int i = tab.length ; i-- > 0 ; ) {
@@ -96,6 +120,11 @@ public class IntHashtable implements Cloneable {
     /// Returns true if the collection contains an element for the key.
     // @param key the key that we are looking for
     // @see IntHashtable#contains
+    /**
+     * Method containsKey.
+     * @param key int
+     * @return boolean
+     */
     public boolean containsKey( int key ) {
         IntHashtableEntry tab[] = table;
         int hash = key;
@@ -113,6 +142,11 @@ public class IntHashtable implements Cloneable {
     // @returns the element for the key or null if the key
     // 		is not defined in the hash table.
     // @see IntHashtable#put
+    /**
+     * Method get.
+     * @param key int
+     * @return int
+     */
     public int get( int key ) {
         IntHashtableEntry tab[] = table;
         int hash = key;
@@ -158,6 +192,12 @@ public class IntHashtable implements Cloneable {
     // is equal to null.
     // @see IntHashtable#get
     // @return the old value of the key, or null if it did not have one.
+    /**
+     * Method put.
+     * @param key int
+     * @param value int
+     * @return int
+     */
     public int put( int key, int value ) {
         // Makes sure the key is not already in the hashtable.
         IntHashtableEntry tab[] = table;
@@ -192,6 +232,11 @@ public class IntHashtable implements Cloneable {
     // key is not present.
     // @param key the key that needs to be removed
     // @return the value of key, or null if the key was not found.
+    /**
+     * Method remove.
+     * @param key int
+     * @return int
+     */
     public int remove( int key ) {
         IntHashtableEntry tab[] = table;
         int hash = key;
@@ -217,6 +262,10 @@ public class IntHashtable implements Cloneable {
         count = 0;
     }
     
+    /**
+     * Method clone.
+     * @return Object
+     */
     public Object clone() {
         try {
             IntHashtable t = (IntHashtable)super.clone();
@@ -232,12 +281,20 @@ public class IntHashtable implements Cloneable {
         }
     }
 
+    /**
+     * Method toOrderedKeys.
+     * @return int[]
+     */
     public int[] toOrderedKeys() {
         int res[] = getKeys();
         Arrays.sort(res);
         return res;
     }
     
+    /**
+     * Method getKeys.
+     * @return int[]
+     */
     public int[] getKeys() {
         int res[] = new int[count];
         int ptr = 0;
@@ -255,6 +312,10 @@ public class IntHashtable implements Cloneable {
         return res;
     }
     
+    /**
+     * Method getOneKey.
+     * @return int
+     */
     public int getOneKey() {
         if (count == 0)
             return 0;
@@ -266,20 +327,34 @@ public class IntHashtable implements Cloneable {
         return entry.key;
     }
     
+    /**
+     */
     static class IntHashtableEntry {
         int hash;
         int key;
         int value;
         IntHashtableEntry next;
         
+        /**
+         * Method getKey.
+         * @return int
+         */
         public int getKey() {
             return key;
         }
         
+        /**
+         * Method getValue.
+         * @return int
+         */
         public int getValue() {
             return value;
         }
         
+        /**
+         * Method clone.
+         * @return Object
+         */
         protected Object clone() {
             IntHashtableEntry entry = new IntHashtableEntry();
             entry.hash = hash;
@@ -290,22 +365,37 @@ public class IntHashtable implements Cloneable {
         }
     }    
 
+    /**
+     * Method getEntryIterator.
+     * @return Iterator
+     */
     public Iterator getEntryIterator() {
         return new IntHashtableIterator(table);
     }
     
+    /**
+     */
     static class IntHashtableIterator implements Iterator {
         //    boolean keys;
         int index;
         IntHashtableEntry table[];
         IntHashtableEntry entry;
         
+        /**
+         * Constructor for IntHashtableIterator.
+         * @param table IntHashtableEntry[]
+         */
         IntHashtableIterator(IntHashtableEntry table[] /* , boolean keys */) {
             this.table = table;
             //	this.keys = keys;
             this.index = table.length;
         }
         
+        /**
+         * Method hasNext.
+         * @return boolean
+         * @see java.util.Iterator#hasNext()
+         */
         public boolean hasNext() {
             if (entry != null) {
                 return true;
@@ -318,6 +408,11 @@ public class IntHashtable implements Cloneable {
             return false;
         }
         
+        /**
+         * Method next.
+         * @return Object
+         * @see java.util.Iterator#next()
+         */
         public Object next() {
             if (entry == null) {
                 while ((index-- > 0) && ((entry = table[index]) == null));
@@ -330,6 +425,10 @@ public class IntHashtable implements Cloneable {
             throw new NoSuchElementException("IntHashtableIterator");
         }
         
+        /**
+         * Method remove.
+         * @see java.util.Iterator#remove()
+         */
         public void remove() {
             throw new UnsupportedOperationException("remove() not supported.");
         }

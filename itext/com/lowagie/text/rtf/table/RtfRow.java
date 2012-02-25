@@ -261,6 +261,10 @@ public class RtfRow extends RtfElement {
         }
     }
        
+    /**
+     * Method writeRowDefinitions.
+     * @return byte[]
+     */
     private byte[] writeRowDefinitions() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
         try {
@@ -331,7 +335,8 @@ public class RtfRow extends RtfElement {
     /**
      * Writes the content of this RtfRow
      * 
-     * @return A byte array with the content of this RtfRow
+    
+     * @return A byte array with the content of this RtfRow * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -360,8 +365,8 @@ public class RtfRow extends RtfElement {
     /**
      * Gets the parent RtfTable of this RtfRow
      * 
-     * @return The parent RtfTable of this RtfRow
-     */
+    
+     * @return The parent RtfTable of this RtfRow */
     protected RtfTable getParentTable() {
         return this.parentTable;
     }
@@ -369,8 +374,8 @@ public class RtfRow extends RtfElement {
     /**
      * Gets the cells of this RtfRow
      * 
-     * @return The cells of this RtfRow
-     */
+    
+     * @return The cells of this RtfRow */
     protected ArrayList getCells() {
         return this.cells;
     }

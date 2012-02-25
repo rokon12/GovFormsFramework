@@ -51,13 +51,15 @@ import java.io.IOException;
 /**
  *
  * @author  psoares
+ * @version $Revision: 1.0 $
  */
 public class OutputStreamCounter extends OutputStream {
     
     protected OutputStream out;
     protected int counter = 0;
     
-    /** Creates a new instance of OutputStreamCounter */
+    /** Creates a new instance of OutputStreamCounter * @param out OutputStream
+     */
     public OutputStreamCounter(OutputStream out) {
         this.out = out;
     }
@@ -69,8 +71,9 @@ public class OutputStreamCounter extends OutputStream {
      * <p>
      * The <code>close</code> method of <code>OutputStream</code> does nothing.
      *
-     * @exception  IOException  if an I/O error occurs.
+    
      *
+     * @exception  IOException  if an I/O error occurs. * @see java.io.Closeable#close()
      */
     public void close() throws IOException {
         out.close();
@@ -85,8 +88,9 @@ public class OutputStreamCounter extends OutputStream {
      * <p>
      * The <code>flush</code> method of <code>OutputStream</code> does nothing.
      *
-     * @exception  IOException  if an I/O error occurs.
+    
      *
+     * @exception  IOException  if an I/O error occurs. * @see java.io.Flushable#flush()
      */
     public void flush() throws IOException {
         out.flush();
@@ -98,10 +102,10 @@ public class OutputStreamCounter extends OutputStream {
      * <code>write(b, 0, b.length)</code>.
      *
      * @param      b   the data.
-     * @exception  IOException  if an I/O error occurs.
-     * @see        java.io.OutputStream#write(byte[], int, int)
+    
+    
      *
-     */
+     * @exception  IOException  if an I/O error occurs. * @see        java.io.OutputStream#write(byte[], int, int) */
     public void write(byte[] b) throws IOException {
         counter += b.length;
         out.write(b);
@@ -117,11 +121,11 @@ public class OutputStreamCounter extends OutputStream {
      * implementation for this method.
      *
      * @param      b   the <code>byte</code>.
+    
+     *
      * @exception  IOException  if an I/O error occurs. In particular,
      *             an <code>IOException</code> may be thrown if the
-     *             output stream has been closed.
-     *
-     */
+     *             output stream has been closed. */
     public void write(int b) throws IOException {
         ++counter;
         out.write(b);
@@ -150,16 +154,20 @@ public class OutputStreamCounter extends OutputStream {
      * @param      b     the data.
      * @param      off   the start offset in the data.
      * @param      len   the number of bytes to write.
+    
+     *
      * @exception  IOException  if an I/O error occurs. In particular,
      *             an <code>IOException</code> is thrown if the output
-     *             stream is closed.
-     *
-     */
+     *             stream is closed. */
     public void write(byte[] b, int off, int len) throws IOException {
         counter += len;
         out.write(b, off, len);
     }
     
+    /**
+     * Method getCounter.
+     * @return int
+     */
     public int getCounter() {
         return counter;
     }

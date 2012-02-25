@@ -58,6 +58,8 @@ import com.lowagie.tools.plugins.AbstractTool;
 
 /**
  * Argument that results in a set of "1" and "0" values.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class BitsetArgument extends ToolArgument {
 	/** These are the different options that can be true or false. */
@@ -80,9 +82,9 @@ public class BitsetArgument extends ToolArgument {
 	
 	/**
 	 * Gets the argument as an object.
-	 * @return an object
-	 * @throws InstantiationException
-	 */
+	
+	
+	 * @return an object * @throws InstantiationException */
 	public Object getArgument() throws InstantiationException {
 		return value;
 	}

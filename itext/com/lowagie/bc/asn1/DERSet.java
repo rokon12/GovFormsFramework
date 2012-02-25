@@ -6,6 +6,8 @@ import java.util.Enumeration;
 
 /**
  * A DER encoded set object
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class DERSet
     extends ASN1Set
@@ -45,6 +47,11 @@ public class DERSet
      * be used for structured types, this varies slightly from the
      * ASN.1 descriptions given. Rather than just outputing SET,
      * we also have to specify CONSTRUCTED, and the objects length.
+     */
+    /**
+     * Method encode.
+     * @param out DEROutputStream
+     * @throws IOException
      */
     void encode(
         DEROutputStream out)

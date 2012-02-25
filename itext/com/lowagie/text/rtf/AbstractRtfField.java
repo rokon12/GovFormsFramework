@@ -121,9 +121,9 @@ abstract class AbstractRtfField extends Chunk implements RtfField {
      * Determines whtether the field is locked, i.e. it cannot be
      * updated.
      * 
+    
      * @return <tt>true</tt> iff the field cannot be updated,
-     * <tt>false</tt> otherwise.
-     */
+     * <tt>false</tt> otherwise. */
     public final boolean isLocked() {
         return this.rtfFieldIsLocked;
     }
@@ -152,9 +152,9 @@ abstract class AbstractRtfField extends Chunk implements RtfField {
     /**
      * Determines whether the field was changed since the field was
      * last updated
+    
      * @return <tt>true</tt> if the field was changed since the field
-     * was last updated, <tt>false</tt> otherwise.
-     */
+     * was last updated, <tt>false</tt> otherwise. */
     public final boolean isDirty() {
         return this.rtfFieldIsDirty;
     }
@@ -173,10 +173,10 @@ abstract class AbstractRtfField extends Chunk implements RtfField {
     /**
      * Determines whether text has been added, removed from the field
      * result since the field was last updated.
+    
      * @return rtfFieldWasEdited <tt>true</tt> if text has been added,
      * removed from the field result since the field was last updated,
-     * <tt>false</tt> otherwise.
-     */
+     * <tt>false</tt> otherwise. */
     public final boolean wasEdited() {
         return this.rtfFieldWasEdited;
     }
@@ -194,9 +194,9 @@ abstract class AbstractRtfField extends Chunk implements RtfField {
 
     /**
      * Determines whether the field is in suitable form for display.
+    
      * @return whether the field is in suitable form for display:
-     * <tt>true</tt> yes, <tt>false</tt> no it cannot be displayed.
-     */
+     * <tt>true</tt> yes, <tt>false</tt> no it cannot be displayed. */
     public final boolean isPrivate() {
         return this.rtfFieldIsPrivate;
     }
@@ -205,16 +205,16 @@ abstract class AbstractRtfField extends Chunk implements RtfField {
      * Abstract method for writing custom stuff to the Field
      * Initialization Stuff part of an RtfField.
      * @param out
-     * @throws IOException
-     */
+    
+     * @throws IOException */
     public abstract void writeRtfFieldInitializationStuff(OutputStream out) throws IOException;
 
     /**
      * Abstract method for writing custom stuff to the Field Result
      * part of an RtfField.
      * @param out
-     * @throws IOException
-     */
+    
+     * @throws IOException */
     public abstract void writeRtfFieldResultStuff(OutputStream out) throws IOException;
 
     /**
@@ -229,17 +229,17 @@ abstract class AbstractRtfField extends Chunk implements RtfField {
     /**
      * Determines whether this RtfField shall refer to an end
      * note.
+    
      * @return <tt>true</tt> if this RtfField shall refer to an end
-     * note, <tt>false</tt> otherwise.
-     */
+     * note, <tt>false</tt> otherwise. */
     public final boolean isAlt() {
         return this.rtfFieldIsAlt;
     }
 
     /**
      * empty implementation for Chunk.
-     * @return an empty string
-     */
+    
+     * @return an empty string */
     public final String content() {
         return "";
     }
@@ -248,7 +248,8 @@ abstract class AbstractRtfField extends Chunk implements RtfField {
      * For Interface RtfField.
      * @param writer
      * @param out
-     * @throws IOException
+    
+     * @throws IOException * @see com.lowagie.text.rtf.RtfField#write(RtfWriter, OutputStream)
      */
     public void write( RtfWriter writer, OutputStream out ) throws IOException {
         writeRtfFieldBegin(out);
@@ -267,8 +268,8 @@ abstract class AbstractRtfField extends Chunk implements RtfField {
     /**
      * Write the beginning of an RtfField to the OutputStream.
      * @param out
-     * @throws IOException
-     */
+    
+     * @throws IOException */
     protected final void writeRtfFieldBegin(OutputStream out)  throws IOException {
         out.write(RtfWriter.openGroup);
         out.write(RtfWriter.escape);
@@ -278,8 +279,8 @@ abstract class AbstractRtfField extends Chunk implements RtfField {
     /**
      * Write the modifiers defined for a RtfField to the OutputStream.
      * @param out
-     * @throws IOException
-     */
+    
+     * @throws IOException */
     protected final void writeRtfFieldModifiers(OutputStream out) throws IOException {
         if (isDirty()) {
             out.write(fldDirty);
@@ -301,8 +302,8 @@ abstract class AbstractRtfField extends Chunk implements RtfField {
     /**
      * Write RtfField Initialization Stuff to OutputStream.
      * @param out
-     * @throws IOException
-     */
+    
+     * @throws IOException */
     protected final void writeRtfFieldInstBegin(OutputStream out) throws IOException {
         out.write( RtfWriter.openGroup );        
         out.write( RtfWriter.escape );
@@ -313,8 +314,8 @@ abstract class AbstractRtfField extends Chunk implements RtfField {
     /**
      * Write end of RtfField Initialization Stuff to OutputStream.
      * @param out
-     * @throws IOException
-     */
+    
+     * @throws IOException */
     protected final void writeRtfFieldInstEnd(OutputStream out) throws IOException {
         if (isAlt()) {
             out.write( fldAlt );
@@ -327,8 +328,8 @@ abstract class AbstractRtfField extends Chunk implements RtfField {
     /**
      * Write beginning of RtfField Result to OutputStream.
      * @param out
-     * @throws IOException
-     */
+    
+     * @throws IOException */
     protected final void writeRtfFieldResultBegin(OutputStream out) throws IOException {
         out.write( RtfWriter.openGroup );        
         out.write( RtfWriter.escape );
@@ -339,8 +340,8 @@ abstract class AbstractRtfField extends Chunk implements RtfField {
     /**
      * Write end of RtfField Result to OutputStream.
      * @param out
-     * @throws IOException
-     */
+    
+     * @throws IOException */
     protected final void writeRtfFieldResultEnd(OutputStream out) throws IOException {
         out.write( RtfWriter.delimiter );
         out.write( RtfWriter.closeGroup );
@@ -349,8 +350,8 @@ abstract class AbstractRtfField extends Chunk implements RtfField {
     /**
      * Close the RtfField.
      * @param out
-     * @throws IOException
-     */
+    
+     * @throws IOException */
     protected final void writeRtfFieldEnd(OutputStream out) throws IOException {
         out.write( RtfWriter.closeGroup );
     }

@@ -43,6 +43,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author asif
+ * @version $Revision: 1.0 $
  */
 @Controller
 @RequestMapping("/userMgt")
@@ -60,6 +61,12 @@ public class UserMgt {
 	@Autowired
 	MessageSource messageSource;
 
+	/**
+	 * Method newUser.
+	 * @param model ModelMap
+	 * @param request HttpServletRequest
+	 * @return String
+	 */
 	@RequestMapping(value = "/newUser", method = RequestMethod.GET)
 	public String newUser(ModelMap model, HttpServletRequest request) {
 		String access = UserAccessChecker.check(request);
@@ -77,6 +84,14 @@ public class UserMgt {
 		return "user/user";
 	}
 
+	/**
+	 * Method saveUser.
+	 * @param user User
+	 * @param result BindingResult
+	 * @param request HttpServletRequest
+	 * @param model ModelMap
+	 * @return String
+	 */
 	@RequestMapping(value = "/saveUser", method = RequestMethod.POST)
 	public String saveUser(@ModelAttribute("userCmd") User user,
 			BindingResult result, HttpServletRequest request, ModelMap model) {
@@ -109,6 +124,13 @@ public class UserMgt {
 		return "redirect:userList.htm";
 	}
 
+	/**
+	 * Method editUser.
+	 * @param sysId String
+	 * @param model ModelMap
+	 * @param request HttpServletRequest
+	 * @return String
+	 */
 	@RequestMapping(value = "/editUser", method = RequestMethod.GET)
 	public String editUser(
 			@RequestParam(value = "sysId", required = true) String sysId,
@@ -130,6 +152,14 @@ public class UserMgt {
 		return "user/user";
 	}
 
+	/**
+	 * Method updateUser.
+	 * @param cmd User
+	 * @param result BindingResult
+	 * @param request HttpServletRequest
+	 * @param model ModelMap
+	 * @return String
+	 */
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
 	public String updateUser(@ModelAttribute("userCmd") User cmd,
 			BindingResult result, HttpServletRequest request, ModelMap model) {
@@ -156,6 +186,13 @@ public class UserMgt {
 		return "redirect:userList.htm";
 	}
 
+	/**
+	 * Method userList.
+	 * @param model ModelMap
+	 * @param request HttpServletRequest
+	 * @return String
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/userList", method = RequestMethod.GET)
 	public String userList(ModelMap model, HttpServletRequest request)
 			throws IOException {
@@ -171,6 +208,11 @@ public class UserMgt {
 		return "user/userList";
 	}
 
+	/**
+	 * Method loginForm.
+	 * @param model ModelMap
+	 * @return String
+	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginForm(ModelMap model) {
 		User user = new User();
@@ -181,6 +223,15 @@ public class UserMgt {
 		return "login/login";
 	}
 
+	/**
+	 * Method loginAction.
+	 * @param user User
+	 * @param result BindingResult
+	 * @param request HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @param model ModelMap
+	 * @return String
+	 */
 	@RequestMapping(value = "/loginAction", method = RequestMethod.POST)
 	public String loginAction(@ModelAttribute("userCmd") User user,
 			BindingResult result, HttpServletRequest request,
@@ -220,6 +271,12 @@ public class UserMgt {
 
 	}
 
+	/**
+	 * Method logout.
+	 * @param model ModelMap
+	 * @param request HttpServletRequest
+	 * @return String
+	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(ModelMap model, HttpServletRequest request) {
 		request.getSession().setAttribute("user", null);
@@ -227,6 +284,11 @@ public class UserMgt {
 		return "redirect:login.htm";
 	}
 
+	/**
+	 * Method forgotPasswordForm.
+	 * @param model ModelMap
+	 * @return String
+	 */
 	@RequestMapping(value = "/forgotPassword", method = RequestMethod.GET)
 	public String forgotPasswordForm(ModelMap model) {
 		User user = new User();
@@ -237,6 +299,15 @@ public class UserMgt {
 		return "login/forgotPassword";
 	}
 
+	/**
+	 * Method forgotPasswordAction.
+	 * @param user User
+	 * @param result BindingResult
+	 * @param request HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @param model ModelMap
+	 * @return String
+	 */
 	@RequestMapping(value = "/forgotPasswordAction", method = RequestMethod.POST)
 	public String forgotPasswordAction(@ModelAttribute("userCmd") User user,
 			BindingResult result, HttpServletRequest request,
@@ -259,6 +330,12 @@ public class UserMgt {
 		return "redirect:forgotPassword.htm";
 	}
 
+	/**
+	 * Method changePasswordForm.
+	 * @param model ModelMap
+	 * @param request HttpServletRequest
+	 * @return String
+	 */
 	@RequestMapping(value = "/changePassword", method = RequestMethod.GET)
 	public String changePasswordForm(ModelMap model, HttpServletRequest request) {
 		String access = Role.checkRole(Role.ROLE_USER, (User) request
@@ -275,6 +352,15 @@ public class UserMgt {
 		return "login/changePassword";
 	}
 
+	/**
+	 * Method changePasswordAction.
+	 * @param user User
+	 * @param result BindingResult
+	 * @param request HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @param model ModelMap
+	 * @return String
+	 */
 	@RequestMapping(value = "/changePasswordAction", method = RequestMethod.POST)
 	public String changePasswordAction(@ModelAttribute("userCmd") User user,
 			BindingResult result, HttpServletRequest request,
@@ -308,6 +394,11 @@ public class UserMgt {
 		return "redirect:changePassword.htm";
 	}
 
+	/**
+	 * Method getYesNoOption.
+	 * @param locale Locale
+	 * @return Map
+	 */
 	@ModelAttribute("yesNoOption")
 	public Map getYesNoOption(Locale locale) {
 		Map m = new HashMap();
@@ -318,6 +409,13 @@ public class UserMgt {
 		return m;
 	}
 
+	/**
+	 * Method uniqueUserName.
+	 * @param userName String
+	 * @param model ModelMap
+	 * @param response HttpServletResponse
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/uniqueUserName", method = RequestMethod.GET)
 	public void uniqueUserName(
 			@RequestParam(value = "userName", required = true) String userName,

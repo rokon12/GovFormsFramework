@@ -68,6 +68,7 @@ import java.awt.image.MemoryImageSource;
  * </pre>
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class BarcodeEAN extends Barcode{
         
@@ -188,8 +189,8 @@ public class BarcodeEAN extends Barcode{
     
     /** Calculates the EAN parity character.
      * @param code the code
-     * @return the parity character
-     */    
+    
+     * @return the parity character */    
     public static int calculateEANParity(String code) {
         int mul = 3;
         int total = 0;
@@ -204,9 +205,9 @@ public class BarcodeEAN extends Barcode{
     /** Converts an UPCA code into an UPCE code. If the code can not
      * be converted a <CODE>null</CODE> is returned.
      * @param text the code to convert. It must have 12 numeric characters
+    
      * @return the 8 converted digits or <CODE>null</CODE> if the
-     * code could not be converted
-     */    
+     * code could not be converted */    
     static public String convertUPCAtoUPCE(String text) {
         if (text.length() != 12 || !(text.startsWith("0") || text.startsWith("1")))
             return null;
@@ -232,8 +233,8 @@ public class BarcodeEAN extends Barcode{
     
     /** Creates the bars for the barcode EAN13 and UPCA.
      * @param _code the text with 13 digits
-     * @return the barcode
-     */    
+    
+     * @return the barcode */    
     public static byte[] getBarsEAN13(String _code) {
         int code[] = new int[_code.length()];
         for (int k = 0; k < code.length; ++k)
@@ -281,8 +282,8 @@ public class BarcodeEAN extends Barcode{
     
     /** Creates the bars for the barcode EAN8.
      * @param _code the text with 8 digits
-     * @return the barcode
-     */    
+    
+     * @return the barcode */    
     public static byte[] getBarsEAN8(String _code) {
         int code[] = new int[_code.length()];
         for (int k = 0; k < code.length; ++k)
@@ -321,8 +322,8 @@ public class BarcodeEAN extends Barcode{
     
     /** Creates the bars for the barcode UPCE.
      * @param _code the text with 8 digits
-     * @return the barcode
-     */    
+    
+     * @return the barcode */    
     public static byte[] getBarsUPCE(String _code) {
         int code[] = new int[_code.length()];
         for (int k = 0; k < code.length; ++k)
@@ -361,8 +362,8 @@ public class BarcodeEAN extends Barcode{
 
     /** Creates the bars for the barcode supplemental 2.
      * @param _code the text with 2 digits
-     * @return the barcode
-     */    
+    
+     * @return the barcode */    
     public static byte[] getBarsSupplemental2(String _code) {
         int code[] = new int[2];
         for (int k = 0; k < code.length; ++k)
@@ -399,8 +400,8 @@ public class BarcodeEAN extends Barcode{
 
     /** Creates the bars for the barcode supplemental 5.
      * @param _code the text with 5 digits
-     * @return the barcode
-     */    
+    
+     * @return the barcode */    
     public static byte[] getBarsSupplemental5(String _code) {
         int code[] = new int[5];
         for (int k = 0; k < code.length; ++k)
@@ -437,8 +438,8 @@ public class BarcodeEAN extends Barcode{
     
     /** Gets the maximum area that the barcode and the text, if
      * any, will occupy. The lower left corner is always (0, 0).
-     * @return the size the barcode occupies.
-     */    
+    
+     * @return the size the barcode occupies. */    
     public Rectangle getBarcodeSize() {
         float width = 0;
         float height = barHeight;
@@ -516,8 +517,8 @@ public class BarcodeEAN extends Barcode{
      * @param cb the <CODE>PdfContentByte</CODE> where the barcode will be placed
      * @param barColor the color of the bars. It can be <CODE>null</CODE>
      * @param textColor the color of the text. It can be <CODE>null</CODE>
-     * @return the dimensions the barcode occupies
-     */    
+    
+     * @return the dimensions the barcode occupies */    
     public Rectangle placeBarcode(PdfContentByte cb, Color barColor, Color textColor) {
         Rectangle rect = getBarcodeSize();
         float barStartX = 0;
@@ -657,8 +658,8 @@ public class BarcodeEAN extends Barcode{
      * contains the bars without any text.
      * @param foreground the color of the bars
      * @param background the color of the background
-     * @return the image
-     */    
+    
+     * @return the image */    
     public java.awt.Image createAwtImage(Color foreground, Color background) {
         int f = foreground.getRGB();
         int g = background.getRGB();

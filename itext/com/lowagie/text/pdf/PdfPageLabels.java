@@ -57,6 +57,7 @@ import java.util.Iterator;
 /** Page labels are used to identify each
  * page visually on the screen or in print.
  * @author  Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PdfPageLabels implements Comparator {
 
@@ -99,8 +100,8 @@ public class PdfPageLabels implements Comparator {
     /** Compares two <CODE>Integer</CODE>.
      * @param obj the first <CODE>Integer</CODE>
      * @param obj1 the second <CODE>Integer</CODE>
-     * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second
-     */    
+    
+     * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second */    
     public int compare(Object obj, Object obj1) {
         int v1 = ((Integer)obj).intValue();
         int v2 = ((Integer)obj1).intValue();
@@ -113,7 +114,8 @@ public class PdfPageLabels implements Comparator {
     
     /** Not used
      * @param obj not used
-     * @return always <CODE>true</CODE>
+    
+     * @return always <CODE>true</CODE> * @see java.util.Comparator#equals(Object)
      */    
     public boolean equals(Object obj) {
         return true;
@@ -165,8 +167,8 @@ public class PdfPageLabels implements Comparator {
     }
 
     /** Gets the page label dictionary to insert into the document.
-     * @return the page label dictionary
-     */    
+    
+     * @return the page label dictionary */    
     PdfDictionary getDictionary() {
         PdfDictionary dic = new PdfDictionary();
         PdfArray array = new PdfArray();

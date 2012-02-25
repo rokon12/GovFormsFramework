@@ -72,6 +72,8 @@ import com.lowagie.tools.arguments.ToolArgument;
 
 /**
  * Converts a Tiff file to a PDF file.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class Tiff2Pdf extends AbstractTool {
 	

@@ -26,6 +26,7 @@ import bd.gov.forms.domain.ListData;
 import bd.gov.forms.domain.User;
 import bd.gov.forms.utils.ContentType;
 import bd.gov.forms.utils.FormUtil;
+import bd.gov.forms.utils.ListUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -71,6 +72,7 @@ import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 /**
  * @author asif
+ * @version $Revision: 1.0 $
  */
 @Controller
 @RequestMapping("/formBuilder")
@@ -88,6 +90,15 @@ public class FormBuilder {
 	@Autowired
 	private DocumentDao documentDao;
 
+	/**
+	 * Method initBinder.
+	 * 
+	 * @param request
+	 *            HttpServletRequest
+	 * @param binder
+	 *            ServletRequestDataBinder
+	 * @throws ServletException
+	 */
 	@InitBinder
 	protected void initBinder(HttpServletRequest request,
 			ServletRequestDataBinder binder) throws ServletException {
@@ -95,6 +106,15 @@ public class FormBuilder {
 				new ByteArrayMultipartFileEditor());
 	}
 
+	/**
+	 * Method newForm.
+	 * 
+	 * @param model
+	 *            ModelMap
+	 * @param request
+	 *            HttpServletRequest
+	 * @return String
+	 */
 	@RequestMapping(value = "/newForm", method = RequestMethod.GET)
 	public String newForm(ModelMap model, HttpServletRequest request) {
 		String access = UserAccessChecker.check(request);
@@ -108,6 +128,19 @@ public class FormBuilder {
 		return "forms/formDetails";
 	}
 
+	/**
+	 * Method saveForm.
+	 * 
+	 * @param form
+	 *            Form
+	 * @param result
+	 *            BindingResult
+	 * @param request
+	 *            HttpServletRequest
+	 * @param model
+	 *            ModelMap
+	 * @return String
+	 */
 	@RequestMapping(value = "/saveForm", method = RequestMethod.POST)
 	public String saveForm(@ModelAttribute("formDetailsCmd") Form form,
 			BindingResult result, HttpServletRequest request, ModelMap model) {
@@ -137,6 +170,17 @@ public class FormBuilder {
 		return "redirect:formList.htm";
 	}
 
+	/**
+	 * Method editForm.
+	 * 
+	 * @param formId
+	 *            String
+	 * @param model
+	 *            ModelMap
+	 * @param request
+	 *            HttpServletRequest
+	 * @return String
+	 */
 	@RequestMapping(value = "/editForm", method = RequestMethod.GET)
 	public String editForm(
 			@RequestParam(value = "formId", required = true) String formId,
@@ -170,6 +214,19 @@ public class FormBuilder {
 		return "forms/formDetails";
 	}
 
+	/**
+	 * Method updateForm.
+	 * 
+	 * @param form
+	 *            Form
+	 * @param result
+	 *            BindingResult
+	 * @param request
+	 *            HttpServletRequest
+	 * @param model
+	 *            ModelMap
+	 * @return String
+	 */
 	@RequestMapping(value = "/updateForm", method = RequestMethod.POST)
 	public String updateForm(@ModelAttribute("formDetailsCmd") Form form,
 			BindingResult result, HttpServletRequest request, ModelMap model) {
@@ -192,6 +249,17 @@ public class FormBuilder {
 		return "redirect:formList.htm";
 	}
 
+	/**
+	 * Method pdfTemplate.
+	 * 
+	 * @param formId
+	 *            String
+	 * @param model
+	 *            ModelMap
+	 * @param response
+	 *            HttpServletResponse
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/dloadTemplate", method = RequestMethod.GET)
 	public void pdfTemplate(
 			@RequestParam(value = "formId", required = true) String formId,
@@ -210,6 +278,17 @@ public class FormBuilder {
 		os.flush();
 	}
 
+	/**
+	 * Method logo.
+	 * 
+	 * @param formId
+	 *            String
+	 * @param model
+	 *            ModelMap
+	 * @param response
+	 *            HttpServletResponse
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/dloadLogo", method = RequestMethod.GET)
 	public void logo(
 			@RequestParam(value = "formId", required = true) String formId,
@@ -225,6 +304,18 @@ public class FormBuilder {
 		os.flush();
 	}
 
+	/**
+	 * Method removeTemplate.
+	 * 
+	 * @param formId
+	 *            String
+	 * @param model
+	 *            ModelMap
+	 * @param response
+	 *            HttpServletResponse
+	 * @return String
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/removeTemplate", method = RequestMethod.GET)
 	public String removeTemplate(
 			@RequestParam(value = "formId", required = true) String formId,
@@ -233,6 +324,18 @@ public class FormBuilder {
 		return "redirect:editForm.htm?formId=" + formId;
 	}
 
+	/**
+	 * Method removeLogo.
+	 * 
+	 * @param formId
+	 *            String
+	 * @param model
+	 *            ModelMap
+	 * @param response
+	 *            HttpServletResponse
+	 * @return String
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/removeLogo", method = RequestMethod.GET)
 	public String removeLogo(
 			@RequestParam(value = "formId", required = true) String formId,
@@ -241,6 +344,32 @@ public class FormBuilder {
 		return "redirect:editForm.htm?formId=" + formId;
 	}
 
+	/**
+	 * Method markChecked.
+	 * 
+	 * @param formId
+	 *            String
+	 * @param entryId
+	 *            String
+	 * @param page
+	 *            Integer
+	 * @param colName
+	 *            String
+	 * @param colVal
+	 *            String
+	 * @param sortCol
+	 *            String
+	 * @param sortDir
+	 *            String
+	 * @param checked
+	 *            boolean
+	 * @param model
+	 *            ModelMap
+	 * @param request
+	 *            HttpServletRequest
+	 * @return String
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/markChecked", method = RequestMethod.GET)
 	public String markChecked(
 			@RequestParam(value = "formId", required = true) String formId,
@@ -270,6 +399,13 @@ public class FormBuilder {
 				+ FormUtil.formatValue(sortDir);
 	}
 
+	/**
+	 * Method getEntryListHeaders.
+	 * 
+	 * @param form
+	 *            Form
+	 * @return List
+	 */
 	public List getEntryListHeaders(Form form) {
 		List list = new ArrayList();
 
@@ -283,6 +419,30 @@ public class FormBuilder {
 		return list;
 	}
 
+	/**
+	 * Method excelExport.
+	 * 
+	 * @param formId
+	 *            String
+	 * @param page
+	 *            Integer
+	 * @param colName
+	 *            String
+	 * @param colVal
+	 *            String
+	 * @param sortCol
+	 *            String
+	 * @param sortDir
+	 *            String
+	 * @param model
+	 *            ModelMap
+	 * @param response
+	 *            HttpServletResponse
+	 * @param request
+	 *            HttpServletRequest
+	 * @return String
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/excelExport", method = RequestMethod.GET)
 	public String excelExport(
 			@RequestParam(value = "formId", required = true) String formId,
@@ -354,6 +514,20 @@ public class FormBuilder {
 		return null;
 	}
 
+	/**
+	 * Method printHtml.
+	 * 
+	 * @param formId
+	 *            String
+	 * @param entryId
+	 *            String
+	 * @param model
+	 *            ModelMap
+	 * @param response
+	 *            HttpServletResponse
+	 * @return String
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/printHtml", method = RequestMethod.GET)
 	public String printHtml(
 			@RequestParam(value = "formId", required = true) String formId,
@@ -404,12 +578,31 @@ public class FormBuilder {
 		return "reports/formReport";
 	}
 
+	/**
+	 * Method fieldTypeIsNotOfFileOrNoteOrSection.
+	 * 
+	 * @param field
+	 *            Field
+	 * @return boolean
+	 */
 	private boolean fieldTypeIsNotOfFileOrNoteOrSection(Field field) {
 		return !"file".equals(field.getType())
 				&& !"note".equals(field.getType())
 				&& !"section".equals(field.getType());
 	}
 
+	/**
+	 * Method activate.
+	 * 
+	 * @param formId
+	 *            String
+	 * @param model
+	 *            ModelMap
+	 * @param request
+	 *            HttpServletRequest
+	 * @return String
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/activate", method = RequestMethod.GET)
 	public String activate(
 			@RequestParam(value = "formId", required = true) String formId,
@@ -433,6 +626,18 @@ public class FormBuilder {
 		return "redirect:formList.htm";
 	}
 
+	/**
+	 * Method deactivate.
+	 * 
+	 * @param formId
+	 *            String
+	 * @param model
+	 *            ModelMap
+	 * @param request
+	 *            HttpServletRequest
+	 * @return String
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/deactivate", method = RequestMethod.GET)
 	public String deactivate(
 			@RequestParam(value = "formId", required = true) String formId,
@@ -448,6 +653,18 @@ public class FormBuilder {
 		return "redirect:formList.htm";
 	}
 
+	/**
+	 * Method deleteForm.
+	 * 
+	 * @param formId
+	 *            String
+	 * @param model
+	 *            ModelMap
+	 * @param request
+	 *            HttpServletRequest
+	 * @return String
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/deleteForm", method = RequestMethod.GET)
 	public String deleteForm(
 			@RequestParam(value = "formId", required = true) String formId,
@@ -463,6 +680,20 @@ public class FormBuilder {
 		return "redirect:formList.htm";
 	}
 
+	/**
+	 * Method deleteField.
+	 * 
+	 * @param fieldId
+	 *            String
+	 * @param formId
+	 *            String
+	 * @param model
+	 *            ModelMap
+	 * @param request
+	 *            HttpServletRequest
+	 * @return String
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/deleteField", method = RequestMethod.GET)
 	public String deleteField(
 			@RequestParam(value = "fieldId", required = true) String fieldId,
@@ -491,6 +722,22 @@ public class FormBuilder {
 		return "redirect:design.htm?formId=" + formId;
 	}
 
+	/**
+	 * Method moveField.
+	 * 
+	 * @param fieldId
+	 *            String
+	 * @param formId
+	 *            String
+	 * @param order
+	 *            int
+	 * @param model
+	 *            ModelMap
+	 * @param request
+	 *            HttpServletRequest
+	 * @return String
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/moveField", method = RequestMethod.GET)
 	public String moveField(
 			@RequestParam(value = "fieldId", required = true) String fieldId,
@@ -513,6 +760,22 @@ public class FormBuilder {
 		return "redirect:design.htm?formId=" + formId;
 	}
 
+	/**
+	 * Method newField.
+	 * 
+	 * @param formId
+	 *            String
+	 * @param type
+	 *            String
+	 * @param order
+	 *            int
+	 * @param model
+	 *            ModelMap
+	 * @param request
+	 *            HttpServletRequest
+	 * @return String
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/newField", method = RequestMethod.GET)
 	public String newField(
 			@RequestParam(value = "formId", required = true) String formId,
@@ -545,6 +808,19 @@ public class FormBuilder {
 		return "forms/field";
 	}
 
+	/**
+	 * Method saveField.
+	 * 
+	 * @param field
+	 *            Field
+	 * @param result
+	 *            BindingResult
+	 * @param request
+	 *            HttpServletRequest
+	 * @param model
+	 *            ModelMap
+	 * @return String
+	 */
 	@RequestMapping(value = "/saveField", method = RequestMethod.POST)
 	public String saveField(@ModelAttribute("fieldCmd") Field field,
 			BindingResult result, HttpServletRequest request, ModelMap model) {
@@ -572,6 +848,19 @@ public class FormBuilder {
 		return "redirect:design.htm?formId=" + field.getFormIdStr();
 	}
 
+	/**
+	 * Method editField.
+	 * 
+	 * @param formId
+	 *            String
+	 * @param fieldId
+	 *            String
+	 * @param model
+	 *            ModelMap
+	 * @param request
+	 *            HttpServletRequest
+	 * @return String
+	 */
 	@RequestMapping(value = "/editField", method = RequestMethod.GET)
 	public String editField(
 			@RequestParam(value = "formId", required = true) String formId,
@@ -599,6 +888,19 @@ public class FormBuilder {
 		return "forms/field";
 	}
 
+	/**
+	 * Method updateField.
+	 * 
+	 * @param field
+	 *            Field
+	 * @param result
+	 *            BindingResult
+	 * @param request
+	 *            HttpServletRequest
+	 * @param model
+	 *            ModelMap
+	 * @return String
+	 */
 	@RequestMapping(value = "/updateField", method = RequestMethod.POST)
 	public String updateField(@ModelAttribute("fieldCmd") Field field,
 			BindingResult result, HttpServletRequest request, ModelMap model) {
@@ -622,6 +924,18 @@ public class FormBuilder {
 		return "redirect:design.htm?formId=" + field.getFormIdStr();
 	}
 
+	/**
+	 * Method formList.
+	 * 
+	 * @param page
+	 *            Integer
+	 * @param model
+	 *            ModelMap
+	 * @param request
+	 *            HttpServletRequest
+	 * @return String
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/formList", method = RequestMethod.GET)
 	public String formList(
 			@RequestParam(value = "page", required = false) Integer page,
@@ -642,6 +956,18 @@ public class FormBuilder {
 		return "forms/formList";
 	}
 
+	/**
+	 * Method formInfo.
+	 * 
+	 * @param formId
+	 *            String
+	 * @param model
+	 *            ModelMap
+	 * @param response
+	 *            HttpServletResponse
+	 * @return String
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/formInfo", method = RequestMethod.GET)
 	public String formInfo(
 			@RequestParam(value = "formId", required = true) String formId,
@@ -653,6 +979,18 @@ public class FormBuilder {
 		return "forms/formInfo";
 	}
 
+	/**
+	 * Method design.
+	 * 
+	 * @param formId
+	 *            String
+	 * @param model
+	 *            ModelMap
+	 * @param request
+	 *            HttpServletRequest
+	 * @return String
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/design", method = RequestMethod.GET)
 	public String design(
 			@RequestParam(value = "formId", required = true) String formId,
@@ -685,6 +1023,19 @@ public class FormBuilder {
 		return "forms/form";
 	}
 
+	/**
+	 * Method formDesign.
+	 * 
+	 * @param form
+	 *            Form
+	 * @param result
+	 *            BindingResult
+	 * @param request
+	 *            HttpServletRequest
+	 * @param model
+	 *            ModelMap
+	 * @return String
+	 */
 	@RequestMapping(value = "/formDesign", method = RequestMethod.POST)
 	public String formDesign(@ModelAttribute("fieldCmd") Form form,
 			BindingResult result, HttpServletRequest request, ModelMap model) {
@@ -695,6 +1046,16 @@ public class FormBuilder {
 		return "redirect:design.htm?formId=" + form.getFormId();
 	}
 
+	/**
+	 * Method newEntry.
+	 * 
+	 * @param formId
+	 *            String
+	 * @param model
+	 *            ModelMap
+	 * @return String
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/newEntry", method = RequestMethod.GET)
 	public String newEntry(
 			@RequestParam(value = "formId", required = true) String formId,
@@ -722,6 +1083,19 @@ public class FormBuilder {
 		return "forms/form";
 	}
 
+	/**
+	 * Method saveEntry.
+	 * 
+	 * @param formCmd
+	 *            Form
+	 * @param result
+	 *            BindingResult
+	 * @param request
+	 *            HttpServletRequest
+	 * @param model
+	 *            ModelMap
+	 * @return String
+	 */
 	@RequestMapping(value = "/saveEntry", method = RequestMethod.POST)
 	public String saveEntry(@ModelAttribute("formCmd") Form formCmd,
 			BindingResult result, HttpServletRequest request, ModelMap model) {
@@ -763,6 +1137,20 @@ public class FormBuilder {
 		return "redirect:done.htm";
 	}
 
+	/**
+	 * Method done.
+	 * 
+	 * @param message
+	 *            String
+	 * @param msgType
+	 *            String
+	 * @param trackId
+	 *            String
+	 * @param model
+	 *            ModelMap
+	 * @return String
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/done", method = RequestMethod.GET)
 	public String done(
 			@RequestParam(value = "doneMessage", required = true) String message,
@@ -777,6 +1165,14 @@ public class FormBuilder {
 		return "forms/done";
 	}
 
+	/**
+	 * Method index.
+	 * 
+	 * @param model
+	 *            ModelMap
+	 * @return String
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index(ModelMap model) throws Exception {
 		List list = formDao.getPublicForms();
@@ -785,6 +1181,28 @@ public class FormBuilder {
 		return "index";
 	}
 
+	/**
+	 * Method entryList.
+	 * 
+	 * @param page
+	 *            Integer
+	 * @param formId
+	 *            String
+	 * @param colName
+	 *            String
+	 * @param colVal
+	 *            String
+	 * @param sortCol
+	 *            String
+	 * @param sortDir
+	 *            String
+	 * @param model
+	 *            ModelMap
+	 * @param request
+	 *            HttpServletRequest
+	 * @return String
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/entryList", method = RequestMethod.GET)
 	public String entryList(
 			@RequestParam(value = "page", required = false) Integer page,
@@ -846,6 +1264,13 @@ public class FormBuilder {
 		return "forms/entryList";
 	}
 
+	/**
+	 * Method initForm.
+	 * 
+	 * @param form
+	 *            Form
+	 * @throws Exception
+	 */
 	private void initForm(Form form) throws Exception {
 		for (Field field : form.getFields()) {
 			String css = "";
@@ -860,12 +1285,17 @@ public class FormBuilder {
 			if (field.getListDataId() != 0) {
 				String sysId = listDao.getListDataSysId(field.getListDataId());
 				ListData lst = listDao.getListData(sysId);
-				List list = lst.getList(field.getType());
+				List list = ListUtil.getList(field.getType(), lst);
 				field.setList(list);
 			}
 		}
 	}
 
+	/**
+	 * Method getInputType.
+	 * 
+	 * @return Map
+	 */
 	@ModelAttribute("inputType")
 	public Map getInputType() {
 		Map fieldType = new HashMap();
@@ -878,6 +1308,15 @@ public class FormBuilder {
 		return fieldType;
 	}
 
+	/**
+	 * Method getYesNoOption.
+	 * 
+	 * @param request
+	 *            HttpServletRequest
+	 * @param locale
+	 *            Locale
+	 * @return Map
+	 */
 	@ModelAttribute("yesNoOption")
 	public Map getYesNoOption(HttpServletRequest request, Locale locale) {
 		Map options = new HashMap();
@@ -888,6 +1327,11 @@ public class FormBuilder {
 		return options;
 	}
 
+	/**
+	 * Method getListSrc.
+	 * 
+	 * @return Map
+	 */
 	@ModelAttribute("listSrc")
 	public Map getListSrc() {
 		Map map = new LinkedHashMap();
@@ -900,6 +1344,12 @@ public class FormBuilder {
 		return map;
 	}
 
+	/**
+	 * Method downloadForm.
+	 * 
+	 * @param formId
+	 *            String
+	 */
 	@RequestMapping(value = "/downloadForm", method = RequestMethod.GET)
 	public void downloadForm(
 			@RequestParam(value = "formId", required = true) String formId) {
@@ -911,8 +1361,13 @@ public class FormBuilder {
 	}
 
 	/**
-	 * @author Rokonoid added for testing purpose
-	 * **/
+	 * 
+	 * * @param model ModelMap
+	 * 
+	 * @param request
+	 *            HttpServletRequest
+	 * @return String
+	 **/
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
 	public String sayHello(ModelMap model, HttpServletRequest request) {
 
@@ -926,6 +1381,17 @@ public class FormBuilder {
 		return "doc/form";
 	}
 
+	/**
+	 * Method addDocument.
+	 * 
+	 * @param document
+	 *            Document
+	 * @param file
+	 *            MultipartFile
+	 * @param request
+	 *            HttpServletRequest
+	 * @return String
+	 */
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String addDocument(@ModelAttribute("document") Document document,
 			@RequestParam("file") MultipartFile file, HttpServletRequest request) {
@@ -951,6 +1417,15 @@ public class FormBuilder {
 		return "redirect:list.htm";
 	}
 
+	/**
+	 * Method listOfDoc.
+	 * 
+	 * @param model
+	 *            ModelMap
+	 * @param request
+	 *            HttpServletRequest
+	 * @return String
+	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String listOfDoc(ModelMap model, HttpServletRequest request) {
 		String access = UserAccessChecker.check(request);
@@ -964,6 +1439,17 @@ public class FormBuilder {
 		return "doc/list";
 	}
 
+	/**
+	 * Method download.
+	 * 
+	 * @param documentId
+	 *            Integer
+	 * @param response
+	 *            HttpServletResponse
+	 * @param request
+	 *            HttpServletRequest
+	 * @return String
+	 */
 	@RequestMapping(value = "/download/{documentId}")
 	public String download(@PathVariable("documentId") Integer documentId,
 			HttpServletResponse response, HttpServletRequest request) {
@@ -995,6 +1481,13 @@ public class FormBuilder {
 		return null;
 	}
 
+	/**
+	 * Method remove.
+	 * 
+	 * @param documentId
+	 *            Integer
+	 * @return String
+	 */
 	@RequestMapping(value = "/remove/{documentId}")
 	public String remove(@PathVariable("documentId") Integer documentId) {
 		documentDao.delete(documentId);
@@ -1004,7 +1497,10 @@ public class FormBuilder {
 	/**
 	 * Restful web service
 	 * 
-	 * */
+	 * * @param id String
+	 * 
+	 * @return Form
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/entry/{id}", headers = "Accept=application/json")
 	public @ResponseBody
 	Form entryListWebservice(@PathVariable("id") String id) {
@@ -1018,6 +1514,18 @@ public class FormBuilder {
 		return form;
 	}
 
+	/**
+	 * Method printPdf.
+	 * 
+	 * @param formId
+	 *            String
+	 * @param entryId
+	 *            String
+	 * @param request
+	 *            HttpServletRequest
+	 * @param response
+	 *            HttpServletResponse
+	 */
 	@RequestMapping(value = "printPdf", method = RequestMethod.GET)
 	public void printPdf(
 			@RequestParam(value = "formId", required = true) String formId,
@@ -1082,6 +1590,21 @@ public class FormBuilder {
 		}
 	}
 
+	/**
+	 * Method downloadAttachemnt.
+	 * 
+	 * @param entryId
+	 *            String
+	 * @param columName
+	 *            String
+	 * @param tableName
+	 *            String
+	 * @param response
+	 *            HttpServletResponse
+	 * @param request
+	 *            HttpServletRequest
+	 * @return String
+	 */
 	@RequestMapping(value = "downloadAttachment", method = RequestMethod.GET)
 	public String downloadAttachemnt(
 			@RequestParam(value = "entryId", required = true) String entryId,

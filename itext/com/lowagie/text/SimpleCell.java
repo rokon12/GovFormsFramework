@@ -60,6 +60,8 @@ import com.lowagie.text.pdf.PdfPTable;
 /**
  * Rectangle that can be used for Cells.
  * This Rectangle is padded and knows how to draw itself in a PdfPTable or PdfPcellEvent.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, TextElementArray {
 
@@ -125,8 +127,8 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, Tex
 	/**
 	 * Adds content to this object.
 	 * @param element
-	 * @throws BadElementException
-	 */
+	
+	 * @throws BadElementException */
 	public void addElement(Element element) throws BadElementException {
 		if (cellgroup) {
 			if (element instanceof SimpleCell) {
@@ -158,9 +160,9 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, Tex
 	/**
 	 * Creates a Cell with these attributes.
 	 * @param rowAttributes
-	 * @return a cell based on these attributes.
-	 * @throws BadElementException
-	 */
+	
+	
+	 * @return a cell based on these attributes. * @throws BadElementException */
 	public Cell createCell(SimpleCell rowAttributes) throws BadElementException {
 		Cell cell = new Cell();
 		cell.cloneNonPositionParameters(rowAttributes);
@@ -182,8 +184,8 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, Tex
 	/**
 	 * Creates a PdfPCell with these attributes.
 	 * @param rowAttributes
-	 * @return a PdfPCell based on these attributes.
-	 */
+	
+	 * @return a PdfPCell based on these attributes. */
 	public PdfPCell createPdfPCell(SimpleCell rowAttributes) {
 		PdfPCell cell = new PdfPCell();
 		cell.setBorder(NO_BORDER);
@@ -243,8 +245,8 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, Tex
 	/**
 	 * @param rectangle
 	 * @param spacing
-	 * @return a rectangle
-	 */
+	
+	 * @return a rectangle */
 	public static SimpleCell getDimensionlessInstance(Rectangle rectangle, float spacing) {
 		SimpleCell event = new SimpleCell(CELL);
 		event.cloneNonPositionParameters(rectangle);
@@ -272,7 +274,8 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, Tex
 	}
 	
 	/** Sets the padding parameters if they are undefined. 
-	 * @param padding*/
+	* @param padding float
+	g*/
 	public void setPadding(float padding) {
 		if (Float.isNaN(padding_right)) {
 			setPadding_right(padding);
@@ -289,8 +292,8 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, Tex
 	}
 	
 	/**
-	 * @return Returns the colspan.
-	 */
+	
+	 * @return Returns the colspan. */
 	public int getColspan() {
 		return colspan;
 	}
@@ -301,8 +304,8 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, Tex
 		if (colspan > 0) this.colspan = colspan;
 	}
 	/**
-	 * @return Returns the padding_bottom.
-	 */
+	
+	 * @return Returns the padding_bottom. */
 	public float getPadding_bottom() {
 		return padding_bottom;
 	}
@@ -313,8 +316,8 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, Tex
 		this.padding_bottom = padding_bottom;
 	}
 	/**
-	 * @return Returns the padding_left.
-	 */
+	
+	 * @return Returns the padding_left. */
 	public float getPadding_left() {
 		return padding_left;
 	}
@@ -325,8 +328,8 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, Tex
 		this.padding_left = padding_left;
 	}
 	/**
-	 * @return Returns the padding_right.
-	 */
+	
+	 * @return Returns the padding_right. */
 	public float getPadding_right() {
 		return padding_right;
 	}
@@ -337,8 +340,8 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, Tex
 		this.padding_right = padding_right;
 	}
 	/**
-	 * @return Returns the padding_top.
-	 */
+	
+	 * @return Returns the padding_top. */
 	public float getPadding_top() {
 		return padding_top;
 	}
@@ -349,26 +352,26 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, Tex
 		this.padding_top = padding_top;
 	}
 	/**
-	 * @return Returns the spacing.
-	 */
+	
+	 * @return Returns the spacing. */
 	public float getSpacing_left() {
 		return spacing_left;
 	}
 	/**
-	 * @return Returns the spacing.
-	 */
+	
+	 * @return Returns the spacing. */
 	public float getSpacing_right() {
 		return spacing_right;
 	}
 	/**
-	 * @return Returns the spacing.
-	 */
+	
+	 * @return Returns the spacing. */
 	public float getSpacing_top() {
 		return spacing_top;
 	}
 	/**
-	 * @return Returns the spacing.
-	 */
+	
+	 * @return Returns the spacing. */
 	public float getSpacing_bottom() {
 		return spacing_bottom;
 	}
@@ -412,8 +415,8 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, Tex
 	}
 	
 	/**
-	 * @return Returns the cellgroup.
-	 */
+	
+	 * @return Returns the cellgroup. */
 	public boolean isCellgroup() {
 		return cellgroup;
 	}
@@ -424,8 +427,8 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, Tex
 		this.cellgroup = cellgroup;
 	}
 	/**
-	 * @return Returns the horizontal alignment.
-	 */
+	
+	 * @return Returns the horizontal alignment. */
 	public int getHorizontalAlignment() {
 		return horizontalAlignment;
 	}
@@ -436,8 +439,8 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, Tex
 		this.horizontalAlignment = horizontalAlignment;
 	}
 	/**
-	 * @return Returns the vertical alignment.
-	 */
+	
+	 * @return Returns the vertical alignment. */
 	public int getVerticalAlignment() {
 		return verticalAlignment;
 	}
@@ -448,8 +451,8 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, Tex
 		this.verticalAlignment = verticalAlignment;
 	}
 	/**
-	 * @return Returns the width.
-	 */
+	
+	 * @return Returns the width. */
 	public float getWidth() {
 		return width;
 	}
@@ -460,8 +463,8 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, Tex
 		this.width = width;
 	}
 	/**
-	 * @return Returns the widthpercentage.
-	 */
+	
+	 * @return Returns the widthpercentage. */
 	public float getWidthpercentage() {
 		return widthpercentage;
 	}
@@ -472,8 +475,8 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, Tex
 		this.widthpercentage = widthpercentage;
 	}
 	/**
-	 * @return Returns the useAscender.
-	 */
+	
+	 * @return Returns the useAscender. */
 	public boolean isUseAscender() {
 		return useAscender;
 	}
@@ -484,8 +487,8 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, Tex
 		this.useAscender = useAscender;
 	}
 	/**
-	 * @return Returns the useBorderPadding.
-	 */
+	
+	 * @return Returns the useBorderPadding. */
 	public boolean isUseBorderPadding() {
 		return useBorderPadding;
 	}
@@ -496,8 +499,8 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, Tex
 		this.useBorderPadding = useBorderPadding;
 	}
 	/**
-	 * @return Returns the useDescender.
-	 */
+	
+	 * @return Returns the useDescender. */
 	public boolean isUseDescender() {
 		return useDescender;
 	}
@@ -509,8 +512,8 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, Element, Tex
 	}
 	
 	/**
-	 * @return Returns the content.
-	 */
+	
+	 * @return Returns the content. */
 	ArrayList getContent() {
 		return content;
 	}

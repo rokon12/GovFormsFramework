@@ -61,6 +61,8 @@ package com.lowagie.text;
  *
  * @see		Element
  * @see		Meta
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class Header extends Meta implements Element {
@@ -89,8 +91,8 @@ public class Header extends Meta implements Element {
 /**
  * Returns the name of the meta information.
  *
- * @return	a <CODE>String</CODE>
- */
+
+ * @return	a <CODE>String</CODE> */
     
     public String name() {
         return name.toString();

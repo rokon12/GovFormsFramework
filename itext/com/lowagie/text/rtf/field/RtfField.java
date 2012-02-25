@@ -174,6 +174,7 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
      * Sets the RtfDocument this RtfElement belongs to
      * 
      * @param doc The RtfDocument to use
+     * @see com.lowagie.text.rtf.RtfBasicElement#setRtfDocument(RtfDocument)
      */
     public void setRtfDocument(RtfDocument doc) {
         this.document = doc;
@@ -183,9 +184,9 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
     /**
      * Writes the field beginning. Also writes field properties.
      * 
-     * @return A byte array with the field beginning.
-     * @throws IOException
-     */
+    
+    
+     * @return A byte array with the field beginning. * @throws IOException */
     private byte[] writeFieldBegin() throws IOException {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
 
@@ -211,9 +212,9 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
     /**
      * Writes the beginning of the field instruction area.
      * 
-     * @return The beginning of the field instruction area
-     * @throws IOException
-     */
+    
+    
+     * @return The beginning of the field instruction area * @throws IOException */
     private byte[] writeFieldInstBegin() throws IOException {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
         
@@ -228,17 +229,17 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
      * Writes the content of the field instruction area. Override this
      * method in your subclasses.
      * 
-     * @return The content of the field instruction area
-     * @throws IOException If an error occurs.
-     */
+    
+    
+     * @return The content of the field instruction area * @throws IOException If an error occurs. */
     protected abstract byte[] writeFieldInstContent() throws IOException;
     
     /**
      * Writes the end of the field instruction area.
      * 
-     * @return A byte array containing the end of the field instruction area
-     * @throws IOException
-     */
+    
+    
+     * @return A byte array containing the end of the field instruction area * @throws IOException */
     private byte[] writeFieldInstEnd() throws IOException {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
 
@@ -254,9 +255,9 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
     /**
      * Writes the beginning of the field result area
      * 
-     * @return A byte array containing the beginning of the field result area
-     * @throws IOException
-     */
+    
+    
+     * @return A byte array containing the beginning of the field result area * @throws IOException */
     private byte[] writeFieldResultBegin() throws IOException {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
         
@@ -271,17 +272,17 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
      * Writes the content of the pre-calculated field result. Override this
      * method in your subclasses.
      * 
-     * @return A byte array containing the field result
-     * @throws IOException If an error occurs
-     */
+    
+    
+     * @return A byte array containing the field result * @throws IOException If an error occurs */
     protected abstract byte[] writeFieldResultContent() throws IOException;
     
     /**
      * Writes the end of the field result area
      * 
-     * @return A byte array containing the end of the field result area
-     * @throws IOException
-     */
+    
+    
+     * @return A byte array containing the end of the field result area * @throws IOException */
     private byte[] writeFieldResultEnd() throws IOException {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
         
@@ -294,9 +295,9 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
     /**
      * Writes the end of the field
      * 
-     * @return A byte array containing the end of the field
-     * @throws IOException
-     */
+    
+    
+     * @return A byte array containing the end of the field * @throws IOException */
     private byte[] writeFieldEnd() throws IOException {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
         
@@ -308,7 +309,8 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
     /**
      * Write the content of this RtfField.
      * 
-     * @return A byte array containing the content of this RtfField
+    
+     * @return A byte array containing the content of this RtfField * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -332,8 +334,8 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
     /**
      * Get whether this field is an alt field
      * 
-     * @return Returns whether this field is an alt field
-     */
+    
+     * @return Returns whether this field is an alt field */
     public boolean isFieldAlt() {
         return fieldAlt;
     }
@@ -350,8 +352,8 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
     /**
      * Get whether this field is dirty
      * 
-     * @return Returns whether this field is dirty
-     */
+    
+     * @return Returns whether this field is dirty */
     public boolean isFieldDirty() {
         return fieldDirty;
     }
@@ -368,8 +370,8 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
     /**
      * Get whether this field is edited
      * 
-     * @return Returns whether this field is edited
-     */
+    
+     * @return Returns whether this field is edited */
     public boolean isFieldEdit() {
         return fieldEdit;
     }
@@ -386,8 +388,8 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
     /**
      * Get whether this field is locked
      * 
-     * @return Returns the fieldLocked.
-     */
+    
+     * @return Returns the fieldLocked. */
     public boolean isFieldLocked() {
         return fieldLocked;
     }
@@ -403,8 +405,8 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
     /**
      * Get whether this field is private
      * 
-     * @return Returns the fieldPrivate.
-     */
+    
+     * @return Returns the fieldPrivate. */
     public boolean isFieldPrivate() {
         return fieldPrivate;
     }
@@ -422,6 +424,7 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
      * Sets whether this RtfField is in a table
      * 
      * @param inTable <code>True</code> if this RtfField is in a table, <code>false</code> otherwise
+     * @see com.lowagie.text.rtf.RtfBasicElement#setInTable(boolean)
      */
     public void setInTable(boolean inTable) {
         this.inTable = inTable;
@@ -431,6 +434,7 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
      * Sets whether this RtfField is in a header
      * 
      * @param inHeader <code>True</code> if this RtfField is in a header, <code>false</code> otherwise
+     * @see com.lowagie.text.rtf.RtfBasicElement#setInHeader(boolean)
      */
     public void setInHeader(boolean inHeader) {
         this.inHeader = inHeader;
@@ -438,6 +442,7 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
     
     /**
      * An RtfField is never empty.
+     * @return boolean
      */
     public boolean isEmpty() {
         return false;

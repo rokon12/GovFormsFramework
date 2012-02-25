@@ -38,7 +38,8 @@ public class RtfNewPage extends RtfElement {
     /**
      * Writes a new page
      * 
-     * @return A byte array with the new page set
+    
+     * @return A byte array with the new page set * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();

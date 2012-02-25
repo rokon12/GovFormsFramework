@@ -53,6 +53,7 @@ package com.lowagie.text.pdf;
 /**
  *
  * @author  Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class CMYKColor extends ExtendedColor {
 
@@ -88,29 +89,29 @@ public class CMYKColor extends ExtendedColor {
     }
     
     /**
-     * @return the cyan value
-     */
+    
+     * @return the cyan value */
     public float getCyan() {
         return cyan;
     }
 
     /**
-     * @return the magenta value
-     */
+    
+     * @return the magenta value */
     public float getMagenta() {
         return magenta;
     }
 
     /**
-     * @return the yellow value
-     */
+    
+     * @return the yellow value */
     public float getYellow() {
         return yellow;
     }
 
     /**
-     * @return the black value
-     */
+    
+     * @return the black value */
     public float getBlack() {
         return black;
     }

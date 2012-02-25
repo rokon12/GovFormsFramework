@@ -99,6 +99,7 @@ package com.lowagie.text.pdf;
  * render appropriately.
  *
  * @author Doug Felt
+ * @version $Revision: 1.0 $
  */
 
 public final class BidiOrder {
@@ -211,6 +212,13 @@ public final class BidiOrder {
         runAlgorithm();
     }
     
+    /**
+     * Constructor for BidiOrder.
+     * @param text char[]
+     * @param offset int
+     * @param length int
+     * @param paragraphEmbeddingLevel byte
+     */
     public BidiOrder(char text[], int offset, int length, byte paragraphEmbeddingLevel) {
         initialTypes = new byte[length];
         for (int k = 0; k < length; ++k) {
@@ -223,6 +231,11 @@ public final class BidiOrder {
         runAlgorithm();
     }
     
+    /**
+     * Method getDirection.
+     * @param c char
+     * @return byte
+     */
     public final static byte getDirection(char c) {
         return rtypes[c];
     }
@@ -335,8 +348,8 @@ public final class BidiOrder {
      * Calls processEmbeddings to generate an embedding array from the explicit format codes.  The
      * embedding overrides in the array are then applied to the result types, and the result levels are
      * initialized.
-     * @see #processEmbeddings
-     */
+    
+     * @see #processEmbeddings */
     private void determineExplicitEmbeddingLevels() {
         embeddings = processEmbeddings(resultTypes, paragraphEmbeddingLevel);
         
@@ -355,8 +368,8 @@ public final class BidiOrder {
      * Remove explicit codes so that they may be ignored during the remainder
      * of the main portion of the algorithm.  The length of the resulting text
      * is returned.
-     * @return the length of the data excluding explicit codes and BN.
-     */
+    
+     * @return the length of the data excluding explicit codes and BN. */
     private int removeExplicitCodes() {
         int w = 0;
         for (int i = 0; i < textLength; ++i) {
@@ -378,9 +391,9 @@ public final class BidiOrder {
      * assigned to these codes are arbitrary, they're
      * chosen so as to avoid breaking level runs.
      * @param textLength the length of the data after compression
+    
      * @return the length of the data (original length of
-     * types array supplied to constructor)
-     */
+     * types array supplied to constructor) */
     private int reinsertExplicitCodes(int textLength) {
         int r = textLength;
         for (int i = initialTypes.length; --i >= 0;) {
@@ -424,6 +437,9 @@ public final class BidiOrder {
      * This examines resultTypes but does not modify it.  It returns embedding and
      * override information in the result array.  The low 7 bits are the level, the high
      * bit is set if the level is an override, and clear if it is an embedding.
+     * @param resultTypes byte[]
+     * @param paragraphEmbeddingLevel byte
+     * @return byte[]
      */
     private static byte[] processEmbeddings(byte[] resultTypes, byte paragraphEmbeddingLevel) {
         final int EXPLICIT_LEVEL_LIMIT = 62;
@@ -553,6 +569,11 @@ public final class BidiOrder {
      * Rules W1-W7.
      *
      * Note that some weak types (EN, AN) remain after this processing is complete.
+     * @param start int
+     * @param limit int
+     * @param level byte
+     * @param sor byte
+     * @param eor byte
      */
     private void resolveWeakTypes(int start, int limit, byte level, byte sor, byte eor) {
         
@@ -668,6 +689,11 @@ public final class BidiOrder {
     /**
      * 6) resolving neutral types
      * Rules N1-N2.
+     * @param start int
+     * @param limit int
+     * @param level byte
+     * @param sor byte
+     * @param eor byte
      */
     private void resolveNeutralTypes(int start, int limit, byte level, byte sor, byte eor) {
         
@@ -732,6 +758,11 @@ public final class BidiOrder {
     /**
      * 7) resolving implicit embedding levels
      * Rules I1, I2.
+     * @param start int
+     * @param limit int
+     * @param level byte
+     * @param sor byte
+     * @param eor byte
      */
     private void resolveImplicitLevels(int start, int limit, byte level, byte sor, byte eor) {
         if ((level & 1) == 0) { // even level
@@ -763,6 +794,10 @@ public final class BidiOrder {
     // Output
     //
     
+    /**
+     * Method getLevels.
+     * @return byte[]
+     */
     public byte[] getLevels() {
         return getLevels(new int[]{textLength});
     }
@@ -780,8 +815,8 @@ public final class BidiOrder {
      * must be the length of the text.
      *
      * @param linebreaks the offsets at which to break the paragraph
-     * @return the resolved levels of the text
-     */
+    
+     * @return the resolved levels of the text */
     public byte[] getLevels(int[] linebreaks) {
         
         // Note that since the previous processing has removed all
@@ -854,6 +889,7 @@ public final class BidiOrder {
      * must be the length of the text.
      *
      * @param linebreaks the offsets at which to break the paragraph.
+     * @return int[]
      */
     public int[] getReordering(int[] linebreaks) {
         validateLineBreaks(linebreaks, textLength);
@@ -866,6 +902,9 @@ public final class BidiOrder {
     /**
      * Return multiline reordering array for a given level array.
      * Reordering does not occur across a line break.
+     * @param levels byte[]
+     * @param linebreaks int[]
+     * @return int[]
      */
     private static int[] computeMultilineReordering(byte[] levels, int[] linebreaks) {
         int[] result = new int[levels.length];
@@ -893,6 +932,8 @@ public final class BidiOrder {
      * The reordering is a visual to logical map.  For example,
      * the leftmost char is string.charAt(order[0]).
      * Rule L2.
+     * @param levels byte[]
+     * @return int[]
      */
     private static int[] computeReordering(byte[] levels) {
         int lineLength = levels.length;
@@ -947,6 +988,7 @@ public final class BidiOrder {
     
     /**
      * Return the base level of the paragraph.
+     * @return byte
      */
     public byte getBaseLevel() {
         return paragraphEmbeddingLevel;
@@ -956,6 +998,8 @@ public final class BidiOrder {
     
     /**
      * Return true if the type is considered a whitespace type for the line break rules.
+     * @param biditype byte
+     * @return boolean
      */
     private static boolean isWhitespace(byte biditype) {
         switch (biditype) {
@@ -974,6 +1018,8 @@ public final class BidiOrder {
     
     /**
      * Return the strong type (L or R) corresponding to the level.
+     * @param level int
+     * @return byte
      */
     private static byte typeForLevel(int level) {
         return ((level & 0x1) == 0) ? L : R;
@@ -982,6 +1028,10 @@ public final class BidiOrder {
     /**
      * Return the limit of the run starting at index that includes only resultTypes in validSet.
      * This checks the value at index, and will return index if that value is not in validSet.
+     * @param index int
+     * @param limit int
+     * @param validSet byte[]
+     * @return int
      */
     private int findRunLimit(int index, int limit, byte[] validSet) {
         --index;
@@ -1002,6 +1052,9 @@ public final class BidiOrder {
     /**
      * Return the start of the run including index that includes only resultTypes in validSet.
      * This assumes the value at index is valid, and does not check it.
+     * @param index int
+     * @param validSet byte[]
+     * @return int
      */
     private int findRunStart(int index, byte[] validSet) {
         loop:
@@ -1019,6 +1072,9 @@ public final class BidiOrder {
     
     /**
      * Set resultTypes from start up to (but not including) limit to newType.
+     * @param start int
+     * @param limit int
+     * @param newType byte
      */
     private void setTypes(int start, int limit, byte newType) {
         for (int i = start; i < limit; ++i) {
@@ -1028,6 +1084,9 @@ public final class BidiOrder {
     
     /**
      * Set resultLevels from start up to (but not including) limit to newLevel.
+     * @param start int
+     * @param limit int
+     * @param newLevel byte
      */
     private void setLevels(int start, int limit, byte newLevel) {
         for (int i = start; i < limit; ++i) {
@@ -1039,6 +1098,7 @@ public final class BidiOrder {
     
     /**
      * Throw exception if type array is invalid.
+     * @param types byte[]
      */
     private static void validateTypes(byte[] types) {
         if (types == null) {
@@ -1059,6 +1119,7 @@ public final class BidiOrder {
     /**
      * Throw exception if paragraph embedding level is invalid. Special allowance for -1 so that
      * default processing can still be performed when using this API.
+     * @param paragraphEmbeddingLevel byte
      */
     private static void validateParagraphEmbeddingLevel(byte paragraphEmbeddingLevel) {
         if (paragraphEmbeddingLevel != -1 &&
@@ -1070,6 +1131,8 @@ public final class BidiOrder {
     
     /**
      * Throw exception if line breaks array is invalid.
+     * @param linebreaks int[]
+     * @param textLength int
      */
     private static void validateLineBreaks(int[] linebreaks, int textLength) {
         int prev = 0;

@@ -104,7 +104,8 @@ public class RtfAnnotation extends RtfElement {
     /**
      * Writes the content of the RtfAnnotation
      * 
-     * @return The content of this RtfAnnotation
+    
+     * @return The content of this RtfAnnotation * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();

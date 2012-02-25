@@ -80,7 +80,8 @@ public class RtfChapter extends RtfSection {
     /**
      * Writes the RtfChapter and its contents
      * 
-     * @return A byte array containing the RtfChapter and its contents 
+    
+     * @return A byte array containing the RtfChapter and its contents  * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();

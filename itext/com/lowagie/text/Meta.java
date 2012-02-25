@@ -65,6 +65,8 @@ import java.util.Set;
  *
  * @see		Element
  * @see		Header
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class Meta implements Element, MarkupAttributes {
@@ -113,7 +115,8 @@ public class Meta implements Element, MarkupAttributes {
  * <CODE>ElementListener</CODE>.
  *
  * @param	listener		the <CODE>ElementListener</CODE>
- * @return	<CODE>true</CODE> if the element was processed successfully
+
+ * @return	<CODE>true</CODE> if the element was processed successfully * @see com.lowagie.text.Element#process(ElementListener)
  */
     
     public boolean process(ElementListener listener) {
@@ -128,7 +131,8 @@ public class Meta implements Element, MarkupAttributes {
 /**
  * Gets the type of the text element.
  *
- * @return	a type
+
+ * @return	a type * @see com.lowagie.text.Element#type()
  */
     
     public int type() {
@@ -138,7 +142,8 @@ public class Meta implements Element, MarkupAttributes {
 /**
  * Gets all the chunks in this element.
  *
- * @return	an <CODE>ArrayList</CODE>
+
+ * @return	an <CODE>ArrayList</CODE> * @see com.lowagie.text.Element#getChunks()
  */
     
     public ArrayList getChunks() {
@@ -151,8 +156,8 @@ public class Meta implements Element, MarkupAttributes {
  * appends some text to this <CODE>Meta</CODE>.
  *
  * @param	string      a <CODE>String</CODE>
- * @return	a <CODE>StringBuffer</CODE>
- */
+
+ * @return	a <CODE>StringBuffer</CODE> */
     
     public StringBuffer append(String string) {
         return content.append(string);
@@ -163,8 +168,8 @@ public class Meta implements Element, MarkupAttributes {
 /**
  * Returns the content of the meta information.
  *
- * @return	a <CODE>String</CODE>
- */
+
+ * @return	a <CODE>String</CODE> */
     
     public String content() {
         return content.toString();
@@ -173,8 +178,8 @@ public class Meta implements Element, MarkupAttributes {
 /**
  * Returns the name of the meta information.
  *
- * @return	a <CODE>String</CODE>
- */
+
+ * @return	a <CODE>String</CODE> */
     
     public String name() {
         switch (type) {
@@ -199,8 +204,8 @@ public class Meta implements Element, MarkupAttributes {
  * Returns the name of the meta information.
  * 
  * @param tag iText tag for meta information
- * @return	the Element value corresponding with the given tag
- */
+
+ * @return	the Element value corresponding with the given tag */
     
     public static int getType(String tag) {
         if (ElementTags.SUBJECT.equals(tag)) {

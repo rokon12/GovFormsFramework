@@ -30,6 +30,7 @@ import java.util.HashMap;
 /**
  * Encrypts a PDF document. It needs iText (http://www.lowagie.com/iText).
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class encrypt_pdf {
     

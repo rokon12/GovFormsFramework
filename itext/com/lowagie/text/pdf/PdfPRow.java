@@ -61,6 +61,7 @@ import java.awt.Color;
  * A row in a PdfPTable.
  * 
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 
 public class PdfPRow {
@@ -104,8 +105,8 @@ public class PdfPRow {
 	/**
 	 * Sets the widths of the columns in the row.
 	 * @param widths
-	 * @return true if everything went right
-	 */
+	
+	 * @return true if everything went right */
 	public boolean setWidths(float widths[]) {
 		if (widths.length != cells.length)
 			return false;
@@ -127,8 +128,8 @@ public class PdfPRow {
 
 	/**
 	 * Calculates the heights of each cell in the row.
-	 * @return the maximum height of the row.
-	 */
+	
+	 * @return the maximum height of the row. */
 	public float calculateHeights() {
 		maxHeight = 0;
 		for (int k = 0; k < cells.length; ++k) {
@@ -403,16 +404,16 @@ public class PdfPRow {
 
 	/**
 	 * Checks if the dimensions of the columns were calculated.
-	 * @return true if the dimensions of the columns were calculated
-	 */
+	
+	 * @return true if the dimensions of the columns were calculated */
 	public boolean isCalculated() {
 		return calculated;
 	}
 
 	/**
 	 * Gets the maximum height of the row (i.e. of the 'highest' cell).
-	 * @return the maximum height of the row
-	 */
+	
+	 * @return the maximum height of the row */
 	public float getMaxHeights() {
 		if (calculated)
 			return maxHeight;
@@ -431,6 +432,11 @@ public class PdfPRow {
 
 	//end add
 
+	/**
+	 * Method getEventWidth.
+	 * @param xPos float
+	 * @return float[]
+	 */
 	float[] getEventWidth(float xPos) {
 		int n = 0;
 		for (int k = 0; k < cells.length; ++k) {
@@ -456,9 +462,9 @@ public class PdfPRow {
 	 * 
 	 * @param newHeight
 	 *            the new height
+	
 	 * @return the remainder row or null if the newHeight was so small that only
-	 *         an empty row would result
-	 */
+	 *         an empty row would result */
 	public PdfPRow splitRow(float newHeight) {
 		PdfPCell newCells[] = new PdfPCell[cells.length];
 		float fh[] = new float[cells.length * 2];

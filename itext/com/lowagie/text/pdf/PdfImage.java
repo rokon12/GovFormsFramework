@@ -77,6 +77,8 @@ import java.io.IOException;
 
 /**
  * <CODE>PdfImage</CODE> is a <CODE>PdfStream</CODE> containing an image-<CODE>Dictionary</CODE> and -stream.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 class PdfImage extends PdfStream {
@@ -94,8 +96,9 @@ class PdfImage extends PdfStream {
      *
      * @param image the <CODE>Image</CODE>-object
      * @param name the <CODE>PdfName</CODE> for this image
-     * @throws BadPdfFormatException on error
-     */
+    
+     * @param maskRef PdfIndirectReference
+     * @throws BadPdfFormatException on error */
     
     public PdfImage(Image image, String name, PdfIndirectReference maskRef) throws BadPdfFormatException {
         super();
@@ -249,13 +252,20 @@ class PdfImage extends PdfStream {
     /**
      * Returns the <CODE>PdfName</CODE> of the image.
      *
-     * @return		the name
-     */
+    
+     * @return		the name */
     
     public PdfName name() {
         return name;
     }
     
+    /**
+     * Method transferBytes.
+     * @param in InputStream
+     * @param out OutputStream
+     * @param len int
+     * @throws IOException
+     */
     static void transferBytes(InputStream in, OutputStream out, int len) throws IOException {
         byte buffer[] = new byte[TRANSFERSIZE];
         if (len < 0)
@@ -270,6 +280,10 @@ class PdfImage extends PdfStream {
         }
     }
     
+    /**
+     * Method importAll.
+     * @param dup PdfImage
+     */
     protected void importAll(PdfImage dup) {
         name = dup.name;
         compressed = dup.compressed;

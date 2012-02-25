@@ -64,6 +64,8 @@ import com.lowagie.text.Phrase;
  * document.setHeader(header);
  * document.setFooter(footer);
  * </PRE></BLOCKQUOTE>
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class HeaderFooter extends Rectangle implements MarkupAttributes {
@@ -125,8 +127,8 @@ public class HeaderFooter extends Rectangle implements MarkupAttributes {
 /**
  * Checks if the HeaderFooter contains a page number.
  *
- * @return  true if the page has to be numbered
- */
+
+ * @return  true if the page has to be numbered */
     
     public boolean isNumbered() {
         return numbered;
@@ -135,8 +137,8 @@ public class HeaderFooter extends Rectangle implements MarkupAttributes {
 /**
  * Gets the part that comes before the pageNumber.
  *
- * @return  a Phrase
- */
+
+ * @return  a Phrase */
     
     public Phrase getBefore() {
         return before;
@@ -145,8 +147,8 @@ public class HeaderFooter extends Rectangle implements MarkupAttributes {
 /**
  * Gets the part that comes after the pageNumber.
  *
- * @return  a Phrase
- */
+
+ * @return  a Phrase */
     
     public Phrase getAfter() {
         return after;
@@ -177,8 +179,8 @@ public class HeaderFooter extends Rectangle implements MarkupAttributes {
 /**
  * Gets the <CODE>Paragraph</CODE> that can be used as header or footer.
  *
- * @return		a <CODE>Paragraph</CODE>
- */
+
+ * @return		a <CODE>Paragraph</CODE> */
     
     public Paragraph paragraph() {
         Paragraph paragraph = new Paragraph(before.leading());
@@ -196,8 +198,8 @@ public class HeaderFooter extends Rectangle implements MarkupAttributes {
     /**
      * Gets the alignment of this HeaderFooter.
      *
-     * @return	alignment
-     */
+    
+     * @return	alignment */
 
         public int alignment() {
             return alignment;

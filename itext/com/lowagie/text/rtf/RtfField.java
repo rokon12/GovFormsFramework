@@ -75,8 +75,8 @@ public interface RtfField {
      * Writes an RTF field.
      * @param writer
      * @param out
-     * @throws IOException
-     */
+    
+     * @throws IOException */
     public void write( RtfWriter writer, OutputStream out ) throws IOException;
 }
 

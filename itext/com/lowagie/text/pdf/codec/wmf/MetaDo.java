@@ -57,6 +57,8 @@ import java.awt.Point;
 import java.awt.Color;
 import java.util.ArrayList;
 
+/**
+ */
 public class MetaDo {
     
     public static final int META_SETBKCOLOR            = 0x0201;
@@ -137,11 +139,21 @@ public class MetaDo {
     int inch;
     MetaState state = new MetaState();
 
+    /**
+     * Constructor for MetaDo.
+     * @param in InputStream
+     * @param cb PdfContentByte
+     */
     public MetaDo(InputStream in, PdfContentByte cb) {
         this.cb = cb;
         this.in = new InputMeta(in);
     }
     
+    /**
+     * Method readAll.
+     * @throws IOException
+     * @throws DocumentException
+     */
     public void readAll() throws IOException, DocumentException{
         if (in.readInt() != 0x9AC6CDD7) {
             throw new DocumentException("Not a placeable windows metafile");
@@ -568,6 +580,18 @@ public class MetaDo {
         
     }
     
+    /**
+     * Method outputText.
+     * @param x int
+     * @param y int
+     * @param flag int
+     * @param x1 int
+     * @param y1 int
+     * @param x2 int
+     * @param y2 int
+     * @param text String
+     * @throws IOException
+     */
     public void outputText(int x, int y, int flag, int x1, int y1, int x2, int y2, String text) throws IOException {
         MetaFont font = state.getCurrentFont();
         float refX = state.transformX(x);
@@ -620,6 +644,11 @@ public class MetaDo {
         cb.restoreState();
     }
     
+    /**
+     * Method isNullStrokeFill.
+     * @param isRectangle boolean
+     * @return boolean
+     */
     public boolean isNullStrokeFill(boolean isRectangle) {
         MetaPen pen = state.getCurrentPen();
         MetaBrush brush = state.getCurrentBrush();
@@ -664,6 +693,14 @@ public class MetaDo {
         }
     }
     
+    /**
+     * Method getArc.
+     * @param xCenter float
+     * @param yCenter float
+     * @param xDot float
+     * @param yDot float
+     * @return float
+     */
     static float getArc(float xCenter, float yCenter, float xDot, float yDot) {
         double s = Math.atan2(yDot - yCenter, xDot - xCenter);
         if (s < 0)
@@ -671,6 +708,12 @@ public class MetaDo {
         return (float)(s / Math.PI * 180);
     }
     
+    /**
+     * Method wrapBMP.
+     * @param image Image
+     * @return byte[]
+     * @throws IOException
+     */
     public static byte[] wrapBMP(Image image) throws IOException {
         if (image.getOriginalType() != Image.ORIGINAL_BMP)
             throw new IOException("Only BMP can be wrapped in WMF.");
@@ -748,11 +791,23 @@ public class MetaDo {
         return os.toByteArray();
     }
 
+    /**
+     * Method writeWord.
+     * @param os OutputStream
+     * @param v int
+     * @throws IOException
+     */
     public static void writeWord(OutputStream os, int v) throws IOException {
         os.write(v & 0xff);
         os.write((v >>> 8) & 0xff);
     }
     
+    /**
+     * Method writeDWord.
+     * @param os OutputStream
+     * @param v int
+     * @throws IOException
+     */
     public static void writeDWord(OutputStream os, int v) throws IOException {
         writeWord(os, v & 0xffff);
         writeWord(os, (v >>> 16) & 0xffff);

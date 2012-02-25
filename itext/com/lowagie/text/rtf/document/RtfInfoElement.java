@@ -118,7 +118,8 @@ public class RtfInfoElement extends RtfElement {
     /**
      * Writes this RtfInfoElement
      * 
-     * @return A byte array containing the RtfInfoElement data
+    
+     * @return A byte array containing the RtfInfoElement data * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -165,8 +166,8 @@ public class RtfInfoElement extends RtfElement {
      * rtf.<br>iText: EEE MMM dd HH:mm:ss zzz yyyy - rtf: \\'yr'yyyy\\'mo'MM\\'dy'dd\\'hr'HH\\'min'mm\\'sec'ss
      * 
      * @param date The date formated by iText
-     * @return The date formated for rtf
-     */
+    
+     * @return The date formated for rtf */
     private String convertDate(String date) {
         SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
         try {

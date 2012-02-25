@@ -47,6 +47,8 @@
 
 package com.lowagie.text.pdf;
 
+/**
+ */
 public class PdfTransition {
     /**
      *  Out Vertical Split
@@ -151,15 +153,27 @@ public class PdfTransition {
     }
     
     
+    /**
+     * Method getDuration.
+     * @return int
+     */
     public int getDuration() {
         return duration;
     }
     
     
+    /**
+     * Method getType.
+     * @return int
+     */
     public int getType() {
         return type;
     }
     
+    /**
+     * Method getTransitionDictionary.
+     * @return PdfDictionary
+     */
     public PdfDictionary getTransitionDictionary() {
         PdfDictionary trans = new PdfDictionary(PdfName.TRANS);
         switch (type) {

@@ -63,6 +63,8 @@ import com.lowagie.tools.plugins.AbstractTool;
 
 /**
  * Argument that can be one of several options.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class PageSizeArgument extends OptionArgument {
 
@@ -104,17 +106,17 @@ public class PageSizeArgument extends OptionArgument {
 	
 	/**
 	 * Gets the options.
-	 * @return Returns the options.
-	 */
+	
+	 * @return Returns the options. */
 	public TreeMap getOptions() {
 		return options;
 	}
 	
 	/**
 	 * Gets the argument as an object.
-	 * @return an object
-	 * @throws InstantiationException
-	 */
+	
+	
+	 * @return an object * @throws InstantiationException */
 	public Object getArgument() throws InstantiationException {
 		if (value == null) return null;
 		try {

@@ -56,12 +56,18 @@ import com.lowagie.text.DocumentException;
  * Signals that an unspecified problem while constructing a PDF document.
  *
  * @see		BadPdfFormatException
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfException extends DocumentException {
     
     // constructors
     
+    /**
+     * Constructor for PdfException.
+     * @param ex Exception
+     */
     public PdfException(Exception ex) {
         super(ex);
     }

@@ -56,12 +56,19 @@ import java.io.IOException;
 /** Represents an imported page.
  *
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PdfImportedPage extends com.lowagie.text.pdf.PdfTemplate {
 
     PdfReaderInstance readerInstance;
     int pageNumber;
     
+    /**
+     * Constructor for PdfImportedPage.
+     * @param readerInstance PdfReaderInstance
+     * @param writer PdfWriter
+     * @param pageNumber int
+     */
     PdfImportedPage(PdfReaderInstance readerInstance, PdfWriter writer, int pageNumber) {
         this.readerInstance = readerInstance;
         this.pageNumber = pageNumber;
@@ -72,13 +79,17 @@ public class PdfImportedPage extends com.lowagie.text.pdf.PdfTemplate {
 
     /** Reads the content from this <CODE>PdfImportedPage</CODE>-object from a reader.
      *
-     * @return self
+    
      *
-     */
+     * @return self */
     public PdfImportedPage getFromReader() {
       return this;
     }
 
+    /**
+     * Method getPageNumber.
+     * @return int
+     */
     public int getPageNumber() {
         return pageNumber;
     }
@@ -116,18 +127,37 @@ public class PdfImportedPage extends com.lowagie.text.pdf.PdfTemplate {
         return null;
     }
     
+    /**
+     * Method getFormXObject.
+     * @return PdfStream
+     * @throws IOException
+     */
     PdfStream getFormXObject() throws IOException {
          return readerInstance.getFormXObject(pageNumber);
     }
     
+    /**
+     * Method setColorFill.
+     * @param sp PdfSpotColor
+     * @param tint float
+     */
     public void setColorFill(PdfSpotColor sp, float tint) {
         throwError();
     }
     
+    /**
+     * Method setColorStroke.
+     * @param sp PdfSpotColor
+     * @param tint float
+     */
     public void setColorStroke(PdfSpotColor sp, float tint) {
         throwError();
     }
     
+    /**
+     * Method getResources.
+     * @return PdfObject
+     */
     PdfObject getResources() {
         return readerInstance.getResources(pageNumber);
     }
@@ -143,6 +173,10 @@ public class PdfImportedPage extends com.lowagie.text.pdf.PdfTemplate {
         throw new RuntimeException("Content can not be added to a PdfImportedPage.");
     }
     
+    /**
+     * Method getPdfReaderInstance.
+     * @return PdfReaderInstance
+     */
     PdfReaderInstance getPdfReaderInstance() {
         return readerInstance;
     }

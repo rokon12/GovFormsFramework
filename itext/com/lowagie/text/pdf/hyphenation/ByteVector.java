@@ -23,6 +23,7 @@ import java.io.Serializable;
  * underlying array.
  *
  * @author Carlos Villegas <cav@uniscope.co.jp>
+ * @version $Revision: 1.0 $
  */
 public class ByteVector implements Serializable {
 
@@ -46,6 +47,10 @@ public class ByteVector implements Serializable {
         this(DEFAULT_BLOCK_SIZE);
     }
 
+    /**
+     * Constructor for ByteVector.
+     * @param capacity int
+     */
     public ByteVector(int capacity) {
         if (capacity > 0) {
             blockSize = capacity;
@@ -56,12 +61,21 @@ public class ByteVector implements Serializable {
         n = 0;
     }
 
+    /**
+     * Constructor for ByteVector.
+     * @param a byte[]
+     */
     public ByteVector(byte[] a) {
         blockSize = DEFAULT_BLOCK_SIZE;
         array = a;
         n = 0;
     }
 
+    /**
+     * Constructor for ByteVector.
+     * @param a byte[]
+     * @param capacity int
+     */
     public ByteVector(byte[] a, int capacity) {
         if (capacity > 0) {
             blockSize = capacity;
@@ -72,12 +86,17 @@ public class ByteVector implements Serializable {
         n = 0;
     }
 
+    /**
+     * Method getArray.
+     * @return byte[]
+     */
     public byte[] getArray() {
         return array;
     }
 
     /**
      * return number of items in array
+     * @return int
      */
     public int length() {
         return n;
@@ -85,21 +104,34 @@ public class ByteVector implements Serializable {
 
     /**
      * returns current capacity of array
+     * @return int
      */
     public int capacity() {
         return array.length;
     }
 
+    /**
+     * Method put.
+     * @param index int
+     * @param val byte
+     */
     public void put(int index, byte val) {
         array[index] = val;
     }
 
+    /**
+     * Method get.
+     * @param index int
+     * @return byte
+     */
     public byte get(int index) {
         return array[index];
     }
 
     /**
      * This is to implement memory allocation in the array. Like malloc().
+     * @param size int
+     * @return int
      */
     public int alloc(int size) {
         int index = n;

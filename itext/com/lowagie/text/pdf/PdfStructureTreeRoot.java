@@ -56,6 +56,7 @@ import java.io.IOException;
 /**
  * The structure tree root corresponds to the highest hierarchy level in a tagged PDF.
  * @author Paulo Soares (psoares@consiste.pt)
+ * @version $Revision: 1.0 $
  */
 public class PdfStructureTreeRoot extends PdfDictionary {
     
@@ -67,7 +68,8 @@ public class PdfStructureTreeRoot extends PdfDictionary {
      */
     private PdfWriter writer;
     
-    /** Creates a new instance of PdfStructureTreeRoot */
+    /** Creates a new instance of PdfStructureTreeRoot * @param writer PdfWriter
+     */
     PdfStructureTreeRoot(PdfWriter writer) {
         super(PdfName.STRUCTTREEROOT);
         this.writer = writer;
@@ -91,20 +93,25 @@ public class PdfStructureTreeRoot extends PdfDictionary {
     
     /**
      * Gets the writer.
-     * @return the writer
-     */
+    
+     * @return the writer */
     public PdfWriter getWriter() {
         return this.writer;
     }
 
     /**
      * Gets the reference this object will be written to.
-     * @return the reference this object will be written to
-     */    
+    
+     * @return the reference this object will be written to */    
     public PdfIndirectReference getReference() {
         return this.reference;
     }
     
+    /**
+     * Method setPageMark.
+     * @param page int
+     * @param struc PdfIndirectReference
+     */
     void setPageMark(int page, PdfIndirectReference struc) {
         Integer i = new Integer(page);
         PdfArray ar = (PdfArray)parentTree.get(i);
@@ -115,6 +122,12 @@ public class PdfStructureTreeRoot extends PdfDictionary {
         ar.add(struc);
     }
     
+    /**
+     * Method nodeProcess.
+     * @param struc PdfDictionary
+     * @param reference PdfIndirectReference
+     * @throws IOException
+     */
     private void nodeProcess(PdfDictionary struc, PdfIndirectReference reference) throws IOException {
         PdfObject obj = struc.get(PdfName.K);
         if (obj != null && obj.isArray() && !((PdfObject)((PdfArray)obj).getArrayList().get(0)).isNumber()) {
@@ -130,6 +143,10 @@ public class PdfStructureTreeRoot extends PdfDictionary {
             writer.addToBody(struc, reference);
     }
     
+    /**
+     * Method buildTree.
+     * @throws IOException
+     */
     void buildTree() throws IOException {
         HashMap numTree = new HashMap();
         for (Iterator it = parentTree.keySet().iterator(); it.hasNext();) {

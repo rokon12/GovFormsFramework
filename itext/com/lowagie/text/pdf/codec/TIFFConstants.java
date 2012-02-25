@@ -46,6 +46,8 @@ package com.lowagie.text.pdf.codec;
  * is limited to Baseline specifications.
  *
  *
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class TIFFConstants {
     

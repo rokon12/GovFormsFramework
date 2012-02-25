@@ -71,6 +71,8 @@ import com.lowagie.tools.arguments.ToolArgument;
 
 /**
  * This is a simple tool that generates a cover for a DVD.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class DvdCover extends AbstractTool {
 	

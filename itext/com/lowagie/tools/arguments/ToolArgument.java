@@ -63,6 +63,8 @@ import com.lowagie.tools.plugins.AbstractTool;
 
 /**
  * This is an argument of one of the tools in the toolbox.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 public class ToolArgument implements ActionListener {
 	/** reference to the internal frame */
@@ -95,9 +97,9 @@ public class ToolArgument implements ActionListener {
 	
 	/**
 	 * Gets the argument as an object.
-	 * @return an object
-	 * @throws InstantiationException
-	 */
+	
+	
+	 * @return an object * @throws InstantiationException */
 	public Object getArgument() throws InstantiationException {
 		if (value == null) return null;
 		try {
@@ -137,8 +139,8 @@ public class ToolArgument implements ActionListener {
 	
 	/**
 	 * Give you a String that can be used in a usage description.
-	 * @return a String
-	 */
+	
+	 * @return a String */
 	public String getUsage() {
 		StringBuffer buf = new StringBuffer("  ");
 		buf.append(name);
@@ -149,8 +151,8 @@ public class ToolArgument implements ActionListener {
 	}
 	
 	/**
-	 * @return Returns the classname.
-	 */
+	
+	 * @return Returns the classname. */
 	public String getClassname() {
 		return classname;
 	}
@@ -163,8 +165,8 @@ public class ToolArgument implements ActionListener {
 	}
 	
 	/**
-	 * @return Returns the description.
-	 */
+	
+	 * @return Returns the description. */
 	public String getDescription() {
 		return description;
 	}
@@ -177,8 +179,8 @@ public class ToolArgument implements ActionListener {
 	}
 	
 	/**
-	 * @return Returns the name.
-	 */
+	
+	 * @return Returns the name. */
 	public String getName() {
 		return name;
 	}
@@ -191,8 +193,8 @@ public class ToolArgument implements ActionListener {
 	}
 	
 	/**
-	 * @return Returns the value.
-	 */
+	
+	 * @return Returns the value. */
 	public String getValue() {
 		return value;
 	}

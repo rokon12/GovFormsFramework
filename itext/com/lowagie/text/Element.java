@@ -83,6 +83,8 @@ import java.util.ArrayList;
  * @see Row
  * @see Section
  * @see Table
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public interface Element {
@@ -294,32 +296,32 @@ public interface Element {
 	 * 
 	 * @param listener
 	 *            an <CODE>ElementListener</CODE>
-	 * @return <CODE>true</CODE> if the element was processed successfully
-	 */
+	
+	 * @return <CODE>true</CODE> if the element was processed successfully */
 
 	public boolean process(ElementListener listener);
 
 	/**
 	 * Gets the type of the text element.
 	 * 
-	 * @return a type
-	 */
+	
+	 * @return a type */
 
 	public int type();
 
 	/**
 	 * Gets all the chunks in this element.
 	 * 
-	 * @return an <CODE>ArrayList</CODE>
-	 */
+	
+	 * @return an <CODE>ArrayList</CODE> */
 
 	public ArrayList getChunks();
 
 	/**
 	 * Gets the content of the text element.
 	 * 
-	 * @return a type
-	 */
+	
+	 * @return a type */
 
 	public String toString();
 }

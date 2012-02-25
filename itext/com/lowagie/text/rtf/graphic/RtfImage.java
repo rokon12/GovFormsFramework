@@ -153,8 +153,8 @@ public class RtfImage extends RtfElement {
      * 
      * @param doc The RtfDocument this RtfImage belongs to
      * @param image The Image that this RtfImage wraps
-     * @throws DocumentException If an error occured accessing the image content
-     */
+    
+     * @throws DocumentException If an error occured accessing the image content */
     public RtfImage(RtfDocument doc, Image image) throws DocumentException {
         super(doc);
         imageType = image.getOriginalType();
@@ -175,9 +175,9 @@ public class RtfImage extends RtfElement {
      * in a rtf document
      * 
      * @param image The Image for which to extract the content
-     * @return The image data formated for the rtf document
-     * @throws DocumentException If an error occurs accessing the image content
-     */
+    
+    
+     * @return The image data formated for the rtf document * @throws DocumentException If an error occurs accessing the image content */
     private byte[] getImage(Image image) throws DocumentException {
         ByteArrayOutputStream imageTemp = new ByteArrayOutputStream();
         try {
@@ -218,7 +218,8 @@ public class RtfImage extends RtfElement {
     /**
      * Writes the RtfImage content
      * 
-     * @return the RtfImage content
+    
+     * @return the RtfImage content * @see com.lowagie.text.rtf.RtfBasicElement#write()
      */
     public byte[] write() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();

@@ -52,6 +52,8 @@ package com.lowagie.text.pdf.codec.wmf;
 import java.io.IOException;
 import java.awt.Color;
 
+/**
+ */
 public class MetaBrush extends MetaObject {
 
     public static final int BS_SOLID = 0;
@@ -74,20 +76,37 @@ public class MetaBrush extends MetaObject {
         type = META_BRUSH;
     }
 
+    /**
+     * Method init.
+     * @param in InputMeta
+     * @throws IOException
+     */
     public void init(InputMeta in) throws IOException {
         style = in.readWord();
         color = in.readColor();
         hatch = in.readWord();
     }
     
+    /**
+     * Method getStyle.
+     * @return int
+     */
     public int getStyle() {
         return style;
     }
     
+    /**
+     * Method getHatch.
+     * @return int
+     */
     public int getHatch() {
         return hatch;
     }
     
+    /**
+     * Method getColor.
+     * @return Color
+     */
     public Color getColor() {
         return color;
     }

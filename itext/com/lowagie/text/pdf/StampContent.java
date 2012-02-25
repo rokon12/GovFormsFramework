@@ -46,17 +46,29 @@
  */
 package com.lowagie.text.pdf;
 
+/**
+ */
 public class StampContent extends PdfContentByte {
     PdfStamperImp.PageStamp ps;
     PageResources pageResources;
     
-    /** Creates a new instance of StampContent */
+    /** Creates a new instance of StampContent * @param stamper PdfStamperImp
+     * @param ps PdfStamperImp.PageStamp
+     */
     StampContent(PdfStamperImp stamper, PdfStamperImp.PageStamp ps) {
         super(stamper);
         this.ps = ps;
         pageResources = ps.pageResources;
     }
     
+    /**
+     * Method setAction.
+     * @param action PdfAction
+     * @param llx float
+     * @param lly float
+     * @param urx float
+     * @param ury float
+     */
     public void setAction(PdfAction action, float llx, float lly, float urx, float ury) {
         ((PdfStamperImp)writer).addAnnotation(new PdfAnnotation(writer, llx, lly, urx, ury, action), ps.pageN);
     }
@@ -65,16 +77,24 @@ public class StampContent extends PdfContentByte {
      * Gets a duplicate of this <CODE>PdfContentByte</CODE>. All
      * the members are copied by reference but the buffer stays different.
      *
-     * @return a copy of this <CODE>PdfContentByte</CODE>
-     */
+    
+     * @return a copy of this <CODE>PdfContentByte</CODE> */
     public PdfContentByte getDuplicate() {
         return new StampContent((PdfStamperImp)writer, ps);
     }
 
+    /**
+     * Method getPageResources.
+     * @return PageResources
+     */
     PageResources getPageResources() {
         return pageResources;
     }
     
+    /**
+     * Method addAnnotation.
+     * @param annot PdfAnnotation
+     */
     void addAnnotation(PdfAnnotation annot) {
         ((PdfStamperImp)writer).addAnnotation(annot, ps.pageN);
     }

@@ -62,6 +62,7 @@ import java.awt.*;
  * ONLY FOR USE WITH THE RtfWriter NOT with the RtfWriter2.
  *
  * @author <a href="mhall@myrealbox.com">mhall@myrealbox.com</a>
+ * @version $Revision: 1.0 $
  */
 public class RtfFont extends Font {
     /**
@@ -118,8 +119,8 @@ public class RtfFont extends Font {
     /**
      * Gets the familyname as a String.
      *
-     * @return  the familyname
-     */
+    
+     * @return  the familyname */
     public String getFamilyname() {
         return this.familyName;
     }
@@ -129,8 +130,8 @@ public class RtfFont extends Font {
      * the attributes of a given font.
      *
      * @param	font	the font of a bigger element class
-     * @return	a <CODE>Font</CODE>
-     */
+    
+     * @return	a <CODE>Font</CODE> */
     public Font difference(Font font) {
         String dFamilyname = font.getFamilyname();
         if(dFamilyname == null || dFamilyname.trim().equals("")) {

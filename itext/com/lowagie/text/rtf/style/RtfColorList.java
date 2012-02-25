@@ -95,8 +95,8 @@ public class RtfColorList extends RtfElement implements RtfExtendedElement {
      * is not in the list of colours, then it is added.
      * 
      * @param color The RtfColor for which to get the index
-     * @return The index of the RtfColor
-     */
+    
+     * @return The index of the RtfColor */
     public int getColorNumber(RtfColor color) {
         int colorIndex = -1;
         for(int i = 0; i < colorList.size(); i++) {
@@ -115,7 +115,8 @@ public class RtfColorList extends RtfElement implements RtfExtendedElement {
      * Write the definition part of the colour list. Calls the writeDefinition
      * methods of the RtfColors in the colour list. 
      * 
-     * @return A byte array with the definition colour list
+    
+     * @return A byte array with the definition colour list * @see com.lowagie.text.rtf.RtfExtendedElement#writeDefinition()
      */
     public byte[] writeDefinition() {
         ByteArrayOutputStream result = new ByteArrayOutputStream();

@@ -98,6 +98,8 @@ import java.util.Set;
  *
  * @see		Element
  * @see		ListItem
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class List implements TextElementArray, MarkupAttributes {
@@ -226,7 +228,8 @@ public class List implements TextElementArray, MarkupAttributes {
  * <CODE>ElementListener</CODE>.
  *
  * @param	listener	an <CODE>ElementListener</CODE>
- * @return	<CODE>true</CODE> if the element was processed successfully
+
+ * @return	<CODE>true</CODE> if the element was processed successfully * @see com.lowagie.text.Element#process(ElementListener)
  */
     
     public boolean process(ElementListener listener) {
@@ -244,7 +247,8 @@ public class List implements TextElementArray, MarkupAttributes {
 /**
  * Gets the type of the text element.
  *
- * @return	a type
+
+ * @return	a type * @see com.lowagie.text.Element#type()
  */
     
     public int type() {
@@ -254,7 +258,8 @@ public class List implements TextElementArray, MarkupAttributes {
 /**
  * Gets all the chunks in this element.
  *
- * @return	an <CODE>ArrayList</CODE>
+
+ * @return	an <CODE>ArrayList</CODE> * @see com.lowagie.text.Element#getChunks()
  */
     
     public ArrayList getChunks() {
@@ -271,7 +276,8 @@ public class List implements TextElementArray, MarkupAttributes {
  * Adds an <CODE>Object</CODE> to the <CODE>List</CODE>.
  *
  * @param	o		the object to add.
- * @return true if adding the object succeeded
+
+ * @return true if adding the object succeeded * @see com.lowagie.text.TextElementArray#add(Object)
  */
     
     public boolean add(Object o) {
@@ -379,8 +385,8 @@ public class List implements TextElementArray, MarkupAttributes {
 /**
  * Gets all the items in the list.
  *
- * @return	an <CODE>ArrayList</CODE> containing <CODE>ListItem</CODE>s.
- */
+
+ * @return	an <CODE>ArrayList</CODE> containing <CODE>ListItem</CODE>s. */
     
     public ArrayList getItems() {
         return list;
@@ -389,8 +395,8 @@ public class List implements TextElementArray, MarkupAttributes {
 /**
  * Gets the size of the list.
  *
- * @return	a <CODE>size</CODE>
- */
+
+ * @return	a <CODE>size</CODE> */
     
     public int size() {
         return list.size();
@@ -399,8 +405,8 @@ public class List implements TextElementArray, MarkupAttributes {
 /**
  * Gets the leading of the first listitem.
  *
- * @return	a <CODE>leading</CODE>
- */
+
+ * @return	a <CODE>leading</CODE> */
     
     public float leading() {
         if (list.size() < 1) {
@@ -413,8 +419,8 @@ public class List implements TextElementArray, MarkupAttributes {
 /**
  * Checks if the list is numbered.
  *
- * @return	<CODE>true</CODE> if the list is numbered, <CODE>false</CODE> otherwise.
- */
+
+ * @return	<CODE>true</CODE> if the list is numbered, <CODE>false</CODE> otherwise. */
     
     public boolean isNumbered() {
         return numbered;
@@ -422,8 +428,8 @@ public class List implements TextElementArray, MarkupAttributes {
     
 /**
  * Gets the symbol indentation.
- * @return the symbol indentation
- */
+
+ * @return the symbol indentation */
     
     public float symbolIndent() {
         return symbolIndent;
@@ -431,8 +437,8 @@ public class List implements TextElementArray, MarkupAttributes {
     
 /**
  * Gets the Chunk containing the symbol.
- * @return a Chunk with a symbol
- */
+
+ * @return a Chunk with a symbol */
     
     public Chunk symbol() {
         return symbol;
@@ -440,8 +446,8 @@ public class List implements TextElementArray, MarkupAttributes {
     
 /**
  * Gets the first number        .
- * @return a number
- */
+
+ * @return a number */
     
     public int first() {
         return first;
@@ -450,8 +456,8 @@ public class List implements TextElementArray, MarkupAttributes {
 /**
  * Gets the indentation of this paragraph on the left side.
  *
- * @return	the indentation
- */
+
+ * @return	the indentation */
     
     public float indentationLeft() {
         return indentationLeft;
@@ -460,8 +466,8 @@ public class List implements TextElementArray, MarkupAttributes {
 /**
  * Gets the indentation of this paragraph on the right side.
  *
- * @return	the indentation
- */
+
+ * @return	the indentation */
     
     public float indentationRight() {
         return indentationRight;
@@ -471,8 +477,8 @@ public class List implements TextElementArray, MarkupAttributes {
  * Checks if a given tag corresponds with the listsymbol tag of this object.
  *
  * @param   tag     the given tag
- * @return  true if the tag corresponds
- */
+
+ * @return  true if the tag corresponds */
     
     public static boolean isSymbol(String tag) {
         return ElementTags.LISTSYMBOL.equals(tag);
@@ -482,8 +488,8 @@ public class List implements TextElementArray, MarkupAttributes {
  * Checks if a given tag corresponds with this object.
  *
  * @param   tag     the given tag
- * @return  true if the tag corresponds
- */
+
+ * @return  true if the tag corresponds */
     
     public static boolean isTag(String tag) {
         return ElementTags.LIST.equals(tag);
@@ -492,8 +498,8 @@ public class List implements TextElementArray, MarkupAttributes {
 /**
  * Retrieves the next letter in the sequence
  *
- * @return  String contains the next character (A-Z or a-z)
- */
+
+ * @return  String contains the next character (A-Z or a-z) */
     private String nextLetter() {
         int num_in_list = listItemsInList(); //list.size();
         int max_ival = (lastCh + 0);
@@ -510,8 +516,8 @@ public class List implements TextElementArray, MarkupAttributes {
     /**
      * Counts the number of ListItems in the list ommiting nested lists
      *
-     * @return  Integer number of ListItems in the list
-     */
+    
+     * @return  Integer number of ListItems in the list */
     private int listItemsInList() {
         int result = 0;
         for (Iterator i = list.iterator(); i.hasNext(); ) {

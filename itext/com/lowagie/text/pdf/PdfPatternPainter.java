@@ -51,6 +51,8 @@ import java.awt.Color;
 
 /**
  * Implements the pattern.
+ * @author Bazlur Rahman Rokon
+ * @version $Revision: 1.0 $
  */
 
 public class PdfPatternPainter extends PdfTemplate {
@@ -79,6 +81,11 @@ public class PdfPatternPainter extends PdfTemplate {
         type = TYPE_PATTERN;
     }
     
+    /**
+     * Constructor for PdfPatternPainter.
+     * @param wr PdfWriter
+     * @param defaultColor Color
+     */
     PdfPatternPainter(PdfWriter wr, Color defaultColor) {
         this(wr);
         stencil = true;
@@ -110,24 +117,24 @@ public class PdfPatternPainter extends PdfTemplate {
     
     /**
      * Returns the horizontal interval when repeating the pattern.
-     * @return a value
-     */
+    
+     * @return a value */
     public float getXStep() {
         return this.xstep;
     }
     
     /**
      * Returns the vertical interval when repeating the pattern.
-     * @return a value
-     */
+    
+     * @return a value */
     public float getYStep() {
         return this.ystep;
     }
     
     /**
      * Tells you if this pattern is colored/uncolored (stencil = uncolored, you need to set a default color).
-     * @return true if the pattern is an uncolored tiling pattern (stencil).
-     */
+    
+     * @return true if the pattern is an uncolored tiling pattern (stencil). */
     public boolean isStencil() {
         return stencil;
     }
@@ -147,8 +154,8 @@ public class PdfPatternPainter extends PdfTemplate {
     /**
      * Gets the stream representing this pattern
      *
-     * @return the stream representing this pattern
-     */
+    
+     * @return the stream representing this pattern */
     
     PdfPattern getPattern() {
         return new PdfPattern(this);
@@ -157,8 +164,8 @@ public class PdfPatternPainter extends PdfTemplate {
     /**
      * Gets a duplicate of this <CODE>PdfPatternPainter</CODE>. All
      * the members are copied by reference but the buffer stays different.
-     * @return a copy of this <CODE>PdfPatternPainter</CODE>
-     */
+    
+     * @return a copy of this <CODE>PdfPatternPainter</CODE> */
     
     public PdfContentByte getDuplicate() {
         PdfPatternPainter tpl = new PdfPatternPainter();
@@ -177,8 +184,8 @@ public class PdfPatternPainter extends PdfTemplate {
     
     /**
      * Returns the default color of the pattern.
-     * @return a Color
-     */
+    
+     * @return a Color */
     public Color getDefaultColor() {
         return defaultColor;
     }
