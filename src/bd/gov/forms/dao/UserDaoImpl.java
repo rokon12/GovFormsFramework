@@ -24,7 +24,6 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
-import org.hibernate.cache.OptimisticTreeCache.CircumventChecksDataVersion;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +33,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.AbstractLobCreatingPreparedStatementCallback;
 import org.springframework.jdbc.support.lob.DefaultLobHandler;
 import org.springframework.jdbc.support.lob.LobCreator;
+import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,9 +43,8 @@ import org.springframework.transaction.annotation.Transactional;
  * @author asif
  * @version $Revision: 1.0 $
  */
-@Repository("userDao")
 @Transactional
-@SuppressWarnings("unchecked")
+@Repository("userDao")
 public class UserDaoImpl implements UserDao {
 
 	private static final Logger log = LoggerFactory
@@ -55,8 +55,8 @@ public class UserDaoImpl implements UserDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	@Autowired
-	private SessionFactory sessionFactory;
+	// @Autowired
+	// private SessionFactory sessionFactory;
 
 	/**
 	 * Method getUserRowMapper.
@@ -96,21 +96,21 @@ public class UserDaoImpl implements UserDao {
 	 * @see bd.gov.forms.dao.UserDao#getUser(String)
 	 */
 	public User getUser(String sysId) {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
-				User.class);
-		criteria.add(Restrictions.eq("sysId", sysId));
+		// Criteria criteria =
+		// sessionFactory.getCurrentSession().createCriteria(
+		// User.class);
+		// criteria.add(Restrictions.eq("sysId", sysId));
+		//
+		// List<User> list = criteria.list();
+		// //
+		// if (list != null && list.size() > 0) {
+		// return list.get(0);
+		// }
+		return (User) jdbcTemplate.queryForObject(
+				"SELECT * FROM user WHERE sys_id = ?", new Object[] { sysId },
+				getUserRowMapper());
 
-		List<User> list = criteria.list();
-
-		if (list != null && list.size() > 0) {
-			return list.get(0);
-		}
-
-		// return (User) jdbcTemplate.queryForObject(
-		// "SELECT * FROM user WHERE sys_id = ?", new Object[] { sysId },
-		// getUserRowMapper());
-
-		return null;
+		// return null;
 		// new RowMapper() {
 		//
 		// public Object mapRow(ResultSet rs, int rowNum)
@@ -145,45 +145,29 @@ public class UserDaoImpl implements UserDao {
 	 * @see bd.gov.forms.dao.UserDao#getUser(String, String)
 	 */
 	public User getUser(String userName, String password) {
-		// Criteria criteria =
-		// sessionFactory.getCurrentSession().createCriteria(
-		// User.class);
-		// criteria.add(Restrictions.eq("userName", userName));
-		// criteria.add(Restrictions.eq("password", password));
-		//
-		// List<User> list = criteria.list();
-		//
-		// if (list != null && list.size() > 0) {
-		// return list.get(0);
-		// }
-		// return null;
-
 		try {
 			return (User) jdbcTemplate.queryForObject(
-					"SELECT * FROM user WHERE user_name = ? and password=?",
-					new Object[] { userName, password }, getUserRowMapper());
+					"SELECT * FROM user WHERE user = ? and password=?",
+					new Object[] { userName, password }, new RowMapper() {
 
-			// new RowMapper() {
-			//
-			// public Object mapRow(ResultSet rs, int rowNum)
-			// throws SQLException {
-			// User user = new User();
-			//
-			// user.setId(rs.getInt("id"));
-			// user.setSysId(rs.getString("sys_id"));
-			// user.setName(rs.getString("name"));
-			// user.setTitle(rs.getString("title"));
-			// user.setUserName(rs.getString("user"));
-			//
-			// user.setMobile(rs.getString("mobile"));
-			// user.setEmail(rs.getString("email"));
-			// user.setAdmin(rs.getInt("admin"));
-			// user.setActive(rs.getInt("active"));
-			// user.setMinistry(rs.getInt("ministry"));
-			//
-			// return user;
-			// }
-			// });
+						public Object mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							User user = new User();
+
+							user.setId(rs.getInt("id"));
+							user.setSysId(rs.getString("sys_id"));
+							user.setName(rs.getString("name"));
+							user.setTitle(rs.getString("title"));
+							user.setUserName(rs.getString("user"));
+
+							user.setMobile(rs.getString("mobile"));
+							user.setEmail(rs.getString("email"));
+							user.setAdmin(rs.getInt("admin"));
+							user.setActive(rs.getInt("active"));
+
+							return user;
+						}
+					});
 		} catch (Exception ex) {
 			log.debug("Exception in getUser().", ex);
 			return null;
@@ -205,6 +189,7 @@ public class UserDaoImpl implements UserDao {
 			return (User) jdbcTemplate.queryForObject(
 					"SELECT * FROM user WHERE user = ? and email=?",
 					new Object[] { userName, email }, getUserRowMapper());
+
 			// new RowMapper() {
 			//
 			// public Object mapRow(ResultSet rs, int rowNum)
